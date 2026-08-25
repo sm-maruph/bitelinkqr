@@ -1,0 +1,8 @@
+import { ArrowRight, Minus, Plus, ShoppingBag, X } from 'lucide-react'
+
+export default function CartDrawer({ cart, onChange, onClose, onPlaceOrder }) {
+  const items = Object.values(cart)
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const discount = subtotal > 700 ? 50 : 0
+  return <div className="cart-backdrop" onClick={onClose}><aside className="cart-drawer" onClick={(event) => event.stopPropagation()}><div className="drawer-heading"><div><span className="section-kicker">Table 12</span><h2>Your order</h2></div><button className="close-button" onClick={onClose} aria-label="Close cart"><X size={20} /></button></div>{items.length === 0 ? <div className="empty-cart"><ShoppingBag size={28} /><p>Your table is waiting.<br />Add a dish to get started.</p></div> : <><div className="cart-list">{items.map((item) => <div className="cart-row" key={item.id}><div><b>{item.name}</b><span>BDT {item.price} each</span></div><div className="quantity-control"><button onClick={() => onChange(item.id, -1)} aria-label={`Remove one ${item.name}`}><Minus size={14} /></button><b>{item.quantity}</b><button onClick={() => onChange(item.id, 1)} aria-label={`Add one ${item.name}`}><Plus size={14} /></button></div></div>)}</div><div className="cart-summary"><div><span>Subtotal</span><b>BDT {subtotal}</b></div><div><span>Discount</span><b>-BDT {discount}</b></div><div className="total"><span>Total</span><b>BDT {subtotal - discount}</b></div><button className="place-order" onClick={() => onPlaceOrder({ subtotal, discount, total: subtotal - discount })}>Place order <ArrowRight size={17} /></button></div></>}</aside></div>
+}
