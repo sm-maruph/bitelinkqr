@@ -5,6 +5,7 @@ import SuperAdminPortal from './components/SuperAdminPortal'
 import CustomerPortalPage from './pages/customer/CustomerPortalPage'
 import { KitchenDashboard, OrderStaffDashboard, OutletDashboard } from './components/RoleDashboards'
 import './App.css'
+import './mobile-menu-grid.css'
 
 const pages = { Overview, 'Live orders': OrdersPage, Tables: TablesPage, 'Menu & offers': MenuPage, Payments: PaymentsPage, Analytics: AnalyticsPage, Team: TeamPage }
 

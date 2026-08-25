@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -78,6 +78,17 @@ export default function CustomerPortalPage({ setRole, context }) {
   const [helpOpen, setHelpOpen] = useState(false);
   const [template, setTemplate] = useState("editorial");
   const [theme, setTheme] = useState("coral");
+  const [compactCanvas, setCompactCanvas] = useState(false);
+  const canvasRef = useRef(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return undefined;
+    const updateCanvasSize = () => setCompactCanvas(canvas.getBoundingClientRect().width <= 820);
+    updateCanvasSize();
+    const observer = new ResizeObserver(updateCanvasSize);
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, []);
   const { state, actions } = useMockStore();
   const order = [...state.orders]
     .reverse()
@@ -102,7 +113,7 @@ export default function CustomerPortalPage({ setRole, context }) {
   };
   const changePage = (nextPage) => {
     setCurrentPage(Math.min(Math.max(nextPage, 1), pageCount));
-    document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector("#menu, #future-menu, #bistro-menus, #express-menu, #worldplate-menu, #ember-menu, #sage-menu")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const scrollToMenu = () =>
     document
@@ -240,7 +251,7 @@ export default function CustomerPortalPage({ setRole, context }) {
           </select>
         </label>
       </div>
-      <div className="customer-canvas">
+      <div ref={canvasRef} className={`customer-canvas ${compactCanvas ? "customer-canvas-compact" : ""}`}>
         <CustomerHeader
           cartCount={cartCount}
           setRole={setRole}
@@ -252,9 +263,9 @@ export default function CustomerPortalPage({ setRole, context }) {
             context.restaurantId === "kacchi" ? "Kacchi Vai" : "The Terrace"
           }
           outlet={context.outlet}
-          menuItems={template.startsWith("future-") || template === "midnight" || template === "express" || template === "worldplate" || template === "ember" || template === "sage" ? filteredItems : visibleItems}
+          menuItems={visibleItems}
           currentPage={currentPage}
-          pageCount={template.startsWith("future-") || template === "midnight" || template === "express" || template === "worldplate" || template === "ember" || template === "sage" ? 1 : pageCount}
+          pageCount={pageCount}
           onPageChange={changePage}
           onSelect={(next) => {
             setSelectedItem(next);

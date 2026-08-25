@@ -1,0 +1,154 @@
+/* Loaded after App.css so every template uses the same reliable mobile grid. */
+@media screen and (max-width: 900px) {
+  .customer-page .customer-grid,
+  .customer-page .bistro-live-menu-grid,
+  .customer-page .express-food-grid,
+  .customer-page .worldplate-food-grid,
+  .customer-page .sage-food-grid,
+  .customer-page .future-food-grid,
+  .customer-page .ember-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-flow: row !important;
+    gap: 10px !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .customer-page :is(.future-card-wrap, .ember-card, .customer-dish) {
+    grid-column: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .customer-page .customer-dish {
+    display: block !important;
+    height: 100% !important;
+    padding: 10px !important;
+    border-radius: 12px !important;
+    clip-path: none !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .customer-page .food-card-image {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 0 !important;
+    border-radius: 9px !important;
+    clip-path: none !important;
+  }
+
+  .customer-page .food-card-copy h3 {
+    min-height: 36px !important;
+    margin: 9px 0 4px !important;
+    font-size: 14px !important;
+    line-height: 1.25 !important;
+    white-space: normal !important;
+  }
+
+  .customer-page .food-card-copy {
+    width: 100% !important;
+    padding: 0 3px !important;
+    box-sizing: border-box !important;
+  }
+
+  .customer-page .food-card-copy p {
+    min-height: 32px !important;
+    display: -webkit-box !important;
+    margin-bottom: 5px !important;
+    overflow: hidden !important;
+    font-size: 10px !important;
+    line-height: 1.4 !important;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .customer-page .food-card-copy strong { font-size: 11px !important; }
+  .customer-page .food-card-copy > div { gap: 6px !important; padding-top: 2px; }
+  .customer-page .food-card-copy > div span { font-size: 9px !important; white-space: nowrap; }
+  .customer-page .customer-add-button { width: calc(100% - 6px) !important; min-height: 34px !important; margin: 6px 3px 0 !important; padding-inline: 1px !important; font-size: 10px !important; box-sizing: border-box; }
+}
+
+/* Stable card spacing and equal-height rows at every screen width. */
+.customer-page :is(.customer-grid,.bistro-live-menu-grid,.express-food-grid,.worldplate-food-grid,.sage-food-grid,.future-food-grid,.ember-grid) { align-items: stretch; grid-auto-rows: 1fr; }
+.customer-page .customer-dish { min-width: 0; height: 100%; box-sizing: border-box; }
+.customer-page .food-card-image,
+.customer-page .food-card-copy { box-sizing: border-box; }
+.customer-page .food-card-copy { padding-inline: clamp(2px, .35vw, 6px); }
+.customer-page .customer-add-button { margin-inline: clamp(2px, .35vw, 6px); }
+
+.universal-menu-pagination,
+.menu-pagination,
+.bistro-live-pagination {
+  --pagination-accent: var(--customer-accent, #e97656);
+  width: 100%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap !important;
+  gap: 8px !important;
+  clear: both;
+  margin: 28px auto 0 !important;
+  padding: 0 !important;
+}
+
+.universal-menu-pagination button,
+.menu-pagination button,
+.bistro-live-pagination button {
+  width: 38px !important;
+  min-width: 38px !important;
+  height: 38px !important;
+  display: inline-grid !important;
+  place-items: center;
+  flex: 0 0 38px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid color-mix(in srgb, var(--pagination-accent) 38%, #a8afa9) !important;
+  border-radius: 8px !important;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px !important;
+  font-weight: 800;
+}
+
+.universal-menu-pagination button.active,
+.menu-pagination button.active,
+.bistro-live-pagination button.active {
+  border-color: var(--pagination-accent) !important;
+  color: #fff !important;
+  background: var(--pagination-accent) !important;
+}
+
+.universal-menu-pagination button:disabled,
+.menu-pagination button:disabled,
+.bistro-live-pagination button:disabled { opacity: .35; cursor: not-allowed; }
+
+.customer-template-editorial :is(.universal-menu-pagination,.menu-pagination) { --pagination-accent: #c75f42; }
+.customer-template-garden :is(.universal-menu-pagination,.menu-pagination) { --pagination-accent: #52775a; }
+.customer-template-midnight :is(.universal-menu-pagination,.menu-pagination,.bistro-live-pagination) { --pagination-accent: #ef513e; }
+.customer-template-express .universal-menu-pagination { --pagination-accent: #ff4b44; }
+.customer-template-worldplate .universal-menu-pagination { --pagination-accent: #ff762c; }
+.customer-template-sage .universal-menu-pagination { --pagination-accent: #315b56; }
+.customer-template-ember .universal-menu-pagination { --pagination-accent: #ff9b52; }
+.customer-template-future .universal-menu-pagination { --pagination-accent: var(--future-primary); }
+
+.customer-template-future .universal-menu-pagination button,
+.customer-template-midnight :is(.universal-menu-pagination,.bistro-live-pagination) button,
+.customer-template-express .universal-menu-pagination button,
+.customer-template-worldplate .universal-menu-pagination button,
+.customer-template-ember .universal-menu-pagination button { color: #dce3e8; background: rgba(255,255,255,.025); }
+
+@media screen and (max-width: 480px) {
+  .universal-menu-pagination,
+  .menu-pagination,
+  .bistro-live-pagination { gap: 6px !important; }
+  .universal-menu-pagination button,
+  .menu-pagination button,
+  .bistro-live-pagination button { width: 34px !important; min-width: 34px !important; height: 34px !important; flex-basis: 34px !important; }
+}
