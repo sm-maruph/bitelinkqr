@@ -1,0 +1,21 @@
+.boot-brand::after,
+.boot-restaurant::after,
+.boot-user::after,
+.boot-nav::after,
+.boot-stats::after,
+.boot-panels::after,
+.boot-ring-panel::after,
+.boot-outlets::after {
+  content: none !important;
+}
+
+.boot-chart::after {
+  position: absolute !important;
+  inset: auto 0 20px !important;
+  height: 3px !important;
+  content: "" !important;
+  transform: none !important;
+  background: #cad6ca !important;
+  clip-path: polygon(0 80%, 18% 55%, 35% 70%, 53% 25%, 70% 48%, 87% 15%, 100% 36%, 100% 100%, 0 100%) !important;
+  animation: none !important;
+}

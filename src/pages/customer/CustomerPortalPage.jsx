@@ -63,7 +63,10 @@ const themes = {
 const itemsPerPage = 6;
 
 export default function CustomerPortalPage({ setRole, context, embedded = false }) {
-  const requestedTemplate = new URLSearchParams(window.location.search).get("previewTemplate");
+  const tableNumber = context.tableNumber || "12";
+  const isLiveCustomerRoute = !embedded && window.location.pathname.split('/').filter(Boolean)[2] === 'table';
+  const canPreviewTemplates = embedded || context.roleId === "super";
+  const requestedTemplate = canPreviewTemplates ? new URLSearchParams(window.location.search).get("previewTemplate") : null;
   useEffect(() => {
     if (!embedded) return undefined;
     document.body.classList.add("embedded-customer-preview");
@@ -82,6 +85,8 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
   const [theme, setTheme] = useState("coral");
   const [compactCanvas, setCompactCanvas] = useState(false);
   const [liveContent, setLiveContent] = useState(null);
+  const [publicLoading, setPublicLoading] = useState(isLiveCustomerRoute);
+  const [publicError, setPublicError] = useState('');
   const canvasRef = useRef(null);
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -95,6 +100,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
   const { state, actions } = useMockStore();
   useEffect(() => {
     let active = true;
+    if (isLiveCustomerRoute) { setPublicLoading(true); setPublicError(''); }
     const outletSlug = context.outlet.toLowerCase().trim().replaceAll(/\s+/g, "-");
     restaurantService.getPublicSite(context.restaurantId, outletSlug)
       .then((payload) => {
@@ -103,10 +109,11 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
         setLiveContent(payload);
         if (!requestedTemplate && payload.restaurant.template_key) setTemplate(payload.restaurant.template_key);
         if (payload.restaurant.theme_key && themes[payload.restaurant.theme_key]) setTheme(payload.restaurant.theme_key);
+        setPublicLoading(false);
       })
-      .catch(() => { /* The visual demo remains available until the API is configured. */ });
+      .catch(() => { if (active && isLiveCustomerRoute) { setPublicError('This restaurant menu is currently unavailable.'); setPublicLoading(false); } });
     return () => { active = false; };
-  }, [context.restaurantId, context.outlet, actions, requestedTemplate]);
+  }, [context.restaurantId, context.outlet, actions, requestedTemplate, isLiveCustomerRoute]);
   const fallbackContent = getRestaurantContent(context.restaurantId, context.outlet);
   const restaurantContent = liveContent ? {
     ...fallbackContent,
@@ -127,7 +134,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
       (item) =>
         item.restaurantId === context.restaurantId &&
         item.outletId === context.outlet &&
-        item.tableId === "12",
+        item.tableId === tableNumber,
     );
   const filteredItems =
     category === "All dishes"
@@ -230,7 +237,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
     actions.placeOrder({
       restaurantId: context.restaurantId,
       outletId: context.outlet,
-      tableId: "12",
+      tableId: tableNumber,
       itemDetails: Object.values(cart).map((item) => ({
         id: item.id,
         name: item.name,
@@ -246,12 +253,14 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
     setDrawerOpen(false);
     setOrderOpen(true);
   };
+  if (publicLoading) return <div className="customer-live-loader" role="status" aria-label="Loading restaurant experience"><div className="live-loader-phone"><header><i/><span/><b/></header><section className="live-loader-hero"><i/><i/><i/></section><section className="live-loader-copy"><i/><i/><i/></section><section className="live-loader-menu"><i/><i/></section><nav><i/><i/><i/><i/><i/></nav></div><span className="sr-only">Loading the restaurant's selected template</span></div>;
+  if (publicError) return <main className="customer-public-error"><div><span>TABLE {tableNumber}</span><h1>Menu unavailable</h1><p>{publicError}</p><button onClick={()=>window.location.reload()}>Try again</button></div></main>;
   return (
     <div
       className={`customer-page customer-template-${template} ${template.startsWith("future-") ? "customer-template-future" : ""}`}
       style={{ "--customer-accent": themes[theme].color }}
     >
-      {!embedded && <div className="customer-preview-controls">
+      {!embedded && canPreviewTemplates && <div className="customer-preview-controls">
         <span>
           <SlidersHorizontal size={14} /> Preview
         </span>
@@ -287,12 +296,13 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
           cartCount={cartCount}
           setRole={setRole}
           onCart={() => setDrawerOpen(true)}
+          tableNumber={tableNumber}
+          outlet={context.outlet}
+          showAdmin={canPreviewTemplates}
         />
         <CustomerHero
           template={template}
-          restaurantName={
-            context.restaurantId === "kacchi" ? "Kacchi Vai" : "The Terrace"
-          }
+          restaurantName={restaurantContent.name}
           content={restaurantContent}
           outlet={context.outlet}
           menuItems={visibleItems}
@@ -368,6 +378,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
       {drawerOpen && (
         <CartDrawer
           cart={cart}
+          tableNumber={tableNumber}
           onChange={changeQuantity}
           onClose={() => setDrawerOpen(false)}
           onPlaceOrder={placeOrder}
@@ -397,6 +408,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
             </button>
             <BillAndPayment
               order={order}
+              tableNumber={tableNumber}
               payment={[...state.payments].reverse().find((payment) => payment.orderId === order?.id)}
               onPay={actions.submitPayment}
             />
@@ -411,7 +423,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
             </button>
             <CustomerRequests
               requests={state.requests}
-              onRequest={(type) => actions.addRequest({ table: "12", type })}
+              onRequest={(type) => actions.addRequest({ table: tableNumber, type })}
               onResolve={actions.resolveRequest}
             />
           </div>

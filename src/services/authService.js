@@ -6,4 +6,5 @@ export const authService = {
   refresh: () => apiRequest('/api/auth/refresh', { method: 'POST' }),
   logout: () => apiRequest('/api/auth/logout', { method: 'POST' }),
   me: (token) => apiRequest('/api/auth/me', { headers: { authorization: `Bearer ${token}` } }),
+  changePassword: (token, input) => apiRequest('/api/auth/change-password', { method:'POST', headers:{authorization:`Bearer ${token}`}, body:JSON.stringify(input) }),
 }

@@ -1,0 +1,10 @@
+import { useState } from 'react'
+import { ArrowRight,KeyRound,ShieldCheck } from 'lucide-react'
+import { useAuth } from '../contexts/AuthContext'
+
+export default function PasswordChangeGate({children}){
+  const auth=useAuth(),[form,setForm]=useState({currentPassword:'',newPassword:'',confirmPassword:''}),[busy,setBusy]=useState(false),[error,setError]=useState('')
+  if(!auth.session?.user?.mustChangePassword)return children
+  const submit=async event=>{event.preventDefault();if(form.newPassword!==form.confirmPassword){setError('The new passwords do not match.');return}setBusy(true);setError('');try{await auth.changePassword({currentPassword:form.currentPassword,newPassword:form.newPassword})}catch(err){setError(err.payload?.error==='current_password_incorrect'?'The temporary password is incorrect.':'Could not update your password.')}finally{setBusy(false)}}
+  return <main className="password-gate"><section><span className="password-gate-icon"><KeyRound size={24}/></span><small className="page-eyebrow">First login security</small><h1>Create your private password</h1><p>Your manager issued a temporary password. Replace it before entering the restaurant workspace.</p><form onSubmit={submit}><label><span>Temporary password</span><input required minLength="8" type="password" value={form.currentPassword} onChange={event=>setForm({...form,currentPassword:event.target.value})}/></label><label><span>New password</span><input required minLength="8" type="password" value={form.newPassword} onChange={event=>setForm({...form,newPassword:event.target.value})}/></label><label><span>Confirm new password</span><input required minLength="8" type="password" value={form.confirmPassword} onChange={event=>setForm({...form,confirmPassword:event.target.value})}/></label>{error&&<div className="auth-error">{error}</div>}<button className="saas-button" disabled={busy}>{busy?'Updating…':'Save password and continue'} <ArrowRight size={15}/></button></form><small className="password-note"><ShieldCheck size={14}/> Your manager cannot see the new password.</small></section></main>
+}

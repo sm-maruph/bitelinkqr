@@ -2,14 +2,17 @@ import { useEffect, useState } from 'react'
 import { Activity, Bell, CircleDollarSign, Grid2X2, Plus, ShoppingBag, Store, Utensils } from 'lucide-react'
 import { Button, StatCard } from './PortalChrome'
 import { platformService } from '../services/platformService'
+import { useAuth } from '../contexts/AuthContext'
 
 const formatDate = () => new Intl.DateTimeFormat('en-GB', {
   weekday: 'long', day: '2-digit', month: 'long', year: 'numeric', timeZone: 'Asia/Dhaka',
 }).format(new Date())
 
 export default function SuperAdminPortal({ setRole }) {
+  const {session}=useAuth()
   const [overview, setOverview] = useState(null)
   const [error, setError] = useState('')
+  const [outletRequests,setOutletRequests]=useState([])
 
   useEffect(() => {
     let active = true
@@ -18,6 +21,8 @@ export default function SuperAdminPortal({ setRole }) {
       .catch(() => { if (active) setError('Could not load platform data from the backend.') })
     return () => { active = false }
   }, [])
+  useEffect(()=>{if(session?.accessToken)platformService.getOutletRequests(session.accessToken).then(result=>setOutletRequests(result.items)).catch(()=>{})},[session])
+  const decide=async(id,decision)=>{await platformService.decideOutlet(session.accessToken,id,decision);setOutletRequests(current=>current.filter(item=>item.id!==id))}
 
   const totals = overview?.totals
   const restaurants = overview?.restaurants || []
@@ -35,6 +40,7 @@ export default function SuperAdminPortal({ setRole }) {
       <StatCard label="Orders today" value={totals?.ordersToday ?? '—'} trend="No order data yet" meta="today" icon={ShoppingBag} tone="amber" />
       <StatCard label="MRR" value={totals?.monthlyRecurringRevenue ?? '—'} trend="No subscriptions yet" meta="recurring revenue" icon={CircleDollarSign} tone="blue" />
     </section>
+    {outletRequests.length>0&&<div className="panel outlet-approvals"><div className="panel-heading"><div><span className="panel-kicker">Approval queue</span><h2>New outlet requests</h2></div></div>{outletRequests.map(item=><div className="approval-row" key={item.id}><span className="restaurant-avatar">{item.name[0]}</span><div><b>{item.name}</b><small>{item.restaurant_name} · {item.tenant_name} · {item.city}</small></div><button onClick={()=>decide(item.id,'reject')}>Reject</button><button className="approve" onClick={()=>decide(item.id,'approve')}>Approve</button></div>)}</div>}
     <div className="super-grid"><div className="panel full-panel">
       <div className="panel-heading"><div><span className="panel-kicker">Database records</span><h2>Restaurants</h2></div></div>
       {!overview && !error && <div className="restaurant-row"><div><b>Loading restaurants…</b><small>Fetching from BiteLink API</small></div></div>}

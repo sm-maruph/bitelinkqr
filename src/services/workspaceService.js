@@ -6,4 +6,5 @@ export const workspaceService = {
   getContext: (session, tenantId) => apiRequest('/api/v1/context', { headers: authenticatedHeaders({ accessToken: session.accessToken, tenantId }) }),
   getWorkspace: (session, tenantId, restaurantId, outletId) => apiRequest(`/api/v1/workspace?restaurantId=${encodeURIComponent(restaurantId)}&outletId=${encodeURIComponent(outletId)}`, { headers: authenticatedHeaders({ accessToken: session.accessToken, tenantId }) }),
   getAnalytics: (session, tenantId, restaurantId) => apiRequest(`/api/v1/restaurant-analytics?restaurantId=${encodeURIComponent(restaurantId)}`, { headers: authenticatedHeaders({ accessToken: session.accessToken, tenantId }) }),
+  createTable: (session, tenantId, payload) => apiRequest('/api/v1/tables', { method: 'POST', headers: authenticatedHeaders({ accessToken: session.accessToken, tenantId }), body: JSON.stringify(payload) }),
 }
