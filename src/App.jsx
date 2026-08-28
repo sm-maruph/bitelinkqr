@@ -28,9 +28,11 @@ function DemoToast() {
 
 export default function App() {
   const path = window.location.pathname
-  const embedded = new URLSearchParams(window.location.search).get('embed') === '1'
-  const initialRole = path.startsWith('/super-admin') ? 'super' : path.startsWith('/admin') || path.startsWith('/demo-admin') ? 'owner' : path !== '/' ? 'customer' : 'owner'
-  const [context, setContext] = useState({ roleId: initialRole, restaurantId: 'terrace', restaurantName: 'The Terrace', outlet: 'Dhanmondi', demoPreview: path.startsWith('/demo-admin') })
+  const search = new URLSearchParams(window.location.search)
+  const previewMode = search.get('previewMode')
+  const embedded = search.get('embed') === '1'
+  const initialRole = previewMode === 'customer' ? 'customer' : previewMode === 'admin' ? 'owner' : path.startsWith('/super-admin') ? 'super' : path.startsWith('/admin') || path.startsWith('/demo-admin') ? 'owner' : path !== '/' ? 'customer' : 'owner'
+  const [context, setContext] = useState({ roleId: initialRole, restaurantId: 'terrace', restaurantName: 'The Terrace', outlet: 'Dhanmondi', demoPreview: previewMode === 'admin' || path.startsWith('/demo-admin') })
   const [activePage, setActivePage] = useState('Overview')
   const [collapsed, setCollapsed] = useState(false)
   const role = context.roleId
