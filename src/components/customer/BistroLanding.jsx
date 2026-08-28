@@ -14,8 +14,8 @@ const eventImages = [
   'https://images.unsplash.com/photo-1519671282429-b44660ead0a7?auto=format&fit=crop&w=600&q=90',
 ]
 
-export default function BistroLanding({ restaurantName, outlet, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
-  return <div className="bistro-site"><OfferSection onMenu={onMenu} variant="midnight" />
+export default function BistroLanding({ restaurantName, outlet, content, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
+  return <div className="bistro-site"><OfferSection onMenu={onMenu} variant="midnight" content={content} />
     <div className="bistro-utility"><span>502-333-0719</span><span><Mail size={10} /> Orders@mgsprimetime.com</span><span><MapPin size={10} /> 7017 Global Drive, Louisville</span></div>
     <nav className="bistro-nav"><div className="bistro-brand"><strong>{restaurantName}</strong><small>PRIME TIME<br />BAR AND EVENT CENTER</small></div><div className="bistro-links"><a className="active" href="#bistro-home">Home</a><a href="#bistro-about">About us</a><a href="#bistro-menus">Menus</a><a href="#bistro-bar">Bar</a><a href="#bistro-events">Event</a><a href="#bistro-contact">Contact</a></div><button onClick={onMenu} aria-label="Open menu"><Utensils size={15} /></button></nav>
     <section className="bistro-reference-hero" id="bistro-home"><div><span className="bistro-kicker">Fresh food · fresh moments</span><h1>{restaurantName}<br /><em>BAR AND EVENT CENTER</em></h1><p>Good food, good drinks, and even better memories.</p><button onClick={onMenu}>Online order <ArrowRight size={14} /></button></div><div className="bistro-reference-hero-image"><img src={images.hero} alt="Fresh food prepared in a restaurant" /><span>● <b>●</b> ●</span></div></section>

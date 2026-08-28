@@ -1,0 +1,71 @@
+.saas-site .template-gallery {
+  position: relative;
+}
+
+.saas-site .template-gallery:before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -35px -28px;
+  border: 1px solid rgba(239, 50, 31, .08);
+  background:
+    linear-gradient(90deg, rgba(239, 50, 31, .035) 1px, transparent 1px),
+    linear-gradient(rgba(239, 50, 31, .035) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+
+html body .saas-site .template-preview-card {
+  border-color: rgba(255, 90, 61, .18);
+  background-color: #0d1118;
+}
+
+html body .saas-site .template-preview-card footer {
+  border-top: 1px solid rgba(255, 90, 61, .15);
+  color: #fff1e8;
+  background: linear-gradient(90deg, #180d0b, #100b0b) !important;
+}
+
+html body .saas-site .template-preview-card footer b {
+  color: #fff1e8;
+}
+
+html body .saas-site .template-preview-card footer small {
+  color: #806f6a;
+}
+
+html body .saas-site .template-preview-card footer em {
+  color: var(--preview-primary);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--preview-primary) 35%, transparent);
+}
+
+.saas-site .template-preview-card:hover footer {
+  background: linear-gradient(90deg, #24100d, #130b0a) !important;
+}
+
+.saas-site .template-pagination {
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+html body .saas-site .template-pagination button {
+  border-color: rgba(255, 255, 255, .12);
+  color: #cdbab4;
+  background: #120c0b;
+}
+
+html body .saas-site .template-pagination button:hover:not(:disabled) {
+  border-color: #ef321f;
+  color: #fff;
+  background: #35100c;
+}
+
+html body .saas-site .template-pagination button.active {
+  border-color: #ef321f;
+  color: #fff;
+  background: #ef321f;
+  box-shadow: 0 7px 22px rgba(239, 50, 31, .25);
+}
+
+html body .saas-site .template-pagination span {
+  color: #7f6e69;
+}

@@ -1,0 +1,804 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/customer/BistroLanding.jsx");const _jsxDEV = __vite__cjsImport4_react_jsxDevRuntime["jsxDEV"];import { ArrowRight, CalendarDays, Clock3, Mail, MapPin, Phone, Play, Utensils } from "/node_modules/.vite/deps/lucide-react.js?v=2834c5bf";
+import FoodCard from "/src/components/customer/FoodCard.jsx";
+import CategoryTabs from "/src/components/customer/CategoryTabs.jsx";
+import OfferSection from "/src/components/customer/OfferSection.jsx";
+var _jsxFileName = "C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/BistroLanding.jsx";
+import __vite__cjsImport4_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=d7e83f3b";
+const images = {
+	hero: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=90",
+	about: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=90",
+	bar: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=900&q=90"
+};
+const eventImages = [
+	"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=600&q=90",
+	"https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=600&q=90",
+	"https://images.unsplash.com/photo-1519671282429-b44660ead0a7?auto=format&fit=crop&w=600&q=90"
+];
+export default function BistroLanding({ restaurantName, outlet, content, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
+	return /* @__PURE__ */ _jsxDEV("div", {
+		className: "bistro-site",
+		children: [
+			/* @__PURE__ */ _jsxDEV(OfferSection, {
+				onMenu,
+				variant: "midnight",
+				content
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 18,
+				columnNumber: 39
+			}, this),
+			/* @__PURE__ */ _jsxDEV("div", {
+				className: "bistro-utility",
+				children: [
+					/* @__PURE__ */ _jsxDEV("span", { children: "502-333-0719" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 19,
+						columnNumber: 37
+					}, this),
+					/* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV(Mail, { size: 10 }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 19,
+						columnNumber: 68
+					}, this), " Orders@mgsprimetime.com"] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 19,
+						columnNumber: 62
+					}, this),
+					/* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV(MapPin, { size: 10 }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 19,
+						columnNumber: 123
+					}, this), " 7017 Global Drive, Louisville"] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 19,
+						columnNumber: 117
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 19,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("nav", {
+				className: "bistro-nav",
+				children: [
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "bistro-brand",
+						children: [/* @__PURE__ */ _jsxDEV("strong", { children: restaurantName }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 20,
+							columnNumber: 63
+						}, this), /* @__PURE__ */ _jsxDEV("small", { children: [
+							"PRIME TIME",
+							/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 20,
+								columnNumber: 113
+							}, this),
+							"BAR AND EVENT CENTER"
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 20,
+							columnNumber: 96
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 20,
+						columnNumber: 33
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "bistro-links",
+						children: [
+							/* @__PURE__ */ _jsxDEV("a", {
+								className: "active",
+								href: "#bistro-home",
+								children: "Home"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 20,
+								columnNumber: 183
+							}, this),
+							/* @__PURE__ */ _jsxDEV("a", {
+								href: "#bistro-about",
+								children: "About us"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 20,
+								columnNumber: 233
+							}, this),
+							/* @__PURE__ */ _jsxDEV("a", {
+								href: "#bistro-menus",
+								children: "Menus"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 20,
+								columnNumber: 269
+							}, this),
+							/* @__PURE__ */ _jsxDEV("a", {
+								href: "#bistro-bar",
+								children: "Bar"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 20,
+								columnNumber: 302
+							}, this),
+							/* @__PURE__ */ _jsxDEV("a", {
+								href: "#bistro-events",
+								children: "Event"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 20,
+								columnNumber: 331
+							}, this),
+							/* @__PURE__ */ _jsxDEV("a", {
+								href: "#bistro-contact",
+								children: "Contact"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 20,
+								columnNumber: 365
+							}, this)
+						]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 20,
+						columnNumber: 153
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						"aria-label": "Open menu",
+						children: /* @__PURE__ */ _jsxDEV(Utensils, { size: 15 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 20,
+							columnNumber: 456
+						}, this)
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 20,
+						columnNumber: 408
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 20,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "bistro-reference-hero",
+				id: "bistro-home",
+				children: [/* @__PURE__ */ _jsxDEV("div", { children: [
+					/* @__PURE__ */ _jsxDEV("span", {
+						className: "bistro-kicker",
+						children: "Fresh food · fresh moments"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 21,
+						columnNumber: 70
+					}, this),
+					/* @__PURE__ */ _jsxDEV("h1", { children: [
+						restaurantName,
+						/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 21,
+							columnNumber: 155
+						}, this),
+						/* @__PURE__ */ _jsxDEV("em", { children: "BAR AND EVENT CENTER" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 21,
+							columnNumber: 161
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 21,
+						columnNumber: 135
+					}, this),
+					/* @__PURE__ */ _jsxDEV("p", { children: "Good food, good drinks, and even better memories." }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 21,
+						columnNumber: 195
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: ["Online order ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 14 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 21,
+							columnNumber: 289
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 21,
+						columnNumber: 251
+					}, this)
+				] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 21,
+					columnNumber: 65
+				}, this), /* @__PURE__ */ _jsxDEV("div", {
+					className: "bistro-reference-hero-image",
+					children: [/* @__PURE__ */ _jsxDEV("img", {
+						src: images.hero,
+						alt: "Fresh food prepared in a restaurant"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 21,
+						columnNumber: 373
+					}, this), /* @__PURE__ */ _jsxDEV("span", { children: [
+						"● ",
+						/* @__PURE__ */ _jsxDEV("b", { children: "●" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 21,
+							columnNumber: 448
+						}, this),
+						" ●"
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 21,
+						columnNumber: 440
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 21,
+					columnNumber: 328
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 21,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "bistro-reference-about",
+				id: "bistro-about",
+				children: [/* @__PURE__ */ _jsxDEV("div", { children: /* @__PURE__ */ _jsxDEV("img", {
+					src: images.about,
+					alt: "Dining at the restaurant"
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 22,
+					columnNumber: 72
+				}, this) }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 22,
+					columnNumber: 67
+				}, this), /* @__PURE__ */ _jsxDEV("div", { children: [
+					/* @__PURE__ */ _jsxDEV("span", {
+						className: "bistro-kicker",
+						children: "About us"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 140
+					}, this),
+					/* @__PURE__ */ _jsxDEV("h2", { children: [/* @__PURE__ */ _jsxDEV("em", { children: "About" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 191
+					}, this), " us"] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 187
+					}, this),
+					/* @__PURE__ */ _jsxDEV("p", { children: [restaurantName, " is a place where great food and good company come together."] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 213
+					}, this),
+					/* @__PURE__ */ _jsxDEV("p", { children: [outlet, ", Dhaka · Open daily for dinner and drinks."] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 296
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: ["Learn more ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 14 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 22,
+							columnNumber: 390
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 22,
+						columnNumber: 354
+					}, this)
+				] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 22,
+					columnNumber: 135
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 22,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "bistro-reference-menus",
+				id: "bistro-menus",
+				children: [
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "bistro-section-title",
+						children: [/* @__PURE__ */ _jsxDEV("span", {
+							className: "bistro-kicker",
+							children: "Our kitchen"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 23,
+							columnNumber: 105
+						}, this), /* @__PURE__ */ _jsxDEV("h2", { children: [/* @__PURE__ */ _jsxDEV("em", { children: "Restaurant" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 23,
+							columnNumber: 159
+						}, this), " menus"] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 23,
+							columnNumber: 155
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 23,
+						columnNumber: 67
+					}, this),
+					/* @__PURE__ */ _jsxDEV(CategoryTabs, {
+						categories,
+						activeCategory: category,
+						onChange: onCategoryChange
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 23,
+						columnNumber: 195
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "bistro-live-menu-grid",
+						children: menuItems.map((item) => /* @__PURE__ */ _jsxDEV(FoodCard, {
+							item,
+							onSelect,
+							onAdd
+						}, item.id || item.name, false, {
+							fileName: _jsxFileName,
+							lineNumber: 23,
+							columnNumber: 353
+						}, this))
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 23,
+						columnNumber: 289
+					}, this),
+					pageCount > 1 && /* @__PURE__ */ _jsxDEV("nav", {
+						className: "bistro-live-pagination",
+						"aria-label": "Menu pages",
+						children: [
+							/* @__PURE__ */ _jsxDEV("button", {
+								onClick: () => onPageChange(currentPage - 1),
+								disabled: currentPage === 1,
+								"aria-label": "Previous menu page",
+								children: "‹"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 23,
+								columnNumber: 528
+							}, this),
+							Array.from({ length: pageCount }, (_, index) => index + 1).map((page) => /* @__PURE__ */ _jsxDEV("button", {
+								className: currentPage === page ? "active" : "",
+								onClick: () => onPageChange(page),
+								"aria-current": currentPage === page ? "page" : undefined,
+								children: page
+							}, page, false, {
+								fileName: _jsxFileName,
+								lineNumber: 23,
+								columnNumber: 727
+							}, this)),
+							/* @__PURE__ */ _jsxDEV("button", {
+								onClick: () => onPageChange(currentPage + 1),
+								disabled: currentPage === pageCount,
+								"aria-label": "Next menu page",
+								children: "›"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 23,
+								columnNumber: 904
+							}, this)
+						]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 23,
+						columnNumber: 464
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 23,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "bistro-reference-bar",
+				id: "bistro-bar",
+				children: [/* @__PURE__ */ _jsxDEV("div", { children: [
+					/* @__PURE__ */ _jsxDEV("span", {
+						className: "bistro-kicker",
+						children: "Cocktails · music · company"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 24,
+						columnNumber: 68
+					}, this),
+					/* @__PURE__ */ _jsxDEV("h2", { children: [/* @__PURE__ */ _jsxDEV("em", { children: "Our" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 24,
+						columnNumber: 138
+					}, this), " bar"] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 24,
+						columnNumber: 134
+					}, this),
+					/* @__PURE__ */ _jsxDEV("p", { children: "A lively room for a late drink, a quick bite, or an evening that turns into something more." }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 24,
+						columnNumber: 159
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: ["Learn more ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 14 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 24,
+							columnNumber: 293
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 24,
+						columnNumber: 257
+					}, this)
+				] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 24,
+					columnNumber: 63
+				}, this), /* @__PURE__ */ _jsxDEV("div", {
+					className: "bistro-bar-image",
+					children: [/* @__PURE__ */ _jsxDEV("img", {
+						src: images.bar,
+						alt: "Restaurant bar"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 24,
+						columnNumber: 366
+					}, this), /* @__PURE__ */ _jsxDEV("button", {
+						"aria-label": "Play bar video",
+						children: /* @__PURE__ */ _jsxDEV(Play, {
+							size: 18,
+							fill: "currentColor"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 24,
+							columnNumber: 447
+						}, this)
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 24,
+						columnNumber: 411
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 24,
+					columnNumber: 332
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 24,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "bistro-reference-events",
+				id: "bistro-events",
+				children: [/* @__PURE__ */ _jsxDEV("div", {
+					className: "bistro-section-title",
+					children: [/* @__PURE__ */ _jsxDEV("span", {
+						className: "bistro-kicker",
+						children: "What is happening"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 25,
+						columnNumber: 107
+					}, this), /* @__PURE__ */ _jsxDEV("h2", { children: [/* @__PURE__ */ _jsxDEV("em", { children: "Latest" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 25,
+						columnNumber: 167
+					}, this), " events"] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 25,
+						columnNumber: 163
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 25,
+					columnNumber: 69
+				}, this), /* @__PURE__ */ _jsxDEV("div", {
+					className: "bistro-event-grid",
+					children: eventImages.map((image, index) => /* @__PURE__ */ _jsxDEV("article", { children: [
+						/* @__PURE__ */ _jsxDEV("img", {
+							src: image,
+							alt: "Restaurant event"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 25,
+							columnNumber: 291
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { children: [
+							/* @__PURE__ */ _jsxDEV(CalendarDays, { size: 11 }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 25,
+								columnNumber: 339
+							}, this),
+							" Oct ",
+							22 + index * 5
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 25,
+							columnNumber: 333
+						}, this),
+						/* @__PURE__ */ _jsxDEV("small", { children: [/* @__PURE__ */ _jsxDEV(MapPin, { size: 10 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 25,
+							columnNumber: 400
+						}, this), " Louisville, Kentucky"] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 25,
+							columnNumber: 393
+						}, this),
+						/* @__PURE__ */ _jsxDEV("h3", { children: "LOREM IPSUM DOLOR" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 25,
+							columnNumber: 449
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", { children: "Good food, good people, and a night worth remembering." }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 25,
+							columnNumber: 475
+						}, this),
+						/* @__PURE__ */ _jsxDEV("button", {
+							onClick: onMenu,
+							children: ["View details ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 12 }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 25,
+								columnNumber: 574
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 25,
+							columnNumber: 536
+						}, this)
+					] }, image, true, {
+						fileName: _jsxFileName,
+						lineNumber: 25,
+						columnNumber: 270
+					}, this))
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 25,
+					columnNumber: 200
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 25,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("footer", {
+				className: "bistro-reference-footer",
+				id: "bistro-contact",
+				children: [
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "bistro-footer-brand",
+						children: [/* @__PURE__ */ _jsxDEV("div", {
+							className: "bistro-brand",
+							children: [/* @__PURE__ */ _jsxDEV("strong", { children: restaurantName }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 26,
+								columnNumber: 136
+							}, this), /* @__PURE__ */ _jsxDEV("small", { children: [
+								"PRIME TIME",
+								/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 26,
+									columnNumber: 186
+								}, this),
+								"BAR AND EVENT CENTER"
+							] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 26,
+								columnNumber: 169
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 106
+						}, this), /* @__PURE__ */ _jsxDEV("p", { children: "Good food. Good drinks. Good times." }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 226
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 26,
+						columnNumber: 69
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", { children: [
+						/* @__PURE__ */ _jsxDEV("h3", { children: "Quick links" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 279
+						}, this),
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#bistro-home",
+							children: "Home"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 299
+						}, this),
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#bistro-about",
+							children: "About us"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 330
+						}, this),
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#bistro-menus",
+							children: "Restaurant menus"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 366
+						}, this),
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#bistro-events",
+							children: "Event"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 410
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 26,
+						columnNumber: 274
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", { children: [
+						/* @__PURE__ */ _jsxDEV("h3", { children: "Contact" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 455
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", { children: [
+							/* @__PURE__ */ _jsxDEV(MapPin, { size: 11 }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 26,
+								columnNumber: 474
+							}, this),
+							" 7017 Global Drive",
+							/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 26,
+								columnNumber: 512
+							}, this),
+							"Louisville, KY 40258"
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 471
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", { children: [/* @__PURE__ */ _jsxDEV(Phone, { size: 11 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 545
+						}, this), " 502-333-0719"] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 542
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", { children: [/* @__PURE__ */ _jsxDEV(Mail, { size: 11 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 584
+						}, this), " Orders@mgsprimetime.com"] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 581
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 26,
+						columnNumber: 450
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", { children: [
+						/* @__PURE__ */ _jsxDEV("h3", { children: "Working hours" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 641
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", { children: [
+							/* @__PURE__ */ _jsxDEV(Clock3, { size: 11 }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 26,
+								columnNumber: 666
+							}, this),
+							" Monday - Thursday",
+							/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 26,
+								columnNumber: 704
+							}, this),
+							"11am - 11pm"
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 663
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", { children: [
+							/* @__PURE__ */ _jsxDEV(Clock3, { size: 11 }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 26,
+								columnNumber: 728
+							}, this),
+							" Friday & Saturday",
+							/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 26,
+								columnNumber: 766
+							}, this),
+							"11am - 2am"
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 26,
+							columnNumber: 725
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 26,
+						columnNumber: 636
+					}, this),
+					/* @__PURE__ */ _jsxDEV("small", {
+						className: "bistro-copyright",
+						children: "© 2022 MG's Prime Time · All Rights Reserved"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 26,
+						columnNumber: 792
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 26,
+				columnNumber: 5
+			}, this)
+		]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 18,
+		columnNumber: 10
+	}, this);
+}
+_c = BistroLanding;
+var _c;
+$RefreshReg$(_c, "BistroLanding");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+import * as __vite_react_currentExports from "/src/components/customer/BistroLanding.jsx";
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+
+  const currentExports = __vite_react_currentExports;
+  queueMicrotask(() => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/BistroLanding.jsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/BistroLanding.jsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/BistroLanding.jsx" + ' ' + id); }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJtYXBwaW5ncyI6IkFBQUEsU0FBUyxZQUFZLGNBQWMsUUFBUSxNQUFNLFFBQVEsT0FBTyxNQUFNLGdCQUFnQjtBQUN0RixPQUFPLGNBQWM7QUFDckIsT0FBTyxrQkFBa0I7QUFDekIsT0FBTyxrQkFBa0I7OztBQUV6QixNQUFNLFNBQVM7Q0FDYixNQUFNO0NBQ04sT0FBTztDQUNQLEtBQUs7QUFDUDtBQUNBLE1BQU0sY0FBYztDQUNsQjtDQUNBO0NBQ0E7QUFDRjtBQUVBLGVBQWUsU0FBUyxjQUFjLEVBQUUsZ0JBQWdCLFFBQVEsU0FBUyxRQUFRLFdBQVcsYUFBYSxXQUFXLGNBQWMsVUFBVSxPQUFPLFlBQVksVUFBVSxvQkFBb0I7Q0FDM0wsT0FBTyx3QkFBQyxPQUFEO0VBQUssV0FBVTtZQUFmO0dBQTZCLHdCQUFDLGNBQUQ7SUFBc0I7SUFBUSxTQUFRO0lBQW9CO0dBQVU7Ozs7O0dBQ3RHLHdCQUFDLE9BQUQ7SUFBSyxXQUFVO2NBQWY7S0FBZ0Msd0JBQUMsUUFBRCxZQUFNLGVBQWtCOzs7OztLQUFDLHdCQUFDLFFBQUQsYUFBTSx3QkFBQyxNQUFELEVBQU0sTUFBTSxHQUFLOzs7O2VBQUMsMEJBQThCOzs7OztLQUFDLHdCQUFDLFFBQUQsYUFBTSx3QkFBQyxRQUFELEVBQVEsTUFBTSxHQUFLOzs7O2VBQUMsZ0NBQW9DOzs7OztJQUFNOzs7Ozs7R0FDcEwsd0JBQUMsT0FBRDtJQUFLLFdBQVU7Y0FBZjtLQUE0Qix3QkFBQyxPQUFEO01BQUssV0FBVTtnQkFBZixDQUE4Qix3QkFBQyxVQUFELFlBQVMsZUFBdUI7Ozs7Z0JBQUMsd0JBQUMsU0FBRDtPQUFPO09BQVUsd0JBQUMsTUFBRCxDQUFLOzs7OztPQUFDO01BQTJCOzs7O2NBQU07Ozs7OztLQUFDLHdCQUFDLE9BQUQ7TUFBSyxXQUFVO2dCQUFmO09BQThCLHdCQUFDLEtBQUQ7UUFBRyxXQUFVO1FBQVMsTUFBSztrQkFBZTtPQUFPOzs7OztPQUFDLHdCQUFDLEtBQUQ7UUFBRyxNQUFLO2tCQUFnQjtPQUFXOzs7OztPQUFDLHdCQUFDLEtBQUQ7UUFBRyxNQUFLO2tCQUFnQjtPQUFROzs7OztPQUFDLHdCQUFDLEtBQUQ7UUFBRyxNQUFLO2tCQUFjO09BQU07Ozs7O09BQUMsd0JBQUMsS0FBRDtRQUFHLE1BQUs7a0JBQWlCO09BQVE7Ozs7O09BQUMsd0JBQUMsS0FBRDtRQUFHLE1BQUs7a0JBQWtCO09BQVU7Ozs7O01BQU07Ozs7OztLQUFDLHdCQUFDLFVBQUQ7TUFBUSxTQUFTO01BQVEsY0FBVztnQkFBWSx3QkFBQyxVQUFELEVBQVUsTUFBTSxHQUFLOzs7OztLQUFTOzs7OztJQUFNOzs7Ozs7R0FDdmUsd0JBQUMsV0FBRDtJQUFTLFdBQVU7SUFBd0IsSUFBRztjQUE5QyxDQUE0RCx3QkFBQyxPQUFEO0tBQUssd0JBQUMsUUFBRDtNQUFNLFdBQVU7Z0JBQWdCO0tBQWdDOzs7OztLQUFDLHdCQUFDLE1BQUQ7TUFBSztNQUFlLHdCQUFDLE1BQUQsQ0FBSzs7Ozs7TUFBQyx3QkFBQyxNQUFELFlBQUksdUJBQXdCOzs7OztLQUFLOzs7OztLQUFDLHdCQUFDLEtBQUQsWUFBRyxvREFBb0Q7Ozs7O0tBQUMsd0JBQUMsVUFBRDtNQUFRLFNBQVM7Z0JBQWpCLENBQXlCLGlCQUFhLHdCQUFDLFlBQUQsRUFBWSxNQUFNLEdBQUs7Ozs7Y0FBUzs7Ozs7O0lBQU07Ozs7Y0FBQyx3QkFBQyxPQUFEO0tBQUssV0FBVTtlQUFmLENBQTZDLHdCQUFDLE9BQUQ7TUFBSyxLQUFLLE9BQU87TUFBTSxLQUFJO0tBQXVDOzs7O2VBQUMsd0JBQUMsUUFBRDtNQUFNO01BQUUsd0JBQUMsS0FBRCxZQUFHLElBQUk7Ozs7O01BQUM7S0FBUTs7OzthQUFNOzs7OztZQUFVOzs7Ozs7R0FDM2Qsd0JBQUMsV0FBRDtJQUFTLFdBQVU7SUFBeUIsSUFBRztjQUEvQyxDQUE4RCx3QkFBQyxPQUFELFlBQUssd0JBQUMsT0FBRDtLQUFLLEtBQUssT0FBTztLQUFPLEtBQUk7SUFBNEI7Ozs7YUFBTTs7OztjQUFDLHdCQUFDLE9BQUQ7S0FBSyx3QkFBQyxRQUFEO01BQU0sV0FBVTtnQkFBZ0I7S0FBYzs7Ozs7S0FBQyx3QkFBQyxNQUFELGFBQUksd0JBQUMsTUFBRCxZQUFJLFFBQVM7Ozs7ZUFBQyxLQUFPOzs7OztLQUFDLHdCQUFDLEtBQUQsYUFBSSxnQkFBZSw4REFBK0Q7Ozs7O0tBQUMsd0JBQUMsS0FBRCxhQUFJLFFBQU8sNkNBQThDOzs7OztLQUFDLHdCQUFDLFVBQUQ7TUFBUSxTQUFTO2dCQUFqQixDQUF5QixlQUFXLHdCQUFDLFlBQUQsRUFBWSxNQUFNLEdBQUs7Ozs7Y0FBUzs7Ozs7O0lBQU07Ozs7WUFBVTs7Ozs7O0dBQ2piLHdCQUFDLFdBQUQ7SUFBUyxXQUFVO0lBQXlCLElBQUc7Y0FBL0M7S0FBOEQsd0JBQUMsT0FBRDtNQUFLLFdBQVU7Z0JBQWYsQ0FBc0Msd0JBQUMsUUFBRDtPQUFNLFdBQVU7aUJBQWdCO01BQWlCOzs7O2dCQUFDLHdCQUFDLE1BQUQsYUFBSSx3QkFBQyxNQUFELFlBQUksYUFBYzs7OztnQkFBQyxRQUFVOzs7O2NBQU07Ozs7OztLQUFDLHdCQUFDLGNBQUQ7TUFBMEI7TUFBWSxnQkFBZ0I7TUFBVSxVQUFVO0tBQW1COzs7OztLQUFDLHdCQUFDLE9BQUQ7TUFBSyxXQUFVO2dCQUF5QixVQUFVLEtBQUssU0FBUyx3QkFBQyxVQUFEO09BQWdCO09BQTJDO09BQWlCO01BQVEsR0FBekQsS0FBSyxNQUFNLEtBQUs7Ozs7YUFBeUMsQ0FBQztLQUFPOzs7OztLQUFFLFlBQVksS0FBSyx3QkFBQyxPQUFEO01BQUssV0FBVTtNQUF5QixjQUFXO2dCQUFuRDtPQUFnRSx3QkFBQyxVQUFEO1FBQVEsZUFBZSxhQUFhLGNBQWMsQ0FBQztRQUFHLFVBQVUsZ0JBQWdCO1FBQUcsY0FBVztrQkFBcUI7T0FBUzs7Ozs7T0FBRSxNQUFNLEtBQUssRUFBRSxRQUFRLFVBQVUsSUFBSSxHQUFHLFVBQVUsUUFBUSxDQUFDLENBQUMsQ0FBQyxLQUFLLFNBQVMsd0JBQUMsVUFBRDtRQUFRLFdBQVcsZ0JBQWdCLE9BQU8sV0FBVztRQUFJLGVBQWUsYUFBYSxJQUFJO1FBQUcsZ0JBQWMsZ0JBQWdCLE9BQU8sU0FBUztrQkFBdUI7T0FBYSxHQUFwQjs7OztjQUFvQixDQUFDO09BQUUsd0JBQUMsVUFBRDtRQUFRLGVBQWUsYUFBYSxjQUFjLENBQUM7UUFBRyxVQUFVLGdCQUFnQjtRQUFXLGNBQVc7a0JBQWlCO09BQVM7Ozs7O01BQU07Ozs7OztJQUFXOzs7Ozs7R0FDcGhDLHdCQUFDLFdBQUQ7SUFBUyxXQUFVO0lBQXVCLElBQUc7Y0FBN0MsQ0FBMEQsd0JBQUMsT0FBRDtLQUFLLHdCQUFDLFFBQUQ7TUFBTSxXQUFVO2dCQUFnQjtLQUFpQzs7Ozs7S0FBQyx3QkFBQyxNQUFELGFBQUksd0JBQUMsTUFBRCxZQUFJLE1BQU87Ozs7ZUFBQyxNQUFROzs7OztLQUFDLHdCQUFDLEtBQUQsWUFBRyw4RkFBOEY7Ozs7O0tBQUMsd0JBQUMsVUFBRDtNQUFRLFNBQVM7Z0JBQWpCLENBQXlCLGVBQVcsd0JBQUMsWUFBRCxFQUFZLE1BQU0sR0FBSzs7OztjQUFTOzs7Ozs7SUFBTTs7OztjQUFDLHdCQUFDLE9BQUQ7S0FBSyxXQUFVO2VBQWYsQ0FBa0Msd0JBQUMsT0FBRDtNQUFLLEtBQUssT0FBTztNQUFLLEtBQUk7S0FBa0I7Ozs7ZUFBQyx3QkFBQyxVQUFEO01BQVEsY0FBVztnQkFBaUIsd0JBQUMsTUFBRDtPQUFNLE1BQU07T0FBSSxNQUFLO01BQWdCOzs7OztLQUFTOzs7O2FBQU07Ozs7O1lBQVU7Ozs7OztHQUN4Zix3QkFBQyxXQUFEO0lBQVMsV0FBVTtJQUEwQixJQUFHO2NBQWhELENBQWdFLHdCQUFDLE9BQUQ7S0FBSyxXQUFVO2VBQWYsQ0FBc0Msd0JBQUMsUUFBRDtNQUFNLFdBQVU7Z0JBQWdCO0tBQXVCOzs7O2VBQUMsd0JBQUMsTUFBRCxhQUFJLHdCQUFDLE1BQUQsWUFBSSxTQUFVOzs7O2VBQUMsU0FBVzs7OzthQUFNOzs7OztjQUFDLHdCQUFDLE9BQUQ7S0FBSyxXQUFVO2VBQXFCLFlBQVksS0FBSyxPQUFPLFVBQVUsd0JBQUMsV0FBRDtNQUFxQix3QkFBQyxPQUFEO09BQUssS0FBSztPQUFPLEtBQUk7TUFBb0I7Ozs7O01BQUMsd0JBQUMsUUFBRDtPQUFNLHdCQUFDLGNBQUQsRUFBYyxNQUFNLEdBQUs7Ozs7O09BQUM7T0FBTSxLQUFLLFFBQVE7TUFBUTs7Ozs7TUFBQyx3QkFBQyxTQUFELGFBQU8sd0JBQUMsUUFBRCxFQUFRLE1BQU0sR0FBSzs7OztnQkFBQyx1QkFBNEI7Ozs7O01BQUMsd0JBQUMsTUFBRCxZQUFJLG9CQUFxQjs7Ozs7TUFBQyx3QkFBQyxLQUFELFlBQUcseURBQXlEOzs7OztNQUFDLHdCQUFDLFVBQUQ7T0FBUSxTQUFTO2lCQUFqQixDQUF5QixpQkFBYSx3QkFBQyxZQUFELEVBQVksTUFBTSxHQUFLOzs7O2VBQVM7Ozs7OztLQUFVLEtBQTVVOzs7O1lBQTRVLENBQUM7SUFBTzs7OztZQUFVOzs7Ozs7R0FDcm5CLHdCQUFDLFVBQUQ7SUFBUSxXQUFVO0lBQTBCLElBQUc7Y0FBL0M7S0FBZ0Usd0JBQUMsT0FBRDtNQUFLLFdBQVU7Z0JBQWYsQ0FBcUMsd0JBQUMsT0FBRDtPQUFLLFdBQVU7aUJBQWYsQ0FBOEIsd0JBQUMsVUFBRCxZQUFTLGVBQXVCOzs7O2lCQUFDLHdCQUFDLFNBQUQ7UUFBTztRQUFVLHdCQUFDLE1BQUQsQ0FBSzs7Ozs7UUFBQztPQUEyQjs7OztlQUFNOzs7OztnQkFBQyx3QkFBQyxLQUFELFlBQUcsc0NBQXNDOzs7O2NBQU07Ozs7OztLQUFDLHdCQUFDLE9BQUQ7TUFBSyx3QkFBQyxNQUFELFlBQUksY0FBZTs7Ozs7TUFBQyx3QkFBQyxLQUFEO09BQUcsTUFBSztpQkFBZTtNQUFPOzs7OztNQUFDLHdCQUFDLEtBQUQ7T0FBRyxNQUFLO2lCQUFnQjtNQUFXOzs7OztNQUFDLHdCQUFDLEtBQUQ7T0FBRyxNQUFLO2lCQUFnQjtNQUFtQjs7Ozs7TUFBQyx3QkFBQyxLQUFEO09BQUcsTUFBSztpQkFBaUI7TUFBUTs7Ozs7S0FBTTs7Ozs7S0FBQyx3QkFBQyxPQUFEO01BQUssd0JBQUMsTUFBRCxZQUFJLFVBQVc7Ozs7O01BQUMsd0JBQUMsS0FBRDtPQUFHLHdCQUFDLFFBQUQsRUFBUSxNQUFNLEdBQUs7Ozs7O09BQUM7T0FBa0Isd0JBQUMsTUFBRCxDQUFLOzs7OztPQUFDO01BQXVCOzs7OztNQUFDLHdCQUFDLEtBQUQsYUFBRyx3QkFBQyxPQUFELEVBQU8sTUFBTSxHQUFLOzs7O2dCQUFDLGVBQWdCOzs7OztNQUFDLHdCQUFDLEtBQUQsYUFBRyx3QkFBQyxNQUFELEVBQU0sTUFBTSxHQUFLOzs7O2dCQUFDLDBCQUEyQjs7Ozs7S0FBTTs7Ozs7S0FBQyx3QkFBQyxPQUFEO01BQUssd0JBQUMsTUFBRCxZQUFJLGdCQUFpQjs7Ozs7TUFBQyx3QkFBQyxLQUFEO09BQUcsd0JBQUMsUUFBRCxFQUFRLE1BQU0sR0FBSzs7Ozs7T0FBQztPQUFrQix3QkFBQyxNQUFELENBQUs7Ozs7O09BQUM7TUFBYzs7Ozs7TUFBQyx3QkFBQyxLQUFEO09BQUcsd0JBQUMsUUFBRCxFQUFRLE1BQU0sR0FBSzs7Ozs7T0FBQztPQUFrQix3QkFBQyxNQUFELENBQUs7Ozs7O09BQUM7TUFBYTs7Ozs7S0FBTTs7Ozs7S0FBQyx3QkFBQyxTQUFEO01BQU8sV0FBVTtnQkFBbUI7S0FBbUQ7Ozs7O0lBQVM7Ozs7OztFQUNoM0I7Ozs7OztBQUNQIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIkJpc3Ryb0xhbmRpbmcuanN4Il0sInZlcnNpb24iOjMsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEFycm93UmlnaHQsIENhbGVuZGFyRGF5cywgQ2xvY2szLCBNYWlsLCBNYXBQaW4sIFBob25lLCBQbGF5LCBVdGVuc2lscyB9IGZyb20gJ2x1Y2lkZS1yZWFjdCdcclxuaW1wb3J0IEZvb2RDYXJkIGZyb20gJy4vRm9vZENhcmQnXHJcbmltcG9ydCBDYXRlZ29yeVRhYnMgZnJvbSAnLi9DYXRlZ29yeVRhYnMnXG5pbXBvcnQgT2ZmZXJTZWN0aW9uIGZyb20gJy4vT2ZmZXJTZWN0aW9uJ1xuXHJcbmNvbnN0IGltYWdlcyA9IHtcclxuICBoZXJvOiAnaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE1NDQwMjUxNjItZDc2Njk0MjY1OTQ3P2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9MTIwMCZxPTkwJyxcclxuICBhYm91dDogJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTE3MjQ4MTM1NDY3LTRjN2VkY2FkMzRjND9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTgwMCZxPTkwJyxcclxuICBiYXI6ICdodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTUxNDkzMzY1MTEwMy0wMDVlZWMwNmMwNGI/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz05MDAmcT05MCcsXHJcbn1cclxuY29uc3QgZXZlbnRJbWFnZXMgPSBbXHJcbiAgJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNDE0MjM1MDc3NDI4LTMzODk4OWEyZThjMD9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTYwMCZxPTkwJyxcclxuICAnaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE1NTkzMzkzNTItMTFkMDM1YWE2NWRlP2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9NjAwJnE9OTAnLFxyXG4gICdodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTUxOTY3MTI4MjQyOS1iNDQ2NjBlYWQwYTc/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz02MDAmcT05MCcsXHJcbl1cclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIEJpc3Ryb0xhbmRpbmcoeyByZXN0YXVyYW50TmFtZSwgb3V0bGV0LCBjb250ZW50LCBvbk1lbnUsIG1lbnVJdGVtcywgY3VycmVudFBhZ2UsIHBhZ2VDb3VudCwgb25QYWdlQ2hhbmdlLCBvblNlbGVjdCwgb25BZGQsIGNhdGVnb3JpZXMsIGNhdGVnb3J5LCBvbkNhdGVnb3J5Q2hhbmdlIH0pIHtcbiAgcmV0dXJuIDxkaXYgY2xhc3NOYW1lPVwiYmlzdHJvLXNpdGVcIj48T2ZmZXJTZWN0aW9uIG9uTWVudT17b25NZW51fSB2YXJpYW50PVwibWlkbmlnaHRcIiBjb250ZW50PXtjb250ZW50fSAvPlxuICAgIDxkaXYgY2xhc3NOYW1lPVwiYmlzdHJvLXV0aWxpdHlcIj48c3Bhbj41MDItMzMzLTA3MTk8L3NwYW4+PHNwYW4+PE1haWwgc2l6ZT17MTB9IC8+IE9yZGVyc0BtZ3NwcmltZXRpbWUuY29tPC9zcGFuPjxzcGFuPjxNYXBQaW4gc2l6ZT17MTB9IC8+IDcwMTcgR2xvYmFsIERyaXZlLCBMb3Vpc3ZpbGxlPC9zcGFuPjwvZGl2PlxyXG4gICAgPG5hdiBjbGFzc05hbWU9XCJiaXN0cm8tbmF2XCI+PGRpdiBjbGFzc05hbWU9XCJiaXN0cm8tYnJhbmRcIj48c3Ryb25nPntyZXN0YXVyYW50TmFtZX08L3N0cm9uZz48c21hbGw+UFJJTUUgVElNRTxiciAvPkJBUiBBTkQgRVZFTlQgQ0VOVEVSPC9zbWFsbD48L2Rpdj48ZGl2IGNsYXNzTmFtZT1cImJpc3Ryby1saW5rc1wiPjxhIGNsYXNzTmFtZT1cImFjdGl2ZVwiIGhyZWY9XCIjYmlzdHJvLWhvbWVcIj5Ib21lPC9hPjxhIGhyZWY9XCIjYmlzdHJvLWFib3V0XCI+QWJvdXQgdXM8L2E+PGEgaHJlZj1cIiNiaXN0cm8tbWVudXNcIj5NZW51czwvYT48YSBocmVmPVwiI2Jpc3Ryby1iYXJcIj5CYXI8L2E+PGEgaHJlZj1cIiNiaXN0cm8tZXZlbnRzXCI+RXZlbnQ8L2E+PGEgaHJlZj1cIiNiaXN0cm8tY29udGFjdFwiPkNvbnRhY3Q8L2E+PC9kaXY+PGJ1dHRvbiBvbkNsaWNrPXtvbk1lbnV9IGFyaWEtbGFiZWw9XCJPcGVuIG1lbnVcIj48VXRlbnNpbHMgc2l6ZT17MTV9IC8+PC9idXR0b24+PC9uYXY+XHJcbiAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJiaXN0cm8tcmVmZXJlbmNlLWhlcm9cIiBpZD1cImJpc3Ryby1ob21lXCI+PGRpdj48c3BhbiBjbGFzc05hbWU9XCJiaXN0cm8ta2lja2VyXCI+RnJlc2ggZm9vZCDCtyBmcmVzaCBtb21lbnRzPC9zcGFuPjxoMT57cmVzdGF1cmFudE5hbWV9PGJyIC8+PGVtPkJBUiBBTkQgRVZFTlQgQ0VOVEVSPC9lbT48L2gxPjxwPkdvb2QgZm9vZCwgZ29vZCBkcmlua3MsIGFuZCBldmVuIGJldHRlciBtZW1vcmllcy48L3A+PGJ1dHRvbiBvbkNsaWNrPXtvbk1lbnV9Pk9ubGluZSBvcmRlciA8QXJyb3dSaWdodCBzaXplPXsxNH0gLz48L2J1dHRvbj48L2Rpdj48ZGl2IGNsYXNzTmFtZT1cImJpc3Ryby1yZWZlcmVuY2UtaGVyby1pbWFnZVwiPjxpbWcgc3JjPXtpbWFnZXMuaGVyb30gYWx0PVwiRnJlc2ggZm9vZCBwcmVwYXJlZCBpbiBhIHJlc3RhdXJhbnRcIiAvPjxzcGFuPuKXjyA8Yj7il488L2I+IOKXjzwvc3Bhbj48L2Rpdj48L3NlY3Rpb24+XHJcbiAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJiaXN0cm8tcmVmZXJlbmNlLWFib3V0XCIgaWQ9XCJiaXN0cm8tYWJvdXRcIj48ZGl2PjxpbWcgc3JjPXtpbWFnZXMuYWJvdXR9IGFsdD1cIkRpbmluZyBhdCB0aGUgcmVzdGF1cmFudFwiIC8+PC9kaXY+PGRpdj48c3BhbiBjbGFzc05hbWU9XCJiaXN0cm8ta2lja2VyXCI+QWJvdXQgdXM8L3NwYW4+PGgyPjxlbT5BYm91dDwvZW0+IHVzPC9oMj48cD57cmVzdGF1cmFudE5hbWV9IGlzIGEgcGxhY2Ugd2hlcmUgZ3JlYXQgZm9vZCBhbmQgZ29vZCBjb21wYW55IGNvbWUgdG9nZXRoZXIuPC9wPjxwPntvdXRsZXR9LCBEaGFrYSDCtyBPcGVuIGRhaWx5IGZvciBkaW5uZXIgYW5kIGRyaW5rcy48L3A+PGJ1dHRvbiBvbkNsaWNrPXtvbk1lbnV9PkxlYXJuIG1vcmUgPEFycm93UmlnaHQgc2l6ZT17MTR9IC8+PC9idXR0b24+PC9kaXY+PC9zZWN0aW9uPlxyXG4gICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwiYmlzdHJvLXJlZmVyZW5jZS1tZW51c1wiIGlkPVwiYmlzdHJvLW1lbnVzXCI+PGRpdiBjbGFzc05hbWU9XCJiaXN0cm8tc2VjdGlvbi10aXRsZVwiPjxzcGFuIGNsYXNzTmFtZT1cImJpc3Ryby1raWNrZXJcIj5PdXIga2l0Y2hlbjwvc3Bhbj48aDI+PGVtPlJlc3RhdXJhbnQ8L2VtPiBtZW51czwvaDI+PC9kaXY+PENhdGVnb3J5VGFicyBjYXRlZ29yaWVzPXtjYXRlZ29yaWVzfSBhY3RpdmVDYXRlZ29yeT17Y2F0ZWdvcnl9IG9uQ2hhbmdlPXtvbkNhdGVnb3J5Q2hhbmdlfSAvPjxkaXYgY2xhc3NOYW1lPVwiYmlzdHJvLWxpdmUtbWVudS1ncmlkXCI+e21lbnVJdGVtcy5tYXAoKGl0ZW0pID0+IDxGb29kQ2FyZCBpdGVtPXtpdGVtfSBrZXk9e2l0ZW0uaWQgfHwgaXRlbS5uYW1lfSBvblNlbGVjdD17b25TZWxlY3R9IG9uQWRkPXtvbkFkZH0gLz4pfTwvZGl2PntwYWdlQ291bnQgPiAxICYmIDxuYXYgY2xhc3NOYW1lPVwiYmlzdHJvLWxpdmUtcGFnaW5hdGlvblwiIGFyaWEtbGFiZWw9XCJNZW51IHBhZ2VzXCI+PGJ1dHRvbiBvbkNsaWNrPXsoKSA9PiBvblBhZ2VDaGFuZ2UoY3VycmVudFBhZ2UgLSAxKX0gZGlzYWJsZWQ9e2N1cnJlbnRQYWdlID09PSAxfSBhcmlhLWxhYmVsPVwiUHJldmlvdXMgbWVudSBwYWdlXCI+4oC5PC9idXR0b24+e0FycmF5LmZyb20oeyBsZW5ndGg6IHBhZ2VDb3VudCB9LCAoXywgaW5kZXgpID0+IGluZGV4ICsgMSkubWFwKChwYWdlKSA9PiA8YnV0dG9uIGNsYXNzTmFtZT17Y3VycmVudFBhZ2UgPT09IHBhZ2UgPyAnYWN0aXZlJyA6ICcnfSBvbkNsaWNrPXsoKSA9PiBvblBhZ2VDaGFuZ2UocGFnZSl9IGFyaWEtY3VycmVudD17Y3VycmVudFBhZ2UgPT09IHBhZ2UgPyAncGFnZScgOiB1bmRlZmluZWR9IGtleT17cGFnZX0+e3BhZ2V9PC9idXR0b24+KX08YnV0dG9uIG9uQ2xpY2s9eygpID0+IG9uUGFnZUNoYW5nZShjdXJyZW50UGFnZSArIDEpfSBkaXNhYmxlZD17Y3VycmVudFBhZ2UgPT09IHBhZ2VDb3VudH0gYXJpYS1sYWJlbD1cIk5leHQgbWVudSBwYWdlXCI+4oC6PC9idXR0b24+PC9uYXY+fTwvc2VjdGlvbj5cclxuICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cImJpc3Ryby1yZWZlcmVuY2UtYmFyXCIgaWQ9XCJiaXN0cm8tYmFyXCI+PGRpdj48c3BhbiBjbGFzc05hbWU9XCJiaXN0cm8ta2lja2VyXCI+Q29ja3RhaWxzIMK3IG11c2ljIMK3IGNvbXBhbnk8L3NwYW4+PGgyPjxlbT5PdXI8L2VtPiBiYXI8L2gyPjxwPkEgbGl2ZWx5IHJvb20gZm9yIGEgbGF0ZSBkcmluaywgYSBxdWljayBiaXRlLCBvciBhbiBldmVuaW5nIHRoYXQgdHVybnMgaW50byBzb21ldGhpbmcgbW9yZS48L3A+PGJ1dHRvbiBvbkNsaWNrPXtvbk1lbnV9PkxlYXJuIG1vcmUgPEFycm93UmlnaHQgc2l6ZT17MTR9IC8+PC9idXR0b24+PC9kaXY+PGRpdiBjbGFzc05hbWU9XCJiaXN0cm8tYmFyLWltYWdlXCI+PGltZyBzcmM9e2ltYWdlcy5iYXJ9IGFsdD1cIlJlc3RhdXJhbnQgYmFyXCIgLz48YnV0dG9uIGFyaWEtbGFiZWw9XCJQbGF5IGJhciB2aWRlb1wiPjxQbGF5IHNpemU9ezE4fSBmaWxsPVwiY3VycmVudENvbG9yXCIgLz48L2J1dHRvbj48L2Rpdj48L3NlY3Rpb24+XHJcbiAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJiaXN0cm8tcmVmZXJlbmNlLWV2ZW50c1wiIGlkPVwiYmlzdHJvLWV2ZW50c1wiPjxkaXYgY2xhc3NOYW1lPVwiYmlzdHJvLXNlY3Rpb24tdGl0bGVcIj48c3BhbiBjbGFzc05hbWU9XCJiaXN0cm8ta2lja2VyXCI+V2hhdCBpcyBoYXBwZW5pbmc8L3NwYW4+PGgyPjxlbT5MYXRlc3Q8L2VtPiBldmVudHM8L2gyPjwvZGl2PjxkaXYgY2xhc3NOYW1lPVwiYmlzdHJvLWV2ZW50LWdyaWRcIj57ZXZlbnRJbWFnZXMubWFwKChpbWFnZSwgaW5kZXgpID0+IDxhcnRpY2xlIGtleT17aW1hZ2V9PjxpbWcgc3JjPXtpbWFnZX0gYWx0PVwiUmVzdGF1cmFudCBldmVudFwiIC8+PHNwYW4+PENhbGVuZGFyRGF5cyBzaXplPXsxMX0gLz4gT2N0IHsyMiArIGluZGV4ICogNX08L3NwYW4+PHNtYWxsPjxNYXBQaW4gc2l6ZT17MTB9IC8+IExvdWlzdmlsbGUsIEtlbnR1Y2t5PC9zbWFsbD48aDM+TE9SRU0gSVBTVU0gRE9MT1I8L2gzPjxwPkdvb2QgZm9vZCwgZ29vZCBwZW9wbGUsIGFuZCBhIG5pZ2h0IHdvcnRoIHJlbWVtYmVyaW5nLjwvcD48YnV0dG9uIG9uQ2xpY2s9e29uTWVudX0+VmlldyBkZXRhaWxzIDxBcnJvd1JpZ2h0IHNpemU9ezEyfSAvPjwvYnV0dG9uPjwvYXJ0aWNsZT4pfTwvZGl2Pjwvc2VjdGlvbj5cclxuICAgIDxmb290ZXIgY2xhc3NOYW1lPVwiYmlzdHJvLXJlZmVyZW5jZS1mb290ZXJcIiBpZD1cImJpc3Ryby1jb250YWN0XCI+PGRpdiBjbGFzc05hbWU9XCJiaXN0cm8tZm9vdGVyLWJyYW5kXCI+PGRpdiBjbGFzc05hbWU9XCJiaXN0cm8tYnJhbmRcIj48c3Ryb25nPntyZXN0YXVyYW50TmFtZX08L3N0cm9uZz48c21hbGw+UFJJTUUgVElNRTxiciAvPkJBUiBBTkQgRVZFTlQgQ0VOVEVSPC9zbWFsbD48L2Rpdj48cD5Hb29kIGZvb2QuIEdvb2QgZHJpbmtzLiBHb29kIHRpbWVzLjwvcD48L2Rpdj48ZGl2PjxoMz5RdWljayBsaW5rczwvaDM+PGEgaHJlZj1cIiNiaXN0cm8taG9tZVwiPkhvbWU8L2E+PGEgaHJlZj1cIiNiaXN0cm8tYWJvdXRcIj5BYm91dCB1czwvYT48YSBocmVmPVwiI2Jpc3Ryby1tZW51c1wiPlJlc3RhdXJhbnQgbWVudXM8L2E+PGEgaHJlZj1cIiNiaXN0cm8tZXZlbnRzXCI+RXZlbnQ8L2E+PC9kaXY+PGRpdj48aDM+Q29udGFjdDwvaDM+PHA+PE1hcFBpbiBzaXplPXsxMX0gLz4gNzAxNyBHbG9iYWwgRHJpdmU8YnIgLz5Mb3Vpc3ZpbGxlLCBLWSA0MDI1ODwvcD48cD48UGhvbmUgc2l6ZT17MTF9IC8+IDUwMi0zMzMtMDcxOTwvcD48cD48TWFpbCBzaXplPXsxMX0gLz4gT3JkZXJzQG1nc3ByaW1ldGltZS5jb208L3A+PC9kaXY+PGRpdj48aDM+V29ya2luZyBob3VyczwvaDM+PHA+PENsb2NrMyBzaXplPXsxMX0gLz4gTW9uZGF5IC0gVGh1cnNkYXk8YnIgLz4xMWFtIC0gMTFwbTwvcD48cD48Q2xvY2szIHNpemU9ezExfSAvPiBGcmlkYXkgJiBTYXR1cmRheTxiciAvPjExYW0gLSAyYW08L3A+PC9kaXY+PHNtYWxsIGNsYXNzTmFtZT1cImJpc3Ryby1jb3B5cmlnaHRcIj7CqSAyMDIyIE1HJ3MgUHJpbWUgVGltZSDCtyBBbGwgUmlnaHRzIFJlc2VydmVkPC9zbWFsbD48L2Zvb3Rlcj5cclxuICA8L2Rpdj5cclxufVxyXG4iXX0=

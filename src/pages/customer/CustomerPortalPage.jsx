@@ -17,11 +17,15 @@ import OrderTracker from "../../components/customer/OrderTracker";
 import BillAndPayment from "../../components/customer/BillAndPayment";
 import CustomerRequests from "../../components/customer/CustomerRequests";
 import CustomerBottomNav from "../../components/customer/CustomerBottomNav";
+import StandardTemplateFooter from "../../components/customer/StandardTemplateFooter";
+import { getRestaurantContent } from "../../data/restaurantContent";
+import { restaurantService } from "../../services/restaurantService";
+import { futuristicTemplateCatalog } from "../../data/templateCatalog";
 
-const futuristicTemplates = {
+const _legacyFuturisticTemplates = {
   "future-neon": "Neon Nova",
   "future-hologram": "Hologram Feast",
-  "future-orbit": "Orbit Dining",
+  "future-paper": "Paper & Salt",
   "future-cyber": "Cyber Bento",
   "future-aurora": "Aurora Kitchen",
   "future-quantum": "Quantum Plate",
@@ -40,6 +44,7 @@ const futuristicTemplates = {
   "future-flux": "Flux Bistro",
   "future-oasis": "Digital Oasis",
 };
+const futuristicTemplates=Object.fromEntries(futuristicTemplateCatalog.map(template=>[template.key,template.name]));
 const templates = {
   editorial: "Editorial",
   garden: "Garden table",
@@ -55,18 +60,15 @@ const themes = {
   olive: { label: "Olive", color: "#597b62" },
   saffron: { label: "Saffron", color: "#bb853f" },
 };
-const categories = [
-  "All dishes",
-  "Kacchi",
-  "Biryani",
-  "Main Course",
-  "Sides",
-  "Drinks",
-  "Desserts",
-];
 const itemsPerPage = 6;
 
-export default function CustomerPortalPage({ setRole, context }) {
+export default function CustomerPortalPage({ setRole, context, embedded = false }) {
+  const requestedTemplate = new URLSearchParams(window.location.search).get("previewTemplate");
+  useEffect(() => {
+    if (!embedded) return undefined;
+    document.body.classList.add("embedded-customer-preview");
+    return () => document.body.classList.remove("embedded-customer-preview");
+  }, [embedded]);
   const [category, setCategoryState] = useState("All dishes");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -76,9 +78,10 @@ export default function CustomerPortalPage({ setRole, context }) {
   const [orderOpen, setOrderOpen] = useState(false);
   const [billOpen, setBillOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
-  const [template, setTemplate] = useState("editorial");
+  const [template, setTemplate] = useState(requestedTemplate && templates[requestedTemplate] ? requestedTemplate : "editorial");
   const [theme, setTheme] = useState("coral");
   const [compactCanvas, setCompactCanvas] = useState(false);
+  const [liveContent, setLiveContent] = useState(null);
   const canvasRef = useRef(null);
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -90,6 +93,34 @@ export default function CustomerPortalPage({ setRole, context }) {
     return () => observer.disconnect();
   }, []);
   const { state, actions } = useMockStore();
+  useEffect(() => {
+    let active = true;
+    const outletSlug = context.outlet.toLowerCase().trim().replaceAll(/\s+/g, "-");
+    restaurantService.getPublicSite(context.restaurantId, outletSlug)
+      .then((payload) => {
+        if (!active) return;
+        actions.hydratePublicMenu(payload.menu);
+        setLiveContent(payload);
+        if (!requestedTemplate && payload.restaurant.template_key) setTemplate(payload.restaurant.template_key);
+        if (payload.restaurant.theme_key && themes[payload.restaurant.theme_key]) setTheme(payload.restaurant.theme_key);
+      })
+      .catch(() => { /* The visual demo remains available until the API is configured. */ });
+    return () => { active = false; };
+  }, [context.restaurantId, context.outlet, actions, requestedTemplate]);
+  const fallbackContent = getRestaurantContent(context.restaurantId, context.outlet);
+  const restaurantContent = liveContent ? {
+    ...fallbackContent,
+    name: liveContent.restaurant.name,
+    tagline: liveContent.restaurant.tagline || fallbackContent.tagline,
+    description: liveContent.restaurant.description || fallbackContent.description,
+    phone: liveContent.restaurant.phone || liveContent.restaurant.outlet_phone || fallbackContent.phone,
+    email: liveContent.restaurant.email || fallbackContent.email,
+    address: [liveContent.restaurant.address_line, liveContent.restaurant.city].filter(Boolean).join(", ") || fallbackContent.address,
+    chefName: liveContent.restaurant.chef_name || fallbackContent.chefName,
+    offerTitle: liveContent.offers[0]?.name || fallbackContent.offerTitle,
+    offerDescription: liveContent.offers[0]?.description || fallbackContent.offerDescription,
+  } : fallbackContent;
+  const categories = ["All dishes", ...new Set(state.menu.map((item) => item.category).filter(Boolean))];
   const order = [...state.orders]
     .reverse()
     .find(
@@ -220,7 +251,7 @@ export default function CustomerPortalPage({ setRole, context }) {
       className={`customer-page customer-template-${template} ${template.startsWith("future-") ? "customer-template-future" : ""}`}
       style={{ "--customer-accent": themes[theme].color }}
     >
-      <div className="customer-preview-controls">
+      {!embedded && <div className="customer-preview-controls">
         <span>
           <SlidersHorizontal size={14} /> Preview
         </span>
@@ -250,7 +281,7 @@ export default function CustomerPortalPage({ setRole, context }) {
             ))}
           </select>
         </label>
-      </div>
+      </div>}
       <div ref={canvasRef} className={`customer-canvas ${compactCanvas ? "customer-canvas-compact" : ""}`}>
         <CustomerHeader
           cartCount={cartCount}
@@ -262,6 +293,7 @@ export default function CustomerPortalPage({ setRole, context }) {
           restaurantName={
             context.restaurantId === "kacchi" ? "Kacchi Vai" : "The Terrace"
           }
+          content={restaurantContent}
           outlet={context.outlet}
           menuItems={visibleItems}
           currentPage={currentPage}
@@ -312,6 +344,7 @@ export default function CustomerPortalPage({ setRole, context }) {
           <div className="customer-bill-placeholder" aria-hidden="true" />
           <div className="customer-help-placeholder" aria-hidden="true" />
         </main>
+        {(template === "editorial" || template === "garden") && <StandardTemplateFooter template={template} restaurantName={restaurantContent.name} outlet={context.outlet} content={restaurantContent} onMenu={scrollToMenu} />}
         <CustomerBottomNav
           cartCount={cartCount}
           onMenu={scrollToMenu}
@@ -364,7 +397,7 @@ export default function CustomerPortalPage({ setRole, context }) {
             </button>
             <BillAndPayment
               order={order}
-              payment={state.payments.at(-1)}
+              payment={[...state.payments].reverse().find((payment) => payment.orderId === order?.id)}
               onPay={actions.submitPayment}
             />
           </div>

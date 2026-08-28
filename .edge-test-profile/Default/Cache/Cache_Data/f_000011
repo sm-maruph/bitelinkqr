@@ -1,0 +1,351 @@
+import { BarChart3, BookOpen, LayoutDashboard, QrCode, ShoppingBag, Table2, Users, WalletCards } from "/node_modules/.vite/deps/lucide-react.js?v=2834c5bf";
+export const restaurants = [
+	{
+		id: "terrace",
+		name: "The Terrace",
+		initials: "T",
+		plan: "Business",
+		outlets: ["Dhanmondi", "Gulshan"]
+	},
+	{
+		id: "kacchi",
+		name: "Kacchi Vai",
+		initials: "K",
+		plan: "Starter",
+		outlets: ["Dhanmondi"]
+	},
+	{
+		id: "noodle",
+		name: "Noodle House",
+		initials: "N",
+		plan: "Enterprise",
+		outlets: [
+			"Banani",
+			"Gulshan",
+			"Uttara"
+		]
+	}
+];
+export const roles = [
+	{
+		id: "owner",
+		label: "Restaurant owner",
+		portal: "admin"
+	},
+	{
+		id: "manager",
+		label: "Restaurant manager",
+		portal: "admin"
+	},
+	{
+		id: "outlet",
+		label: "Outlet manager",
+		portal: "admin"
+	},
+	{
+		id: "order",
+		label: "Order staff",
+		portal: "admin"
+	},
+	{
+		id: "kitchen",
+		label: "Kitchen staff",
+		portal: "admin"
+	},
+	{
+		id: "super",
+		label: "Super admin",
+		portal: "super"
+	},
+	{
+		id: "customer",
+		label: "Guest customer",
+		portal: "customer"
+	}
+];
+export const navGroups = [
+	{
+		label: "Workspace",
+		links: [
+			["Overview", LayoutDashboard],
+			["Live orders", ShoppingBag],
+			["Tables", Table2]
+		]
+	},
+	{
+		label: "Manage",
+		links: [
+			["Menu & offers", BookOpen],
+			["Payments", WalletCards],
+			["Team", Users]
+		]
+	},
+	{
+		label: "Understand",
+		links: [["Analytics", BarChart3], ["QR codes", QrCode]]
+	}
+];
+export const menuItems = [
+	{
+		name: "Smoked Beef Rib",
+		category: "Kitchen signatures",
+		price: 690,
+		tag: "Chef pick",
+		image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Tandoori Chicken",
+		category: "Kitchen signatures",
+		price: 420,
+		tag: "Popular",
+		image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Crispy Prawn Toast",
+		category: "Small plates",
+		price: 360,
+		tag: "New",
+		image: "https://images.unsplash.com/photo-1562565652-a0d8f0c59eb4?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Charred Aubergine",
+		category: "Small plates",
+		price: 280,
+		tag: "Vegetarian",
+		image: "https://images.unsplash.com/photo-1572449043416-55f4685c9bb7?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Mango Lassi",
+		category: "Coolers & drinks",
+		price: 160,
+		tag: "Fresh",
+		image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Special Mutton Kacchi",
+		category: "Kacchi",
+		price: 350,
+		tag: "Signature",
+		image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Chicken Kacchi",
+		category: "Kacchi",
+		price: 280,
+		tag: "Popular",
+		image: "https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Beef Kacchi",
+		category: "Kacchi",
+		price: 320,
+		tag: "Rich",
+		image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Mutton Biryani",
+		category: "Biryani",
+		price: 330,
+		tag: "Classic",
+		image: "https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Chicken Roast",
+		category: "Main Course",
+		price: 260,
+		tag: "Popular",
+		image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Mutton Rezala",
+		category: "Main Course",
+		price: 390,
+		tag: "Slow cooked",
+		image: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Beef Kala Bhuna",
+		category: "Main Course",
+		price: 340,
+		tag: "Spiced",
+		image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Plain Polao",
+		category: "Sides",
+		price: 120,
+		tag: "Fragrant",
+		image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Borhani",
+		category: "Drinks",
+		price: 60,
+		tag: "House made",
+		image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Coke",
+		category: "Drinks",
+		price: 50,
+		tag: "Chilled",
+		image: "https://images.unsplash.com/photo-1629203849820-fdd70d49c38e?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Sprite",
+		category: "Drinks",
+		price: 50,
+		tag: "Chilled",
+		image: "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Mineral Water",
+		category: "Drinks",
+		price: 30,
+		tag: "Essential",
+		image: "https://images.unsplash.com/photo-1560023907-5f339617ea30?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Firni",
+		category: "Desserts",
+		price: 110,
+		tag: "Sweet",
+		image: "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Jorda",
+		category: "Desserts",
+		price: 90,
+		tag: "Traditional",
+		image: "https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Shahi Tukra",
+		category: "Desserts",
+		price: 150,
+		tag: "Indulgent",
+		image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Aloo Bukhara Chutney",
+		category: "Sides",
+		price: 45,
+		tag: "Tangy",
+		image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Cucumber Salad",
+		category: "Sides",
+		price: 70,
+		tag: "Fresh",
+		image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Mutton Tehari",
+		category: "Biryani",
+		price: 290,
+		tag: "New",
+		image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Egg Biryani",
+		category: "Biryani",
+		price: 210,
+		tag: "Comfort",
+		image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Chicken Tikka",
+		category: "Main Course",
+		price: 240,
+		tag: "Charred",
+		image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Dal Tadka",
+		category: "Sides",
+		price: 130,
+		tag: "Vegetarian",
+		image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Lemon Mint Cooler",
+		category: "Drinks",
+		price: 140,
+		tag: "Refreshing",
+		image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=85"
+	},
+	{
+		name: "Rabri",
+		category: "Desserts",
+		price: 130,
+		tag: "Creamy",
+		image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=900&q=85"
+	}
+];
+export const orderRows = [
+	[
+		"#1048",
+		"06",
+		"Smoked Beef Rib x 2, Mango Lassi",
+		"BDT 1,540",
+		"New",
+		"4 min ago"
+	],
+	[
+		"#1047",
+		"03",
+		"Tandoori Chicken x 1, Mango Lassi x 1",
+		"BDT 580",
+		"Preparing",
+		"11 min ago"
+	],
+	[
+		"#1046",
+		"11",
+		"Charred Aubergine x 1",
+		"BDT 280",
+		"Ready",
+		"18 min ago"
+	],
+	[
+		"#1045",
+		"02",
+		"Smoked Beef Rib x 1",
+		"BDT 690",
+		"Served",
+		"25 min ago"
+	]
+];
+export const teamMembers = [
+	[
+		"SR",
+		"Samira Rahman",
+		"samira@theterrace.bd",
+		"Owner",
+		"All outlets"
+	],
+	[
+		"AH",
+		"Arif Hossain",
+		"arif@theterrace.bd",
+		"Outlet manager",
+		"Dhanmondi"
+	],
+	[
+		"NJ",
+		"Nusrat Jahan",
+		"nusrat@theterrace.bd",
+		"Kitchen staff",
+		"Dhanmondi"
+	],
+	[
+		"RK",
+		"Rafiq Khan",
+		"rafiq@theterrace.bd",
+		"Order staff",
+		"Dhanmondi"
+	]
+];
+
+//# sourceMappingURL=data:application/json;base64,eyJtYXBwaW5ncyI6IkFBQUEsU0FBUyxXQUFXLFVBQVUsaUJBQWlCLFFBQVEsYUFBYSxRQUFRLE9BQU8sbUJBQW1CO0FBRXRHLE9BQU8sTUFBTSxjQUFjO0NBQ3pCO0VBQUUsSUFBSTtFQUFXLE1BQU07RUFBZSxVQUFVO0VBQUssTUFBTTtFQUFZLFNBQVMsQ0FBQyxhQUFhLFNBQVM7Q0FBRTtDQUN6RztFQUFFLElBQUk7RUFBVSxNQUFNO0VBQWMsVUFBVTtFQUFLLE1BQU07RUFBVyxTQUFTLENBQUMsV0FBVztDQUFFO0NBQzNGO0VBQUUsSUFBSTtFQUFVLE1BQU07RUFBZ0IsVUFBVTtFQUFLLE1BQU07RUFBYyxTQUFTO0dBQUM7R0FBVTtHQUFXO0VBQVE7Q0FBRTtBQUNwSDtBQUVBLE9BQU8sTUFBTSxRQUFRO0NBQ25CO0VBQUUsSUFBSTtFQUFTLE9BQU87RUFBb0IsUUFBUTtDQUFRO0NBQzFEO0VBQUUsSUFBSTtFQUFXLE9BQU87RUFBc0IsUUFBUTtDQUFRO0NBQzlEO0VBQUUsSUFBSTtFQUFVLE9BQU87RUFBa0IsUUFBUTtDQUFRO0NBQ3pEO0VBQUUsSUFBSTtFQUFTLE9BQU87RUFBZSxRQUFRO0NBQVE7Q0FDckQ7RUFBRSxJQUFJO0VBQVcsT0FBTztFQUFpQixRQUFRO0NBQVE7Q0FDekQ7RUFBRSxJQUFJO0VBQVMsT0FBTztFQUFlLFFBQVE7Q0FBUTtDQUNyRDtFQUFFLElBQUk7RUFBWSxPQUFPO0VBQWtCLFFBQVE7Q0FBVztBQUNoRTtBQUVBLE9BQU8sTUFBTSxZQUFZO0NBQ3ZCO0VBQUUsT0FBTztFQUFhLE9BQU87R0FBQyxDQUFDLFlBQVksZUFBZTtHQUFHLENBQUMsZUFBZSxXQUFXO0dBQUcsQ0FBQyxVQUFVLE1BQU07RUFBQztDQUFFO0NBQy9HO0VBQUUsT0FBTztFQUFVLE9BQU87R0FBQyxDQUFDLGlCQUFpQixRQUFRO0dBQUcsQ0FBQyxZQUFZLFdBQVc7R0FBRyxDQUFDLFFBQVEsS0FBSztFQUFDO0NBQUU7Q0FDcEc7RUFBRSxPQUFPO0VBQWMsT0FBTyxDQUFDLENBQUMsYUFBYSxTQUFTLEdBQUcsQ0FBQyxZQUFZLE1BQU0sQ0FBQztDQUFFO0FBQ2pGO0FBRUEsT0FBTyxNQUFNLFlBQVk7Q0FDdkI7RUFBRSxNQUFNO0VBQW1CLFVBQVU7RUFBc0IsT0FBTztFQUFLLEtBQUs7RUFBYSxPQUFPO0NBQTRGO0NBQzVMO0VBQUUsTUFBTTtFQUFvQixVQUFVO0VBQXNCLE9BQU87RUFBSyxLQUFLO0VBQVcsT0FBTztDQUErRjtDQUM5TDtFQUFFLE1BQU07RUFBc0IsVUFBVTtFQUFnQixPQUFPO0VBQUssS0FBSztFQUFPLE9BQU87Q0FBNEY7Q0FDbkw7RUFBRSxNQUFNO0VBQXFCLFVBQVU7RUFBZ0IsT0FBTztFQUFLLEtBQUs7RUFBYyxPQUFPO0NBQStGO0NBQzVMO0VBQUUsTUFBTTtFQUFlLFVBQVU7RUFBb0IsT0FBTztFQUFLLEtBQUs7RUFBUyxPQUFPO0NBQStGO0NBQ3JMO0VBQUUsTUFBTTtFQUF5QixVQUFVO0VBQVUsT0FBTztFQUFLLEtBQUs7RUFBYSxPQUFPO0NBQStGO0NBQ3pMO0VBQUUsTUFBTTtFQUFrQixVQUFVO0VBQVUsT0FBTztFQUFLLEtBQUs7RUFBVyxPQUFPO0NBQStGO0NBQ2hMO0VBQUUsTUFBTTtFQUFlLFVBQVU7RUFBVSxPQUFPO0VBQUssS0FBSztFQUFRLE9BQU87Q0FBK0Y7Q0FDMUs7RUFBRSxNQUFNO0VBQWtCLFVBQVU7RUFBVyxPQUFPO0VBQUssS0FBSztFQUFXLE9BQU87Q0FBK0Y7Q0FDakw7RUFBRSxNQUFNO0VBQWlCLFVBQVU7RUFBZSxPQUFPO0VBQUssS0FBSztFQUFXLE9BQU87Q0FBK0Y7Q0FDcEw7RUFBRSxNQUFNO0VBQWlCLFVBQVU7RUFBZSxPQUFPO0VBQUssS0FBSztFQUFlLE9BQU87Q0FBK0Y7Q0FDeEw7RUFBRSxNQUFNO0VBQW1CLFVBQVU7RUFBZSxPQUFPO0VBQUssS0FBSztFQUFVLE9BQU87Q0FBK0Y7Q0FDckw7RUFBRSxNQUFNO0VBQWUsVUFBVTtFQUFTLE9BQU87RUFBSyxLQUFLO0VBQVksT0FBTztDQUErRjtDQUM3SztFQUFFLE1BQU07RUFBVyxVQUFVO0VBQVUsT0FBTztFQUFJLEtBQUs7RUFBYyxPQUFPO0NBQTRGO0NBQ3hLO0VBQUUsTUFBTTtFQUFRLFVBQVU7RUFBVSxPQUFPO0VBQUksS0FBSztFQUFXLE9BQU87Q0FBK0Y7Q0FDcks7RUFBRSxNQUFNO0VBQVUsVUFBVTtFQUFVLE9BQU87RUFBSSxLQUFLO0VBQVcsT0FBTztDQUErRjtDQUN2SztFQUFFLE1BQU07RUFBaUIsVUFBVTtFQUFVLE9BQU87RUFBSSxLQUFLO0VBQWEsT0FBTztDQUE0RjtDQUM3SztFQUFFLE1BQU07RUFBUyxVQUFVO0VBQVksT0FBTztFQUFLLEtBQUs7RUFBUyxPQUFPO0NBQStGO0NBQ3ZLO0VBQUUsTUFBTTtFQUFTLFVBQVU7RUFBWSxPQUFPO0VBQUksS0FBSztFQUFlLE9BQU87Q0FBK0Y7Q0FDNUs7RUFBRSxNQUFNO0VBQWUsVUFBVTtFQUFZLE9BQU87RUFBSyxLQUFLO0VBQWEsT0FBTztDQUErRjtDQUNqTDtFQUFFLE1BQU07RUFBd0IsVUFBVTtFQUFTLE9BQU87RUFBSSxLQUFLO0VBQVMsT0FBTztDQUErRjtDQUNsTDtFQUFFLE1BQU07RUFBa0IsVUFBVTtFQUFTLE9BQU87RUFBSSxLQUFLO0VBQVMsT0FBTztDQUErRjtDQUM1SztFQUFFLE1BQU07RUFBaUIsVUFBVTtFQUFXLE9BQU87RUFBSyxLQUFLO0VBQU8sT0FBTztDQUErRjtDQUM1SztFQUFFLE1BQU07RUFBZSxVQUFVO0VBQVcsT0FBTztFQUFLLEtBQUs7RUFBVyxPQUFPO0NBQStGO0NBQzlLO0VBQUUsTUFBTTtFQUFpQixVQUFVO0VBQWUsT0FBTztFQUFLLEtBQUs7RUFBVyxPQUFPO0NBQStGO0NBQ3BMO0VBQUUsTUFBTTtFQUFhLFVBQVU7RUFBUyxPQUFPO0VBQUssS0FBSztFQUFjLE9BQU87Q0FBNEY7Q0FDMUs7RUFBRSxNQUFNO0VBQXFCLFVBQVU7RUFBVSxPQUFPO0VBQUssS0FBSztFQUFjLE9BQU87Q0FBK0Y7Q0FDdEw7RUFBRSxNQUFNO0VBQVMsVUFBVTtFQUFZLE9BQU87RUFBSyxLQUFLO0VBQVUsT0FBTztDQUErRjtBQUMxSztBQUVBLE9BQU8sTUFBTSxZQUFZO0NBQ3ZCO0VBQUM7RUFBUztFQUFNO0VBQW9DO0VBQWE7RUFBTztDQUFXO0NBQ25GO0VBQUM7RUFBUztFQUFNO0VBQXlDO0VBQVc7RUFBYTtDQUFZO0NBQzdGO0VBQUM7RUFBUztFQUFNO0VBQXlCO0VBQVc7RUFBUztDQUFZO0NBQ3pFO0VBQUM7RUFBUztFQUFNO0VBQXVCO0VBQVc7RUFBVTtDQUFZO0FBQzFFO0FBRUEsT0FBTyxNQUFNLGNBQWM7Q0FDekI7RUFBQztFQUFNO0VBQWlCO0VBQXdCO0VBQVM7Q0FBYTtDQUN0RTtFQUFDO0VBQU07RUFBZ0I7RUFBc0I7RUFBa0I7Q0FBVztDQUMxRTtFQUFDO0VBQU07RUFBZ0I7RUFBd0I7RUFBaUI7Q0FBVztDQUMzRTtFQUFDO0VBQU07RUFBYztFQUF1QjtFQUFlO0NBQVc7QUFDeEUiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsibW9ja0RhdGEuanMiXSwidmVyc2lvbiI6Mywic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQmFyQ2hhcnQzLCBCb29rT3BlbiwgTGF5b3V0RGFzaGJvYXJkLCBRckNvZGUsIFNob3BwaW5nQmFnLCBUYWJsZTIsIFVzZXJzLCBXYWxsZXRDYXJkcyB9IGZyb20gJ2x1Y2lkZS1yZWFjdCdcclxuXHJcbmV4cG9ydCBjb25zdCByZXN0YXVyYW50cyA9IFtcclxuICB7IGlkOiAndGVycmFjZScsIG5hbWU6ICdUaGUgVGVycmFjZScsIGluaXRpYWxzOiAnVCcsIHBsYW46ICdCdXNpbmVzcycsIG91dGxldHM6IFsnRGhhbm1vbmRpJywgJ0d1bHNoYW4nXSB9LFxyXG4gIHsgaWQ6ICdrYWNjaGknLCBuYW1lOiAnS2FjY2hpIFZhaScsIGluaXRpYWxzOiAnSycsIHBsYW46ICdTdGFydGVyJywgb3V0bGV0czogWydEaGFubW9uZGknXSB9LFxyXG4gIHsgaWQ6ICdub29kbGUnLCBuYW1lOiAnTm9vZGxlIEhvdXNlJywgaW5pdGlhbHM6ICdOJywgcGxhbjogJ0VudGVycHJpc2UnLCBvdXRsZXRzOiBbJ0JhbmFuaScsICdHdWxzaGFuJywgJ1V0dGFyYSddIH0sXHJcbl1cclxuXHJcbmV4cG9ydCBjb25zdCByb2xlcyA9IFtcclxuICB7IGlkOiAnb3duZXInLCBsYWJlbDogJ1Jlc3RhdXJhbnQgb3duZXInLCBwb3J0YWw6ICdhZG1pbicgfSxcclxuICB7IGlkOiAnbWFuYWdlcicsIGxhYmVsOiAnUmVzdGF1cmFudCBtYW5hZ2VyJywgcG9ydGFsOiAnYWRtaW4nIH0sXHJcbiAgeyBpZDogJ291dGxldCcsIGxhYmVsOiAnT3V0bGV0IG1hbmFnZXInLCBwb3J0YWw6ICdhZG1pbicgfSxcclxuICB7IGlkOiAnb3JkZXInLCBsYWJlbDogJ09yZGVyIHN0YWZmJywgcG9ydGFsOiAnYWRtaW4nIH0sXHJcbiAgeyBpZDogJ2tpdGNoZW4nLCBsYWJlbDogJ0tpdGNoZW4gc3RhZmYnLCBwb3J0YWw6ICdhZG1pbicgfSxcclxuICB7IGlkOiAnc3VwZXInLCBsYWJlbDogJ1N1cGVyIGFkbWluJywgcG9ydGFsOiAnc3VwZXInIH0sXHJcbiAgeyBpZDogJ2N1c3RvbWVyJywgbGFiZWw6ICdHdWVzdCBjdXN0b21lcicsIHBvcnRhbDogJ2N1c3RvbWVyJyB9LFxyXG5dXHJcblxyXG5leHBvcnQgY29uc3QgbmF2R3JvdXBzID0gW1xyXG4gIHsgbGFiZWw6ICdXb3Jrc3BhY2UnLCBsaW5rczogW1snT3ZlcnZpZXcnLCBMYXlvdXREYXNoYm9hcmRdLCBbJ0xpdmUgb3JkZXJzJywgU2hvcHBpbmdCYWddLCBbJ1RhYmxlcycsIFRhYmxlMl1dIH0sXHJcbiAgeyBsYWJlbDogJ01hbmFnZScsIGxpbmtzOiBbWydNZW51ICYgb2ZmZXJzJywgQm9va09wZW5dLCBbJ1BheW1lbnRzJywgV2FsbGV0Q2FyZHNdLCBbJ1RlYW0nLCBVc2Vyc11dIH0sXHJcbiAgeyBsYWJlbDogJ1VuZGVyc3RhbmQnLCBsaW5rczogW1snQW5hbHl0aWNzJywgQmFyQ2hhcnQzXSwgWydRUiBjb2RlcycsIFFyQ29kZV1dIH0sXHJcbl1cclxuXHJcbmV4cG9ydCBjb25zdCBtZW51SXRlbXMgPSBbXHJcbiAgeyBuYW1lOiAnU21va2VkIEJlZWYgUmliJywgY2F0ZWdvcnk6ICdLaXRjaGVuIHNpZ25hdHVyZXMnLCBwcmljZTogNjkwLCB0YWc6ICdDaGVmIHBpY2snLCBpbWFnZTogJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTQ0MDI1MTYyLWQ3NjY5NDI2NTk0Nz9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTkwMCZxPTg1JyB9LFxyXG4gIHsgbmFtZTogJ1RhbmRvb3JpIENoaWNrZW4nLCBjYXRlZ29yeTogJ0tpdGNoZW4gc2lnbmF0dXJlcycsIHByaWNlOiA0MjAsIHRhZzogJ1BvcHVsYXInLCBpbWFnZTogJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTk5NDg3NDg4MTcwLWQxMWVjOWMxNzJmMD9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTkwMCZxPTg1JyB9LFxyXG4gIHsgbmFtZTogJ0NyaXNweSBQcmF3biBUb2FzdCcsIGNhdGVnb3J5OiAnU21hbGwgcGxhdGVzJywgcHJpY2U6IDM2MCwgdGFnOiAnTmV3JywgaW1hZ2U6ICdodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTU2MjU2NTY1Mi1hMGQ4ZjBjNTllYjQ/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz05MDAmcT04NScgfSxcclxuICB7IG5hbWU6ICdDaGFycmVkIEF1YmVyZ2luZScsIGNhdGVnb3J5OiAnU21hbGwgcGxhdGVzJywgcHJpY2U6IDI4MCwgdGFnOiAnVmVnZXRhcmlhbicsIGltYWdlOiAnaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE1NzI0NDkwNDM0MTYtNTVmNDY4NWM5YmI3P2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9OTAwJnE9ODUnIH0sXHJcbiAgeyBuYW1lOiAnTWFuZ28gTGFzc2knLCBjYXRlZ29yeTogJ0Nvb2xlcnMgJiBkcmlua3MnLCBwcmljZTogMTYwLCB0YWc6ICdGcmVzaCcsIGltYWdlOiAnaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE2MjYwODI5MjczODktNmNkMDk3Y2RjNmVjP2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9OTAwJnE9ODUnIH0sXHJcbiAgeyBuYW1lOiAnU3BlY2lhbCBNdXR0b24gS2FjY2hpJywgY2F0ZWdvcnk6ICdLYWNjaGknLCBwcmljZTogMzUwLCB0YWc6ICdTaWduYXR1cmUnLCBpbWFnZTogJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTg5MzAyMTY4MDY4LTk2NDY2NGQ5M2RjMD9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTkwMCZxPTg1JyB9LFxyXG4gIHsgbmFtZTogJ0NoaWNrZW4gS2FjY2hpJywgY2F0ZWdvcnk6ICdLYWNjaGknLCBwcmljZTogMjgwLCB0YWc6ICdQb3B1bGFyJywgaW1hZ2U6ICdodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTU2MzM3OTA5MTMzOS0wMzI0Njk2M2Q5NmM/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz05MDAmcT04NScgfSxcclxuICB7IG5hbWU6ICdCZWVmIEthY2NoaScsIGNhdGVnb3J5OiAnS2FjY2hpJywgcHJpY2U6IDMyMCwgdGFnOiAnUmljaCcsIGltYWdlOiAnaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE1MTIwNTg1NjQzNjYtMTg1MTBiZTJkYjE5P2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9OTAwJnE9ODUnIH0sXHJcbiAgeyBuYW1lOiAnTXV0dG9uIEJpcnlhbmknLCBjYXRlZ29yeTogJ0JpcnlhbmknLCBwcmljZTogMzMwLCB0YWc6ICdDbGFzc2ljJywgaW1hZ2U6ICdodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTU2MzM3OTA5MTMzOS0wMzI0Njk2M2Q5NmM/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz05MDAmcT04NScgfSxcclxuICB7IG5hbWU6ICdDaGlja2VuIFJvYXN0JywgY2F0ZWdvcnk6ICdNYWluIENvdXJzZScsIHByaWNlOiAyNjAsIHRhZzogJ1BvcHVsYXInLCBpbWFnZTogJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNjAxMDUwNjkwNTk3LWRmMDU2OGY3MDk1MD9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTkwMCZxPTg1JyB9LFxyXG4gIHsgbmFtZTogJ011dHRvbiBSZXphbGEnLCBjYXRlZ29yeTogJ01haW4gQ291cnNlJywgcHJpY2U6IDM5MCwgdGFnOiAnU2xvdyBjb29rZWQnLCBpbWFnZTogJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTg4MTY2NTI0OTQxLTNiZjYxYTljNDFkYj9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTkwMCZxPTg1JyB9LFxyXG4gIHsgbmFtZTogJ0JlZWYgS2FsYSBCaHVuYScsIGNhdGVnb3J5OiAnTWFpbiBDb3Vyc2UnLCBwcmljZTogMzQwLCB0YWc6ICdTcGljZWQnLCBpbWFnZTogJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNjAzODk0NTg0MzczLTVhYzgyYjJhZTM5OD9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTkwMCZxPTg1JyB9LFxyXG4gIHsgbmFtZTogJ1BsYWluIFBvbGFvJywgY2F0ZWdvcnk6ICdTaWRlcycsIHByaWNlOiAxMjAsIHRhZzogJ0ZyYWdyYW50JywgaW1hZ2U6ICdodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTU5Njc5NzAzODUzMC0yYzEwNzIyOTY1NGI/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz05MDAmcT04NScgfSxcclxuICB7IG5hbWU6ICdCb3JoYW5pJywgY2F0ZWdvcnk6ICdEcmlua3MnLCBwcmljZTogNjAsIHRhZzogJ0hvdXNlIG1hZGUnLCBpbWFnZTogJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTQ0MTQ1OTQ1LWY5MDQyNTM0MGM3ZT9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTkwMCZxPTg1JyB9LFxyXG4gIHsgbmFtZTogJ0Nva2UnLCBjYXRlZ29yeTogJ0RyaW5rcycsIHByaWNlOiA1MCwgdGFnOiAnQ2hpbGxlZCcsIGltYWdlOiAnaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE2MjkyMDM4NDk4MjAtZmRkNzBkNDljMzhlP2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9OTAwJnE9ODUnIH0sXHJcbiAgeyBuYW1lOiAnU3ByaXRlJywgY2F0ZWdvcnk6ICdEcmlua3MnLCBwcmljZTogNTAsIHRhZzogJ0NoaWxsZWQnLCBpbWFnZTogJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNjI1NzcyMjk5ODQ4LTM5MWI2YTg3ZDdiMz9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTkwMCZxPTg1JyB9LFxyXG4gIHsgbmFtZTogJ01pbmVyYWwgV2F0ZXInLCBjYXRlZ29yeTogJ0RyaW5rcycsIHByaWNlOiAzMCwgdGFnOiAnRXNzZW50aWFsJywgaW1hZ2U6ICdodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTU2MDAyMzkwNy01ZjMzOTYxN2VhMzA/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz05MDAmcT04NScgfSxcclxuICB7IG5hbWU6ICdGaXJuaScsIGNhdGVnb3J5OiAnRGVzc2VydHMnLCBwcmljZTogMTEwLCB0YWc6ICdTd2VldCcsIGltYWdlOiAnaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE1ODczMTQxNjg0ODUtMzIzNmQ2NzEwODE0P2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9OTAwJnE9ODUnIH0sXHJcbiAgeyBuYW1lOiAnSm9yZGEnLCBjYXRlZ29yeTogJ0Rlc3NlcnRzJywgcHJpY2U6IDkwLCB0YWc6ICdUcmFkaXRpb25hbCcsIGltYWdlOiAnaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE2MDEwNTA2OTAxMTctOTRmNWY2ZmE4YmQ3P2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9OTAwJnE9ODUnIH0sXHJcbiAgeyBuYW1lOiAnU2hhaGkgVHVrcmEnLCBjYXRlZ29yeTogJ0Rlc3NlcnRzJywgcHJpY2U6IDE1MCwgdGFnOiAnSW5kdWxnZW50JywgaW1hZ2U6ICdodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTYwMTA1MDY5MDU5Ny1kZjA1NjhmNzA5NTA/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz05MDAmcT04NScgfSxcclxuICB7IG5hbWU6ICdBbG9vIEJ1a2hhcmEgQ2h1dG5leScsIGNhdGVnb3J5OiAnU2lkZXMnLCBwcmljZTogNDUsIHRhZzogJ1Rhbmd5JywgaW1hZ2U6ICdodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTU5NjA0MDAzMzIyOS1hOTgyMWViZDA1OGQ/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz05MDAmcT04NScgfSxcclxuICB7IG5hbWU6ICdDdWN1bWJlciBTYWxhZCcsIGNhdGVnb3J5OiAnU2lkZXMnLCBwcmljZTogNzAsIHRhZzogJ0ZyZXNoJywgaW1hZ2U6ICdodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTU0MDQyMDc3MzQyMC0zMzY2NzcyZjQ5OTk/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz05MDAmcT04NScgfSxcclxuICB7IG5hbWU6ICdNdXR0b24gVGVoYXJpJywgY2F0ZWdvcnk6ICdCaXJ5YW5pJywgcHJpY2U6IDI5MCwgdGFnOiAnTmV3JywgaW1hZ2U6ICdodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTU5Njc5NzAzODUzMC0yYzEwNzIyOTY1NGI/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz05MDAmcT04NScgfSxcclxuICB7IG5hbWU6ICdFZ2cgQmlyeWFuaScsIGNhdGVnb3J5OiAnQmlyeWFuaScsIHByaWNlOiAyMTAsIHRhZzogJ0NvbWZvcnQnLCBpbWFnZTogJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTg1OTM3NDIxNjEyLTcwYTAwODM1NmZiZT9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTkwMCZxPTg1JyB9LFxyXG4gIHsgbmFtZTogJ0NoaWNrZW4gVGlra2EnLCBjYXRlZ29yeTogJ01haW4gQ291cnNlJywgcHJpY2U6IDI0MCwgdGFnOiAnQ2hhcnJlZCcsIGltYWdlOiAnaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE1OTk0ODc0ODgxNzAtZDExZWM5YzE3MmYwP2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9OTAwJnE9ODUnIH0sXHJcbiAgeyBuYW1lOiAnRGFsIFRhZGthJywgY2F0ZWdvcnk6ICdTaWRlcycsIHByaWNlOiAxMzAsIHRhZzogJ1ZlZ2V0YXJpYW4nLCBpbWFnZTogJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTQ2ODMzOTk5LWI5ZjU4MWExOTk2ZD9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTkwMCZxPTg1JyB9LFxyXG4gIHsgbmFtZTogJ0xlbW9uIE1pbnQgQ29vbGVyJywgY2F0ZWdvcnk6ICdEcmlua3MnLCBwcmljZTogMTQwLCB0YWc6ICdSZWZyZXNoaW5nJywgaW1hZ2U6ICdodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vcGhvdG8tMTUxMzU1ODE2MTI5My1jZGFmNzY1ZWQyZmQ/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz05MDAmcT04NScgfSxcclxuICB7IG5hbWU6ICdSYWJyaScsIGNhdGVnb3J5OiAnRGVzc2VydHMnLCBwcmljZTogMTMwLCB0YWc6ICdDcmVhbXknLCBpbWFnZTogJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTcxODc3MjI3MjAwLWEwZDk4ZWE2MDdlOT9hdXRvPWZvcm1hdCZmaXQ9Y3JvcCZ3PTkwMCZxPTg1JyB9LFxyXG5dXHJcblxyXG5leHBvcnQgY29uc3Qgb3JkZXJSb3dzID0gW1xyXG4gIFsnIzEwNDgnLCAnMDYnLCAnU21va2VkIEJlZWYgUmliIHggMiwgTWFuZ28gTGFzc2knLCAnQkRUIDEsNTQwJywgJ05ldycsICc0IG1pbiBhZ28nXSxcclxuICBbJyMxMDQ3JywgJzAzJywgJ1RhbmRvb3JpIENoaWNrZW4geCAxLCBNYW5nbyBMYXNzaSB4IDEnLCAnQkRUIDU4MCcsICdQcmVwYXJpbmcnLCAnMTEgbWluIGFnbyddLFxyXG4gIFsnIzEwNDYnLCAnMTEnLCAnQ2hhcnJlZCBBdWJlcmdpbmUgeCAxJywgJ0JEVCAyODAnLCAnUmVhZHknLCAnMTggbWluIGFnbyddLFxyXG4gIFsnIzEwNDUnLCAnMDInLCAnU21va2VkIEJlZWYgUmliIHggMScsICdCRFQgNjkwJywgJ1NlcnZlZCcsICcyNSBtaW4gYWdvJ10sXHJcbl1cclxuXHJcbmV4cG9ydCBjb25zdCB0ZWFtTWVtYmVycyA9IFtcclxuICBbJ1NSJywgJ1NhbWlyYSBSYWhtYW4nLCAnc2FtaXJhQHRoZXRlcnJhY2UuYmQnLCAnT3duZXInLCAnQWxsIG91dGxldHMnXSxcclxuICBbJ0FIJywgJ0FyaWYgSG9zc2FpbicsICdhcmlmQHRoZXRlcnJhY2UuYmQnLCAnT3V0bGV0IG1hbmFnZXInLCAnRGhhbm1vbmRpJ10sXHJcbiAgWydOSicsICdOdXNyYXQgSmFoYW4nLCAnbnVzcmF0QHRoZXRlcnJhY2UuYmQnLCAnS2l0Y2hlbiBzdGFmZicsICdEaGFubW9uZGknXSxcclxuICBbJ1JLJywgJ1JhZmlxIEtoYW4nLCAncmFmaXFAdGhldGVycmFjZS5iZCcsICdPcmRlciBzdGFmZicsICdEaGFubW9uZGknXSxcclxuXVxyXG4iXX0=

@@ -1,2 +1,5 @@
-import { restaurants } from '../data/mockData'
-export const restaurantService = { list: () => restaurants, getBySlug: (slug) => restaurants.find((restaurant) => restaurant.id === slug || restaurant.name.toLowerCase().replaceAll(' ', '') === slug) }
+import { apiRequest } from './apiClient'
+
+export const restaurantService = {
+  getPublicSite: (restaurantSlug, outletSlug) => apiRequest(`/api/public/restaurants/${encodeURIComponent(restaurantSlug)}/outlets/${encodeURIComponent(outletSlug)}`),
+}

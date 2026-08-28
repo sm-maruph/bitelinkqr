@@ -4,9 +4,9 @@ import FoodCard from './FoodCard'
 import OfferSection from './OfferSection'
 import MenuPagination from './MenuPagination'
 
-export default function SageLanding({ restaurantName, outlet, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
+export default function SageLanding({ restaurantName, outlet, content, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
   const hero = menuItems[0]
-  return <div className="sage-site"><OfferSection onMenu={onMenu} variant="sage" />
+  return <div className="sage-site"><OfferSection onMenu={onMenu} variant="sage" content={content} />
     <nav className="sage-nav"><a href="#sage-home"><Leaf size={18} />Foodb</a><div><a className="active" href="#sage-home">Home</a><a href="#sage-menu">Menu</a><a href="#sage-special">About us</a><a href="#sage-reviews">Reviews</a></div><button onClick={onMenu}>Order food</button></nav>
     <section className="sage-hero" id="sage-home"><div className="sage-hero-copy"><small>Exploring the delicious world</small><h1>The Perfect Space<br />to Enjoy best<br />Food</h1><p>Fresh ingredients, thoughtful recipes, and a warm table made for memorable meals.</p><label><Search size={14} /><input placeholder="Search your favourite dish" aria-label="Search menu" /></label><div><button onClick={onMenu}>Book a table</button><button onClick={onMenu}>View menu <ArrowRight size={13} /></button></div><article><img src={menuItems[4]?.image || hero?.image} alt="Chef recommendation" /><span><b>Chef's choice</b><small>{outlet}, Dhaka</small></span><strong>BDT {menuItems[4]?.price || 590}</strong></article></div><div className="sage-hero-plate"><i /><img src={hero?.image} alt={hero?.name || 'Signature dish'} /><span className="one"><Star size={12} /> 4.9</span><span className="two"><Clock3 size={12} /> 25 min</span></div></section>
     <section className="sage-benefits">{[[Gift, 'Discount voucher', 'Save more on every visit'], [Leaf, 'Fresh healthy food', 'Local produce, cooked daily'], [Clock3, 'Fast serve on table', 'Quick service, no compromise']].map(([Icon, title, copy]) => <article key={title}><span><Icon size={18} /></span><div><b>{title}</b><small>{copy}</small></div></article>)}</section>

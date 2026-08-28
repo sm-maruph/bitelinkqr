@@ -4,9 +4,9 @@ import FoodCard from './FoodCard'
 import OfferSection from './OfferSection'
 import MenuPagination from './MenuPagination'
 
-export default function EmberLanding({ restaurantName, outlet, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
+export default function EmberLanding({ restaurantName, outlet, content, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
   const hero = menuItems[2] || menuItems[0]
-  return <div className="ember-site"><OfferSection onMenu={onMenu} variant="ember" />
+  return <div className="ember-site"><OfferSection onMenu={onMenu} variant="ember" content={content} />
     <nav className="ember-nav"><a href="#ember-home"><Flame size={18} />EMBER</a><span>Fire · smoke · soul</span><button onClick={onMenu}>View menu</button></nav>
     <section className="ember-hero" id="ember-home"><div className="ember-image"><img src={hero?.image} alt={hero?.name || 'Fire cooked signature dish'} /><span><Flame size={14} /> Cooked over flame</span></div><div className="ember-copy"><small>{restaurantName} · {outlet}</small><h1>Gather<br />around<br /><em>the fire.</em></h1><p>Smoke-led cooking, generous plates and ingredients transformed by flame.</p><button onClick={onMenu}>Taste the menu <ArrowRight size={14} /></button></div></section>
     <section className="ember-strip"><span><Flame /> Live fire kitchen</span><span><Timer /> Slow cooked daily</span><span><MapPin /> {outlet}, Dhaka</span></section>

@@ -1,0 +1,2 @@
+.actual-admin-frame{width:100%;height:100%;min-height:390px;display:block;border:0;background:#f2f4f0}.preview-browser .actual-admin-frame{height:min(72vh,820px)}.admin-preview-window .actual-admin-frame{pointer-events:none}
+@media(max-width:650px){.preview-browser .actual-admin-frame{width:1000px;height:calc(100vh - 175px)}}

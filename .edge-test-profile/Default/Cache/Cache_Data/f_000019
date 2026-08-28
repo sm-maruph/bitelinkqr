@@ -1,0 +1,607 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/customer/ExpressLanding.jsx");const _jsxDEV = __vite__cjsImport5_react_jsxDevRuntime["jsxDEV"];import { ArrowRight, Check, ChefHat, Clock3, MapPin, Search, Star } from "/node_modules/.vite/deps/lucide-react.js?v=2834c5bf";
+import CategoryTabs from "/src/components/customer/CategoryTabs.jsx";
+import FoodCard from "/src/components/customer/FoodCard.jsx";
+import OfferSection from "/src/components/customer/OfferSection.jsx";
+import MenuPagination from "/src/components/customer/MenuPagination.jsx";
+var _jsxFileName = "C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/ExpressLanding.jsx";
+import __vite__cjsImport5_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=d7e83f3b";
+export default function ExpressLanding({ restaurantName, outlet, content, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
+	const heroItem = menuItems[0];
+	return /* @__PURE__ */ _jsxDEV("div", {
+		className: "express-site",
+		children: [
+			/* @__PURE__ */ _jsxDEV(OfferSection, {
+				onMenu,
+				variant: "express",
+				content
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 9,
+				columnNumber: 40
+			}, this),
+			/* @__PURE__ */ _jsxDEV("nav", {
+				className: "express-nav",
+				children: [
+					/* @__PURE__ */ _jsxDEV("a", {
+						href: "#express-home",
+						className: "express-logo",
+						children: [/* @__PURE__ */ _jsxDEV("span", { children: /* @__PURE__ */ _jsxDEV(ChefHat, { size: 16 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 10,
+							columnNumber: 89
+						}, this) }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 10,
+							columnNumber: 83
+						}, this), restaurantName]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 10,
+						columnNumber: 34
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", { children: [
+						/* @__PURE__ */ _jsxDEV("a", {
+							className: "active",
+							href: "#express-home",
+							children: "Home"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 10,
+							columnNumber: 142
+						}, this),
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#express-menu",
+							children: "Foods"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 10,
+							columnNumber: 193
+						}, this),
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#express-process",
+							children: "Services"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 10,
+							columnNumber: 226
+						}, this),
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#express-reviews",
+							children: "Reviews"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 10,
+							columnNumber: 265
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 10,
+						columnNumber: 137
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: "Order now"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 10,
+						columnNumber: 309
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 10,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "express-hero",
+				id: "express-home",
+				children: [/* @__PURE__ */ _jsxDEV("div", {
+					className: "express-hero-copy",
+					children: [
+						/* @__PURE__ */ _jsxDEV("span", {
+							className: "express-eyebrow",
+							children: "Fresh from our kitchen"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 92
+						}, this),
+						/* @__PURE__ */ _jsxDEV("h1", { children: [
+							"Delivery of fresh",
+							/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 176
+							}, this),
+							"and ",
+							/* @__PURE__ */ _jsxDEV("em", { children: "hot food" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 186
+							}, this),
+							/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 203
+							}, this),
+							"within 40 minutes"
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 155
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", { children: "Every dish is prepared to order with bold flavour, quality ingredients, and care." }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 231
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", {
+							className: "express-actions",
+							children: [/* @__PURE__ */ _jsxDEV("button", {
+								onClick: onMenu,
+								children: ["Order now ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 14 }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 11,
+									columnNumber: 387
+								}, this)]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 352
+							}, this), /* @__PURE__ */ _jsxDEV("a", {
+								href: "#express-menu",
+								children: "See menu"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 420
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 319
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", {
+							className: "express-facts",
+							children: [
+								/* @__PURE__ */ _jsxDEV("span", { children: [
+									/* @__PURE__ */ _jsxDEV(Clock3, { size: 14 }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 11,
+										columnNumber: 499
+									}, this),
+									/* @__PURE__ */ _jsxDEV("b", { children: "25–40 min" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 11,
+										columnNumber: 519
+									}, this),
+									" Delivery"
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 11,
+									columnNumber: 493
+								}, this),
+								/* @__PURE__ */ _jsxDEV("span", { children: [
+									/* @__PURE__ */ _jsxDEV(MapPin, { size: 14 }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 11,
+										columnNumber: 557
+									}, this),
+									/* @__PURE__ */ _jsxDEV("b", { children: outlet }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 11,
+										columnNumber: 577
+									}, this),
+									" Dhaka"
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 11,
+									columnNumber: 551
+								}, this),
+								/* @__PURE__ */ _jsxDEV("span", { children: [
+									/* @__PURE__ */ _jsxDEV(Star, { size: 14 }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 11,
+										columnNumber: 611
+									}, this),
+									/* @__PURE__ */ _jsxDEV("b", { children: "4.9 rating" }, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 11,
+										columnNumber: 629
+									}, this),
+									" Guests love us"
+								] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 11,
+									columnNumber: 605
+								}, this)
+							]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 462
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 11,
+					columnNumber: 57
+				}, this), /* @__PURE__ */ _jsxDEV("div", {
+					className: "express-plate",
+					children: [
+						/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 711
+						}, this),
+						/* @__PURE__ */ _jsxDEV("img", {
+							src: heroItem?.image,
+							alt: heroItem?.name || "Fresh restaurant dish"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 716
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { className: "express-orbit one" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 793
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { className: "express-orbit two" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 831
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 11,
+					columnNumber: 680
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 11,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "express-menu",
+				id: "express-menu",
+				children: [
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "express-section-head",
+						children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", {
+							className: "express-eyebrow",
+							children: "Restaurant menu"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 12,
+							columnNumber: 100
+						}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "Choose your dishes" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 12,
+							columnNumber: 156
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 12,
+							columnNumber: 95
+						}, this), /* @__PURE__ */ _jsxDEV("label", { children: [/* @__PURE__ */ _jsxDEV(Search, { size: 13 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 12,
+							columnNumber: 196
+						}, this), /* @__PURE__ */ _jsxDEV("input", {
+							"aria-label": "Search dishes",
+							placeholder: "Search for food"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 12,
+							columnNumber: 216
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 12,
+							columnNumber: 189
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 12,
+						columnNumber: 57
+					}, this),
+					/* @__PURE__ */ _jsxDEV(CategoryTabs, {
+						categories,
+						activeCategory: category,
+						onChange: onCategoryChange
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 12,
+						columnNumber: 296
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "express-food-grid",
+						children: menuItems.map((item) => /* @__PURE__ */ _jsxDEV(FoodCard, {
+							item,
+							onSelect,
+							onAdd
+						}, item.id || item.name, false, {
+							fileName: _jsxFileName,
+							lineNumber: 12,
+							columnNumber: 450
+						}, this))
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 12,
+						columnNumber: 390
+					}, this),
+					/* @__PURE__ */ _jsxDEV(MenuPagination, {
+						currentPage,
+						pageCount,
+						onPageChange
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 12,
+						columnNumber: 543
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 12,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "express-lunch",
+				children: [
+					/* @__PURE__ */ _jsxDEV("span", { children: "Business Lunch" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 40
+					}, this),
+					/* @__PURE__ */ _jsxDEV("h2", { children: "Freshly cooked. Right on time." }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 67
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: ["Order lunch ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 13 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 13,
+							columnNumber: 143
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 106
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 13,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "express-process",
+				id: "express-process",
+				children: [/* @__PURE__ */ _jsxDEV("div", {
+					className: "express-process-art",
+					children: /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV(ChefHat, { size: 76 }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 105
+					}, this), /* @__PURE__ */ _jsxDEV("span", {}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 126
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 100
+					}, this)
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 14,
+					columnNumber: 63
+				}, this), /* @__PURE__ */ _jsxDEV("div", { children: [
+					/* @__PURE__ */ _jsxDEV("span", {
+						className: "express-eyebrow",
+						children: "Fast delivery within an hour"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 151
+					}, this),
+					/* @__PURE__ */ _jsxDEV("h2", { children: [
+						"Fresh food.",
+						/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 14,
+							columnNumber: 235
+						}, this),
+						/* @__PURE__ */ _jsxDEV("em", { children: "Simple process." }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 14,
+							columnNumber: 241
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 220
+					}, this),
+					[
+						["Choose your meal", "Pick a favourite from the live restaurant menu."],
+						["We cook it fresh", "Our kitchen prepares every order immediately."],
+						["Enjoy at your table", "Track progress and pay when you are ready."]
+					].map(([title, copy], index) => /* @__PURE__ */ _jsxDEV("article", { children: [
+						/* @__PURE__ */ _jsxDEV("b", { children: ["0", index + 1] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 14,
+							columnNumber: 538
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: title }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 14,
+							columnNumber: 563
+						}, this), /* @__PURE__ */ _jsxDEV("small", { children: copy }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 14,
+							columnNumber: 587
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 14,
+							columnNumber: 557
+						}, this),
+						/* @__PURE__ */ _jsxDEV(Check, { size: 14 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 14,
+							columnNumber: 615
+						}, this)
+					] }, title, true, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 517
+					}, this))
+				] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 14,
+					columnNumber: 146
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 14,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "express-reviews",
+				id: "express-reviews",
+				children: [
+					/* @__PURE__ */ _jsxDEV("span", {
+						className: "express-eyebrow",
+						children: "What guests say"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 63
+					}, this),
+					/* @__PURE__ */ _jsxDEV("h2", { children: "Reviews" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 119
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", { children: [
+						"The food arrived hot, fresh, and beautifully packed.",
+						"Ordering was effortless and every dish tasted fantastic.",
+						"Fast service, generous portions, and wonderful flavours."
+					].map((review, index) => /* @__PURE__ */ _jsxDEV("article", { children: [
+						/* @__PURE__ */ _jsxDEV("span", { children: "★★★★★" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 15,
+							columnNumber: 363
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", { children: review }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 15,
+							columnNumber: 385
+						}, this),
+						/* @__PURE__ */ _jsxDEV("b", { children: [
+							"Nadia Rahman",
+							"Jubair Hasan",
+							"Samia Khan"
+						][index] }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 15,
+							columnNumber: 400
+						}, this),
+						/* @__PURE__ */ _jsxDEV("small", { children: "Verified guest" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 15,
+							columnNumber: 462
+						}, this)
+					] }, review, true, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 341
+					}, this)) }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 135
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 15,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("footer", {
+				className: "express-footer",
+				children: [
+					/* @__PURE__ */ _jsxDEV("a", {
+						href: "#express-home",
+						className: "express-logo",
+						children: [/* @__PURE__ */ _jsxDEV("span", { children: /* @__PURE__ */ _jsxDEV(ChefHat, { size: 16 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 16,
+							columnNumber: 95
+						}, this) }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 16,
+							columnNumber: 89
+						}, this), restaurantName]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 16,
+						columnNumber: 40
+					}, this),
+					/* @__PURE__ */ _jsxDEV("p", { children: [outlet, ", Dhaka · Fresh food, delivered fast."] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 16,
+						columnNumber: 143
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: ["Order now ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 13 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 16,
+							columnNumber: 230
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 16,
+						columnNumber: 195
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 16,
+				columnNumber: 5
+			}, this)
+		]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 9,
+		columnNumber: 10
+	}, this);
+}
+_c = ExpressLanding;
+var _c;
+$RefreshReg$(_c, "ExpressLanding");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+import * as __vite_react_currentExports from "/src/components/customer/ExpressLanding.jsx";
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+
+  const currentExports = __vite_react_currentExports;
+  queueMicrotask(() => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/ExpressLanding.jsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/ExpressLanding.jsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/ExpressLanding.jsx" + ' ' + id); }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,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QVMsTUFBTSxHQUFLOzs7O2VBQU87Ozs7Z0JBQUUsY0FBa0I7Ozs7OztLQUFDLHdCQUFDLEtBQUQsYUFBSSxRQUFPLHVDQUF3Qzs7Ozs7S0FBQyx3QkFBQyxVQUFEO01BQVEsU0FBUztnQkFBakIsQ0FBeUIsY0FBVSx3QkFBQyxZQUFELEVBQVksTUFBTSxHQUFLOzs7O2NBQVM7Ozs7OztJQUFTOzs7Ozs7RUFDdlE7Ozs7OztBQUNQIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIkV4cHJlc3NMYW5kaW5nLmpzeCJdLCJ2ZXJzaW9uIjozLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBBcnJvd1JpZ2h0LCBDaGVjaywgQ2hlZkhhdCwgQ2xvY2szLCBNYXBQaW4sIFNlYXJjaCwgU3RhciB9IGZyb20gJ2x1Y2lkZS1yZWFjdCdcbmltcG9ydCBDYXRlZ29yeVRhYnMgZnJvbSAnLi9DYXRlZ29yeVRhYnMnXG5pbXBvcnQgRm9vZENhcmQgZnJvbSAnLi9Gb29kQ2FyZCdcbmltcG9ydCBPZmZlclNlY3Rpb24gZnJvbSAnLi9PZmZlclNlY3Rpb24nXG5pbXBvcnQgTWVudVBhZ2luYXRpb24gZnJvbSAnLi9NZW51UGFnaW5hdGlvbidcblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gRXhwcmVzc0xhbmRpbmcoeyByZXN0YXVyYW50TmFtZSwgb3V0bGV0LCBjb250ZW50LCBvbk1lbnUsIG1lbnVJdGVtcywgY3VycmVudFBhZ2UsIHBhZ2VDb3VudCwgb25QYWdlQ2hhbmdlLCBvblNlbGVjdCwgb25BZGQsIGNhdGVnb3JpZXMsIGNhdGVnb3J5LCBvbkNhdGVnb3J5Q2hhbmdlIH0pIHtcbiAgY29uc3QgaGVyb0l0ZW0gPSBtZW51SXRlbXNbMF1cbiAgcmV0dXJuIDxkaXYgY2xhc3NOYW1lPVwiZXhwcmVzcy1zaXRlXCI+PE9mZmVyU2VjdGlvbiBvbk1lbnU9e29uTWVudX0gdmFyaWFudD1cImV4cHJlc3NcIiBjb250ZW50PXtjb250ZW50fSAvPlxuICAgIDxuYXYgY2xhc3NOYW1lPVwiZXhwcmVzcy1uYXZcIj48YSBocmVmPVwiI2V4cHJlc3MtaG9tZVwiIGNsYXNzTmFtZT1cImV4cHJlc3MtbG9nb1wiPjxzcGFuPjxDaGVmSGF0IHNpemU9ezE2fSAvPjwvc3Bhbj57cmVzdGF1cmFudE5hbWV9PC9hPjxkaXY+PGEgY2xhc3NOYW1lPVwiYWN0aXZlXCIgaHJlZj1cIiNleHByZXNzLWhvbWVcIj5Ib21lPC9hPjxhIGhyZWY9XCIjZXhwcmVzcy1tZW51XCI+Rm9vZHM8L2E+PGEgaHJlZj1cIiNleHByZXNzLXByb2Nlc3NcIj5TZXJ2aWNlczwvYT48YSBocmVmPVwiI2V4cHJlc3MtcmV2aWV3c1wiPlJldmlld3M8L2E+PC9kaXY+PGJ1dHRvbiBvbkNsaWNrPXtvbk1lbnV9Pk9yZGVyIG5vdzwvYnV0dG9uPjwvbmF2PlxuICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cImV4cHJlc3MtaGVyb1wiIGlkPVwiZXhwcmVzcy1ob21lXCI+PGRpdiBjbGFzc05hbWU9XCJleHByZXNzLWhlcm8tY29weVwiPjxzcGFuIGNsYXNzTmFtZT1cImV4cHJlc3MtZXllYnJvd1wiPkZyZXNoIGZyb20gb3VyIGtpdGNoZW48L3NwYW4+PGgxPkRlbGl2ZXJ5IG9mIGZyZXNoPGJyIC8+YW5kIDxlbT5ob3QgZm9vZDwvZW0+PGJyIC8+d2l0aGluIDQwIG1pbnV0ZXM8L2gxPjxwPkV2ZXJ5IGRpc2ggaXMgcHJlcGFyZWQgdG8gb3JkZXIgd2l0aCBib2xkIGZsYXZvdXIsIHF1YWxpdHkgaW5ncmVkaWVudHMsIGFuZCBjYXJlLjwvcD48ZGl2IGNsYXNzTmFtZT1cImV4cHJlc3MtYWN0aW9uc1wiPjxidXR0b24gb25DbGljaz17b25NZW51fT5PcmRlciBub3cgPEFycm93UmlnaHQgc2l6ZT17MTR9IC8+PC9idXR0b24+PGEgaHJlZj1cIiNleHByZXNzLW1lbnVcIj5TZWUgbWVudTwvYT48L2Rpdj48ZGl2IGNsYXNzTmFtZT1cImV4cHJlc3MtZmFjdHNcIj48c3Bhbj48Q2xvY2szIHNpemU9ezE0fSAvPjxiPjI14oCTNDAgbWluPC9iPiBEZWxpdmVyeTwvc3Bhbj48c3Bhbj48TWFwUGluIHNpemU9ezE0fSAvPjxiPntvdXRsZXR9PC9iPiBEaGFrYTwvc3Bhbj48c3Bhbj48U3RhciBzaXplPXsxNH0gLz48Yj40LjkgcmF0aW5nPC9iPiBHdWVzdHMgbG92ZSB1czwvc3Bhbj48L2Rpdj48L2Rpdj48ZGl2IGNsYXNzTmFtZT1cImV4cHJlc3MtcGxhdGVcIj48aSAvPjxpbWcgc3JjPXtoZXJvSXRlbT8uaW1hZ2V9IGFsdD17aGVyb0l0ZW0/Lm5hbWUgfHwgJ0ZyZXNoIHJlc3RhdXJhbnQgZGlzaCd9IC8+PHNwYW4gY2xhc3NOYW1lPVwiZXhwcmVzcy1vcmJpdCBvbmVcIiAvPjxzcGFuIGNsYXNzTmFtZT1cImV4cHJlc3Mtb3JiaXQgdHdvXCIgLz48L2Rpdj48L3NlY3Rpb24+XG4gICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwiZXhwcmVzcy1tZW51XCIgaWQ9XCJleHByZXNzLW1lbnVcIj48ZGl2IGNsYXNzTmFtZT1cImV4cHJlc3Mtc2VjdGlvbi1oZWFkXCI+PGRpdj48c3BhbiBjbGFzc05hbWU9XCJleHByZXNzLWV5ZWJyb3dcIj5SZXN0YXVyYW50IG1lbnU8L3NwYW4+PGgyPkNob29zZSB5b3VyIGRpc2hlczwvaDI+PC9kaXY+PGxhYmVsPjxTZWFyY2ggc2l6ZT17MTN9IC8+PGlucHV0IGFyaWEtbGFiZWw9XCJTZWFyY2ggZGlzaGVzXCIgcGxhY2Vob2xkZXI9XCJTZWFyY2ggZm9yIGZvb2RcIiAvPjwvbGFiZWw+PC9kaXY+PENhdGVnb3J5VGFicyBjYXRlZ29yaWVzPXtjYXRlZ29yaWVzfSBhY3RpdmVDYXRlZ29yeT17Y2F0ZWdvcnl9IG9uQ2hhbmdlPXtvbkNhdGVnb3J5Q2hhbmdlfSAvPjxkaXYgY2xhc3NOYW1lPVwiZXhwcmVzcy1mb29kLWdyaWRcIj57bWVudUl0ZW1zLm1hcCgoaXRlbSkgPT4gPEZvb2RDYXJkIGl0ZW09e2l0ZW19IGtleT17aXRlbS5pZCB8fCBpdGVtLm5hbWV9IG9uU2VsZWN0PXtvblNlbGVjdH0gb25BZGQ9e29uQWRkfSAvPil9PC9kaXY+PE1lbnVQYWdpbmF0aW9uIGN1cnJlbnRQYWdlPXtjdXJyZW50UGFnZX0gcGFnZUNvdW50PXtwYWdlQ291bnR9IG9uUGFnZUNoYW5nZT17b25QYWdlQ2hhbmdlfSAvPjwvc2VjdGlvbj5cbiAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJleHByZXNzLWx1bmNoXCI+PHNwYW4+QnVzaW5lc3MgTHVuY2g8L3NwYW4+PGgyPkZyZXNobHkgY29va2VkLiBSaWdodCBvbiB0aW1lLjwvaDI+PGJ1dHRvbiBvbkNsaWNrPXtvbk1lbnV9Pk9yZGVyIGx1bmNoIDxBcnJvd1JpZ2h0IHNpemU9ezEzfSAvPjwvYnV0dG9uPjwvc2VjdGlvbj5cbiAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJleHByZXNzLXByb2Nlc3NcIiBpZD1cImV4cHJlc3MtcHJvY2Vzc1wiPjxkaXYgY2xhc3NOYW1lPVwiZXhwcmVzcy1wcm9jZXNzLWFydFwiPjxkaXY+PENoZWZIYXQgc2l6ZT17NzZ9IC8+PHNwYW4gLz48L2Rpdj48L2Rpdj48ZGl2PjxzcGFuIGNsYXNzTmFtZT1cImV4cHJlc3MtZXllYnJvd1wiPkZhc3QgZGVsaXZlcnkgd2l0aGluIGFuIGhvdXI8L3NwYW4+PGgyPkZyZXNoIGZvb2QuPGJyIC8+PGVtPlNpbXBsZSBwcm9jZXNzLjwvZW0+PC9oMj57W1snQ2hvb3NlIHlvdXIgbWVhbCcsICdQaWNrIGEgZmF2b3VyaXRlIGZyb20gdGhlIGxpdmUgcmVzdGF1cmFudCBtZW51LiddLCBbJ1dlIGNvb2sgaXQgZnJlc2gnLCAnT3VyIGtpdGNoZW4gcHJlcGFyZXMgZXZlcnkgb3JkZXIgaW1tZWRpYXRlbHkuJ10sIFsnRW5qb3kgYXQgeW91ciB0YWJsZScsICdUcmFjayBwcm9ncmVzcyBhbmQgcGF5IHdoZW4geW91IGFyZSByZWFkeS4nXV0ubWFwKChbdGl0bGUsIGNvcHldLCBpbmRleCkgPT4gPGFydGljbGUga2V5PXt0aXRsZX0+PGI+MHtpbmRleCArIDF9PC9iPjxzcGFuPjxzdHJvbmc+e3RpdGxlfTwvc3Ryb25nPjxzbWFsbD57Y29weX08L3NtYWxsPjwvc3Bhbj48Q2hlY2sgc2l6ZT17MTR9IC8+PC9hcnRpY2xlPil9PC9kaXY+PC9zZWN0aW9uPlxuICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cImV4cHJlc3MtcmV2aWV3c1wiIGlkPVwiZXhwcmVzcy1yZXZpZXdzXCI+PHNwYW4gY2xhc3NOYW1lPVwiZXhwcmVzcy1leWVicm93XCI+V2hhdCBndWVzdHMgc2F5PC9zcGFuPjxoMj5SZXZpZXdzPC9oMj48ZGl2PntbJ1RoZSBmb29kIGFycml2ZWQgaG90LCBmcmVzaCwgYW5kIGJlYXV0aWZ1bGx5IHBhY2tlZC4nLCAnT3JkZXJpbmcgd2FzIGVmZm9ydGxlc3MgYW5kIGV2ZXJ5IGRpc2ggdGFzdGVkIGZhbnRhc3RpYy4nLCAnRmFzdCBzZXJ2aWNlLCBnZW5lcm91cyBwb3J0aW9ucywgYW5kIHdvbmRlcmZ1bCBmbGF2b3Vycy4nXS5tYXAoKHJldmlldywgaW5kZXgpID0+IDxhcnRpY2xlIGtleT17cmV2aWV3fT48c3Bhbj57J+KYheKYheKYheKYheKYhSd9PC9zcGFuPjxwPntyZXZpZXd9PC9wPjxiPntbJ05hZGlhIFJhaG1hbicsICdKdWJhaXIgSGFzYW4nLCAnU2FtaWEgS2hhbiddW2luZGV4XX08L2I+PHNtYWxsPlZlcmlmaWVkIGd1ZXN0PC9zbWFsbD48L2FydGljbGU+KX08L2Rpdj48L3NlY3Rpb24+XG4gICAgPGZvb3RlciBjbGFzc05hbWU9XCJleHByZXNzLWZvb3RlclwiPjxhIGhyZWY9XCIjZXhwcmVzcy1ob21lXCIgY2xhc3NOYW1lPVwiZXhwcmVzcy1sb2dvXCI+PHNwYW4+PENoZWZIYXQgc2l6ZT17MTZ9IC8+PC9zcGFuPntyZXN0YXVyYW50TmFtZX08L2E+PHA+e291dGxldH0sIERoYWthIMK3IEZyZXNoIGZvb2QsIGRlbGl2ZXJlZCBmYXN0LjwvcD48YnV0dG9uIG9uQ2xpY2s9e29uTWVudX0+T3JkZXIgbm93IDxBcnJvd1JpZ2h0IHNpemU9ezEzfSAvPjwvYnV0dG9uPjwvZm9vdGVyPlxuICA8L2Rpdj5cbn1cbiJdfQ==

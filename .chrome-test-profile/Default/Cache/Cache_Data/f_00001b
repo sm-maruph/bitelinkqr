@@ -1,0 +1,685 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/customer/SageLanding.jsx");const _jsxDEV = __vite__cjsImport5_react_jsxDevRuntime["jsxDEV"];import { ArrowRight, ChefHat, Clock3, Gift, Heart, Leaf, Search, ShoppingBag, Sparkles, Star } from "/node_modules/.vite/deps/lucide-react.js?v=2834c5bf";
+import CategoryTabs from "/src/components/customer/CategoryTabs.jsx";
+import FoodCard from "/src/components/customer/FoodCard.jsx";
+import OfferSection from "/src/components/customer/OfferSection.jsx";
+import MenuPagination from "/src/components/customer/MenuPagination.jsx";
+var _jsxFileName = "C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/SageLanding.jsx";
+import __vite__cjsImport5_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=d7e83f3b";
+export default function SageLanding({ restaurantName, outlet, content, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
+	const hero = menuItems[0];
+	return /* @__PURE__ */ _jsxDEV("div", {
+		className: "sage-site",
+		children: [
+			/* @__PURE__ */ _jsxDEV(OfferSection, {
+				onMenu,
+				variant: "sage",
+				content
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 9,
+				columnNumber: 37
+			}, this),
+			/* @__PURE__ */ _jsxDEV("nav", {
+				className: "sage-nav",
+				children: [
+					/* @__PURE__ */ _jsxDEV("a", {
+						href: "#sage-home",
+						children: [/* @__PURE__ */ _jsxDEV(Leaf, { size: 18 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 10,
+							columnNumber: 52
+						}, this), "Foodb"]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 10,
+						columnNumber: 31
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", { children: [
+						/* @__PURE__ */ _jsxDEV("a", {
+							className: "active",
+							href: "#sage-home",
+							children: "Home"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 10,
+							columnNumber: 84
+						}, this),
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#sage-menu",
+							children: "Menu"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 10,
+							columnNumber: 132
+						}, this),
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#sage-special",
+							children: "About us"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 10,
+							columnNumber: 161
+						}, this),
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#sage-reviews",
+							children: "Reviews"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 10,
+							columnNumber: 197
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 10,
+						columnNumber: 79
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: "Order food"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 10,
+						columnNumber: 238
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 10,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "sage-hero",
+				id: "sage-home",
+				children: [/* @__PURE__ */ _jsxDEV("div", {
+					className: "sage-hero-copy",
+					children: [
+						/* @__PURE__ */ _jsxDEV("small", { children: "Exploring the delicious world" }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 83
+						}, this),
+						/* @__PURE__ */ _jsxDEV("h1", { children: [
+							"The Perfect Space",
+							/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 148
+							}, this),
+							"to Enjoy best",
+							/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 167
+							}, this),
+							"Food"
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 127
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", { children: "Fresh ingredients, thoughtful recipes, and a warm table made for memorable meals." }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 182
+						}, this),
+						/* @__PURE__ */ _jsxDEV("label", { children: [/* @__PURE__ */ _jsxDEV(Search, { size: 14 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 277
+						}, this), /* @__PURE__ */ _jsxDEV("input", {
+							placeholder: "Search your favourite dish",
+							"aria-label": "Search menu"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 297
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 270
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("button", {
+							onClick: onMenu,
+							children: "Book a table"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 385
+						}, this), /* @__PURE__ */ _jsxDEV("button", {
+							onClick: onMenu,
+							children: ["View menu ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 13 }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 466
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 431
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 380
+						}, this),
+						/* @__PURE__ */ _jsxDEV("article", { children: [
+							/* @__PURE__ */ _jsxDEV("img", {
+								src: menuItems[4]?.image || hero?.image,
+								alt: "Chef recommendation"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 514
+							}, this),
+							/* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV("b", { children: "Chef's choice" }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 594
+							}, this), /* @__PURE__ */ _jsxDEV("small", { children: [outlet, ", Dhaka"] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 614
+							}, this)] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 588
+							}, this),
+							/* @__PURE__ */ _jsxDEV("strong", { children: ["BDT ", menuItems[4]?.price || 590] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 651
+							}, this)
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 505
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 11,
+					columnNumber: 51
+				}, this), /* @__PURE__ */ _jsxDEV("div", {
+					className: "sage-hero-plate",
+					children: [
+						/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 749
+						}, this),
+						/* @__PURE__ */ _jsxDEV("img", {
+							src: hero?.image,
+							alt: hero?.name || "Signature dish"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 754
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", {
+							className: "one",
+							children: [/* @__PURE__ */ _jsxDEV(Star, { size: 12 }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 838
+							}, this), " 4.9"]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 816
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", {
+							className: "two",
+							children: [/* @__PURE__ */ _jsxDEV(Clock3, { size: 12 }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 889
+							}, this), " 25 min"]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 867
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 11,
+					columnNumber: 716
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 11,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "sage-benefits",
+				children: [
+					[
+						Gift,
+						"Discount voucher",
+						"Save more on every visit"
+					],
+					[
+						Leaf,
+						"Fresh healthy food",
+						"Local produce, cooked daily"
+					],
+					[
+						Clock3,
+						"Fast serve on table",
+						"Quick service, no compromise"
+					]
+				].map(([Icon, title, copy]) => /* @__PURE__ */ _jsxDEV("article", { children: [/* @__PURE__ */ _jsxDEV("span", { children: /* @__PURE__ */ _jsxDEV(Icon, { size: 18 }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 12,
+					columnNumber: 280
+				}, this) }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 12,
+					columnNumber: 274
+				}, this), /* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("b", { children: title }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 12,
+					columnNumber: 310
+				}, this), /* @__PURE__ */ _jsxDEV("small", { children: copy }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 12,
+					columnNumber: 324
+				}, this)] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 12,
+					columnNumber: 305
+				}, this)] }, title, true, {
+					fileName: _jsxFileName,
+					lineNumber: 12,
+					columnNumber: 253
+				}, this))
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 12,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "sage-special",
+				id: "sage-special",
+				children: [/* @__PURE__ */ _jsxDEV("div", {
+					className: "sage-special-dishes",
+					children: menuItems.slice(1, 3).map((item) => /* @__PURE__ */ _jsxDEV("article", { children: [
+						/* @__PURE__ */ _jsxDEV("button", {
+							onClick: () => onSelect(item),
+							children: /* @__PURE__ */ _jsxDEV("img", {
+								src: item.image,
+								alt: item.name
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 13,
+								columnNumber: 193
+							}, this)
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 13,
+							columnNumber: 154
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("b", { children: item.name }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 13,
+							columnNumber: 247
+						}, this), /* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV(Star, {
+							size: 10,
+							fill: "currentColor"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 13,
+							columnNumber: 271
+						}, this), " 4.9"] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 13,
+							columnNumber: 265
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 13,
+							columnNumber: 242
+						}, this),
+						/* @__PURE__ */ _jsxDEV("strong", { children: ["BDT ", item.price] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 13,
+							columnNumber: 326
+						}, this),
+						/* @__PURE__ */ _jsxDEV("button", {
+							onClick: () => onAdd(item),
+							"aria-label": `Add ${item.name}`,
+							children: /* @__PURE__ */ _jsxDEV(ShoppingBag, { size: 13 }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 13,
+								columnNumber: 427
+							}, this)
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 13,
+							columnNumber: 359
+						}, this)
+					] }, item.id, true, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 131
+					}, this))
+				}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 13,
+					columnNumber: 57
+				}, this), /* @__PURE__ */ _jsxDEV("div", { children: [
+					/* @__PURE__ */ _jsxDEV("span", { children: "Made with care" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 484
+					}, this),
+					/* @__PURE__ */ _jsxDEV("h2", { children: "Our Special Dishes" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 511
+					}, this),
+					/* @__PURE__ */ _jsxDEV("p", { children: "Professionally prepared seasonal favourites with balanced spices, vibrant produce, and flavours worth sharing." }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 538
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: ["Discover more ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 13 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 13,
+							columnNumber: 694
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 655
+					}, this)
+				] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 13,
+					columnNumber: 479
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 13,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "sage-menu",
+				id: "sage-menu",
+				children: [
+					/* @__PURE__ */ _jsxDEV("header", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "Fresh from our kitchen" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 59
+					}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "Explore Our Menu" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 94
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 51
+					}, this),
+					/* @__PURE__ */ _jsxDEV(CategoryTabs, {
+						categories,
+						activeCategory: category,
+						onChange: onCategoryChange
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 128
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "sage-food-grid",
+						children: menuItems.map((item) => /* @__PURE__ */ _jsxDEV(FoodCard, {
+							item,
+							onSelect,
+							onAdd
+						}, item.id || item.name, false, {
+							fileName: _jsxFileName,
+							lineNumber: 14,
+							columnNumber: 279
+						}, this))
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 222
+					}, this),
+					/* @__PURE__ */ _jsxDEV(MenuPagination, {
+						currentPage,
+						pageCount,
+						onPageChange
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 372
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 14,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "sage-trending",
+				children: [/* @__PURE__ */ _jsxDEV("header", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "Worth discovering" }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 15,
+					columnNumber: 48
+				}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "Trending Recipes" }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 15,
+					columnNumber: 78
+				}, this)] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 15,
+					columnNumber: 40
+				}, this), /* @__PURE__ */ _jsxDEV("div", { children: menuItems.slice(6, 11).map((item) => /* @__PURE__ */ _jsxDEV("button", {
+					onClick: () => onSelect(item),
+					children: [/* @__PURE__ */ _jsxDEV("img", {
+						src: item.image,
+						alt: item.name
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 208
+					}, this), /* @__PURE__ */ _jsxDEV("span", { children: item.name }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 248
+					}, this)]
+				}, item.id, true, {
+					fileName: _jsxFileName,
+					lineNumber: 15,
+					columnNumber: 155
+				}, this)) }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 15,
+					columnNumber: 112
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 15,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "sage-chef",
+				children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV(ChefHat, { size: 72 }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 16,
+					columnNumber: 41
+				}, this), /* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 16,
+					columnNumber: 62
+				}, this)] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 16,
+					columnNumber: 36
+				}, this), /* @__PURE__ */ _jsxDEV("article", { children: [
+					/* @__PURE__ */ _jsxDEV("span", { children: "Meet our master chef" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 16,
+						columnNumber: 82
+					}, this),
+					/* @__PURE__ */ _jsxDEV("h2", { children: "Crafted by experience" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 16,
+						columnNumber: 115
+					}, this),
+					/* @__PURE__ */ _jsxDEV("p", { children: "Our kitchen team brings thoughtful technique and joyful hospitality to every plate." }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 16,
+						columnNumber: 145
+					}, this),
+					/* @__PURE__ */ _jsxDEV("b", { children: "Chef Zihad Islam" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 16,
+						columnNumber: 235
+					}, this),
+					/* @__PURE__ */ _jsxDEV("small", { children: "Executive chef" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 16,
+						columnNumber: 258
+					}, this)
+				] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 16,
+					columnNumber: 73
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 16,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "sage-reviews",
+				id: "sage-reviews",
+				children: [/* @__PURE__ */ _jsxDEV("div", {
+					className: "sage-review-art",
+					children: [/* @__PURE__ */ _jsxDEV(Heart, { size: 65 }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 17,
+						columnNumber: 90
+					}, this), /* @__PURE__ */ _jsxDEV(Sparkles, { size: 24 }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 17,
+						columnNumber: 109
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 17,
+					columnNumber: 57
+				}, this), /* @__PURE__ */ _jsxDEV("article", { children: [
+					/* @__PURE__ */ _jsxDEV("span", { children: "Our customer's says" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 17,
+						columnNumber: 146
+					}, this),
+					/* @__PURE__ */ _jsxDEV("h2", { children: "Food that makes people smile" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 17,
+						columnNumber: 178
+					}, this),
+					/* @__PURE__ */ _jsxDEV("p", { children: "“Fresh, beautifully served, and full of flavour. The whole ordering experience was wonderfully easy.”" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 17,
+						columnNumber: 215
+					}, this),
+					/* @__PURE__ */ _jsxDEV("b", { children: "Ms Zihad Islam" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 17,
+						columnNumber: 323
+					}, this),
+					/* @__PURE__ */ _jsxDEV("small", { children: "★★★★★ · Verified customer" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 17,
+						columnNumber: 344
+					}, this)
+				] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 17,
+					columnNumber: 137
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 17,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("footer", {
+				className: "sage-footer",
+				children: [
+					/* @__PURE__ */ _jsxDEV("a", {
+						href: "#sage-home",
+						children: [/* @__PURE__ */ _jsxDEV(Leaf, { size: 17 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 18,
+							columnNumber: 58
+						}, this), "Foodb"]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 18,
+						columnNumber: 37
+					}, this),
+					/* @__PURE__ */ _jsxDEV("p", { children: [
+						restaurantName,
+						" · ",
+						outlet,
+						", Dhaka"
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 18,
+						columnNumber: 85
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: ["Order now ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 13 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 18,
+							columnNumber: 161
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 18,
+						columnNumber: 126
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 18,
+				columnNumber: 5
+			}, this)
+		]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 9,
+		columnNumber: 10
+	}, this);
+}
+_c = SageLanding;
+var _c;
+$RefreshReg$(_c, "SageLanding");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+import * as __vite_react_currentExports from "/src/components/customer/SageLanding.jsx";
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+
+  const currentExports = __vite_react_currentExports;
+  queueMicrotask(() => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/SageLanding.jsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/SageLanding.jsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/SageLanding.jsx" + ' ' + id); }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,eyJtYXBwaW5ncyI6IkFBQUEsU0FBUyxZQUFZLFNBQVMsUUFBUSxNQUFNLE9BQU8sTUFBTSxRQUFRLGFBQWEsVUFBVSxZQUFZO0FBQ3BHLE9BQU8sa0JBQWtCO0FBQ3pCLE9BQU8sY0FBYztBQUNyQixPQUFPLGtCQUFrQjtBQUN6QixPQUFPLG9CQUFvQjs7O0FBRTNCLGVBQWUsU0FBUyxZQUFZLEVBQUUsZ0JBQWdCLFFBQVEsU0FBUyxRQUFRLFdBQVcsYUFBYSxXQUFXLGNBQWMsVUFBVSxPQUFPLFlBQVksVUFBVSxvQkFBb0I7Q0FDekwsTUFBTSxPQUFPLFVBQVU7Q0FDdkIsT0FBTyx3QkFBQyxPQUFEO0VBQUssV0FBVTtZQUFmO0dBQTJCLHdCQUFDLGNBQUQ7SUFBc0I7SUFBUSxTQUFRO0lBQWdCO0dBQVU7Ozs7O0dBQ2hHLHdCQUFDLE9BQUQ7SUFBSyxXQUFVO2NBQWY7S0FBMEIsd0JBQUMsS0FBRDtNQUFHLE1BQUs7Z0JBQVIsQ0FBcUIsd0JBQUMsTUFBRCxFQUFNLE1BQU0sR0FBSzs7OztnQkFBQyxPQUFROzs7Ozs7S0FBQyx3QkFBQyxPQUFEO01BQUssd0JBQUMsS0FBRDtPQUFHLFdBQVU7T0FBUyxNQUFLO2lCQUFhO01BQU87Ozs7O01BQUMsd0JBQUMsS0FBRDtPQUFHLE1BQUs7aUJBQWE7TUFBTzs7Ozs7TUFBQyx3QkFBQyxLQUFEO09BQUcsTUFBSztpQkFBZ0I7TUFBVzs7Ozs7TUFBQyx3QkFBQyxLQUFEO09BQUcsTUFBSztpQkFBZ0I7TUFBVTs7Ozs7S0FBTTs7Ozs7S0FBQyx3QkFBQyxVQUFEO01BQVEsU0FBUztnQkFBUTtLQUFrQjs7Ozs7SUFBTTs7Ozs7O0dBQzFSLHdCQUFDLFdBQUQ7SUFBUyxXQUFVO0lBQVksSUFBRztjQUFsQyxDQUE4Qyx3QkFBQyxPQUFEO0tBQUssV0FBVTtlQUFmO01BQWdDLHdCQUFDLFNBQUQsWUFBTyxnQ0FBb0M7Ozs7O01BQUMsd0JBQUMsTUFBRDtPQUFJO09BQWlCLHdCQUFDLE1BQUQsQ0FBSzs7Ozs7T0FBQztPQUFhLHdCQUFDLE1BQUQsQ0FBSzs7Ozs7T0FBQztNQUFROzs7OztNQUFDLHdCQUFDLEtBQUQsWUFBRyxvRkFBb0Y7Ozs7O01BQUMsd0JBQUMsU0FBRCxhQUFPLHdCQUFDLFFBQUQsRUFBUSxNQUFNLEdBQUs7Ozs7Z0JBQUMsd0JBQUMsU0FBRDtPQUFPLGFBQVk7T0FBNkIsY0FBVztNQUFlOzs7O2NBQVE7Ozs7O01BQUMsd0JBQUMsT0FBRCxhQUFLLHdCQUFDLFVBQUQ7T0FBUSxTQUFTO2lCQUFRO01BQW9COzs7O2dCQUFDLHdCQUFDLFVBQUQ7T0FBUSxTQUFTO2lCQUFqQixDQUF5QixjQUFVLHdCQUFDLFlBQUQsRUFBWSxNQUFNLEdBQUs7Ozs7ZUFBUzs7Ozs7Y0FBTTs7Ozs7TUFBQyx3QkFBQyxXQUFEO09BQVMsd0JBQUMsT0FBRDtRQUFLLEtBQUssVUFBVSxFQUFFLEVBQUUsU0FBUyxNQUFNO1FBQU8sS0FBSTtPQUF1Qjs7Ozs7T0FBQyx3QkFBQyxRQUFELGFBQU0sd0JBQUMsS0FBRCxZQUFHLGdCQUFnQjs7OztpQkFBQyx3QkFBQyxTQUFELGFBQVEsUUFBTyxTQUFjOzs7O2VBQU87Ozs7O09BQUMsd0JBQUMsVUFBRCxhQUFRLFFBQUssVUFBVSxFQUFFLEVBQUUsU0FBUyxHQUFZOzs7OztNQUFVOzs7OztLQUFNOzs7OztjQUFDLHdCQUFDLE9BQUQ7S0FBSyxXQUFVO2VBQWY7TUFBaUMsd0JBQUMsS0FBRCxDQUFJOzs7OztNQUFDLHdCQUFDLE9BQUQ7T0FBSyxLQUFLLE1BQU07T0FBTyxLQUFLLE1BQU0sUUFBUTtNQUFtQjs7Ozs7TUFBQyx3QkFBQyxRQUFEO09BQU0sV0FBVTtpQkFBaEIsQ0FBc0Isd0JBQUMsTUFBRCxFQUFNLE1BQU0sR0FBSzs7OztpQkFBQyxNQUFVOzs7Ozs7TUFBQyx3QkFBQyxRQUFEO09BQU0sV0FBVTtpQkFBaEIsQ0FBc0Isd0JBQUMsUUFBRCxFQUFRLE1BQU0sR0FBSzs7OztpQkFBQyxTQUFhOzs7Ozs7S0FBTTs7Ozs7WUFBVTs7Ozs7O0dBQ3I2Qix3QkFBQyxXQUFEO0lBQVMsV0FBVTtjQUFpQjtLQUFDO01BQUM7TUFBTTtNQUFvQjtLQUEwQjtLQUFHO01BQUM7TUFBTTtNQUFzQjtLQUE2QjtLQUFHO01BQUM7TUFBUTtNQUF1QjtLQUE4QjtJQUFDLENBQUMsQ0FBQyxLQUFLLENBQUMsTUFBTSxPQUFPLFVBQVUsd0JBQUMsV0FBRCxhQUFxQix3QkFBQyxRQUFELFlBQU0sd0JBQUMsTUFBRCxFQUFNLE1BQU0sR0FBSzs7OzthQUFPOzs7O2NBQUMsd0JBQUMsT0FBRCxhQUFLLHdCQUFDLEtBQUQsWUFBSSxNQUFTOzs7O2NBQUMsd0JBQUMsU0FBRCxZQUFRLEtBQVk7Ozs7WUFBTTs7OztZQUFVLEtBQTdGOzs7O1dBQTZGLENBQUM7R0FBVzs7Ozs7R0FDL1csd0JBQUMsV0FBRDtJQUFTLFdBQVU7SUFBZSxJQUFHO2NBQXJDLENBQW9ELHdCQUFDLE9BQUQ7S0FBSyxXQUFVO2VBQXVCLFVBQVUsTUFBTSxHQUFHLENBQUMsQ0FBQyxDQUFDLEtBQUssU0FBUyx3QkFBQyxXQUFEO01BQXVCLHdCQUFDLFVBQUQ7T0FBUSxlQUFlLFNBQVMsSUFBSTtpQkFBRyx3QkFBQyxPQUFEO1FBQUssS0FBSyxLQUFLO1FBQU8sS0FBSyxLQUFLO09BQU87Ozs7O01BQVM7Ozs7O01BQUMsd0JBQUMsT0FBRCxhQUFLLHdCQUFDLEtBQUQsWUFBSSxLQUFLLEtBQVE7Ozs7Z0JBQUMsd0JBQUMsUUFBRCxhQUFNLHdCQUFDLE1BQUQ7T0FBTSxNQUFNO09BQUksTUFBSztNQUFnQjs7OztnQkFBQyxNQUFVOzs7O2NBQU07Ozs7O01BQUMsd0JBQUMsVUFBRCxhQUFRLFFBQUssS0FBSyxLQUFjOzs7OztNQUFDLHdCQUFDLFVBQUQ7T0FBUSxlQUFlLE1BQU0sSUFBSTtPQUFHLGNBQVksT0FBTyxLQUFLO2lCQUFRLHdCQUFDLGFBQUQsRUFBYSxNQUFNLEdBQUs7Ozs7O01BQVM7Ozs7O0tBQVUsS0FBclUsS0FBSzs7OztZQUFnVSxDQUFDO0lBQU87Ozs7Y0FBQyx3QkFBQyxPQUFEO0tBQUssd0JBQUMsUUFBRCxZQUFNLGlCQUFvQjs7Ozs7S0FBQyx3QkFBQyxNQUFELFlBQUkscUJBQXNCOzs7OztLQUFDLHdCQUFDLEtBQUQsWUFBRyxpSEFBaUg7Ozs7O0tBQUMsd0JBQUMsVUFBRDtNQUFRLFNBQVM7Z0JBQWpCLENBQXlCLGtCQUFjLHdCQUFDLFlBQUQsRUFBWSxNQUFNLEdBQUs7Ozs7Y0FBUzs7Ozs7O0lBQU07Ozs7WUFBVTs7Ozs7O0dBQ2p1Qix3QkFBQyxXQUFEO0lBQVMsV0FBVTtJQUFZLElBQUc7Y0FBbEM7S0FBOEMsd0JBQUMsVUFBRCxhQUFRLHdCQUFDLFFBQUQsWUFBTSx5QkFBNEI7Ozs7ZUFBQyx3QkFBQyxNQUFELFlBQUksbUJBQW9COzs7O2FBQVM7Ozs7O0tBQUMsd0JBQUMsY0FBRDtNQUEwQjtNQUFZLGdCQUFnQjtNQUFVLFVBQVU7S0FBbUI7Ozs7O0tBQUMsd0JBQUMsT0FBRDtNQUFLLFdBQVU7Z0JBQWtCLFVBQVUsS0FBSyxTQUFTLHdCQUFDLFVBQUQ7T0FBZ0I7T0FBMkM7T0FBaUI7TUFBUSxHQUF6RCxLQUFLLE1BQU0sS0FBSzs7OzthQUF5QyxDQUFDO0tBQU87Ozs7O0tBQUMsd0JBQUMsZ0JBQUQ7TUFBNkI7TUFBd0I7TUFBeUI7S0FBZTs7Ozs7SUFBVTs7Ozs7O0dBQ3RkLHdCQUFDLFdBQUQ7SUFBUyxXQUFVO2NBQW5CLENBQW1DLHdCQUFDLFVBQUQsYUFBUSx3QkFBQyxRQUFELFlBQU0sb0JBQXVCOzs7O2NBQUMsd0JBQUMsTUFBRCxZQUFJLG1CQUFvQjs7OztZQUFTOzs7O2NBQUMsd0JBQUMsT0FBRCxZQUFNLFVBQVUsTUFBTSxHQUFHLEVBQUUsQ0FBQyxDQUFDLEtBQUssU0FBUyx3QkFBQyxVQUFEO0tBQXNCLGVBQWUsU0FBUyxJQUFJO2VBQWxELENBQXFELHdCQUFDLE9BQUQ7TUFBSyxLQUFLLEtBQUs7TUFBTyxLQUFLLEtBQUs7S0FBTzs7OztlQUFDLHdCQUFDLFFBQUQsWUFBTyxLQUFLLEtBQVc7Ozs7YUFBUztPQUFoSCxLQUFLOzs7O1dBQTJHLENBQUMsRUFBTzs7OztZQUFVOzs7Ozs7R0FDclMsd0JBQUMsV0FBRDtJQUFTLFdBQVU7Y0FBbkIsQ0FBK0Isd0JBQUMsT0FBRCxhQUFLLHdCQUFDLFNBQUQsRUFBUyxNQUFNLEdBQUs7Ozs7Y0FBQyx3QkFBQyxLQUFELENBQUk7Ozs7WUFBTTs7OztjQUFDLHdCQUFDLFdBQUQ7S0FBUyx3QkFBQyxRQUFELFlBQU0sdUJBQTBCOzs7OztLQUFDLHdCQUFDLE1BQUQsWUFBSSx3QkFBeUI7Ozs7O0tBQUMsd0JBQUMsS0FBRCxZQUFHLHNGQUFzRjs7Ozs7S0FBQyx3QkFBQyxLQUFELFlBQUcsbUJBQW1COzs7OztLQUFDLHdCQUFDLFNBQUQsWUFBTyxpQkFBcUI7Ozs7O0lBQVU7Ozs7WUFBVTs7Ozs7O0dBQzdTLHdCQUFDLFdBQUQ7SUFBUyxXQUFVO0lBQWUsSUFBRztjQUFyQyxDQUFvRCx3QkFBQyxPQUFEO0tBQUssV0FBVTtlQUFmLENBQWlDLHdCQUFDLE9BQUQsRUFBTyxNQUFNLEdBQUs7Ozs7ZUFBQyx3QkFBQyxVQUFELEVBQVUsTUFBTSxHQUFLOzs7O2FBQU07Ozs7O2NBQUMsd0JBQUMsV0FBRDtLQUFTLHdCQUFDLFFBQUQsWUFBTSxzQkFBeUI7Ozs7O0tBQUMsd0JBQUMsTUFBRCxZQUFJLCtCQUFnQzs7Ozs7S0FBQyx3QkFBQyxLQUFELFlBQUcsd0dBQXdHOzs7OztLQUFDLHdCQUFDLEtBQUQsWUFBRyxpQkFBaUI7Ozs7O0tBQUMsd0JBQUMsU0FBRCxZQUFPLDRCQUFnQzs7Ozs7SUFBVTs7OztZQUFVOzs7Ozs7R0FDOVksd0JBQUMsVUFBRDtJQUFRLFdBQVU7Y0FBbEI7S0FBZ0Msd0JBQUMsS0FBRDtNQUFHLE1BQUs7Z0JBQVIsQ0FBcUIsd0JBQUMsTUFBRCxFQUFNLE1BQU0sR0FBSzs7OztnQkFBQyxPQUFROzs7Ozs7S0FBQyx3QkFBQyxLQUFEO01BQUk7TUFBZTtNQUFJO01BQU87S0FBVTs7Ozs7S0FBQyx3QkFBQyxVQUFEO01BQVEsU0FBUztnQkFBakIsQ0FBeUIsY0FBVSx3QkFBQyxZQUFELEVBQVksTUFBTSxHQUFLOzs7O2NBQVM7Ozs7OztJQUFTOzs7Ozs7RUFDbE07Ozs7OztBQUNQIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIlNhZ2VMYW5kaW5nLmpzeCJdLCJ2ZXJzaW9uIjozLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBBcnJvd1JpZ2h0LCBDaGVmSGF0LCBDbG9jazMsIEdpZnQsIEhlYXJ0LCBMZWFmLCBTZWFyY2gsIFNob3BwaW5nQmFnLCBTcGFya2xlcywgU3RhciB9IGZyb20gJ2x1Y2lkZS1yZWFjdCdcbmltcG9ydCBDYXRlZ29yeVRhYnMgZnJvbSAnLi9DYXRlZ29yeVRhYnMnXG5pbXBvcnQgRm9vZENhcmQgZnJvbSAnLi9Gb29kQ2FyZCdcbmltcG9ydCBPZmZlclNlY3Rpb24gZnJvbSAnLi9PZmZlclNlY3Rpb24nXG5pbXBvcnQgTWVudVBhZ2luYXRpb24gZnJvbSAnLi9NZW51UGFnaW5hdGlvbidcblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gU2FnZUxhbmRpbmcoeyByZXN0YXVyYW50TmFtZSwgb3V0bGV0LCBjb250ZW50LCBvbk1lbnUsIG1lbnVJdGVtcywgY3VycmVudFBhZ2UsIHBhZ2VDb3VudCwgb25QYWdlQ2hhbmdlLCBvblNlbGVjdCwgb25BZGQsIGNhdGVnb3JpZXMsIGNhdGVnb3J5LCBvbkNhdGVnb3J5Q2hhbmdlIH0pIHtcbiAgY29uc3QgaGVybyA9IG1lbnVJdGVtc1swXVxuICByZXR1cm4gPGRpdiBjbGFzc05hbWU9XCJzYWdlLXNpdGVcIj48T2ZmZXJTZWN0aW9uIG9uTWVudT17b25NZW51fSB2YXJpYW50PVwic2FnZVwiIGNvbnRlbnQ9e2NvbnRlbnR9IC8+XG4gICAgPG5hdiBjbGFzc05hbWU9XCJzYWdlLW5hdlwiPjxhIGhyZWY9XCIjc2FnZS1ob21lXCI+PExlYWYgc2l6ZT17MTh9IC8+Rm9vZGI8L2E+PGRpdj48YSBjbGFzc05hbWU9XCJhY3RpdmVcIiBocmVmPVwiI3NhZ2UtaG9tZVwiPkhvbWU8L2E+PGEgaHJlZj1cIiNzYWdlLW1lbnVcIj5NZW51PC9hPjxhIGhyZWY9XCIjc2FnZS1zcGVjaWFsXCI+QWJvdXQgdXM8L2E+PGEgaHJlZj1cIiNzYWdlLXJldmlld3NcIj5SZXZpZXdzPC9hPjwvZGl2PjxidXR0b24gb25DbGljaz17b25NZW51fT5PcmRlciBmb29kPC9idXR0b24+PC9uYXY+XG4gICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwic2FnZS1oZXJvXCIgaWQ9XCJzYWdlLWhvbWVcIj48ZGl2IGNsYXNzTmFtZT1cInNhZ2UtaGVyby1jb3B5XCI+PHNtYWxsPkV4cGxvcmluZyB0aGUgZGVsaWNpb3VzIHdvcmxkPC9zbWFsbD48aDE+VGhlIFBlcmZlY3QgU3BhY2U8YnIgLz50byBFbmpveSBiZXN0PGJyIC8+Rm9vZDwvaDE+PHA+RnJlc2ggaW5ncmVkaWVudHMsIHRob3VnaHRmdWwgcmVjaXBlcywgYW5kIGEgd2FybSB0YWJsZSBtYWRlIGZvciBtZW1vcmFibGUgbWVhbHMuPC9wPjxsYWJlbD48U2VhcmNoIHNpemU9ezE0fSAvPjxpbnB1dCBwbGFjZWhvbGRlcj1cIlNlYXJjaCB5b3VyIGZhdm91cml0ZSBkaXNoXCIgYXJpYS1sYWJlbD1cIlNlYXJjaCBtZW51XCIgLz48L2xhYmVsPjxkaXY+PGJ1dHRvbiBvbkNsaWNrPXtvbk1lbnV9PkJvb2sgYSB0YWJsZTwvYnV0dG9uPjxidXR0b24gb25DbGljaz17b25NZW51fT5WaWV3IG1lbnUgPEFycm93UmlnaHQgc2l6ZT17MTN9IC8+PC9idXR0b24+PC9kaXY+PGFydGljbGU+PGltZyBzcmM9e21lbnVJdGVtc1s0XT8uaW1hZ2UgfHwgaGVybz8uaW1hZ2V9IGFsdD1cIkNoZWYgcmVjb21tZW5kYXRpb25cIiAvPjxzcGFuPjxiPkNoZWYncyBjaG9pY2U8L2I+PHNtYWxsPntvdXRsZXR9LCBEaGFrYTwvc21hbGw+PC9zcGFuPjxzdHJvbmc+QkRUIHttZW51SXRlbXNbNF0/LnByaWNlIHx8IDU5MH08L3N0cm9uZz48L2FydGljbGU+PC9kaXY+PGRpdiBjbGFzc05hbWU9XCJzYWdlLWhlcm8tcGxhdGVcIj48aSAvPjxpbWcgc3JjPXtoZXJvPy5pbWFnZX0gYWx0PXtoZXJvPy5uYW1lIHx8ICdTaWduYXR1cmUgZGlzaCd9IC8+PHNwYW4gY2xhc3NOYW1lPVwib25lXCI+PFN0YXIgc2l6ZT17MTJ9IC8+IDQuOTwvc3Bhbj48c3BhbiBjbGFzc05hbWU9XCJ0d29cIj48Q2xvY2szIHNpemU9ezEyfSAvPiAyNSBtaW48L3NwYW4+PC9kaXY+PC9zZWN0aW9uPlxuICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cInNhZ2UtYmVuZWZpdHNcIj57W1tHaWZ0LCAnRGlzY291bnQgdm91Y2hlcicsICdTYXZlIG1vcmUgb24gZXZlcnkgdmlzaXQnXSwgW0xlYWYsICdGcmVzaCBoZWFsdGh5IGZvb2QnLCAnTG9jYWwgcHJvZHVjZSwgY29va2VkIGRhaWx5J10sIFtDbG9jazMsICdGYXN0IHNlcnZlIG9uIHRhYmxlJywgJ1F1aWNrIHNlcnZpY2UsIG5vIGNvbXByb21pc2UnXV0ubWFwKChbSWNvbiwgdGl0bGUsIGNvcHldKSA9PiA8YXJ0aWNsZSBrZXk9e3RpdGxlfT48c3Bhbj48SWNvbiBzaXplPXsxOH0gLz48L3NwYW4+PGRpdj48Yj57dGl0bGV9PC9iPjxzbWFsbD57Y29weX08L3NtYWxsPjwvZGl2PjwvYXJ0aWNsZT4pfTwvc2VjdGlvbj5cbiAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJzYWdlLXNwZWNpYWxcIiBpZD1cInNhZ2Utc3BlY2lhbFwiPjxkaXYgY2xhc3NOYW1lPVwic2FnZS1zcGVjaWFsLWRpc2hlc1wiPnttZW51SXRlbXMuc2xpY2UoMSwgMykubWFwKChpdGVtKSA9PiA8YXJ0aWNsZSBrZXk9e2l0ZW0uaWR9PjxidXR0b24gb25DbGljaz17KCkgPT4gb25TZWxlY3QoaXRlbSl9PjxpbWcgc3JjPXtpdGVtLmltYWdlfSBhbHQ9e2l0ZW0ubmFtZX0gLz48L2J1dHRvbj48ZGl2PjxiPntpdGVtLm5hbWV9PC9iPjxzcGFuPjxTdGFyIHNpemU9ezEwfSBmaWxsPVwiY3VycmVudENvbG9yXCIgLz4gNC45PC9zcGFuPjwvZGl2PjxzdHJvbmc+QkRUIHtpdGVtLnByaWNlfTwvc3Ryb25nPjxidXR0b24gb25DbGljaz17KCkgPT4gb25BZGQoaXRlbSl9IGFyaWEtbGFiZWw9e2BBZGQgJHtpdGVtLm5hbWV9YH0+PFNob3BwaW5nQmFnIHNpemU9ezEzfSAvPjwvYnV0dG9uPjwvYXJ0aWNsZT4pfTwvZGl2PjxkaXY+PHNwYW4+TWFkZSB3aXRoIGNhcmU8L3NwYW4+PGgyPk91ciBTcGVjaWFsIERpc2hlczwvaDI+PHA+UHJvZmVzc2lvbmFsbHkgcHJlcGFyZWQgc2Vhc29uYWwgZmF2b3VyaXRlcyB3aXRoIGJhbGFuY2VkIHNwaWNlcywgdmlicmFudCBwcm9kdWNlLCBhbmQgZmxhdm91cnMgd29ydGggc2hhcmluZy48L3A+PGJ1dHRvbiBvbkNsaWNrPXtvbk1lbnV9PkRpc2NvdmVyIG1vcmUgPEFycm93UmlnaHQgc2l6ZT17MTN9IC8+PC9idXR0b24+PC9kaXY+PC9zZWN0aW9uPlxuICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cInNhZ2UtbWVudVwiIGlkPVwic2FnZS1tZW51XCI+PGhlYWRlcj48c3Bhbj5GcmVzaCBmcm9tIG91ciBraXRjaGVuPC9zcGFuPjxoMj5FeHBsb3JlIE91ciBNZW51PC9oMj48L2hlYWRlcj48Q2F0ZWdvcnlUYWJzIGNhdGVnb3JpZXM9e2NhdGVnb3JpZXN9IGFjdGl2ZUNhdGVnb3J5PXtjYXRlZ29yeX0gb25DaGFuZ2U9e29uQ2F0ZWdvcnlDaGFuZ2V9IC8+PGRpdiBjbGFzc05hbWU9XCJzYWdlLWZvb2QtZ3JpZFwiPnttZW51SXRlbXMubWFwKChpdGVtKSA9PiA8Rm9vZENhcmQgaXRlbT17aXRlbX0ga2V5PXtpdGVtLmlkIHx8IGl0ZW0ubmFtZX0gb25TZWxlY3Q9e29uU2VsZWN0fSBvbkFkZD17b25BZGR9IC8+KX08L2Rpdj48TWVudVBhZ2luYXRpb24gY3VycmVudFBhZ2U9e2N1cnJlbnRQYWdlfSBwYWdlQ291bnQ9e3BhZ2VDb3VudH0gb25QYWdlQ2hhbmdlPXtvblBhZ2VDaGFuZ2V9IC8+PC9zZWN0aW9uPlxuICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cInNhZ2UtdHJlbmRpbmdcIj48aGVhZGVyPjxzcGFuPldvcnRoIGRpc2NvdmVyaW5nPC9zcGFuPjxoMj5UcmVuZGluZyBSZWNpcGVzPC9oMj48L2hlYWRlcj48ZGl2PnttZW51SXRlbXMuc2xpY2UoNiwgMTEpLm1hcCgoaXRlbSkgPT4gPGJ1dHRvbiBrZXk9e2l0ZW0uaWR9IG9uQ2xpY2s9eygpID0+IG9uU2VsZWN0KGl0ZW0pfT48aW1nIHNyYz17aXRlbS5pbWFnZX0gYWx0PXtpdGVtLm5hbWV9IC8+PHNwYW4+e2l0ZW0ubmFtZX08L3NwYW4+PC9idXR0b24+KX08L2Rpdj48L3NlY3Rpb24+XG4gICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwic2FnZS1jaGVmXCI+PGRpdj48Q2hlZkhhdCBzaXplPXs3Mn0gLz48aSAvPjwvZGl2PjxhcnRpY2xlPjxzcGFuPk1lZXQgb3VyIG1hc3RlciBjaGVmPC9zcGFuPjxoMj5DcmFmdGVkIGJ5IGV4cGVyaWVuY2U8L2gyPjxwPk91ciBraXRjaGVuIHRlYW0gYnJpbmdzIHRob3VnaHRmdWwgdGVjaG5pcXVlIGFuZCBqb3lmdWwgaG9zcGl0YWxpdHkgdG8gZXZlcnkgcGxhdGUuPC9wPjxiPkNoZWYgWmloYWQgSXNsYW08L2I+PHNtYWxsPkV4ZWN1dGl2ZSBjaGVmPC9zbWFsbD48L2FydGljbGU+PC9zZWN0aW9uPlxuICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cInNhZ2UtcmV2aWV3c1wiIGlkPVwic2FnZS1yZXZpZXdzXCI+PGRpdiBjbGFzc05hbWU9XCJzYWdlLXJldmlldy1hcnRcIj48SGVhcnQgc2l6ZT17NjV9IC8+PFNwYXJrbGVzIHNpemU9ezI0fSAvPjwvZGl2PjxhcnRpY2xlPjxzcGFuPk91ciBjdXN0b21lcidzIHNheXM8L3NwYW4+PGgyPkZvb2QgdGhhdCBtYWtlcyBwZW9wbGUgc21pbGU8L2gyPjxwPuKAnEZyZXNoLCBiZWF1dGlmdWxseSBzZXJ2ZWQsIGFuZCBmdWxsIG9mIGZsYXZvdXIuIFRoZSB3aG9sZSBvcmRlcmluZyBleHBlcmllbmNlIHdhcyB3b25kZXJmdWxseSBlYXN5LuKAnTwvcD48Yj5NcyBaaWhhZCBJc2xhbTwvYj48c21hbGw+4piF4piF4piF4piF4piFIMK3IFZlcmlmaWVkIGN1c3RvbWVyPC9zbWFsbD48L2FydGljbGU+PC9zZWN0aW9uPlxuICAgIDxmb290ZXIgY2xhc3NOYW1lPVwic2FnZS1mb290ZXJcIj48YSBocmVmPVwiI3NhZ2UtaG9tZVwiPjxMZWFmIHNpemU9ezE3fSAvPkZvb2RiPC9hPjxwPntyZXN0YXVyYW50TmFtZX0gwrcge291dGxldH0sIERoYWthPC9wPjxidXR0b24gb25DbGljaz17b25NZW51fT5PcmRlciBub3cgPEFycm93UmlnaHQgc2l6ZT17MTN9IC8+PC9idXR0b24+PC9mb290ZXI+XG4gIDwvZGl2PlxufVxuIl19

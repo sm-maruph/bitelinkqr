@@ -1,0 +1,729 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/customer/FuturisticLanding.jsx");const useState = __vite__cjsImport0_react["useState"];const _jsxDEV = __vite__cjsImport7_react_jsxDevRuntime["jsxDEV"];import __vite__cjsImport0_react from "/node_modules/.vite/deps/react.js?v=d7e83f3b";
+import { ArrowRight, Atom, Bot, ChevronRight, Clock3, Cpu, Orbit, Radio, ScanLine, Sparkles, Star, Zap } from "/node_modules/.vite/deps/lucide-react.js?v=2834c5bf";
+import CategoryTabs from "/src/components/customer/CategoryTabs.jsx";
+import FoodCard from "/src/components/customer/FoodCard.jsx";
+import OfferSection from "/src/components/customer/OfferSection.jsx";
+import MenuPagination from "/src/components/customer/MenuPagination.jsx";
+import { futuristicTemplateMap } from "/src/data/templateCatalog.js";
+var _jsxFileName = "C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/FuturisticLanding.jsx";
+import __vite__cjsImport7_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=d7e83f3b";
+var _s = $RefreshSig$();
+/* Template definitions live in templateCatalog so previews and live pages share one source. */
+const legacyConfigs = {
+	"future-neon": [
+		"Neon Nova",
+		"#00f5ff",
+		"#ff3df2",
+		1,
+		"Taste beyond tomorrow"
+	],
+	"future-hologram": [
+		"Hologram Feast",
+		"#70ffca",
+		"#8a7dff",
+		2,
+		"A feast made of light"
+	],
+	"future-paper": [
+		"Paper & Salt",
+		"#d94b32",
+		"#e7b44d",
+		3,
+		"A fresh page for flavour"
+	],
+	"future-cyber": [
+		"Cyber Bento",
+		"#ff426d",
+		"#19d9ff",
+		4,
+		"Street food, upgraded"
+	],
+	"future-aurora": [
+		"Aurora Kitchen",
+		"#80ffdb",
+		"#b388ff",
+		5,
+		"Cooked under new skies"
+	],
+	"future-quantum": [
+		"Quantum Plate",
+		"#c6ff00",
+		"#00b8d4",
+		6,
+		"Infinite taste states"
+	],
+	"future-solar": [
+		"Solar Flare",
+		"#ffb000",
+		"#ff3d00",
+		7,
+		"Powered by fire"
+	],
+	"future-lunar": [
+		"Lunar Lounge",
+		"#d8e2ff",
+		"#7c4dff",
+		8,
+		"Dinner after dark"
+	],
+	"future-bio": [
+		"Bio Lumina",
+		"#64ff72",
+		"#00e5ff",
+		9,
+		"Naturally electric"
+	],
+	"future-chrome": [
+		"Chrome Café",
+		"#315f73",
+		"#9eb6c2",
+		10,
+		"Polished to perfection"
+	],
+	"future-void": [
+		"Void Supper",
+		"#ff4d8d",
+		"#8f5cff",
+		11,
+		"Into the delicious unknown"
+	],
+	"future-prism": [
+		"Prism Pantry",
+		"#ff6ec7",
+		"#62e7ff",
+		12,
+		"Every flavour, refracted"
+	],
+	"future-synth": [
+		"Synthwave Diner",
+		"#ff2bd6",
+		"#ff8a00",
+		13,
+		"Retro taste, future pulse"
+	],
+	"future-crystal": [
+		"Crystal Table",
+		"#167b78",
+		"#9bc9c3",
+		14,
+		"Clarity in every course"
+	],
+	"future-plasma": [
+		"Plasma Grill",
+		"#ff5a36",
+		"#ffe600",
+		15,
+		"High-energy dining"
+	],
+	"future-zen": [
+		"Neo Zen",
+		"#3f7452",
+		"#a9c5a4",
+		16,
+		"Stillness meets flavour"
+	],
+	"future-circuit": [
+		"Circuit Kitchen",
+		"#34ff9a",
+		"#ffd23f",
+		17,
+		"Connected by taste"
+	],
+	"future-cosmos": [
+		"Cosmos Eatery",
+		"#9a7dff",
+		"#ff75bc",
+		18,
+		"A universe on your plate"
+	],
+	"future-flux": [
+		"Flux Bistro",
+		"#00ffc6",
+		"#ff477e",
+		19,
+		"Always fresh. Never static."
+	],
+	"future-oasis": [
+		"Digital Oasis",
+		"#46f7d5",
+		"#f5cb5c",
+		20,
+		"Recharge your senses"
+	]
+};
+export default function FuturisticLanding({ template, restaurantName, outlet, content, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
+	_s();
+	const selected = futuristicTemplateMap[template];
+	const { name, primary, secondary, layout, headline } = selected || {
+		name: legacyConfigs[template]?.[0],
+		primary: legacyConfigs[template]?.[1],
+		secondary: legacyConfigs[template]?.[2],
+		layout: legacyConfigs[template]?.[3],
+		headline: legacyConfigs[template]?.[4]
+	};
+	const hero = menuItems[layout * 2 % Math.max(menuItems.length, 1)] || menuItems[0];
+	const [loadedHero, setLoadedHero] = useState("");
+	const heroLoaded = loadedHero === hero?.image;
+	return /* @__PURE__ */ _jsxDEV("div", {
+		className: `future-site future-layout-${layout} ${template}`,
+		style: {
+			"--future-primary": primary,
+			"--future-secondary": secondary
+		},
+		children: [
+			/* @__PURE__ */ _jsxDEV(OfferSection, {
+				onMenu,
+				variant: "future",
+				content
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 39,
+				columnNumber: 150
+			}, this),
+			/* @__PURE__ */ _jsxDEV("nav", {
+				className: "future-nav",
+				children: [
+					/* @__PURE__ */ _jsxDEV("a", {
+						href: "#future-home",
+						children: [/* @__PURE__ */ _jsxDEV(Atom, { size: 18 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 40,
+							columnNumber: 56
+						}, this), /* @__PURE__ */ _jsxDEV("b", { children: name }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 40,
+							columnNumber: 74
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 40,
+						columnNumber: 33
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", { children: [
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#future-home",
+							children: "Home"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 40,
+							columnNumber: 96
+						}, this),
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#future-menu",
+							children: "Menu"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 40,
+							columnNumber: 127
+						}, this),
+						/* @__PURE__ */ _jsxDEV("a", {
+							href: "#future-system",
+							children: "Experience"
+						}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 40,
+							columnNumber: 158
+						}, this)
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 40,
+						columnNumber: 91
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: [/* @__PURE__ */ _jsxDEV(ScanLine, { size: 14 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 40,
+							columnNumber: 228
+						}, this), " Order"]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 40,
+						columnNumber: 203
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 40,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "future-hero",
+				id: "future-home",
+				children: [
+					/* @__PURE__ */ _jsxDEV("div", { className: "future-grid-lines" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 41,
+						columnNumber: 55
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "future-copy",
+						children: [
+							/* @__PURE__ */ _jsxDEV("span", { children: [
+								/* @__PURE__ */ _jsxDEV(Radio, { size: 12 }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 41,
+									columnNumber: 127
+								}, this),
+								" System online · ",
+								outlet
+							] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 121
+							}, this),
+							/* @__PURE__ */ _jsxDEV("h1", { children: headline }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 178
+							}, this),
+							/* @__PURE__ */ _jsxDEV("p", { children: [restaurantName, " reimagines dining with bold ingredients, kinetic presentation, and dishes engineered for delight."] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 197
+							}, this),
+							/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("button", {
+								onClick: onMenu,
+								children: ["Launch menu ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 15 }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 41,
+									columnNumber: 360
+								}, this)]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 323
+							}, this), /* @__PURE__ */ _jsxDEV("a", {
+								href: "#future-system",
+								children: "Explore experience"
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 393
+							}, this)] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 318
+							}, this),
+							/* @__PURE__ */ _jsxDEV("aside", { children: [
+								/* @__PURE__ */ _jsxDEV("b", { children: "4.9" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 41,
+									columnNumber: 453
+								}, this),
+								/* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV(Star, {
+									size: 11,
+									fill: "currentColor"
+								}, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 41,
+									columnNumber: 469
+								}, this), " Guest signal"] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 41,
+									columnNumber: 463
+								}, this),
+								/* @__PURE__ */ _jsxDEV("b", { children: "20m" }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 41,
+									columnNumber: 527
+								}, this),
+								/* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV(Clock3, { size: 11 }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 41,
+									columnNumber: 543
+								}, this), " Kitchen cycle"] }, void 0, true, {
+									fileName: _jsxFileName,
+									lineNumber: 41,
+									columnNumber: 537
+								}, this)
+							] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 446
+							}, this)
+						]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 41,
+						columnNumber: 92
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: `future-visual ${heroLoaded ? "image-ready" : "image-loading"}`,
+						children: [
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "future-orbit",
+								children: [
+									/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 41,
+										columnNumber: 705
+									}, this),
+									/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 41,
+										columnNumber: 710
+									}, this),
+									/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 41,
+										columnNumber: 715
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 675
+							}, this),
+							/* @__PURE__ */ _jsxDEV("div", {
+								className: "future-image-skeleton",
+								"aria-hidden": "true",
+								children: [
+									/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 41,
+										columnNumber: 784
+									}, this),
+									/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 41,
+										columnNumber: 788
+									}, this),
+									/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+										fileName: _jsxFileName,
+										lineNumber: 41,
+										columnNumber: 792
+									}, this)
+								]
+							}, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 726
+							}, this),
+							/* @__PURE__ */ _jsxDEV("img", {
+								src: hero?.image,
+								alt: hero?.name || "Futuristic signature dish",
+								onLoad: () => setLoadedHero(hero?.image)
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 802
+							}, this),
+							/* @__PURE__ */ _jsxDEV("span", { children: [
+								/* @__PURE__ */ _jsxDEV(Cpu, { size: 14 }, void 0, false, {
+									fileName: _jsxFileName,
+									lineNumber: 41,
+									columnNumber: 921
+								}, this),
+								" Signature ",
+								String(layout).padStart(2, "0")
+							] }, void 0, true, {
+								fileName: _jsxFileName,
+								lineNumber: 41,
+								columnNumber: 915
+							}, this)
+						]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 41,
+						columnNumber: 598
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 41,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "future-marquee",
+				children: [
+					/* @__PURE__ */ _jsxDEV("span", { children: name }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 42,
+						columnNumber: 41
+					}, this),
+					/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 42,
+						columnNumber: 60
+					}, this),
+					"NEXT-GEN DINING",
+					/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 42,
+						columnNumber: 80
+					}, this),
+					"LIVE KITCHEN",
+					/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 42,
+						columnNumber: 97
+					}, this),
+					outlet,
+					/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 42,
+						columnNumber: 110
+					}, this),
+					"FLAVOUR PROTOCOL"
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 42,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "future-menu",
+				id: "future-menu",
+				children: [
+					/* @__PURE__ */ _jsxDEV("header", { children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("span", { children: "Curated selection" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 43,
+						columnNumber: 68
+					}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "Choose your next experience" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 43,
+						columnNumber: 98
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 43,
+						columnNumber: 63
+					}, this), /* @__PURE__ */ _jsxDEV("p", { children: "Freshly prepared dishes transmitted directly from our kitchen to your table." }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 43,
+						columnNumber: 140
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 43,
+						columnNumber: 55
+					}, this),
+					/* @__PURE__ */ _jsxDEV(CategoryTabs, {
+						categories,
+						activeCategory: category,
+						onChange: onCategoryChange
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 43,
+						columnNumber: 232
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "future-food-grid",
+						children: menuItems.map((item, index) => /* @__PURE__ */ _jsxDEV("div", {
+							className: `future-card-wrap card-${index + 1}`,
+							children: /* @__PURE__ */ _jsxDEV(FoodCard, {
+								item,
+								onSelect,
+								onAdd
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 43,
+								columnNumber: 473
+							}, this)
+						}, item.id || item.name, false, {
+							fileName: _jsxFileName,
+							lineNumber: 43,
+							columnNumber: 392
+						}, this))
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 43,
+						columnNumber: 326
+					}, this),
+					/* @__PURE__ */ _jsxDEV(MenuPagination, {
+						currentPage,
+						pageCount,
+						onPageChange
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 43,
+						columnNumber: 545
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 43,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "future-system",
+				id: "future-system",
+				children: [/* @__PURE__ */ _jsxDEV("div", {
+					className: "future-core",
+					children: [
+						/* @__PURE__ */ _jsxDEV(Orbit, { size: 90 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 44,
+							columnNumber: 88
+						}, this),
+						/* @__PURE__ */ _jsxDEV("span", {}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 44,
+							columnNumber: 107
+						}, this),
+						/* @__PURE__ */ _jsxDEV("i", {}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 44,
+							columnNumber: 115
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 44,
+					columnNumber: 59
+				}, this), /* @__PURE__ */ _jsxDEV("div", { children: [
+					/* @__PURE__ */ _jsxDEV("span", { children: "Experience protocol" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 44,
+						columnNumber: 131
+					}, this),
+					/* @__PURE__ */ _jsxDEV("h2", { children: [
+						"Designed around",
+						/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 44,
+							columnNumber: 182
+						}, this),
+						"your appetite."
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 44,
+						columnNumber: 163
+					}, this),
+					[
+						[
+							Zap,
+							"Instant ordering",
+							"Tap, choose, and transmit your order."
+						],
+						[
+							Bot,
+							"Smart kitchen",
+							"Live preparation with precise timing."
+						],
+						[
+							Sparkles,
+							"Sensory plates",
+							"Unexpected texture, colour, and flavour."
+						]
+					].map(([Icon, title, copy], index) => /* @__PURE__ */ _jsxDEV("article", { children: [
+						/* @__PURE__ */ _jsxDEV("b", { children: ["0", index + 1] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 44,
+							columnNumber: 473
+						}, this),
+						/* @__PURE__ */ _jsxDEV(Icon, { size: 17 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 44,
+							columnNumber: 492
+						}, this),
+						/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("strong", { children: title }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 44,
+							columnNumber: 515
+						}, this), /* @__PURE__ */ _jsxDEV("small", { children: copy }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 44,
+							columnNumber: 539
+						}, this)] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 44,
+							columnNumber: 510
+						}, this),
+						/* @__PURE__ */ _jsxDEV(ChevronRight, { size: 14 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 44,
+							columnNumber: 566
+						}, this)
+					] }, title, true, {
+						fileName: _jsxFileName,
+						lineNumber: 44,
+						columnNumber: 452
+					}, this))
+				] }, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 44,
+					columnNumber: 126
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 44,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("footer", {
+				className: "future-footer",
+				children: [
+					/* @__PURE__ */ _jsxDEV("a", {
+						href: "#future-home",
+						children: [/* @__PURE__ */ _jsxDEV(Atom, { size: 17 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 45,
+							columnNumber: 62
+						}, this), name]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 45,
+						columnNumber: 39
+					}, this),
+					/* @__PURE__ */ _jsxDEV("p", { children: [
+						restaurantName,
+						" · ",
+						outlet,
+						" node"
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 45,
+						columnNumber: 90
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: ["Initialize order ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 13 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 45,
+							columnNumber: 171
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 45,
+						columnNumber: 129
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 45,
+				columnNumber: 5
+			}, this)
+		]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 39,
+		columnNumber: 10
+	}, this);
+}
+_s(FuturisticLanding, "50W8mZZkb5F32z2OchuTvQLapqw=");
+_c = FuturisticLanding;
+var _c;
+$RefreshReg$(_c, "FuturisticLanding");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+import * as __vite_react_currentExports from "/src/components/customer/FuturisticLanding.jsx";
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+
+  const currentExports = __vite_react_currentExports;
+  queueMicrotask(() => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/FuturisticLanding.jsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/FuturisticLanding.jsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/FuturisticLanding.jsx" + ' ' + id); }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,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VSxLQUF2STs7OztZQUF1SSxDQUFDO0lBQU87Ozs7WUFBVTs7Ozs7O0dBQ3RtQix3QkFBQyxVQUFEO0lBQVEsV0FBVTtjQUFsQjtLQUFrQyx3QkFBQyxLQUFEO01BQUcsTUFBSztnQkFBUixDQUF1Qix3QkFBQyxNQUFELEVBQU0sTUFBTSxHQUFLOzs7O2dCQUFFLElBQVE7Ozs7OztLQUFDLHdCQUFDLEtBQUQ7TUFBSTtNQUFlO01BQUk7TUFBTztLQUFROzs7OztLQUFDLHdCQUFDLFVBQUQ7TUFBUSxTQUFTO2dCQUFqQixDQUF5QixxQkFBaUIsd0JBQUMsWUFBRCxFQUFZLE1BQU0sR0FBSzs7OztjQUFTOzs7Ozs7SUFBUzs7Ozs7O0VBQzVNOzs7Ozs7QUFDUCIsIm5hbWVzIjpbXSwic291cmNlcyI6WyJGdXR1cmlzdGljTGFuZGluZy5qc3giXSwidmVyc2lvbiI6Mywic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgdXNlU3RhdGUgfSBmcm9tICdyZWFjdCdcbmltcG9ydCB7IEFycm93UmlnaHQsIEF0b20sIEJvdCwgQ2hldnJvblJpZ2h0LCBDbG9jazMsIENwdSwgT3JiaXQsIFJhZGlvLCBTY2FuTGluZSwgU3BhcmtsZXMsIFN0YXIsIFphcCB9IGZyb20gJ2x1Y2lkZS1yZWFjdCdcbmltcG9ydCBDYXRlZ29yeVRhYnMgZnJvbSAnLi9DYXRlZ29yeVRhYnMnXG5pbXBvcnQgRm9vZENhcmQgZnJvbSAnLi9Gb29kQ2FyZCdcbmltcG9ydCBPZmZlclNlY3Rpb24gZnJvbSAnLi9PZmZlclNlY3Rpb24nXG5pbXBvcnQgTWVudVBhZ2luYXRpb24gZnJvbSAnLi9NZW51UGFnaW5hdGlvbidcbmltcG9ydCB7IGZ1dHVyaXN0aWNUZW1wbGF0ZU1hcCB9IGZyb20gJy4uLy4uL2RhdGEvdGVtcGxhdGVDYXRhbG9nJ1xuXG4vKiBUZW1wbGF0ZSBkZWZpbml0aW9ucyBsaXZlIGluIHRlbXBsYXRlQ2F0YWxvZyBzbyBwcmV2aWV3cyBhbmQgbGl2ZSBwYWdlcyBzaGFyZSBvbmUgc291cmNlLiAqL1xuY29uc3QgbGVnYWN5Q29uZmlncyA9IHtcbiAgJ2Z1dHVyZS1uZW9uJzogWydOZW9uIE5vdmEnLCAnIzAwZjVmZicsICcjZmYzZGYyJywgMSwgJ1Rhc3RlIGJleW9uZCB0b21vcnJvdyddLFxuICAnZnV0dXJlLWhvbG9ncmFtJzogWydIb2xvZ3JhbSBGZWFzdCcsICcjNzBmZmNhJywgJyM4YTdkZmYnLCAyLCAnQSBmZWFzdCBtYWRlIG9mIGxpZ2h0J10sXG4gICdmdXR1cmUtcGFwZXInOiBbJ1BhcGVyICYgU2FsdCcsICcjZDk0YjMyJywgJyNlN2I0NGQnLCAzLCAnQSBmcmVzaCBwYWdlIGZvciBmbGF2b3VyJ10sXG4gICdmdXR1cmUtY3liZXInOiBbJ0N5YmVyIEJlbnRvJywgJyNmZjQyNmQnLCAnIzE5ZDlmZicsIDQsICdTdHJlZXQgZm9vZCwgdXBncmFkZWQnXSxcbiAgJ2Z1dHVyZS1hdXJvcmEnOiBbJ0F1cm9yYSBLaXRjaGVuJywgJyM4MGZmZGInLCAnI2IzODhmZicsIDUsICdDb29rZWQgdW5kZXIgbmV3IHNraWVzJ10sXG4gICdmdXR1cmUtcXVhbnR1bSc6IFsnUXVhbnR1bSBQbGF0ZScsICcjYzZmZjAwJywgJyMwMGI4ZDQnLCA2LCAnSW5maW5pdGUgdGFzdGUgc3RhdGVzJ10sXG4gICdmdXR1cmUtc29sYXInOiBbJ1NvbGFyIEZsYXJlJywgJyNmZmIwMDAnLCAnI2ZmM2QwMCcsIDcsICdQb3dlcmVkIGJ5IGZpcmUnXSxcbiAgJ2Z1dHVyZS1sdW5hcic6IFsnTHVuYXIgTG91bmdlJywgJyNkOGUyZmYnLCAnIzdjNGRmZicsIDgsICdEaW5uZXIgYWZ0ZXIgZGFyayddLFxuICAnZnV0dXJlLWJpbyc6IFsnQmlvIEx1bWluYScsICcjNjRmZjcyJywgJyMwMGU1ZmYnLCA5LCAnTmF0dXJhbGx5IGVsZWN0cmljJ10sXG4gICdmdXR1cmUtY2hyb21lJzogWydDaHJvbWUgQ2Fmw6knLCAnIzMxNWY3MycsICcjOWViNmMyJywgMTAsICdQb2xpc2hlZCB0byBwZXJmZWN0aW9uJ10sXG4gICdmdXR1cmUtdm9pZCc6IFsnVm9pZCBTdXBwZXInLCAnI2ZmNGQ4ZCcsICcjOGY1Y2ZmJywgMTEsICdJbnRvIHRoZSBkZWxpY2lvdXMgdW5rbm93biddLFxuICAnZnV0dXJlLXByaXNtJzogWydQcmlzbSBQYW50cnknLCAnI2ZmNmVjNycsICcjNjJlN2ZmJywgMTIsICdFdmVyeSBmbGF2b3VyLCByZWZyYWN0ZWQnXSxcbiAgJ2Z1dHVyZS1zeW50aCc6IFsnU3ludGh3YXZlIERpbmVyJywgJyNmZjJiZDYnLCAnI2ZmOGEwMCcsIDEzLCAnUmV0cm8gdGFzdGUsIGZ1dHVyZSBwdWxzZSddLFxuICAnZnV0dXJlLWNyeXN0YWwnOiBbJ0NyeXN0YWwgVGFibGUnLCAnIzE2N2I3OCcsICcjOWJjOWMzJywgMTQsICdDbGFyaXR5IGluIGV2ZXJ5IGNvdXJzZSddLFxuICAnZnV0dXJlLXBsYXNtYSc6IFsnUGxhc21hIEdyaWxsJywgJyNmZjVhMzYnLCAnI2ZmZTYwMCcsIDE1LCAnSGlnaC1lbmVyZ3kgZGluaW5nJ10sXG4gICdmdXR1cmUtemVuJzogWydOZW8gWmVuJywgJyMzZjc0NTInLCAnI2E5YzVhNCcsIDE2LCAnU3RpbGxuZXNzIG1lZXRzIGZsYXZvdXInXSxcbiAgJ2Z1dHVyZS1jaXJjdWl0JzogWydDaXJjdWl0IEtpdGNoZW4nLCAnIzM0ZmY5YScsICcjZmZkMjNmJywgMTcsICdDb25uZWN0ZWQgYnkgdGFzdGUnXSxcbiAgJ2Z1dHVyZS1jb3Ntb3MnOiBbJ0Nvc21vcyBFYXRlcnknLCAnIzlhN2RmZicsICcjZmY3NWJjJywgMTgsICdBIHVuaXZlcnNlIG9uIHlvdXIgcGxhdGUnXSxcbiAgJ2Z1dHVyZS1mbHV4JzogWydGbHV4IEJpc3RybycsICcjMDBmZmM2JywgJyNmZjQ3N2UnLCAxOSwgJ0Fsd2F5cyBmcmVzaC4gTmV2ZXIgc3RhdGljLiddLFxuICAnZnV0dXJlLW9hc2lzJzogWydEaWdpdGFsIE9hc2lzJywgJyM0NmY3ZDUnLCAnI2Y1Y2I1YycsIDIwLCAnUmVjaGFyZ2UgeW91ciBzZW5zZXMnXSxcbn1cblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gRnV0dXJpc3RpY0xhbmRpbmcoeyB0ZW1wbGF0ZSwgcmVzdGF1cmFudE5hbWUsIG91dGxldCwgY29udGVudCwgb25NZW51LCBtZW51SXRlbXMsIGN1cnJlbnRQYWdlLCBwYWdlQ291bnQsIG9uUGFnZUNoYW5nZSwgb25TZWxlY3QsIG9uQWRkLCBjYXRlZ29yaWVzLCBjYXRlZ29yeSwgb25DYXRlZ29yeUNoYW5nZSB9KSB7XG4gIGNvbnN0IHNlbGVjdGVkPWZ1dHVyaXN0aWNUZW1wbGF0ZU1hcFt0ZW1wbGF0ZV1cbiAgY29uc3Qge25hbWUscHJpbWFyeSxzZWNvbmRhcnksbGF5b3V0LGhlYWRsaW5lfT1zZWxlY3RlZHx8e25hbWU6bGVnYWN5Q29uZmlnc1t0ZW1wbGF0ZV0/LlswXSxwcmltYXJ5OmxlZ2FjeUNvbmZpZ3NbdGVtcGxhdGVdPy5bMV0sc2Vjb25kYXJ5OmxlZ2FjeUNvbmZpZ3NbdGVtcGxhdGVdPy5bMl0sbGF5b3V0OmxlZ2FjeUNvbmZpZ3NbdGVtcGxhdGVdPy5bM10saGVhZGxpbmU6bGVnYWN5Q29uZmlnc1t0ZW1wbGF0ZV0/Lls0XX1cbiAgY29uc3QgaGVybyA9IG1lbnVJdGVtc1sobGF5b3V0ICogMikgJSBNYXRoLm1heChtZW51SXRlbXMubGVuZ3RoLCAxKV0gfHwgbWVudUl0ZW1zWzBdXG4gIGNvbnN0IFtsb2FkZWRIZXJvLHNldExvYWRlZEhlcm9dPXVzZVN0YXRlKCcnKVxuICBjb25zdCBoZXJvTG9hZGVkPWxvYWRlZEhlcm89PT1oZXJvPy5pbWFnZVxuICByZXR1cm4gPGRpdiBjbGFzc05hbWU9e2BmdXR1cmUtc2l0ZSBmdXR1cmUtbGF5b3V0LSR7bGF5b3V0fSAke3RlbXBsYXRlfWB9IHN0eWxlPXt7ICctLWZ1dHVyZS1wcmltYXJ5JzogcHJpbWFyeSwgJy0tZnV0dXJlLXNlY29uZGFyeSc6IHNlY29uZGFyeSB9fT48T2ZmZXJTZWN0aW9uIG9uTWVudT17b25NZW51fSB2YXJpYW50PVwiZnV0dXJlXCIgY29udGVudD17Y29udGVudH0gLz5cbiAgICA8bmF2IGNsYXNzTmFtZT1cImZ1dHVyZS1uYXZcIj48YSBocmVmPVwiI2Z1dHVyZS1ob21lXCI+PEF0b20gc2l6ZT17MTh9IC8+PGI+e25hbWV9PC9iPjwvYT48ZGl2PjxhIGhyZWY9XCIjZnV0dXJlLWhvbWVcIj5Ib21lPC9hPjxhIGhyZWY9XCIjZnV0dXJlLW1lbnVcIj5NZW51PC9hPjxhIGhyZWY9XCIjZnV0dXJlLXN5c3RlbVwiPkV4cGVyaWVuY2U8L2E+PC9kaXY+PGJ1dHRvbiBvbkNsaWNrPXtvbk1lbnV9PjxTY2FuTGluZSBzaXplPXsxNH0gLz4gT3JkZXI8L2J1dHRvbj48L25hdj5cbiAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJmdXR1cmUtaGVyb1wiIGlkPVwiZnV0dXJlLWhvbWVcIj48ZGl2IGNsYXNzTmFtZT1cImZ1dHVyZS1ncmlkLWxpbmVzXCIgLz48ZGl2IGNsYXNzTmFtZT1cImZ1dHVyZS1jb3B5XCI+PHNwYW4+PFJhZGlvIHNpemU9ezEyfSAvPiBTeXN0ZW0gb25saW5lIMK3IHtvdXRsZXR9PC9zcGFuPjxoMT57aGVhZGxpbmV9PC9oMT48cD57cmVzdGF1cmFudE5hbWV9IHJlaW1hZ2luZXMgZGluaW5nIHdpdGggYm9sZCBpbmdyZWRpZW50cywga2luZXRpYyBwcmVzZW50YXRpb24sIGFuZCBkaXNoZXMgZW5naW5lZXJlZCBmb3IgZGVsaWdodC48L3A+PGRpdj48YnV0dG9uIG9uQ2xpY2s9e29uTWVudX0+TGF1bmNoIG1lbnUgPEFycm93UmlnaHQgc2l6ZT17MTV9IC8+PC9idXR0b24+PGEgaHJlZj1cIiNmdXR1cmUtc3lzdGVtXCI+RXhwbG9yZSBleHBlcmllbmNlPC9hPjwvZGl2Pjxhc2lkZT48Yj40Ljk8L2I+PHNwYW4+PFN0YXIgc2l6ZT17MTF9IGZpbGw9XCJjdXJyZW50Q29sb3JcIiAvPiBHdWVzdCBzaWduYWw8L3NwYW4+PGI+MjBtPC9iPjxzcGFuPjxDbG9jazMgc2l6ZT17MTF9IC8+IEtpdGNoZW4gY3ljbGU8L3NwYW4+PC9hc2lkZT48L2Rpdj48ZGl2IGNsYXNzTmFtZT17YGZ1dHVyZS12aXN1YWwgJHtoZXJvTG9hZGVkPydpbWFnZS1yZWFkeSc6J2ltYWdlLWxvYWRpbmcnfWB9PjxkaXYgY2xhc3NOYW1lPVwiZnV0dXJlLW9yYml0XCI+PGkgLz48aSAvPjxpIC8+PC9kaXY+PGRpdiBjbGFzc05hbWU9XCJmdXR1cmUtaW1hZ2Utc2tlbGV0b25cIiBhcmlhLWhpZGRlbj1cInRydWVcIj48aS8+PGkvPjxpLz48L2Rpdj48aW1nIHNyYz17aGVybz8uaW1hZ2V9IGFsdD17aGVybz8ubmFtZSB8fCAnRnV0dXJpc3RpYyBzaWduYXR1cmUgZGlzaCd9IG9uTG9hZD17KCk9PnNldExvYWRlZEhlcm8oaGVybz8uaW1hZ2UpfSAvPjxzcGFuPjxDcHUgc2l6ZT17MTR9IC8+IFNpZ25hdHVyZSB7U3RyaW5nKGxheW91dCkucGFkU3RhcnQoMiwnMCcpfTwvc3Bhbj48L2Rpdj48L3NlY3Rpb24+XG4gICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwiZnV0dXJlLW1hcnF1ZWVcIj48c3Bhbj57bmFtZX08L3NwYW4+PGkgLz5ORVhULUdFTiBESU5JTkc8aSAvPkxJVkUgS0lUQ0hFTjxpIC8+e291dGxldH08aSAvPkZMQVZPVVIgUFJPVE9DT0w8L3NlY3Rpb24+XG4gICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwiZnV0dXJlLW1lbnVcIiBpZD1cImZ1dHVyZS1tZW51XCI+PGhlYWRlcj48ZGl2PjxzcGFuPkN1cmF0ZWQgc2VsZWN0aW9uPC9zcGFuPjxoMj5DaG9vc2UgeW91ciBuZXh0IGV4cGVyaWVuY2U8L2gyPjwvZGl2PjxwPkZyZXNobHkgcHJlcGFyZWQgZGlzaGVzIHRyYW5zbWl0dGVkIGRpcmVjdGx5IGZyb20gb3VyIGtpdGNoZW4gdG8geW91ciB0YWJsZS48L3A+PC9oZWFkZXI+PENhdGVnb3J5VGFicyBjYXRlZ29yaWVzPXtjYXRlZ29yaWVzfSBhY3RpdmVDYXRlZ29yeT17Y2F0ZWdvcnl9IG9uQ2hhbmdlPXtvbkNhdGVnb3J5Q2hhbmdlfSAvPjxkaXYgY2xhc3NOYW1lPVwiZnV0dXJlLWZvb2QtZ3JpZFwiPnttZW51SXRlbXMubWFwKChpdGVtLCBpbmRleCkgPT4gPGRpdiBjbGFzc05hbWU9e2BmdXR1cmUtY2FyZC13cmFwIGNhcmQtJHtpbmRleCArIDF9YH0ga2V5PXtpdGVtLmlkIHx8IGl0ZW0ubmFtZX0+PEZvb2RDYXJkIGl0ZW09e2l0ZW19IG9uU2VsZWN0PXtvblNlbGVjdH0gb25BZGQ9e29uQWRkfSAvPjwvZGl2Pil9PC9kaXY+PE1lbnVQYWdpbmF0aW9uIGN1cnJlbnRQYWdlPXtjdXJyZW50UGFnZX0gcGFnZUNvdW50PXtwYWdlQ291bnR9IG9uUGFnZUNoYW5nZT17b25QYWdlQ2hhbmdlfSAvPjwvc2VjdGlvbj5cbiAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJmdXR1cmUtc3lzdGVtXCIgaWQ9XCJmdXR1cmUtc3lzdGVtXCI+PGRpdiBjbGFzc05hbWU9XCJmdXR1cmUtY29yZVwiPjxPcmJpdCBzaXplPXs5MH0gLz48c3BhbiAvPjxpIC8+PC9kaXY+PGRpdj48c3Bhbj5FeHBlcmllbmNlIHByb3RvY29sPC9zcGFuPjxoMj5EZXNpZ25lZCBhcm91bmQ8YnIgLz55b3VyIGFwcGV0aXRlLjwvaDI+e1tbWmFwLCAnSW5zdGFudCBvcmRlcmluZycsICdUYXAsIGNob29zZSwgYW5kIHRyYW5zbWl0IHlvdXIgb3JkZXIuJ10sIFtCb3QsICdTbWFydCBraXRjaGVuJywgJ0xpdmUgcHJlcGFyYXRpb24gd2l0aCBwcmVjaXNlIHRpbWluZy4nXSwgW1NwYXJrbGVzLCAnU2Vuc29yeSBwbGF0ZXMnLCAnVW5leHBlY3RlZCB0ZXh0dXJlLCBjb2xvdXIsIGFuZCBmbGF2b3VyLiddXS5tYXAoKFtJY29uLCB0aXRsZSwgY29weV0sIGluZGV4KSA9PiA8YXJ0aWNsZSBrZXk9e3RpdGxlfT48Yj4we2luZGV4ICsgMX08L2I+PEljb24gc2l6ZT17MTd9IC8+PGRpdj48c3Ryb25nPnt0aXRsZX08L3N0cm9uZz48c21hbGw+e2NvcHl9PC9zbWFsbD48L2Rpdj48Q2hldnJvblJpZ2h0IHNpemU9ezE0fSAvPjwvYXJ0aWNsZT4pfTwvZGl2Pjwvc2VjdGlvbj5cbiAgICA8Zm9vdGVyIGNsYXNzTmFtZT1cImZ1dHVyZS1mb290ZXJcIj48YSBocmVmPVwiI2Z1dHVyZS1ob21lXCI+PEF0b20gc2l6ZT17MTd9IC8+e25hbWV9PC9hPjxwPntyZXN0YXVyYW50TmFtZX0gwrcge291dGxldH0gbm9kZTwvcD48YnV0dG9uIG9uQ2xpY2s9e29uTWVudX0+SW5pdGlhbGl6ZSBvcmRlciA8QXJyb3dSaWdodCBzaXplPXsxM30gLz48L2J1dHRvbj48L2Zvb3Rlcj5cbiAgPC9kaXY+XG59XG4iXX0=

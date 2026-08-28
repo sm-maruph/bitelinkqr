@@ -1,0 +1,379 @@
+const placed = (minutes) => new Date(Date.now() - minutes * 6e4).toISOString();
+const image = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80`;
+export const demoAdminWorkspace = {
+	restaurant: {
+		id: "terrace",
+		name: "The Terrace"
+	},
+	metrics: {
+		revenueToday: 186450,
+		ordersToday: 142,
+		averageOrder: 1313,
+		activeTables: 9,
+		totalTables: 12
+	},
+	orders: [
+		{
+			id: "o1",
+			order_number: "1088",
+			table_number: "12",
+			items: "Smoked Beef Rib × 2, Borhani × 2",
+			grand_total: 1500,
+			status: "pending",
+			placed_at: placed(2)
+		},
+		{
+			id: "o2",
+			order_number: "1087",
+			table_number: "08",
+			items: "Tandoori Chicken × 2, Crispy Prawn Toast",
+			grand_total: 1200,
+			status: "confirmed",
+			placed_at: placed(5)
+		},
+		{
+			id: "o3",
+			order_number: "1086",
+			table_number: "04",
+			items: "Mutton Kacchi × 3, Borhani × 3",
+			grand_total: 1180,
+			status: "preparing",
+			placed_at: placed(11)
+		},
+		{
+			id: "o4",
+			order_number: "1085",
+			table_number: "09",
+			items: "Chicken Ramen × 2, Chilli Garlic Noodles",
+			grand_total: 1080,
+			status: "ready",
+			placed_at: placed(18)
+		},
+		{
+			id: "o5",
+			order_number: "1084",
+			table_number: "02",
+			items: "Charred Aubergine × 2, Prawn Toast × 2",
+			grand_total: 1230,
+			status: "served",
+			placed_at: placed(29)
+		},
+		{
+			id: "o6",
+			order_number: "1083",
+			table_number: "06",
+			items: "Smoked Beef Rib, Tandoori Chicken",
+			grand_total: 1060,
+			status: "completed",
+			placed_at: placed(44)
+		}
+	],
+	tables: Array.from({ length: 12 }, (_, i) => ({
+		id: `t${i + 1}`,
+		table_number: String(i + 1).padStart(2, "0"),
+		capacity: i % 3 === 0 ? 6 : 4,
+		status: [
+			"occupied",
+			"available",
+			"reserved",
+			"occupied",
+			"available",
+			"occupied",
+			"occupied",
+			"reserved",
+			"occupied",
+			"available",
+			"occupied",
+			"occupied"
+		][i]
+	})),
+	menu: [
+		[
+			"m1",
+			"Smoked Beef Rib",
+			"Kitchen signatures",
+			690,
+			"photo-1544025162-d76694265947",
+			"Chef pick"
+		],
+		[
+			"m2",
+			"Tandoori Chicken",
+			"Kitchen signatures",
+			420,
+			"photo-1599487488170-d11ec9c172f0",
+			"Popular"
+		],
+		[
+			"m3",
+			"Crispy Prawn Toast",
+			"Small plates",
+			360,
+			"photo-1562565652-a0d8f0c59eb4",
+			"New"
+		],
+		[
+			"m4",
+			"Charred Aubergine",
+			"Small plates",
+			280,
+			"photo-1572449043416-55f4685c9bb7",
+			"Vegetarian"
+		],
+		[
+			"m5",
+			"Mutton Kacchi",
+			"Rice & biryani",
+			350,
+			"photo-1589302168068-964664d93dc0",
+			"Signature"
+		],
+		[
+			"m6",
+			"Chicken Ramen",
+			"Noodles",
+			420,
+			"photo-1569718212165-3a8278d5f624",
+			"Chef pick"
+		],
+		[
+			"m7",
+			"Chilli Garlic Noodles",
+			"Noodles",
+			290,
+			"photo-1585032226651-759b368d7246",
+			"Popular"
+		],
+		[
+			"m8",
+			"Seasonal Cheesecake",
+			"Dessert",
+			320,
+			"photo-1578985545062-69928b1d9587",
+			"Seasonal"
+		]
+	].map(([id, name, category_name, price, img, tag], i) => ({
+		id,
+		name,
+		category_name,
+		price,
+		image_url: image(img),
+		tags: [tag],
+		availability: i === 7 ? "sold_out" : "available"
+	})),
+	offers: [
+		{
+			id: "of1",
+			name: "20% off signature plates"
+		},
+		{
+			id: "of2",
+			name: "Table 12 welcome offer"
+		},
+		{
+			id: "of3",
+			name: "Weekend family set"
+		}
+	],
+	payments: [
+		{
+			id: "p1",
+			table_number: "03",
+			method: "bangla_qr",
+			amount: 2450,
+			status: "verified"
+		},
+		{
+			id: "p2",
+			table_number: "06",
+			method: "cash",
+			amount: 1860,
+			status: "verified"
+		},
+		{
+			id: "p3",
+			table_number: "09",
+			method: "bangla_qr",
+			amount: 1080,
+			status: "submitted"
+		},
+		{
+			id: "p4",
+			table_number: "02",
+			method: "card",
+			amount: 1230,
+			status: "verified"
+		},
+		{
+			id: "p5",
+			table_number: "12",
+			method: "bangla_qr",
+			amount: 1500,
+			status: "submitted"
+		}
+	],
+	requests: [
+		{
+			id: "r1",
+			table_number: "08",
+			type: "waiter",
+			status: "open"
+		},
+		{
+			id: "r2",
+			table_number: "12",
+			type: "water",
+			status: "open"
+		},
+		{
+			id: "r3",
+			table_number: "04",
+			type: "cutlery",
+			status: "resolved"
+		}
+	],
+	team: [
+		[
+			"u1",
+			"Arman Rahman",
+			"arman@terrace.demo",
+			"Restaurant manager"
+		],
+		[
+			"u2",
+			"Nabila Chowdhury",
+			"nabila@terrace.demo",
+			"Outlet manager"
+		],
+		[
+			"u3",
+			"Mahmud Hasan",
+			"mahmud@terrace.demo",
+			"Kitchen lead"
+		],
+		[
+			"u4",
+			"Tania Islam",
+			"tania@terrace.demo",
+			"Order staff"
+		],
+		[
+			"u5",
+			"Farhan Ahmed",
+			"farhan@terrace.demo",
+			"Kitchen staff"
+		],
+		[
+			"u6",
+			"Raisa Karim",
+			"raisa@terrace.demo",
+			"Cashier"
+		]
+	].map(([id, display_name, email, roles]) => ({
+		id,
+		display_name,
+		email,
+		roles,
+		status: "active"
+	}))
+};
+export const demoAdminAnalytics = {
+	summary: {
+		revenue: 1286450,
+		orders: 984,
+		averageOrder: 1307,
+		teamMembers: 18,
+		activeTables: 21,
+		totalTables: 32
+	},
+	statuses: [
+		{
+			name: "pending",
+			value: 7
+		},
+		{
+			name: "confirmed",
+			value: 9
+		},
+		{
+			name: "preparing",
+			value: 11
+		},
+		{
+			name: "ready",
+			value: 5
+		},
+		{
+			name: "served",
+			value: 18
+		}
+	],
+	trend: [
+		{
+			date: "2026-08-22",
+			revenue: 148500,
+			orders: 116
+		},
+		{
+			date: "2026-08-23",
+			revenue: 162800,
+			orders: 124
+		},
+		{
+			date: "2026-08-24",
+			revenue: 154200,
+			orders: 119
+		},
+		{
+			date: "2026-08-25",
+			revenue: 181400,
+			orders: 137
+		},
+		{
+			date: "2026-08-26",
+			revenue: 196750,
+			orders: 149
+		},
+		{
+			date: "2026-08-27",
+			revenue: 207300,
+			orders: 157
+		},
+		{
+			date: "2026-08-28",
+			revenue: 235500,
+			orders: 182
+		}
+	],
+	outlets: [
+		{
+			slug: "dhanmondi",
+			name: "Dhanmondi",
+			revenue: 548900,
+			orders: 421,
+			totalTables: 12,
+			activeTables: 9,
+			seats: 52
+		},
+		{
+			slug: "gulshan",
+			name: "Gulshan",
+			revenue: 467350,
+			orders: 349,
+			totalTables: 12,
+			activeTables: 8,
+			seats: 58
+		},
+		{
+			slug: "uttara",
+			name: "Uttara",
+			revenue: 270200,
+			orders: 214,
+			totalTables: 8,
+			activeTables: 4,
+			seats: 36
+		}
+	]
+};
+
+//# sourceMappingURL=data:application/json;base64,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QztDQUFFLE9BQU07RUFBQztHQUFDLE1BQUs7R0FBYSxTQUFRO0dBQU8sUUFBTztFQUFHO0VBQUU7R0FBQyxNQUFLO0dBQWEsU0FBUTtHQUFPLFFBQU87RUFBRztFQUFFO0dBQUMsTUFBSztHQUFhLFNBQVE7R0FBTyxRQUFPO0VBQUc7RUFBRTtHQUFDLE1BQUs7R0FBYSxTQUFRO0dBQU8sUUFBTztFQUFHO0VBQUU7R0FBQyxNQUFLO0dBQWEsU0FBUTtHQUFPLFFBQU87RUFBRztFQUFFO0dBQUMsTUFBSztHQUFhLFNBQVE7R0FBTyxRQUFPO0VBQUc7RUFBRTtHQUFDLE1BQUs7R0FBYSxTQUFRO0dBQU8sUUFBTztFQUFHO0NBQUM7Q0FBRSxTQUFRO0VBQUM7R0FBQyxNQUFLO0dBQVksTUFBSztHQUFZLFNBQVE7R0FBTyxRQUFPO0dBQUksYUFBWTtHQUFHLGNBQWE7R0FBRSxPQUFNO0VBQUU7RUFBRTtHQUFDLE1BQUs7R0FBVSxNQUFLO0dBQVUsU0FBUTtHQUFPLFFBQU87R0FBSSxhQUFZO0dBQUcsY0FBYTtHQUFFLE9BQU07RUFBRTtFQUFFO0dBQUMsTUFBSztHQUFTLE1BQUs7R0FBUyxTQUFRO0dBQU8sUUFBTztHQUFJLGFBQVk7R0FBRSxjQUFhO0dBQUUsT0FBTTtFQUFFO0NBQUM7QUFBQyIsIm5hbWVzIjpbXSwic291cmNlcyI6WyJkZW1vQWRtaW5QcmV2aWV3LmpzIl0sInZlcnNpb24iOjMsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IHBsYWNlZD1taW51dGVzPT5uZXcgRGF0ZShEYXRlLm5vdygpLW1pbnV0ZXMqNjAwMDApLnRvSVNPU3RyaW5nKClcbmNvbnN0IGltYWdlPShpZCk9PmBodHRwczovL2ltYWdlcy51bnNwbGFzaC5jb20vJHtpZH0/YXV0bz1mb3JtYXQmZml0PWNyb3Amdz04MDAmcT04MGBcbmV4cG9ydCBjb25zdCBkZW1vQWRtaW5Xb3Jrc3BhY2U9e3Jlc3RhdXJhbnQ6e2lkOid0ZXJyYWNlJyxuYW1lOidUaGUgVGVycmFjZSd9LG1ldHJpY3M6e3JldmVudWVUb2RheToxODY0NTAsb3JkZXJzVG9kYXk6MTQyLGF2ZXJhZ2VPcmRlcjoxMzEzLGFjdGl2ZVRhYmxlczo5LHRvdGFsVGFibGVzOjEyfSxvcmRlcnM6W1xuIHtpZDonbzEnLG9yZGVyX251bWJlcjonMTA4OCcsdGFibGVfbnVtYmVyOicxMicsaXRlbXM6J1Ntb2tlZCBCZWVmIFJpYiDDlyAyLCBCb3JoYW5pIMOXIDInLGdyYW5kX3RvdGFsOjE1MDAsc3RhdHVzOidwZW5kaW5nJyxwbGFjZWRfYXQ6cGxhY2VkKDIpfSxcbiB7aWQ6J28yJyxvcmRlcl9udW1iZXI6JzEwODcnLHRhYmxlX251bWJlcjonMDgnLGl0ZW1zOidUYW5kb29yaSBDaGlja2VuIMOXIDIsIENyaXNweSBQcmF3biBUb2FzdCcsZ3JhbmRfdG90YWw6MTIwMCxzdGF0dXM6J2NvbmZpcm1lZCcscGxhY2VkX2F0OnBsYWNlZCg1KX0sXG4ge2lkOidvMycsb3JkZXJfbnVtYmVyOicxMDg2Jyx0YWJsZV9udW1iZXI6JzA0JyxpdGVtczonTXV0dG9uIEthY2NoaSDDlyAzLCBCb3JoYW5pIMOXIDMnLGdyYW5kX3RvdGFsOjExODAsc3RhdHVzOidwcmVwYXJpbmcnLHBsYWNlZF9hdDpwbGFjZWQoMTEpfSxcbiB7aWQ6J280JyxvcmRlcl9udW1iZXI6JzEwODUnLHRhYmxlX251bWJlcjonMDknLGl0ZW1zOidDaGlja2VuIFJhbWVuIMOXIDIsIENoaWxsaSBHYXJsaWMgTm9vZGxlcycsZ3JhbmRfdG90YWw6MTA4MCxzdGF0dXM6J3JlYWR5JyxwbGFjZWRfYXQ6cGxhY2VkKDE4KX0sXG4ge2lkOidvNScsb3JkZXJfbnVtYmVyOicxMDg0Jyx0YWJsZV9udW1iZXI6JzAyJyxpdGVtczonQ2hhcnJlZCBBdWJlcmdpbmUgw5cgMiwgUHJhd24gVG9hc3Qgw5cgMicsZ3JhbmRfdG90YWw6MTIzMCxzdGF0dXM6J3NlcnZlZCcscGxhY2VkX2F0OnBsYWNlZCgyOSl9LFxuIHtpZDonbzYnLG9yZGVyX251bWJlcjonMTA4MycsdGFibGVfbnVtYmVyOicwNicsaXRlbXM6J1Ntb2tlZCBCZWVmIFJpYiwgVGFuZG9vcmkgQ2hpY2tlbicsZ3JhbmRfdG90YWw6MTA2MCxzdGF0dXM6J2NvbXBsZXRlZCcscGxhY2VkX2F0OnBsYWNlZCg0NCl9XSxcbiB0YWJsZXM6QXJyYXkuZnJvbSh7bGVuZ3RoOjEyfSwoXyxpKT0+KHtpZDpgdCR7aSsxfWAsdGFibGVfbnVtYmVyOlN0cmluZyhpKzEpLnBhZFN0YXJ0KDIsJzAnKSxjYXBhY2l0eTppJTM9PT0wPzY6NCxzdGF0dXM6WydvY2N1cGllZCcsJ2F2YWlsYWJsZScsJ3Jlc2VydmVkJywnb2NjdXBpZWQnLCdhdmFpbGFibGUnLCdvY2N1cGllZCcsJ29jY3VwaWVkJywncmVzZXJ2ZWQnLCdvY2N1cGllZCcsJ2F2YWlsYWJsZScsJ29jY3VwaWVkJywnb2NjdXBpZWQnXVtpXX0pKSxcbiBtZW51OltbJ20xJywnU21va2VkIEJlZWYgUmliJywnS2l0Y2hlbiBzaWduYXR1cmVzJyw2OTAsJ3Bob3RvLTE1NDQwMjUxNjItZDc2Njk0MjY1OTQ3JywnQ2hlZiBwaWNrJ10sWydtMicsJ1RhbmRvb3JpIENoaWNrZW4nLCdLaXRjaGVuIHNpZ25hdHVyZXMnLDQyMCwncGhvdG8tMTU5OTQ4NzQ4ODE3MC1kMTFlYzljMTcyZjAnLCdQb3B1bGFyJ10sWydtMycsJ0NyaXNweSBQcmF3biBUb2FzdCcsJ1NtYWxsIHBsYXRlcycsMzYwLCdwaG90by0xNTYyNTY1NjUyLWEwZDhmMGM1OWViNCcsJ05ldyddLFsnbTQnLCdDaGFycmVkIEF1YmVyZ2luZScsJ1NtYWxsIHBsYXRlcycsMjgwLCdwaG90by0xNTcyNDQ5MDQzNDE2LTU1ZjQ2ODVjOWJiNycsJ1ZlZ2V0YXJpYW4nXSxbJ201JywnTXV0dG9uIEthY2NoaScsJ1JpY2UgJiBiaXJ5YW5pJywzNTAsJ3Bob3RvLTE1ODkzMDIxNjgwNjgtOTY0NjY0ZDkzZGMwJywnU2lnbmF0dXJlJ10sWydtNicsJ0NoaWNrZW4gUmFtZW4nLCdOb29kbGVzJyw0MjAsJ3Bob3RvLTE1Njk3MTgyMTIxNjUtM2E4Mjc4ZDVmNjI0JywnQ2hlZiBwaWNrJ10sWydtNycsJ0NoaWxsaSBHYXJsaWMgTm9vZGxlcycsJ05vb2RsZXMnLDI5MCwncGhvdG8tMTU4NTAzMjIyNjY1MS03NTliMzY4ZDcyNDYnLCdQb3B1bGFyJ10sWydtOCcsJ1NlYXNvbmFsIENoZWVzZWNha2UnLCdEZXNzZXJ0JywzMjAsJ3Bob3RvLTE1Nzg5ODU1NDUwNjItNjk5MjhiMWQ5NTg3JywnU2Vhc29uYWwnXV0ubWFwKChbaWQsbmFtZSxjYXRlZ29yeV9uYW1lLHByaWNlLGltZyx0YWddLGkpPT4oe2lkLG5hbWUsY2F0ZWdvcnlfbmFtZSxwcmljZSxpbWFnZV91cmw6aW1hZ2UoaW1nKSx0YWdzOlt0YWddLGF2YWlsYWJpbGl0eTppPT09Nz8nc29sZF9vdXQnOidhdmFpbGFibGUnfSkpLFxuIG9mZmVyczpbe2lkOidvZjEnLG5hbWU6JzIwJSBvZmYgc2lnbmF0dXJlIHBsYXRlcyd9LHtpZDonb2YyJyxuYW1lOidUYWJsZSAxMiB3ZWxjb21lIG9mZmVyJ30se2lkOidvZjMnLG5hbWU6J1dlZWtlbmQgZmFtaWx5IHNldCd9XSxcbiBwYXltZW50czpbe2lkOidwMScsdGFibGVfbnVtYmVyOicwMycsbWV0aG9kOidiYW5nbGFfcXInLGFtb3VudDoyNDUwLHN0YXR1czondmVyaWZpZWQnfSx7aWQ6J3AyJyx0YWJsZV9udW1iZXI6JzA2JyxtZXRob2Q6J2Nhc2gnLGFtb3VudDoxODYwLHN0YXR1czondmVyaWZpZWQnfSx7aWQ6J3AzJyx0YWJsZV9udW1iZXI6JzA5JyxtZXRob2Q6J2JhbmdsYV9xcicsYW1vdW50OjEwODAsc3RhdHVzOidzdWJtaXR0ZWQnfSx7aWQ6J3A0Jyx0YWJsZV9udW1iZXI6JzAyJyxtZXRob2Q6J2NhcmQnLGFtb3VudDoxMjMwLHN0YXR1czondmVyaWZpZWQnfSx7aWQ6J3A1Jyx0YWJsZV9udW1iZXI6JzEyJyxtZXRob2Q6J2JhbmdsYV9xcicsYW1vdW50OjE1MDAsc3RhdHVzOidzdWJtaXR0ZWQnfV0sXG4gcmVxdWVzdHM6W3tpZDoncjEnLHRhYmxlX251bWJlcjonMDgnLHR5cGU6J3dhaXRlcicsc3RhdHVzOidvcGVuJ30se2lkOidyMicsdGFibGVfbnVtYmVyOicxMicsdHlwZTond2F0ZXInLHN0YXR1czonb3Blbid9LHtpZDoncjMnLHRhYmxlX251bWJlcjonMDQnLHR5cGU6J2N1dGxlcnknLHN0YXR1czoncmVzb2x2ZWQnfV0sXG4gdGVhbTpbWyd1MScsJ0FybWFuIFJhaG1hbicsJ2FybWFuQHRlcnJhY2UuZGVtbycsJ1Jlc3RhdXJhbnQgbWFuYWdlciddLFsndTInLCdOYWJpbGEgQ2hvd2RodXJ5JywnbmFiaWxhQHRlcnJhY2UuZGVtbycsJ091dGxldCBtYW5hZ2VyJ10sWyd1MycsJ01haG11ZCBIYXNhbicsJ21haG11ZEB0ZXJyYWNlLmRlbW8nLCdLaXRjaGVuIGxlYWQnXSxbJ3U0JywnVGFuaWEgSXNsYW0nLCd0YW5pYUB0ZXJyYWNlLmRlbW8nLCdPcmRlciBzdGFmZiddLFsndTUnLCdGYXJoYW4gQWhtZWQnLCdmYXJoYW5AdGVycmFjZS5kZW1vJywnS2l0Y2hlbiBzdGFmZiddLFsndTYnLCdSYWlzYSBLYXJpbScsJ3JhaXNhQHRlcnJhY2UuZGVtbycsJ0Nhc2hpZXInXV0ubWFwKChbaWQsZGlzcGxheV9uYW1lLGVtYWlsLHJvbGVzXSk9Pih7aWQsZGlzcGxheV9uYW1lLGVtYWlsLHJvbGVzLHN0YXR1czonYWN0aXZlJ30pKX1cbmV4cG9ydCBjb25zdCBkZW1vQWRtaW5BbmFseXRpY3M9e3N1bW1hcnk6e3JldmVudWU6MTI4NjQ1MCxvcmRlcnM6OTg0LGF2ZXJhZ2VPcmRlcjoxMzA3LHRlYW1NZW1iZXJzOjE4LGFjdGl2ZVRhYmxlczoyMSx0b3RhbFRhYmxlczozMn0sc3RhdHVzZXM6W3tuYW1lOidwZW5kaW5nJyx2YWx1ZTo3fSx7bmFtZTonY29uZmlybWVkJyx2YWx1ZTo5fSx7bmFtZToncHJlcGFyaW5nJyx2YWx1ZToxMX0se25hbWU6J3JlYWR5Jyx2YWx1ZTo1fSx7bmFtZTonc2VydmVkJyx2YWx1ZToxOH1dLHRyZW5kOlt7ZGF0ZTonMjAyNi0wOC0yMicscmV2ZW51ZToxNDg1MDAsb3JkZXJzOjExNn0se2RhdGU6JzIwMjYtMDgtMjMnLHJldmVudWU6MTYyODAwLG9yZGVyczoxMjR9LHtkYXRlOicyMDI2LTA4LTI0JyxyZXZlbnVlOjE1NDIwMCxvcmRlcnM6MTE5fSx7ZGF0ZTonMjAyNi0wOC0yNScscmV2ZW51ZToxODE0MDAsb3JkZXJzOjEzN30se2RhdGU6JzIwMjYtMDgtMjYnLHJldmVudWU6MTk2NzUwLG9yZGVyczoxNDl9LHtkYXRlOicyMDI2LTA4LTI3JyxyZXZlbnVlOjIwNzMwMCxvcmRlcnM6MTU3fSx7ZGF0ZTonMjAyNi0wOC0yOCcscmV2ZW51ZToyMzU1MDAsb3JkZXJzOjE4Mn1dLG91dGxldHM6W3tzbHVnOidkaGFubW9uZGknLG5hbWU6J0RoYW5tb25kaScscmV2ZW51ZTo1NDg5MDAsb3JkZXJzOjQyMSx0b3RhbFRhYmxlczoxMixhY3RpdmVUYWJsZXM6OSxzZWF0czo1Mn0se3NsdWc6J2d1bHNoYW4nLG5hbWU6J0d1bHNoYW4nLHJldmVudWU6NDY3MzUwLG9yZGVyczozNDksdG90YWxUYWJsZXM6MTIsYWN0aXZlVGFibGVzOjgsc2VhdHM6NTh9LHtzbHVnOid1dHRhcmEnLG5hbWU6J1V0dGFyYScscmV2ZW51ZToyNzAyMDAsb3JkZXJzOjIxNCx0b3RhbFRhYmxlczo4LGFjdGl2ZVRhYmxlczo0LHNlYXRzOjM2fV19XG4iXX0=

@@ -4,10 +4,10 @@ import FoodCard from './FoodCard'
 import OfferSection from './OfferSection'
 import MenuPagination from './MenuPagination'
 
-export default function WorldPlateLanding({ restaurantName, outlet, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
+export default function WorldPlateLanding({ restaurantName, outlet, content, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
   const hero = menuItems[1] || menuItems[0]
   const featured = menuItems[3] || menuItems[0]
-  return <div className="worldplate-site"><OfferSection onMenu={onMenu} variant="worldplate" />
+  return <div className="worldplate-site"><OfferSection onMenu={onMenu} variant="worldplate" content={content} />
     <nav className="worldplate-nav"><a className="worldplate-logo" href="#worldplate-home"><Flame size={17} />WorldPlate</a><div><a className="active" href="#worldplate-home">Home</a><a href="#worldplate-menu">Menu</a><a href="#worldplate-best">Best dishes</a><a href="#worldplate-chef">Chef</a></div><button onClick={onMenu}>Book a table</button></nav>
     <section className="worldplate-hero" id="worldplate-home"><div><span className="worldplate-kicker">Flavours without borders</span><h1>Experience the<br /><em>Taste</em> of the<br />World</h1><p>Discover handcrafted dishes inspired by kitchens across the globe, served fresh at your table.</p><button onClick={onMenu}>Explore menu <ArrowRight size={14} /></button><div className="worldplate-meta"><span><Clock3 size={14} /><b>Open daily</b> 11 AM–11 PM</span><span><MapPin size={14} /><b>{outlet}</b> Dhaka</span></div></div><div className="worldplate-hero-dish"><i /><img src={hero?.image} alt={hero?.name || 'Signature world cuisine'} /><span><Flame size={13} /> Chef's choice</span></div></section>
     <aside className="worldplate-offer"><div><small>Great food and lots<br />of discounted prices</small><strong>50%<sup>off</sup></strong><button onClick={onMenu}>Claim offer</button></div><img src={menuItems[2]?.image || hero?.image} alt="Discounted restaurant dish" /></aside>

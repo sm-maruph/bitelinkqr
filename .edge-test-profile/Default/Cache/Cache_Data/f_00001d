@@ -1,0 +1,353 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/components/customer/EmberLanding.jsx");const _jsxDEV = __vite__cjsImport5_react_jsxDevRuntime["jsxDEV"];import { ArrowRight, Flame, MapPin, Timer, UtensilsCrossed } from "/node_modules/.vite/deps/lucide-react.js?v=2834c5bf";
+import CategoryTabs from "/src/components/customer/CategoryTabs.jsx";
+import FoodCard from "/src/components/customer/FoodCard.jsx";
+import OfferSection from "/src/components/customer/OfferSection.jsx";
+import MenuPagination from "/src/components/customer/MenuPagination.jsx";
+var _jsxFileName = "C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/EmberLanding.jsx";
+import __vite__cjsImport5_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=d7e83f3b";
+export default function EmberLanding({ restaurantName, outlet, content, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
+	const hero = menuItems[2] || menuItems[0];
+	return /* @__PURE__ */ _jsxDEV("div", {
+		className: "ember-site",
+		children: [
+			/* @__PURE__ */ _jsxDEV(OfferSection, {
+				onMenu,
+				variant: "ember",
+				content
+			}, void 0, false, {
+				fileName: _jsxFileName,
+				lineNumber: 9,
+				columnNumber: 38
+			}, this),
+			/* @__PURE__ */ _jsxDEV("nav", {
+				className: "ember-nav",
+				children: [
+					/* @__PURE__ */ _jsxDEV("a", {
+						href: "#ember-home",
+						children: [/* @__PURE__ */ _jsxDEV(Flame, { size: 18 }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 10,
+							columnNumber: 54
+						}, this), "EMBER"]
+					}, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 10,
+						columnNumber: 32
+					}, this),
+					/* @__PURE__ */ _jsxDEV("span", { children: "Fire · smoke · soul" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 10,
+						columnNumber: 82
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: "View menu"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 10,
+						columnNumber: 114
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 10,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "ember-hero",
+				id: "ember-home",
+				children: [/* @__PURE__ */ _jsxDEV("div", {
+					className: "ember-image",
+					children: [/* @__PURE__ */ _jsxDEV("img", {
+						src: hero?.image,
+						alt: hero?.name || "Fire cooked signature dish"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 11,
+						columnNumber: 82
+					}, this), /* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV(Flame, { size: 14 }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 11,
+						columnNumber: 162
+					}, this), " Cooked over flame"] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 11,
+						columnNumber: 156
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 11,
+					columnNumber: 53
+				}, this), /* @__PURE__ */ _jsxDEV("div", {
+					className: "ember-copy",
+					children: [
+						/* @__PURE__ */ _jsxDEV("small", { children: [
+							restaurantName,
+							" · ",
+							outlet
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 240
+						}, this),
+						/* @__PURE__ */ _jsxDEV("h1", { children: [
+							"Gather",
+							/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 292
+							}, this),
+							"around",
+							/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 304
+							}, this),
+							/* @__PURE__ */ _jsxDEV("em", { children: "the fire." }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 310
+							}, this)
+						] }, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 282
+						}, this),
+						/* @__PURE__ */ _jsxDEV("p", { children: "Smoke-led cooking, generous plates and ingredients transformed by flame." }, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 333
+						}, this),
+						/* @__PURE__ */ _jsxDEV("button", {
+							onClick: onMenu,
+							children: ["Taste the menu ", /* @__PURE__ */ _jsxDEV(ArrowRight, { size: 14 }, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 11,
+								columnNumber: 452
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName,
+							lineNumber: 11,
+							columnNumber: 412
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName,
+					lineNumber: 11,
+					columnNumber: 212
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 11,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "ember-strip",
+				children: [
+					/* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV(Flame, {}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 12,
+						columnNumber: 44
+					}, this), " Live fire kitchen"] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 12,
+						columnNumber: 38
+					}, this),
+					/* @__PURE__ */ _jsxDEV("span", { children: [/* @__PURE__ */ _jsxDEV(Timer, {}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 12,
+						columnNumber: 84
+					}, this), " Slow cooked daily"] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 12,
+						columnNumber: 78
+					}, this),
+					/* @__PURE__ */ _jsxDEV("span", { children: [
+						/* @__PURE__ */ _jsxDEV(MapPin, {}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 12,
+							columnNumber: 124
+						}, this),
+						" ",
+						outlet,
+						", Dhaka"
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 12,
+						columnNumber: 118
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 12,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "ember-menu",
+				id: "ember-menu",
+				children: [
+					/* @__PURE__ */ _jsxDEV("header", { children: [/* @__PURE__ */ _jsxDEV("div", { children: [/* @__PURE__ */ _jsxDEV("small", { children: "From the hearth" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 66
+					}, this), /* @__PURE__ */ _jsxDEV("h2", { children: "Fire-led favourites" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 96
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 61
+					}, this), /* @__PURE__ */ _jsxDEV(UtensilsCrossed, { size: 34 }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 130
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 53
+					}, this),
+					/* @__PURE__ */ _jsxDEV(CategoryTabs, {
+						categories,
+						activeCategory: category,
+						onChange: onCategoryChange
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 168
+					}, this),
+					/* @__PURE__ */ _jsxDEV("div", {
+						className: "ember-grid",
+						children: menuItems.map((item, index) => /* @__PURE__ */ _jsxDEV("div", {
+							className: `ember-card ember-card-${index + 1}`,
+							children: /* @__PURE__ */ _jsxDEV(FoodCard, {
+								item,
+								onSelect,
+								onAdd
+							}, void 0, false, {
+								fileName: _jsxFileName,
+								lineNumber: 13,
+								columnNumber: 390
+							}, this)
+						}, item.id, false, {
+							fileName: _jsxFileName,
+							lineNumber: 13,
+							columnNumber: 322
+						}, this))
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 262
+					}, this),
+					/* @__PURE__ */ _jsxDEV(MenuPagination, {
+						currentPage,
+						pageCount,
+						onPageChange
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 13,
+						columnNumber: 462
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 13,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("section", {
+				className: "ember-story",
+				children: [
+					/* @__PURE__ */ _jsxDEV("span", { children: "01" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 38
+					}, this),
+					/* @__PURE__ */ _jsxDEV("h2", { children: [
+						"Charred outside.",
+						/* @__PURE__ */ _jsxDEV("br", {}, void 0, false, {
+							fileName: _jsxFileName,
+							lineNumber: 14,
+							columnNumber: 73
+						}, this),
+						"Tender within."
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 53
+					}, this),
+					/* @__PURE__ */ _jsxDEV("p", { children: "Our kitchen works patiently with fire, balancing deep caramelisation with bright seasonal produce." }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 14,
+						columnNumber: 98
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 14,
+				columnNumber: 5
+			}, this),
+			/* @__PURE__ */ _jsxDEV("footer", {
+				className: "ember-footer",
+				children: [
+					/* @__PURE__ */ _jsxDEV("b", { children: "EMBER" }, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 38
+					}, this),
+					/* @__PURE__ */ _jsxDEV("span", { children: [
+						restaurantName,
+						" · ",
+						outlet
+					] }, void 0, true, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 50
+					}, this),
+					/* @__PURE__ */ _jsxDEV("button", {
+						onClick: onMenu,
+						children: "Start an order"
+					}, void 0, false, {
+						fileName: _jsxFileName,
+						lineNumber: 15,
+						columnNumber: 90
+					}, this)
+				]
+			}, void 0, true, {
+				fileName: _jsxFileName,
+				lineNumber: 15,
+				columnNumber: 5
+			}, this)
+		]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 9,
+		columnNumber: 10
+	}, this);
+}
+_c = EmberLanding;
+var _c;
+$RefreshReg$(_c, "EmberLanding");
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+import * as __vite_react_currentExports from "/src/components/customer/EmberLanding.jsx";
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+
+  const currentExports = __vite_react_currentExports;
+  queueMicrotask(() => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/EmberLanding.jsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/EmberLanding.jsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+function $RefreshReg$(type, id) { return RefreshRuntime.register(type, "C:/Users/smmaruph/Desktop/BiteLinkAPP/BiteLinkQR/src/components/customer/EmberLanding.jsx" + ' ' + id); }
+function $RefreshSig$() { return RefreshRuntime.createSignatureFunctionForTransform(); }
+
+//# sourceMappingURL=data:application/json;base64,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UUFBRCxZQUFNLEtBQVE7Ozs7O0tBQUMsd0JBQUMsTUFBRDtNQUFJO01BQWdCLHdCQUFDLE1BQUQsQ0FBSzs7Ozs7TUFBQztLQUFrQjs7Ozs7S0FBQyx3QkFBQyxLQUFELFlBQUcscUdBQXFHOzs7OztJQUFVOzs7Ozs7R0FDL00sd0JBQUMsVUFBRDtJQUFRLFdBQVU7Y0FBbEI7S0FBaUMsd0JBQUMsS0FBRCxZQUFHLFFBQVE7Ozs7O0tBQUMsd0JBQUMsUUFBRDtNQUFPO01BQWU7TUFBSTtLQUFhOzs7OztLQUFDLHdCQUFDLFVBQUQ7TUFBUSxTQUFTO2dCQUFRO0tBQXNCOzs7OztJQUFTOzs7Ozs7RUFDMUk7Ozs7OztBQUNQIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIkVtYmVyTGFuZGluZy5qc3giXSwidmVyc2lvbiI6Mywic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQXJyb3dSaWdodCwgRmxhbWUsIE1hcFBpbiwgVGltZXIsIFV0ZW5zaWxzQ3Jvc3NlZCB9IGZyb20gJ2x1Y2lkZS1yZWFjdCdcbmltcG9ydCBDYXRlZ29yeVRhYnMgZnJvbSAnLi9DYXRlZ29yeVRhYnMnXG5pbXBvcnQgRm9vZENhcmQgZnJvbSAnLi9Gb29kQ2FyZCdcbmltcG9ydCBPZmZlclNlY3Rpb24gZnJvbSAnLi9PZmZlclNlY3Rpb24nXG5pbXBvcnQgTWVudVBhZ2luYXRpb24gZnJvbSAnLi9NZW51UGFnaW5hdGlvbidcblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gRW1iZXJMYW5kaW5nKHsgcmVzdGF1cmFudE5hbWUsIG91dGxldCwgY29udGVudCwgb25NZW51LCBtZW51SXRlbXMsIGN1cnJlbnRQYWdlLCBwYWdlQ291bnQsIG9uUGFnZUNoYW5nZSwgb25TZWxlY3QsIG9uQWRkLCBjYXRlZ29yaWVzLCBjYXRlZ29yeSwgb25DYXRlZ29yeUNoYW5nZSB9KSB7XG4gIGNvbnN0IGhlcm8gPSBtZW51SXRlbXNbMl0gfHwgbWVudUl0ZW1zWzBdXG4gIHJldHVybiA8ZGl2IGNsYXNzTmFtZT1cImVtYmVyLXNpdGVcIj48T2ZmZXJTZWN0aW9uIG9uTWVudT17b25NZW51fSB2YXJpYW50PVwiZW1iZXJcIiBjb250ZW50PXtjb250ZW50fSAvPlxuICAgIDxuYXYgY2xhc3NOYW1lPVwiZW1iZXItbmF2XCI+PGEgaHJlZj1cIiNlbWJlci1ob21lXCI+PEZsYW1lIHNpemU9ezE4fSAvPkVNQkVSPC9hPjxzcGFuPkZpcmUgwrcgc21va2Ugwrcgc291bDwvc3Bhbj48YnV0dG9uIG9uQ2xpY2s9e29uTWVudX0+VmlldyBtZW51PC9idXR0b24+PC9uYXY+XG4gICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwiZW1iZXItaGVyb1wiIGlkPVwiZW1iZXItaG9tZVwiPjxkaXYgY2xhc3NOYW1lPVwiZW1iZXItaW1hZ2VcIj48aW1nIHNyYz17aGVybz8uaW1hZ2V9IGFsdD17aGVybz8ubmFtZSB8fCAnRmlyZSBjb29rZWQgc2lnbmF0dXJlIGRpc2gnfSAvPjxzcGFuPjxGbGFtZSBzaXplPXsxNH0gLz4gQ29va2VkIG92ZXIgZmxhbWU8L3NwYW4+PC9kaXY+PGRpdiBjbGFzc05hbWU9XCJlbWJlci1jb3B5XCI+PHNtYWxsPntyZXN0YXVyYW50TmFtZX0gwrcge291dGxldH08L3NtYWxsPjxoMT5HYXRoZXI8YnIgLz5hcm91bmQ8YnIgLz48ZW0+dGhlIGZpcmUuPC9lbT48L2gxPjxwPlNtb2tlLWxlZCBjb29raW5nLCBnZW5lcm91cyBwbGF0ZXMgYW5kIGluZ3JlZGllbnRzIHRyYW5zZm9ybWVkIGJ5IGZsYW1lLjwvcD48YnV0dG9uIG9uQ2xpY2s9e29uTWVudX0+VGFzdGUgdGhlIG1lbnUgPEFycm93UmlnaHQgc2l6ZT17MTR9IC8+PC9idXR0b24+PC9kaXY+PC9zZWN0aW9uPlxuICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cImVtYmVyLXN0cmlwXCI+PHNwYW4+PEZsYW1lIC8+IExpdmUgZmlyZSBraXRjaGVuPC9zcGFuPjxzcGFuPjxUaW1lciAvPiBTbG93IGNvb2tlZCBkYWlseTwvc3Bhbj48c3Bhbj48TWFwUGluIC8+IHtvdXRsZXR9LCBEaGFrYTwvc3Bhbj48L3NlY3Rpb24+XG4gICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwiZW1iZXItbWVudVwiIGlkPVwiZW1iZXItbWVudVwiPjxoZWFkZXI+PGRpdj48c21hbGw+RnJvbSB0aGUgaGVhcnRoPC9zbWFsbD48aDI+RmlyZS1sZWQgZmF2b3VyaXRlczwvaDI+PC9kaXY+PFV0ZW5zaWxzQ3Jvc3NlZCBzaXplPXszNH0gLz48L2hlYWRlcj48Q2F0ZWdvcnlUYWJzIGNhdGVnb3JpZXM9e2NhdGVnb3JpZXN9IGFjdGl2ZUNhdGVnb3J5PXtjYXRlZ29yeX0gb25DaGFuZ2U9e29uQ2F0ZWdvcnlDaGFuZ2V9IC8+PGRpdiBjbGFzc05hbWU9XCJlbWJlci1ncmlkXCI+e21lbnVJdGVtcy5tYXAoKGl0ZW0sIGluZGV4KSA9PiA8ZGl2IGNsYXNzTmFtZT17YGVtYmVyLWNhcmQgZW1iZXItY2FyZC0ke2luZGV4ICsgMX1gfSBrZXk9e2l0ZW0uaWR9PjxGb29kQ2FyZCBpdGVtPXtpdGVtfSBvblNlbGVjdD17b25TZWxlY3R9IG9uQWRkPXtvbkFkZH0gLz48L2Rpdj4pfTwvZGl2PjxNZW51UGFnaW5hdGlvbiBjdXJyZW50UGFnZT17Y3VycmVudFBhZ2V9IHBhZ2VDb3VudD17cGFnZUNvdW50fSBvblBhZ2VDaGFuZ2U9e29uUGFnZUNoYW5nZX0gLz48L3NlY3Rpb24+XG4gICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwiZW1iZXItc3RvcnlcIj48c3Bhbj4wMTwvc3Bhbj48aDI+Q2hhcnJlZCBvdXRzaWRlLjxiciAvPlRlbmRlciB3aXRoaW4uPC9oMj48cD5PdXIga2l0Y2hlbiB3b3JrcyBwYXRpZW50bHkgd2l0aCBmaXJlLCBiYWxhbmNpbmcgZGVlcCBjYXJhbWVsaXNhdGlvbiB3aXRoIGJyaWdodCBzZWFzb25hbCBwcm9kdWNlLjwvcD48L3NlY3Rpb24+XG4gICAgPGZvb3RlciBjbGFzc05hbWU9XCJlbWJlci1mb290ZXJcIj48Yj5FTUJFUjwvYj48c3Bhbj57cmVzdGF1cmFudE5hbWV9IMK3IHtvdXRsZXR9PC9zcGFuPjxidXR0b24gb25DbGljaz17b25NZW51fT5TdGFydCBhbiBvcmRlcjwvYnV0dG9uPjwvZm9vdGVyPlxuICA8L2Rpdj5cbn1cbiJdfQ==

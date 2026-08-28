@@ -1,0 +1,11 @@
+/* The former seven-card gallery centered its last card. The catalog now has 20. */
+.template-gallery > .template-preview-card,
+.template-gallery > .template-preview-card:nth-child(7) {
+  grid-column: auto;
+}
+
+/* Public and authentication pages do not render the 58px portal context bar. */
+body:has(.saas-site),
+body:has(.auth-page) {
+  padding-top: 0;
+}
