@@ -34,6 +34,8 @@ export function LoginPage() {
       setError(
         err.status === 401
           ? "Email or password is incorrect."
+          : err.status === 400
+            ? "Enter a valid email address and a password of at least 8 characters."
           : "Login failed. Please try again.",
       );
     } finally {
@@ -47,8 +49,8 @@ export function LoginPage() {
     >
       <form onSubmit={submit}>
         <Field
-          label="Email / username"
-          type="text"
+          label="Email address"
+          type="email"
           autoComplete="username"
           value={form.email}
           onChange={(event) => setForm({ ...form, email: event.target.value })}
