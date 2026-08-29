@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
+  ShoppingBag,
   X,
   Palette,
   SlidersHorizontal,
@@ -17,6 +18,7 @@ import OrderTracker from "../../components/customer/OrderTracker";
 import BillAndPayment from "../../components/customer/BillAndPayment";
 import CustomerRequests from "../../components/customer/CustomerRequests";
 import CustomerBottomNav from "../../components/customer/CustomerBottomNav";
+import CustomerOrderHistory from "../../components/customer/CustomerOrderHistory";
 import StandardTemplateFooter from "../../components/customer/StandardTemplateFooter";
 import { getRestaurantContent } from "../../data/restaurantContent";
 import { restaurantService } from "../../services/restaurantService";
@@ -79,6 +81,13 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
   const [cart, setCart] = useState({});
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [orderOpen, setOrderOpen] = useState(false);
+  const [orderSubmitting, setOrderSubmitting] = useState(false);
+  const [orderError, setOrderError] = useState('');
+  const [orderHistory, setOrderHistory] = useState([]);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [historyLoading, setHistoryLoading] = useState(false);
+  const [historyView, setHistoryView] = useState('grid');
+  const [selectedOrder, setSelectedOrder] = useState(null);
   const [billOpen, setBillOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [template, setTemplate] = useState(requestedTemplate && templates[requestedTemplate] ? requestedTemplate : "editorial");
@@ -127,7 +136,8 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
     offerTitle: liveContent.offers[0]?.name || fallbackContent.offerTitle,
     offerDescription: liveContent.offers[0]?.description || fallbackContent.offerDescription,
   } : fallbackContent;
-  const categories = ["All dishes", ...new Set(state.menu.map((item) => item.category).filter(Boolean))];
+  const categories = ["All dishes", "Popular now", "Offers", "Combo offers", ...new Set(state.menu.map((item) => item.category).filter(Boolean))];
+  const comboItems=(liveContent?.comboOffers||[]).map(offer=>({id:`combo-${offer.id}`,comboOffer:true,name:offer.name,description:offer.description,price:Number(offer.comboPrice),regularPrice:Number(offer.regularPrice),savings:Number(offer.savings),image:offer.items[0]?.image_url,tag:'Combo offer',availability:'AVAILABLE',comboItems:offer.items.map(raw=>state.menu.find(item=>item.id===raw.id)).filter(Boolean)}));
   const order = [...state.orders]
     .reverse()
     .find(
@@ -136,10 +146,35 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
         item.outletId === context.outlet &&
         item.tableId === tableNumber,
     );
-  const filteredItems =
-    category === "All dishes"
-      ? state.menu
-      : state.menu.filter((item) => item.category === category);
+  useEffect(() => {
+    if (!isLiveCustomerRoute) return undefined;
+    let active = true;
+    let refreshing = false;
+    const outletSlug = context.outlet.toLowerCase().trim().replaceAll(/\s+/g, "-");
+    const refreshOrders = async () => {
+      if (refreshing || document.visibilityState !== 'visible') return;
+      refreshing = true;
+      if (active && !orderHistory.length) setHistoryLoading(true);
+      try {
+        const result = await restaurantService.getOrders(context.restaurantId, outletSlug, tableNumber);
+        if (active) {
+          const normalized = result.items.map(item => ({ id:item.id, orderNumber:item.order_number, tableId:tableNumber, status:item.status==='completed'?'SERVED':String(item.status).toUpperCase(), subtotal:Number(item.subtotal), discount:Number(item.discount_total), total:Number(item.grand_total), placed:new Date(item.placed_at).toLocaleString(), itemDetails:item.items.map(line=>({id:line.id,name:line.name,price:Number(line.price),quantity:Number(line.quantity)})) }));
+          setOrderHistory(normalized);
+          setSelectedOrder(current => current ? normalized.find(item=>item.id===current.id) || current : current);
+        }
+      } catch { /* The tracker keeps its last known status during a transient outage. */ }
+      finally { refreshing = false; if(active)setHistoryLoading(false); }
+    };
+    refreshOrders();
+    const timer = window.setInterval(refreshOrders, 3000);
+    window.addEventListener('focus', refreshOrders);
+    return () => { active = false; window.clearInterval(timer); window.removeEventListener('focus', refreshOrders); };
+  }, [isLiveCustomerRoute, context.restaurantId, context.outlet, tableNumber]);
+  const filteredItems = category === "All dishes" ? state.menu
+    : category === "Popular now" ? state.menu.filter(item=>item.popularNow)
+    : category === "Offers" ? (state.menu.some(item=>item.onOffer) ? state.menu.filter(item=>item.onOffer) : [{id:'offers-empty',name:state.menu[0]?.name||'Menu',image:state.menu[0]?.image,emptyOffer:true,onViewMenu:()=>{setCategoryState('All dishes');setCurrentPage(1)}}])
+    : category === "Combo offers" ? (comboItems.length?comboItems:[{id:'combos-empty',emptyOffer:true,emptyTitle:'No combo offers are available right now.',onViewMenu:()=>{setCategoryState('All dishes');setCurrentPage(1)}}])
+    : state.menu.filter((item) => item.category === category);
   const pageCount = Math.max(1, Math.ceil(filteredItems.length / itemsPerPage));
   const visibleItems = filteredItems.slice(
     (currentPage - 1) * itemsPerPage,
@@ -215,6 +250,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
   );
   const addToCart = (item, quantity = 1) => {
     if (item.availability === "SOLD_OUT") return;
+    if(item.comboOffer){setCart(current=>{const next={...current};item.comboItems.forEach(entry=>{next[entry.id]={...entry,quantity:(next[entry.id]?.quantity||0)+quantity}});return next});setSelectedItem(null);setDrawerOpen(true);return}
     setCart((current) => ({
       ...current,
       [item.id]: {
@@ -233,8 +269,11 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
         );
       return { ...current, [id]: { ...current[id], quantity: next } };
     });
-  const placeOrder = (summary) => {
-    actions.placeOrder({
+  const placeOrder = async (summary) => {
+    if (orderSubmitting) return;
+    setOrderSubmitting(true);
+    setOrderError('');
+    const orderDraft = {
       restaurantId: context.restaurantId,
       outletId: context.outlet,
       tableId: tableNumber,
@@ -248,10 +287,19 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
         .map((item) => `${item.name} x ${item.quantity}`)
         .join(", "),
       ...summary,
-    });
-    setCart({});
-    setDrawerOpen(false);
-    setOrderOpen(true);
+    };
+    try {
+      const outletSlug = context.outlet.toLowerCase().trim().replaceAll(/\s+/g, "-");
+      const created = await restaurantService.placeOrder(context.restaurantId, outletSlug, tableNumber, {
+        items: orderDraft.itemDetails.map((item) => ({ menuItemId: item.id, quantity: item.quantity })),
+      });
+      actions.placeOrder({ ...orderDraft, id: created.id, orderNumber: created.order_number });
+      setCart({});
+      setDrawerOpen(false);
+      setHistoryOpen(true);
+    } catch {
+      setOrderError('Could not place the order. Please check the table QR and try again.');
+    } finally { setOrderSubmitting(false); }
   };
   if (publicLoading) return <div className="customer-live-loader" role="status" aria-label="Loading restaurant experience"><div className="live-loader-phone"><header><i/><span/><b/></header><section className="live-loader-hero"><i/><i/><i/></section><section className="live-loader-copy"><i/><i/><i/></section><section className="live-loader-menu"><i/><i/></section><nav><i/><i/><i/><i/><i/></nav></div><span className="sr-only">Loading the restaurant's selected template</span></div>;
   if (publicError) return <main className="customer-public-error"><div><span>TABLE {tableNumber}</span><h1>Menu unavailable</h1><p>{publicError}</p><button onClick={()=>window.location.reload()}>Try again</button></div></main>;
@@ -293,9 +341,12 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
       </div>}
       <div ref={canvasRef} className={`customer-canvas ${compactCanvas ? "customer-canvas-compact" : ""}`}>
         <CustomerHeader
+          restaurantName={restaurantContent.name}
+          logoUrl={liveContent?.restaurant?.logo_url}
           cartCount={cartCount}
           setRole={setRole}
           onCart={() => setDrawerOpen(true)}
+          onMenu={scrollToMenu}
           tableNumber={tableNumber}
           outlet={context.outlet}
           showAdmin={canPreviewTemplates}
@@ -318,6 +369,9 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
           category={category}
           onCategoryChange={setCategory}
           onMenu={scrollToMenu}
+          onCart={() => setDrawerOpen(true)}
+          cartCount={cartCount}
+          logoUrl={liveContent?.restaurant?.logo_url}
         />
         <main className="customer-content">
           <section className="customer-menu" id="menu">
@@ -358,13 +412,11 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
         <CustomerBottomNav
           cartCount={cartCount}
           onMenu={scrollToMenu}
-          onOrder={() => {
-            if (order) setOrderOpen(true);
-            else setDrawerOpen(true);
-          }}
+          onOrder={() => setHistoryOpen(true)}
           onBill={() => setBillOpen(true)}
           onHelp={() => setHelpOpen(true)}
         />
+        <button className="customer-cart-fab" onClick={()=>setDrawerOpen(true)} aria-label={`Open cart with ${cartCount} items`}><ShoppingBag size={19}/><span>Cart</span>{cartCount>0&&<b>{cartCount}</b>}</button>
       </div>
       {selectedItem && (
         <FoodDetailModal
@@ -381,17 +433,21 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
           tableNumber={tableNumber}
           onChange={changeQuantity}
           onClose={() => setDrawerOpen(false)}
+          onAddMore={() => { setDrawerOpen(false); window.setTimeout(scrollToMenu, 0); }}
           onPlaceOrder={placeOrder}
+          submitting={orderSubmitting}
+          error={orderError}
         />
       )}
-      {orderOpen && order && (
+      {historyOpen && <CustomerOrderHistory orders={orderHistory} view={historyView} onView={setHistoryView} loading={historyLoading} onClose={()=>setHistoryOpen(false)} onSelect={(next)=>{setSelectedOrder(next);setOrderOpen(true)}}/>}
+      {orderOpen && selectedOrder && (
         <div className="customer-modal-backdrop" onClick={() => setOrderOpen(false)}>
           <div className="bill-modal order-modal" onClick={(event) => event.stopPropagation()}>
             <button className="bill-modal-close" onClick={() => setOrderOpen(false)} aria-label="Close order">
               <X size={17} />
             </button>
             <OrderTracker
-              order={order}
+              order={{...selectedOrder,id:`#${selectedOrder.orderNumber}`}}
               onOrderMore={() => {
                 setOrderOpen(false);
                 scrollToMenu();

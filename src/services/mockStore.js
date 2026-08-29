@@ -55,6 +55,11 @@ export const mockStore = {
       description: item.description,
       availability: String(item.availability).toUpperCase(),
       preparationTime: item.preparation_minutes,
+      orderCount: Number(item.order_count || 0),
+      quantityOrdered: Number(item.quantity_ordered || 0),
+      popularNow: Boolean(item.popular_now),
+      onOffer: Boolean(item.on_offer),
+      offers: item.offers || [],
     })),
   }),
   placeOrder: (order) => {

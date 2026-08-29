@@ -7,18 +7,18 @@ import FuturisticLanding from './FuturisticLanding'
 import EmberLanding from './EmberLanding'
 import OfferSection from './OfferSection'
 
-export default function CustomerHero({ template, restaurantName, outlet, content, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, onMenu, categories, category, onCategoryChange }) {
-  if (template.startsWith('future-')) return <FuturisticLanding template={template} restaurantName={restaurantName} outlet={outlet} content={content} onMenu={onMenu} menuItems={menuItems} currentPage={currentPage} pageCount={pageCount} onPageChange={onPageChange} onSelect={onSelect} onAdd={onAdd} categories={categories} category={category} onCategoryChange={onCategoryChange} />
+export default function CustomerHero({ template, restaurantName, logoUrl, outlet, content, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, onMenu, onCart, cartCount, categories, category, onCategoryChange }) {
+  if (template.startsWith('future-')) return <FuturisticLanding template={template} restaurantName={restaurantName} logoUrl={logoUrl} outlet={outlet} content={content} onMenu={onMenu} onCart={onCart} cartCount={cartCount} menuItems={menuItems} currentPage={currentPage} pageCount={pageCount} onPageChange={onPageChange} onSelect={onSelect} onAdd={onAdd} categories={categories} category={category} onCategoryChange={onCategoryChange} />
   if (template === 'midnight') return <BistroLanding restaurantName={restaurantName} outlet={outlet} content={content} onMenu={onMenu} menuItems={menuItems} currentPage={currentPage} pageCount={pageCount} onPageChange={onPageChange} onSelect={onSelect} onAdd={onAdd} categories={categories} category={category} onCategoryChange={onCategoryChange} />
   if (template === 'express') return <ExpressLanding restaurantName={restaurantName} outlet={outlet} content={content} onMenu={onMenu} menuItems={menuItems} currentPage={currentPage} pageCount={pageCount} onPageChange={onPageChange} onSelect={onSelect} onAdd={onAdd} categories={categories} category={category} onCategoryChange={onCategoryChange} />
   if (template === 'worldplate') return <WorldPlateLanding restaurantName={restaurantName} outlet={outlet} content={content} onMenu={onMenu} menuItems={menuItems} currentPage={currentPage} pageCount={pageCount} onPageChange={onPageChange} onSelect={onSelect} onAdd={onAdd} categories={categories} category={category} onCategoryChange={onCategoryChange} />
   if (template === 'ember') return <EmberLanding restaurantName={restaurantName} outlet={outlet} content={content} onMenu={onMenu} menuItems={menuItems} currentPage={currentPage} pageCount={pageCount} onPageChange={onPageChange} onSelect={onSelect} onAdd={onAdd} categories={categories} category={category} onCategoryChange={onCategoryChange} />
   if (template === 'sage') return <SageLanding restaurantName={restaurantName} outlet={outlet} content={content} onMenu={onMenu} menuItems={menuItems} currentPage={currentPage} pageCount={pageCount} onPageChange={onPageChange} onSelect={onSelect} onAdd={onAdd} categories={categories} category={category} onCategoryChange={onCategoryChange} />
   return <>
+    <OfferSection onMenu={onMenu} variant={template} content={content} />
     <div className="standard-customer-hero">
       <section className="customer-hero"><div><div className="eyebrow"><span className="live-dot" /> Open now <span className="eyebrow-line" /> {content?.hours}</div><p className="customer-restaurant-name">{content?.name || restaurantName}</p><h1>{content?.tagline || 'A little more flavour.'}</h1><p>{content?.description}</p><div className="location"><MapPin size={16} /> {content?.address || `${outlet}, Dhaka`} <ChevronRight size={15} /></div></div><div className="customer-photo"><span className="photo-note"><Sparkles size={14} /> Made to order</span></div></section>
       <div className="customer-pulse"><span>25 - 35 min <b>kitchen pulse</b></span><button onClick={() => document.getElementById('requests')?.scrollIntoView({ behavior: 'smooth' })}>Need a hand? <b>Call your waiter</b></button><span>10% off our signatures</span></div>
-      <OfferSection onMenu={onMenu} variant={template} content={content} />
     </div>
   </>
 }

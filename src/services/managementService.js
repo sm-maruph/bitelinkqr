@@ -8,6 +8,8 @@ export const managementService={
   categories:(session,tenantId,restaurantId)=>apiRequest(`/api/v1/menu-categories?restaurantId=${restaurantId}`,{headers:headers(session,tenantId)}),
   createCategory:(session,tenantId,payload)=>apiRequest('/api/v1/menu-categories',{method:'POST',headers:headers(session,tenantId),body:JSON.stringify(payload)}),
   createItem:(session,tenantId,payload)=>apiRequest('/api/v1/menu-items',{method:'POST',headers:headers(session,tenantId),body:JSON.stringify(payload)}),
+  createOffer:(session,tenantId,payload)=>apiRequest('/api/v1/offers',{method:'POST',headers:headers(session,tenantId),body:JSON.stringify(payload)}),
+  updateOffer:(session,tenantId,offerId,payload)=>apiRequest(`/api/v1/offers/${offerId}`,{method:'PATCH',headers:headers(session,tenantId),body:JSON.stringify(payload)}),
   setAvailability:(session,tenantId,itemId,payload)=>apiRequest(`/api/v1/menu-items/${itemId}/availability`,{method:'PATCH',headers:headers(session,tenantId),body:JSON.stringify(payload)}),
   updateItem:(session,tenantId,itemId,payload)=>apiRequest(`/api/v1/menu-items/${itemId}`,{method:'PATCH',headers:headers(session,tenantId),body:JSON.stringify(payload)}),
   deleteItem:(session,tenantId,itemId)=>apiRequest(`/api/v1/menu-items/${itemId}`,{method:'DELETE',headers:headers(session,tenantId)}),

@@ -1,0 +1,21 @@
+import { BadgePercent, PackagePlus, Percent, Plus, Trash2, X } from 'lucide-react'
+import { Button } from './PortalChrome'
+
+const money=value=>`BDT ${Number(value||0).toLocaleString('en-BD')}`
+export default function OfferBuilder({offer,setOffer,items,busy,onClose,onSave}){
+  const isCombo=offer.offerType==='combo'
+  const updateTier=(index,patch)=>setOffer({...offer,tiers:offer.tiers.map((tier,i)=>i===index?{...tier,...patch}:tier)})
+  const removeTier=index=>setOffer({...offer,tiers:offer.tiers.filter((_,i)=>i!==index)})
+  const selected=items.filter(item=>offer.menuItemIds.includes(item.id)),regularPrice=selected.reduce((sum,item)=>sum+Number(item.price||item.base_price||0),0)
+  return <div className="staff-modal-backdrop" onMouseDown={event=>event.target===event.currentTarget&&!busy&&onClose()}><section className="staff-modal offer-builder-modal">
+    <header><div><span className="page-eyebrow">Menu promotion</span><h2>{offer.id?'Edit offer':'Create an offer'}</h2></div><button onClick={onClose} aria-label="Close"><X/></button></header>
+    <form onSubmit={onSave}><div className="staff-fields">
+      <fieldset className="offer-type-picker wide"><legend>Offer type</legend><button type="button" className={!isCombo?'active':''} onClick={()=>setOffer({...offer,offerType:'quantity'})}><BadgePercent/>Quantity discount<small>Discount dishes by quantity</small></button><button type="button" className={isCombo?'active':''} onClick={()=>setOffer({...offer,offerType:'combo'})}><PackagePlus/>Combo offer<small>Bundle dishes at one price</small></button></fieldset>
+      <label><span>Offer name</span><input required value={offer.name} onChange={event=>setOffer({...offer,name:event.target.value})}/></label>
+      <label className="wide"><span>Customer message</span><input value={offer.description} onChange={event=>setOffer({...offer,description:event.target.value})} placeholder={isCombo?'A complete meal at a better price':'Buy 2 for 10% off, buy 3 for 15% off'}/></label>
+      <fieldset className="offer-item-picker wide"><legend>{isCombo?'Items included in combo':'Eligible menu items'}</legend>{items.map(entry=><label key={entry.id}><input type="checkbox" checked={offer.menuItemIds.includes(entry.id)} onChange={event=>setOffer({...offer,menuItemIds:event.target.checked?[...offer.menuItemIds,entry.id]:offer.menuItemIds.filter(id=>id!==entry.id)})}/><span>{entry.name}</span><small>{money(entry.price||entry.base_price)}</small></label>)}</fieldset>
+      {isCombo?<div className="combo-price-editor wide"><label><span>Combo price (BDT)</span><input required min="1" type="number" value={offer.comboPrice} onChange={event=>setOffer({...offer,comboPrice:event.target.value})}/></label><div><span>Regular total</span><b>{money(regularPrice)}</b><span>Customer saves</span><b>{money(Math.max(0,regularPrice-Number(offer.comboPrice||0)))}</b></div></div>:<div className="offer-tier-editor wide"><span>Quantity discount tiers</span>{offer.tiers.map((tier,index)=><div key={index}><label>Minimum quantity<input required min="2" max="99" type="number" value={tier.quantity} onChange={event=>updateTier(index,{quantity:event.target.value})}/></label><label>Discount percent<input required min="1" max="100" type="number" value={tier.percent} onChange={event=>updateTier(index,{percent:event.target.value})}/></label><button className="offer-tier-delete" type="button" disabled={offer.tiers.length===1} onClick={()=>removeTier(index)}><Trash2 size={15}/>Delete</button></div>)}<button type="button" className="trial-add" onClick={()=>setOffer({...offer,tiers:[...offer.tiers,{quantity:'',percent:''}]})}><Plus size={14}/> Add tier</button></div>}
+      <div className="offer-preview wide"><Percent size={19}/><span><b>Customer preview</b><small>{isCombo?`${selected.map(item=>item.name).join(' + ')||'Choose at least two items'} · ${money(offer.comboPrice)}`:offer.tiers.filter(tier=>tier.quantity&&tier.percent).map(tier=>`Order ×${tier.quantity} for ${tier.percent}% off`).join(' · ')}</small></span></div>
+    </div><footer><button type="button" onClick={onClose}>Cancel</button><Button className="primary" disabled={busy||(isCombo?offer.menuItemIds.length<2:!offer.menuItemIds.length)}>{busy?'Saving…':offer.id?'Save offer changes':'Create & publish offer'}</Button></footer></form>
+  </section></div>
+}

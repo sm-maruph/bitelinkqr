@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowRight, Atom, Bot, ChevronRight, Clock3, Cpu, Orbit, Radio, ScanLine, Sparkles, Star, Zap } from 'lucide-react'
+import { ArrowRight, Atom, Bot, ChevronRight, Clock3, Cpu, Orbit, Radio, ShoppingBag, Sparkles, Star, Zap } from 'lucide-react'
 import CategoryTabs from './CategoryTabs'
 import FoodCard from './FoodCard'
 import OfferSection from './OfferSection'
@@ -30,14 +30,14 @@ const legacyConfigs = {
   'future-oasis': ['Digital Oasis', '#46f7d5', '#f5cb5c', 20, 'Recharge your senses'],
 }
 
-export default function FuturisticLanding({ template, restaurantName, outlet, content, onMenu, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
+export default function FuturisticLanding({ template, restaurantName, logoUrl, outlet, content, onMenu, onCart, cartCount, menuItems, currentPage, pageCount, onPageChange, onSelect, onAdd, categories, category, onCategoryChange }) {
   const selected=futuristicTemplateMap[template]
   const {name,primary,secondary,layout,headline}=selected||{name:legacyConfigs[template]?.[0],primary:legacyConfigs[template]?.[1],secondary:legacyConfigs[template]?.[2],layout:legacyConfigs[template]?.[3],headline:legacyConfigs[template]?.[4]}
   const hero = menuItems[(layout * 2) % Math.max(menuItems.length, 1)] || menuItems[0]
   const [loadedHero,setLoadedHero]=useState('')
   const heroLoaded=loadedHero===hero?.image
   return <div className={`future-site future-layout-${layout} ${template}`} style={{ '--future-primary': primary, '--future-secondary': secondary }}><OfferSection onMenu={onMenu} variant="future" content={content} />
-    <nav className="future-nav"><a href="#future-home"><Atom size={18} /><b>{name}</b></a><div><a href="#future-home">Home</a><a href="#future-menu">Menu</a><a href="#future-system">Experience</a></div><button onClick={onMenu}><ScanLine size={14} /> Order</button></nav>
+    <nav className="future-nav"><a href="#future-home"><img src={logoUrl||'/favicon.svg'} onError={event=>{event.currentTarget.src='/favicon.svg'}} alt=""/><b>{restaurantName}</b></a><div><a href="#future-home">Home</a><a href="#offers">Offers</a><a href="#future-menu">Menu</a><a href="#future-system">Experience</a></div><span className="future-nav-actions"><button onClick={onMenu}>Order now</button><button className="future-cart-icon" onClick={onCart} aria-label={`Open cart with ${cartCount} items`}><ShoppingBag size={16}/>{cartCount>0&&<b>{cartCount}</b>}</button></span></nav>
     <section className="future-hero" id="future-home"><div className="future-grid-lines" /><div className="future-copy"><span><Radio size={12} /> System online · {outlet}</span><h1>{headline}</h1><p>{restaurantName} reimagines dining with bold ingredients, kinetic presentation, and dishes engineered for delight.</p><div><button onClick={onMenu}>Launch menu <ArrowRight size={15} /></button><a href="#future-system">Explore experience</a></div><aside><b>4.9</b><span><Star size={11} fill="currentColor" /> Guest signal</span><b>20m</b><span><Clock3 size={11} /> Kitchen cycle</span></aside></div><div className={`future-visual ${heroLoaded?'image-ready':'image-loading'}`}><div className="future-orbit"><i /><i /><i /></div><div className="future-image-skeleton" aria-hidden="true"><i/><i/><i/></div><img src={hero?.image} alt={hero?.name || 'Futuristic signature dish'} onLoad={()=>setLoadedHero(hero?.image)} /><span><Cpu size={14} /> Signature {String(layout).padStart(2,'0')}</span></div></section>
     <section className="future-marquee"><span>{name}</span><i />NEXT-GEN DINING<i />LIVE KITCHEN<i />{outlet}<i />FLAVOUR PROTOCOL</section>
     <section className="future-menu" id="future-menu"><header><div><span>Curated selection</span><h2>Choose your next experience</h2></div><p>Freshly prepared dishes transmitted directly from our kitchen to your table.</p></header><CategoryTabs categories={categories} activeCategory={category} onChange={onCategoryChange} /><div className="future-food-grid">{menuItems.map((item, index) => <div className={`future-card-wrap card-${index + 1}`} key={item.id || item.name}><FoodCard item={item} onSelect={onSelect} onAdd={onAdd} /></div>)}</div><MenuPagination currentPage={currentPage} pageCount={pageCount} onPageChange={onPageChange} /></section>
