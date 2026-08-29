@@ -1119,3 +1119,17 @@ footer { display: flex; justify-content: space-between; padding: 23px 9%; border
   .saas-nav .saas-login,.saas-nav>div:last-of-type .saas-button{padding-inline:10px}
   .saas-nav>div:last-of-type .saas-button svg{display:none}
 }
+
+/* Preserve every sidebar action when the navigation is collapsed. */
+.sidebar.collapsed .collapse-button{position:absolute;z-index:3;top:3px;right:-12px;display:grid;width:25px;height:25px;padding:0;border:1px solid #d8e0d7;border-radius:50%;background:#fbfcf8;box-shadow:0 3px 9px rgba(35,56,46,.12);transform:rotate(180deg)}
+.sidebar.collapsed .side-top{position:relative}
+.sidebar.collapsed .side-bottom{display:block;padding-top:10px}
+.sidebar.collapsed .side-bottom>button{justify-content:center;padding:11px 0}
+.sidebar.collapsed .side-bottom>button span{display:none}
+.sidebar.collapsed .side-bottom>button:hover,.sidebar.collapsed .side-bottom>button.active{color:#23382e;background:#e9f0e5;box-shadow:inset 3px 0 #e97656}
+.sidebar.collapsed .user-chip{justify-content:center;margin-top:9px;padding:12px 0 2px}
+.sidebar.collapsed .user-chip .user-details,.sidebar.collapsed .user-chip>svg{display:none}
+.sidebar.collapsed .portal-nav{overflow-y:auto;scrollbar-width:none}
+.sidebar.collapsed .portal-nav::-webkit-scrollbar{display:none}
+body.has-context-bar .sidebar{top:58px;height:calc(100vh - 58px)}
+@media(max-height:720px){.sidebar.collapsed .nav-group{margin-bottom:8px}.sidebar.collapsed .nav-group button,.sidebar.collapsed .side-bottom>button{padding-block:8px}.sidebar.collapsed .user-chip{display:none}}

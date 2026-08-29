@@ -1,5 +1,5 @@
 /* Keep dashboard content inside the available portal viewport. */
-.portal-shell{width:100%;min-width:0;overflow-x:hidden}
+.portal-shell{width:100%;min-width:0;overflow-x:clip}
 .portal-main{flex:1 1 auto;width:auto;min-width:0;max-width:none;box-sizing:border-box;overflow-x:hidden}
 
 /* Accessible loading announcements must not become visible page content. */

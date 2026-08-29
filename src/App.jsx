@@ -4,6 +4,7 @@ import { ContextBar, AdminSidebar } from './components/PortalChrome'
 import { AnalyticsPage, MenuPage, OrdersPage, Overview, PaymentsPage, TablesPage, TeamPage } from './components/AdminPages'
 import TeamManagementPage from './components/TeamManagementPage'
 import OrganizationSettingsPage from './components/OrganizationSettingsPage'
+import HelpCenterPage from './components/HelpCenterPage'
 import QrCodesPage from './components/QrCodesPage'
 import MenuManagementPage from './components/MenuManagementPage'
 import SuperAdminPortal from './components/SuperAdminPortal'
@@ -19,6 +20,7 @@ import './staff-management.css'
 import './management.css'
 import './management-approval.css'
 import './qr-codes.css'
+import './help-center.css'
 import './qr-table-modal.css'
 import './customer-live-loader.css'
 import './template-surface-contrast.css'
@@ -26,6 +28,7 @@ import './outlet-operations.css'
 import './layout-overflow-fix.css'
 import './menu-loader.css'
 import './role-permissions.css'
+import './role-template-workflow.css'
 import './dark-landing-fix.css'
 import './dark-template-gallery.css'
 import './live-template-thumbnails.css'
@@ -33,7 +36,7 @@ import './template-redesign.css'
 import { useAuth } from './contexts/AuthContext'
 import { workspaceService } from './services/workspaceService'
 
-const pages = { Overview, 'Live orders': OrdersPage, Tables: TablesPage, 'Menu & offers': MenuManagementPage, Payments: PaymentsPage, Analytics: AnalyticsPage, Team: TeamManagementPage, 'QR codes': QrCodesPage, Settings: OrganizationSettingsPage }
+const pages = { Overview, 'Live orders': OrdersPage, Tables: TablesPage, 'Menu & offers': MenuManagementPage, Payments: PaymentsPage, Analytics: AnalyticsPage, Team: TeamManagementPage, 'QR codes': QrCodesPage, Settings: OrganizationSettingsPage, Help: HelpCenterPage }
 
 function DemoToast() {
   const [message, setMessage] = useState('')
@@ -71,7 +74,7 @@ export default function App() {
   const rolePath={owner:'admin',manager:'manager',outlet:'outlet-manager',order:'order-staff',kitchen:'kitchen'}
   const setRole = (roleId) => { if(roleId==='super'&&!session?.user?.isPlatformAdmin)return;setActivePage('Overview'); setContext((current) => ({ ...current, roleId })) }
   const handleLogout = async () => { await logout(); navigate('/login', { replace: true }) }
-  const Page = role === 'kitchen' ? KitchenDashboard : role === 'order' ? OrderStaffDashboard : role === 'outlet' && activePage === 'Overview' ? OutletDashboard : pages[activePage] || Overview
+  const Page = activePage === 'Help' ? HelpCenterPage : role === 'kitchen' ? KitchenDashboard : role === 'order' ? OrderStaffDashboard : role === 'outlet' && activePage === 'Overview' ? OutletDashboard : pages[activePage] || Overview
   useEffect(() => {
     document.body.classList.toggle('has-context-bar', showContextBar)
     return () => document.body.classList.remove('has-context-bar')
