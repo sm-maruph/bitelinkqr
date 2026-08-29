@@ -21,6 +21,11 @@ import './management-approval.css'
 import './qr-codes.css'
 import './qr-table-modal.css'
 import './customer-live-loader.css'
+import './template-surface-contrast.css'
+import './outlet-operations.css'
+import './layout-overflow-fix.css'
+import './menu-loader.css'
+import './role-permissions.css'
 import './dark-landing-fix.css'
 import './dark-template-gallery.css'
 import './live-template-thumbnails.css'
@@ -57,7 +62,7 @@ export default function App() {
   const showContextBar = !embedded && isDemoPreview
   const requiresAccountContext = (path.startsWith('/admin') || Boolean(segmentRole)) && !previewMode
   const isCustomerTablePath=pathParts[2]==='table'&&Boolean(pathParts[0]&&pathParts[1]&&pathParts[3])
-  const [context, setContext] = useState({ roleId: initialRole, restaurantId: requiresAccountContext?'':isCustomerTablePath?pathParts[0]:'terrace', restaurantUuid:'', restaurantName: requiresAccountContext?'':'', outlet: requiresAccountContext?'':isCustomerTablePath?pathParts[1]:'Dhanmondi', outletId:'', tableNumber:isCustomerTablePath?decodeURIComponent(pathParts[3]):'12', tenantId:'', restaurants:[], demoPreview: isDemoPreview })
+  const [context, setContext] = useState({ roleId: initialRole, restaurantId: requiresAccountContext?'':isCustomerTablePath?pathParts[0]:'terrace', restaurantUuid:'', restaurantName: requiresAccountContext?'':'', outlet: requiresAccountContext?'':isCustomerTablePath?pathParts[1]:'Dhanmondi', outletId:'', tableNumber:isCustomerTablePath?decodeURIComponent(pathParts[3]):'12', tenantId:'', restaurants:[], permissions:[], demoPreview: isDemoPreview })
   const [contextLoading,setContextLoading]=useState(requiresAccountContext)
   const [contextError,setContextError]=useState('')
   const [activePage, setActivePage] = useState('Overview')
@@ -66,7 +71,7 @@ export default function App() {
   const rolePath={owner:'admin',manager:'manager',outlet:'outlet-manager',order:'order-staff',kitchen:'kitchen'}
   const setRole = (roleId) => { if(roleId==='super'&&!session?.user?.isPlatformAdmin)return;setActivePage('Overview'); setContext((current) => ({ ...current, roleId })) }
   const handleLogout = async () => { await logout(); navigate('/login', { replace: true }) }
-  const Page = role === 'kitchen' ? KitchenDashboard : role === 'order' ? OrderStaffDashboard : role === 'outlet' ? OutletDashboard : pages[activePage] || Overview
+  const Page = role === 'kitchen' ? KitchenDashboard : role === 'order' ? OrderStaffDashboard : role === 'outlet' && activePage === 'Overview' ? OutletDashboard : pages[activePage] || Overview
   useEffect(() => {
     document.body.classList.toggle('has-context-bar', showContextBar)
     return () => document.body.classList.remove('has-context-bar')
@@ -81,14 +86,16 @@ export default function App() {
       const restaurant=data.restaurants?.[0],outlet=restaurant?.outlets?.[0]
       if(!restaurant||!outlet)throw new Error('No restaurant workspace was found')
       const roleCode=data.roles?.[0]?.code
-      const roleId=roleCode==='restaurant_manager'?'manager':roleCode==='outlet_manager'?'outlet':roleCode==='order_staff'?'order':roleCode==='kitchen_staff'?'kitchen':'owner'
-      setContext(current=>({...current,tenantId,restaurants:data.restaurants,userDisplayName:session.user?.displayName||session.user?.email||'Account owner',restaurantId:restaurant.slug,restaurantUuid:restaurant.id,restaurantName:restaurant.name,outlet:outlet.name,outletId:outlet.id,roleId}))
+      const roleScope=data.roles?.[0]?.scope
+      const roleId=roleCode==='restaurant_manager'?'manager':roleCode==='outlet_manager'?'outlet':roleCode==='order_staff'?'order':roleCode==='kitchen_staff'?'kitchen':roleCode==='owner'?'owner':roleScope==='outlet'?'outlet':roleScope==='restaurant'?'manager':'owner'
+      setContext(current=>({...current,tenantId,restaurants:data.restaurants,permissions:data.permissions||[],userDisplayName:session.user?.displayName||session.user?.email||'Account owner',restaurantId:restaurant.slug,restaurantUuid:restaurant.id,restaurantName:restaurant.name,outlet:outlet.name,outletId:outlet.id,roleId}))
       setContextError('');setContextLoading(false)
     }).catch(()=>{if(active){setContextError('Could not load your registered restaurant. Please sign in again.');setContextLoading(false)}})
     return()=>{active=false}
   },[session,requiresAccountContext])
   useEffect(()=>{if(requiresAccountContext&&!contextLoading&&!contextError&&context.restaurantId&&rolePath[context.roleId])navigate(`/${context.restaurantId}/${rolePath[context.roleId]}`,{replace:true})},[requiresAccountContext,contextLoading,contextError,context.restaurantId,context.roleId,navigate])
   useEffect(() => {
+    if (!isDemoPreview) return undefined
     const handleButtonClick = (event) => {
       const button = event.target.closest('button')
       if (!button || button.disabled || button.dataset.noToast === 'true') return
@@ -97,8 +104,8 @@ export default function App() {
     }
     document.addEventListener('click', handleButtonClick)
     return () => document.removeEventListener('click', handleButtonClick)
-  }, [])
+  }, [isDemoPreview])
   if(contextLoading)return <WorkspaceBootSkeleton/>
   if(contextError)return <main className="auth-page"><div className="auth-error" role="alert">{contextError}</div></main>
-  return <>{showContextBar&&<ContextBar context={context} setContext={setContext} onRoleChange={(event) => setRole(event.target.value)} />}{role === 'customer' ? <CustomerPortalPage setRole={setRole} context={context} embedded={embedded} /> : role === 'super' ? <SuperAdminPortal setRole={setRole} /> : <div className={`portal-shell ${embedded?'embedded-admin':''}`}><AdminSidebar activePage={activePage} setActivePage={setActivePage} collapsed={collapsed} setCollapsed={setCollapsed} context={context} setContext={setContext} onLogout={handleLogout} /><main className="portal-main"><Page setActivePage={setActivePage} context={context} />{!embedded&&<button className="super-entry" onClick={() => setRole('super')}>Platform control center</button>}</main></div>}{!embedded&&<DemoToast />}</>
+  return <>{showContextBar&&<ContextBar context={context} setContext={setContext} onRoleChange={(event) => setRole(event.target.value)} />}{role === 'customer' ? <CustomerPortalPage setRole={setRole} context={context} embedded={embedded} /> : role === 'super' ? <SuperAdminPortal setRole={setRole} /> : <div className={`portal-shell ${embedded?'embedded-admin':''}`}><AdminSidebar activePage={activePage} setActivePage={setActivePage} collapsed={collapsed} setCollapsed={setCollapsed} context={context} setContext={setContext} onLogout={handleLogout} /><main className="portal-main"><Page setActivePage={setActivePage} context={context} />{!embedded&&session?.user?.isPlatformAdmin&&<button className="super-entry" onClick={() => setRole('super')}>Platform control center</button>}</main></div>}{!embedded&&<DemoToast />}</>
 }

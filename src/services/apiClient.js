@@ -24,7 +24,7 @@ async function fetchWithTransientRetry(url,init){
 
 export async function apiRequest(path, options = {}) {
   const headers = { ...options.headers }
-  if (options.body != null && !Object.keys(headers).some((key) => key.toLowerCase() === 'content-type')) {
+  if (options.body != null && !(options.body instanceof FormData) && !Object.keys(headers).some((key) => key.toLowerCase() === 'content-type')) {
     headers['content-type'] = 'application/json'
   }
   const requestOptions = {

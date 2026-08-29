@@ -1,34 +1,441 @@
-import { useEffect,useState } from 'react'
-import { ArrowRight,BarChart3,Check,ChefHat,ChevronDown,Eye,Monitor,QrCode,ShieldCheck,Store,Utensils,X } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { futuristicTemplateCatalog as templates } from '../data/templateCatalog'
+import { useEffect, useState } from "react";
+import {
+  ArrowRight,
+  BarChart3,
+  Check,
+  ChefHat,
+  ChevronDown,
+  Eye,
+  Monitor,
+  QrCode,
+  ShieldCheck,
+  Store,
+  Utensils,
+  X,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import { futuristicTemplateCatalog as templates } from "../data/templateCatalog";
+import SiteFooter from "../components/SiteFooter";
 
-const plans=[['Starter','BDT 1,490','1 outlet'],['Business','BDT 3,490','Up to 5 outlets'],['Enterprise','Custom','Unlimited outlets']]
-const categories=['All','Dark','Light','Warm','Cool','Nature']
-const categoryFor=key=>['future-paper','future-chrome','future-crystal','future-zen'].includes(key)?'Light':['future-solar','future-synth','future-plasma','future-cyber'].includes(key)?'Warm':['future-void','future-lunar','future-cosmos'].includes(key)?'Dark':['future-bio','future-oasis','future-aurora'].includes(key)?'Nature':'Cool'
+const plans = [
+  ["Starter", "BDT 1,490", "1 outlet"],
+  ["Business", "BDT 3,490", "Up to 5 outlets"],
+  ["Enterprise", "Custom", "Unlimited outlets"],
+];
+const categories = ["All", "Dark", "Light", "Warm", "Cool", "Nature"];
+const categoryFor = (key) =>
+  ["future-paper", "future-chrome", "future-crystal", "future-zen"].includes(
+    key,
+  )
+    ? "Light"
+    : [
+          "future-solar",
+          "future-synth",
+          "future-plasma",
+          "future-cyber",
+        ].includes(key)
+      ? "Warm"
+      : ["future-void", "future-lunar", "future-cosmos"].includes(key)
+        ? "Dark"
+        : ["future-bio", "future-oasis", "future-aurora"].includes(key)
+          ? "Nature"
+          : "Cool";
 
-function CustomerPreview({template}){return <iframe className="actual-template-frame" title={`${template.name} full customer website`} src={`/?previewMode=customer&previewTemplate=${encodeURIComponent(template.key)}&embed=1`}/>}
-function AdminPreview(){return <iframe className="actual-admin-frame" title="Actual restaurant owner portal" src="/?previewMode=admin&embed=1"/>}
-
-function PreviewModal({value,onClose}){
-  const [showScrollCue,setShowScrollCue]=useState(value!=='admin')
-  useEffect(()=>{const close=event=>event.key==='Escape'&&onClose();document.addEventListener('keydown',close);document.body.classList.add('modal-open');return()=>{document.removeEventListener('keydown',close);document.body.classList.remove('modal-open')}},[onClose])
-  useEffect(()=>{const timer=window.setTimeout(()=>setShowScrollCue(false),4800);return()=>window.clearTimeout(timer)},[value])
-  const admin=value==='admin',dark=!admin&&categoryFor(value.key)!=='Light'
-  return <div className="landing-modal-backdrop" onMouseDown={event=>event.target===event.currentTarget&&onClose()}><section className={`landing-preview-modal ${dark?'preview-modal-dark':'preview-modal-light'}`} role="dialog" aria-modal="true"><header><div><span className="saas-kicker">Live product preview</span><h2>{admin?'Owner and manager portal':value.name}</h2></div><button onClick={onClose} aria-label="Close preview"><X size={20}/></button></header><div className="preview-browser"><div><i/><i/><i/><span>preview.bitelink.app</span></div>{admin?<AdminPreview/>:<CustomerPreview template={value}/>} {showScrollCue&&<div className="template-scroll-cue" role="status"><span>Scroll to discover</span><small>the full template</small><ChevronDown size={16}/></div>}</div><footer><p>{admin?'One responsive workspace for outlets, staff, orders, tables, payments, and analytics.':`${value.headline} · Layout ${String(value.layout).padStart(2,'0')} uses the live menu and table QR context.`}</p><Link className="saas-button" to="/register">Start 7-day trial <ArrowRight size={15}/></Link></footer></section></div>
+function CustomerPreview({ template }) {
+  return (
+    <iframe
+      className="actual-template-frame"
+      title={`${template.name} full customer website`}
+      src={`/?previewMode=customer&previewTemplate=${encodeURIComponent(template.key)}&embed=1`}
+    />
+  );
+}
+function AdminPreview() {
+  return (
+    <iframe
+      className="actual-admin-frame"
+      title="Actual restaurant owner portal"
+      src="/?previewMode=admin&embed=1"
+    />
+  );
 }
 
-function TemplateCard({template,number,onPreview}){const [loaded,setLoaded]=useState(false),src=`/?previewMode=customer&previewTemplate=${encodeURIComponent(template.key)}&embed=1&thumbnail=1`;return <button className="template-preview-card actual-thumbnail-card" style={{'--preview-primary':template.primary,'--preview-secondary':template.secondary}} onClick={()=>onPreview(template)}><span className="template-index">{String(number).padStart(2,'0')}</span><div className={`template-phone-thumbnail ${loaded?'preview-ready':'preview-loading'}`} aria-hidden="true"><div className="thumbnail-island"/><div className="thumbnail-structure-loader"><i/><strong/><span/><span/><b/><em/></div><iframe title="" src={src} loading="lazy" tabIndex="-1" onLoad={()=>setLoaded(true)}/></div><footer><span><b>{template.name}</b><small>{categoryFor(template.key)} · {template.key}</small></span><em><Eye size={14}/> Full preview</em></footer></button>}
-
-function TemplateGallery({onPreview}){
-  const [category,setCategory]=useState('All'),[page,setPage]=useState(1)
-  const pageSize=6,filtered=category==='All'?templates:templates.filter(template=>categoryFor(template.key)===category),pages=Math.max(1,Math.ceil(filtered.length/pageSize)),visible=filtered.slice((page-1)*pageSize,page*pageSize)
-  const chooseCategory=next=>{setCategory(next);setPage(1)}
-  const choosePage=next=>{setPage(next);document.getElementById('templates')?.scrollIntoView({behavior:'smooth',block:'start'})}
-  return <><div className="template-categories" role="tablist" aria-label="Template categories">{categories.map(item=><button className={category===item?'active':''} onClick={()=>chooseCategory(item)} role="tab" aria-selected={category===item} key={item}>{item}<b>{item==='All'?templates.length:templates.filter(template=>categoryFor(template.key)===item).length}</b></button>)}</div><div className="template-gallery">{visible.map(template=><TemplateCard template={template} number={templates.indexOf(template)+1} onPreview={onPreview} key={template.key}/>)}</div><nav className="template-pagination" aria-label="Template pages"><button onClick={()=>choosePage(page-1)} disabled={page===1}>Previous</button>{Array.from({length:pages},(_,index)=>index+1).map(number=><button className={page===number?'active':''} onClick={()=>choosePage(number)} aria-current={page===number?'page':undefined} key={number}>{number}</button>)}<button onClick={()=>choosePage(page+1)} disabled={page===pages}>Next</button><span>Showing {(page-1)*pageSize+1}–{Math.min(page*pageSize,filtered.length)} of {filtered.length}</span></nav></>
+function PreviewModal({ value, onClose }) {
+  const [showScrollCue, setShowScrollCue] = useState(value !== "admin");
+  useEffect(() => {
+    const close = (event) => event.key === "Escape" && onClose();
+    document.addEventListener("keydown", close);
+    document.body.classList.add("modal-open");
+    return () => {
+      document.removeEventListener("keydown", close);
+      document.body.classList.remove("modal-open");
+    };
+  }, [onClose]);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowScrollCue(false), 4800);
+    return () => window.clearTimeout(timer);
+  }, [value]);
+  const admin = value === "admin",
+    dark = !admin && categoryFor(value.key) !== "Light";
+  return (
+    <div
+      className="landing-modal-backdrop"
+      onMouseDown={(event) => event.target === event.currentTarget && onClose()}
+    >
+      <section
+        className={`landing-preview-modal ${dark ? "preview-modal-dark" : "preview-modal-light"}`}
+        role="dialog"
+        aria-modal="true"
+      >
+        <header>
+          <div>
+            <span className="saas-kicker">Live product preview</span>
+            <h2>{admin ? "Owner and manager portal" : value.name}</h2>
+          </div>
+          <button onClick={onClose} aria-label="Close preview">
+            <X size={20} />
+          </button>
+        </header>
+        <div className="preview-browser">
+          <div>
+            <i />
+            <i />
+            <i />
+            <span>preview.bitelink.app</span>
+          </div>
+          {admin ? <AdminPreview /> : <CustomerPreview template={value} />}{" "}
+          {showScrollCue && (
+            <div className="template-scroll-cue" role="status">
+              <span>Scroll to discover</span>
+              <small>the full template</small>
+              <ChevronDown size={16} />
+            </div>
+          )}
+        </div>
+        <footer>
+          <p>
+            {admin
+              ? "One responsive workspace for outlets, staff, orders, tables, payments, and analytics."
+              : `${value.headline} · Layout ${String(value.layout).padStart(2, "0")} uses the live menu and table QR context.`}
+          </p>
+          <Link className="saas-button" to="/register">
+            Start 7-day trial <ArrowRight size={15} />
+          </Link>
+        </footer>
+      </section>
+    </div>
+  );
 }
 
-export default function MarketingHome(){
-  const [preview,setPreview]=useState(null)
-  return <div className="saas-site"><nav className="saas-nav"><Link className="saas-brand" to="/"><Utensils size={19}/> Bite<span>Link</span></Link><div><a href="#templates">Templates</a><a href="#admin-preview">Admin portal</a><a href="#features">Features</a><a href="#pricing">Plans</a></div><div><Link className="saas-login" to="/login">Log in</Link><Link className="saas-button" to="/register">Try free <ArrowRight size={15}/></Link></div></nav><main><section className="saas-hero"><div><span className="saas-kicker">One platform. Twenty identities.</span><h1>Beautiful outside.<br/>Powerful inside.</h1><p>Choose from 20 customer experiences and manage every outlet from one operations portal.</p><div className="saas-actions"><Link className="saas-button" to="/register">Start 7-day free trial <ArrowRight size={16}/></Link><button className="saas-secondary" onClick={()=>setPreview('admin')}><Monitor size={16}/> Preview admin</button></div><small><ShieldCheck size={15}/> No card required. Customer app not required.</small></div><button className="saas-hero-card hero-preview-button" onClick={()=>setPreview(templates[0])}><span>NEON NOVA / LIVE PREVIEW</span><QrCode size={86}/><h3>Taste beyond tomorrow.</h3><div><b>Template 01</b><em><Eye size={14}/> Open preview</em></div></button></section><section className="saas-proof"><span>20 live templates</span><span>Multi-outlet admin</span><span>Custom staff roles</span><span>Mobile-first</span></section><section id="templates" className="saas-section template-showcase"><div className="template-heading"><div><span className="saas-kicker">The complete collection</span><h2>Find your restaurant’s style.</h2></div><p>Filter the real templates by visual character, then open any design in the mobile preview.</p></div><TemplateGallery onPreview={setPreview}/></section><section id="admin-preview" className="admin-preview-section"><div><span className="saas-kicker">The operations side</span><h2>One portal for every location.</h2><p>Owners see the whole restaurant. Managers and staff receive focused views based on assigned permissions.</p><button className="saas-button" onClick={()=>setPreview('admin')}><Monitor size={16}/> View admin portal</button></div><button className="admin-preview-window" onClick={()=>setPreview('admin')}><AdminPreview/><span><Eye size={15}/> Open full preview</span></button></section><section id="features" className="saas-section"><span className="saas-kicker">One connected system</span><h2>Everything your service needs.</h2><div className="saas-features">{[[QrCode,'Customer ordering'],[ChefHat,'Kitchen workflow'],[Store,'Multi-outlet control'],[BarChart3,'Manager analytics']].map(([Icon,title])=><article key={title}><Icon/><h3>{title}</h3><p>Connected to the same secure restaurant, outlet, table, and role data.</p></article>)}</div></section><section id="pricing" className="saas-section"><span className="saas-kicker">Seven days free</span><h2>Choose your plan as you grow.</h2><div className="saas-pricing">{plans.map(([name,price,scope],index)=><article className={index===1?'featured':''} key={name}><h3>{name}</h3><strong>{price}</strong><span>{scope}</span><ul>{['All 20 templates','QR ordering','Secure admin portal'].map(item=><li key={item}><Check size={15}/>{item}</li>)}</ul><Link className={index===1?'saas-button':'saas-secondary'} to="/register">Try {name} free</Link></article>)}</div></section><section className="saas-cta"><h2>Choose your look. Run your restaurant.</h2><Link className="saas-button" to="/register">Start free <ArrowRight size={16}/></Link></section></main><footer className="saas-footer"><span>BiteLink</span><p>Restaurant service without the friction.</p><Link to="/login">Portal login</Link></footer>{preview&&<PreviewModal value={preview} onClose={()=>setPreview(null)}/>}</div>
+function TemplateCard({ template, number, onPreview }) {
+  const [loaded, setLoaded] = useState(false),
+    src = `/?previewMode=customer&previewTemplate=${encodeURIComponent(template.key)}&embed=1&thumbnail=1`;
+  return (
+    <button
+      className="template-preview-card actual-thumbnail-card"
+      style={{
+        "--preview-primary": template.primary,
+        "--preview-secondary": template.secondary,
+      }}
+      onClick={() => onPreview(template)}
+    >
+      <span className="template-index">{String(number).padStart(2, "0")}</span>
+      <div
+        className={`template-phone-thumbnail ${loaded ? "preview-ready" : "preview-loading"}`}
+        aria-hidden="true"
+      >
+        <div className="thumbnail-island" />
+        <div className="thumbnail-structure-loader">
+          <i />
+          <strong />
+          <span />
+          <span />
+          <b />
+          <em />
+        </div>
+        <iframe
+          title=""
+          src={src}
+          loading="lazy"
+          tabIndex="-1"
+          onLoad={() => setLoaded(true)}
+        />
+      </div>
+      <footer>
+        <span>
+          <b>{template.name}</b>
+          <small>
+            {categoryFor(template.key)} · {template.key}
+          </small>
+        </span>
+        <em>
+          <Eye size={14} /> Full preview
+        </em>
+      </footer>
+    </button>
+  );
+}
+
+function TemplateGallery({ onPreview }) {
+  const [category, setCategory] = useState("All"),
+    [page, setPage] = useState(1);
+  const pageSize = 6,
+    filtered =
+      category === "All"
+        ? templates
+        : templates.filter(
+            (template) => categoryFor(template.key) === category,
+          ),
+    pages = Math.max(1, Math.ceil(filtered.length / pageSize)),
+    visible = filtered.slice((page - 1) * pageSize, page * pageSize);
+  const chooseCategory = (next) => {
+    setCategory(next);
+    setPage(1);
+  };
+  const choosePage = (next) => {
+    setPage(next);
+    document
+      .getElementById("templates")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  return (
+    <>
+      <div
+        className="template-categories"
+        role="tablist"
+        aria-label="Template categories"
+      >
+        {categories.map((item) => (
+          <button
+            className={category === item ? "active" : ""}
+            onClick={() => chooseCategory(item)}
+            role="tab"
+            aria-selected={category === item}
+            key={item}
+          >
+            {item}
+            <b>
+              {item === "All"
+                ? templates.length
+                : templates.filter(
+                    (template) => categoryFor(template.key) === item,
+                  ).length}
+            </b>
+          </button>
+        ))}
+      </div>
+      <div className="template-gallery">
+        {visible.map((template) => (
+          <TemplateCard
+            template={template}
+            number={templates.indexOf(template) + 1}
+            onPreview={onPreview}
+            key={template.key}
+          />
+        ))}
+      </div>
+      <nav className="template-pagination" aria-label="Template pages">
+        <button onClick={() => choosePage(page - 1)} disabled={page === 1}>
+          Previous
+        </button>
+        {Array.from({ length: pages }, (_, index) => index + 1).map(
+          (number) => (
+            <button
+              className={page === number ? "active" : ""}
+              onClick={() => choosePage(number)}
+              aria-current={page === number ? "page" : undefined}
+              key={number}
+            >
+              {number}
+            </button>
+          ),
+        )}
+        <button onClick={() => choosePage(page + 1)} disabled={page === pages}>
+          Next
+        </button>
+        <span>
+          Showing {(page - 1) * pageSize + 1}–
+          {Math.min(page * pageSize, filtered.length)} of {filtered.length}
+        </span>
+      </nav>
+    </>
+  );
+}
+
+export default function MarketingHome() {
+  const [preview, setPreview] = useState(null);
+  return (
+    <div className="saas-site">
+      <nav className="saas-nav">
+        <Link className="saas-brand" to="/">
+          <Utensils size={19} /> Bite<span>Link</span>
+        </Link>
+        <div>
+          <a href="#templates">Templates</a>
+          <a href="#admin-preview">Admin portal</a>
+          <a href="#features">Features</a>
+          <a href="#pricing">Plans</a>
+        </div>
+        <div>
+          <Link className="saas-login" to="/login">
+            Log in
+          </Link>
+          <Link className="saas-button" to="/register">
+            Try free <ArrowRight size={15} />
+          </Link>
+        </div>
+      </nav>
+      <main>
+        <section className="saas-hero">
+          <div>
+            <span className="saas-kicker">
+              One platform. Twenty identities.
+            </span>
+            <h1>
+              Beautiful outside.
+              <br />
+              Powerful inside.
+            </h1>
+            <p>
+              Choose from 20 customer experiences and manage every outlet from
+              one operations portal.
+            </p>
+            <div className="saas-actions">
+              <Link className="saas-button" to="/register">
+                Start 7-day free trial <ArrowRight size={16} />
+              </Link>
+              <button
+                className="saas-secondary"
+                onClick={() => setPreview("admin")}
+              >
+                <Monitor size={16} /> Preview admin
+              </button>
+            </div>
+            <small>
+              <ShieldCheck size={15} /> No card required. Customer app not
+              required.
+            </small>
+          </div>
+          <button
+            className="saas-hero-card hero-preview-button"
+            onClick={() => setPreview(templates[0])}
+          >
+            <span>NEON NOVA / LIVE PREVIEW</span>
+            <QrCode size={86} />
+            <h3>Taste beyond tomorrow.</h3>
+            <div>
+              <b>Template 01</b>
+              <em>
+                <Eye size={14} /> Open preview
+              </em>
+            </div>
+          </button>
+        </section>
+        <section className="saas-proof">
+          <span>20 live templates</span>
+          <span>Multi-outlet admin</span>
+          <span>Custom staff roles</span>
+          <span>Mobile-first</span>
+        </section>
+        <section id="templates" className="saas-section template-showcase">
+          <div className="template-heading">
+            <div>
+              <span className="saas-kicker">The complete collection</span>
+              <h2>Find your restaurant’s style.</h2>
+            </div>
+            <p>
+              Filter the real templates by visual character, then open any
+              design in the mobile preview.
+            </p>
+          </div>
+          <TemplateGallery onPreview={setPreview} />
+        </section>
+        <section id="admin-preview" className="admin-preview-section">
+          <div>
+            <span className="saas-kicker">The operations side</span>
+            <h2>One portal for every location.</h2>
+            <p>
+              Owners see the whole restaurant. Managers and staff receive
+              focused views based on assigned permissions.
+            </p>
+            <button className="saas-button" onClick={() => setPreview("admin")}>
+              <Monitor size={16} /> View admin portal
+            </button>
+          </div>
+          <button
+            className="admin-preview-window"
+            onClick={() => setPreview("admin")}
+          >
+            <AdminPreview />
+            <span>
+              <Eye size={15} /> Open full preview
+            </span>
+          </button>
+        </section>
+        <section id="features" className="saas-section">
+          <span className="saas-kicker">One connected system</span>
+          <h2>Everything your service needs.</h2>
+          <div className="saas-features">
+            {[
+              [QrCode, "01 · Guest", "Order placed", "A guest scans, explores the menu, and sends an order.", "Confirmed in seconds", ["Table and outlet identified", "Items and notes captured", "Order total confirmed"]],
+              [ChefHat, "02 · Kitchen", "Ticket received", "The kitchen sees the order instantly and starts preparing.", "Live kitchen queue", ["Ticket routed by outlet", "Prep priority assigned", "Status changed to cooking"]],
+              [Store, "03 · Service", "Outlet synced", "Staff track the table and keep service moving in real time.", "Team notified", ["Ready alert sent to staff", "Table status stays visible", "Guest receives an update"]],
+              [BarChart3, "04 · Insight", "Performance visible", "Managers see sales and service data across every outlet.", "Analytics updated", ["Sale added to reporting", "Service time measured", "Outlet trends refreshed"]],
+            ].map(([Icon, stage, title, text, status, details], index) => (
+              <article style={{ "--flow-step": index }} key={title}>
+                <div className="feature-flow-icon"><Icon size={23}/><i/></div>
+                <span>{stage}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <ul>{details.map(detail => <li key={detail}><i/>{detail}</li>)}</ul>
+                <small className="feature-live-status"><i/>{status}</small>
+              </article>
+            ))}
+            <div className="feature-flow-line" aria-hidden="true"><i/></div>
+          </div>
+        </section>
+        <section id="pricing" className="saas-section">
+          <span className="saas-kicker">Seven days free</span>
+          <h2>Choose your plan as you grow.</h2>
+          <div className="saas-pricing">
+            {plans.map(([name, price, scope], index) => (
+              <article className={index === 1 ? "featured" : ""} key={name}>
+                <h3>{name}</h3>
+                <strong>{price}</strong>
+                <span>{scope}</span>
+                <ul>
+                  {[
+                    "All 20 templates",
+                    "QR ordering",
+                    "Secure admin portal",
+                  ].map((item) => (
+                    <li key={item}>
+                      <Check size={15} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  className={index === 1 ? "saas-button" : "saas-secondary"}
+                  to="/register"
+                >
+                  Try {name} free
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="saas-cta">
+          <h2>Choose your look. Run your restaurant.</h2>
+          <Link className="saas-button" to="/register">
+            Start free <ArrowRight size={16} />
+          </Link>
+        </section>
+      </main>
+      <SiteFooter />
+      {preview && (
+        <PreviewModal value={preview} onClose={() => setPreview(null)} />
+      )}
+    </div>
+  );
 }
