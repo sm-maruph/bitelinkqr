@@ -84,6 +84,9 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
   const [orderSubmitting, setOrderSubmitting] = useState(false);
   const [orderError, setOrderError] = useState('');
   const [orderHistory, setOrderHistory] = useState([]);
+  const [statusNotice, setStatusNotice] = useState(null);
+  const orderStatusesRef = useRef(new Map());
+  const historyReadyRef = useRef(false);
   const [historyOpen, setHistoryOpen] = useState(false);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [historyView, setHistoryView] = useState('grid');
@@ -97,6 +100,11 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
   const [publicLoading, setPublicLoading] = useState(isLiveCustomerRoute);
   const [publicError, setPublicError] = useState('');
   const canvasRef = useRef(null);
+  useEffect(() => {
+    if(!statusNotice)return undefined;
+    const timer=window.setTimeout(()=>setStatusNotice(null),6000);
+    return ()=>window.clearTimeout(timer);
+  },[statusNotice]);
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return undefined;
@@ -159,6 +167,8 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
         const result = await restaurantService.getOrders(context.restaurantId, outletSlug, tableNumber);
         if (active) {
           const normalized = result.items.map(item => ({ id:item.id, orderNumber:item.order_number, tableId:tableNumber, status:item.status==='completed'?'SERVED':String(item.status).toUpperCase(), subtotal:Number(item.subtotal), discount:Number(item.discount_total), total:Number(item.grand_total), placed:new Date(item.placed_at).toLocaleString(), itemDetails:item.items.map(line=>({id:line.id,name:line.name,price:Number(line.price),quantity:Number(line.quantity)})) }));
+          if(historyReadyRef.current){const changed=normalized.filter(item=>orderStatusesRef.current.has(item.id)&&orderStatusesRef.current.get(item.id)!==item.status);if(changed.length){const item=changed[0];setStatusNotice({id:item.id,orderNumber:item.orderNumber,status:item.status,message:{CONFIRMED:'Your order has been confirmed.',PREPARING:'The kitchen has started preparing your order.',READY:'Your order is ready to serve.',SERVING:'Your order is on the way to your table.',SERVED:'Your order has been served.',REJECTED:'The restaurant could not accept this order.',CANCELLED:'This order has been cancelled.'}[item.status]||`Order status changed to ${item.status.toLowerCase()}.`})}}else historyReadyRef.current=true;
+          orderStatusesRef.current=new Map(normalized.map(item=>[item.id,item.status]));
           setOrderHistory(normalized);
           setSelectedOrder(current => current ? normalized.find(item=>item.id===current.id) || current : current);
         }
@@ -248,6 +258,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
     (total, item) => total + item.quantity,
     0,
   );
+  const activeOrderCount=orderHistory.filter(item=>!['SERVED','COMPLETED','REJECTED','CANCELLED'].includes(item.status)).length;
   const addToCart = (item, quantity = 1) => {
     if (item.availability === "SOLD_OUT") return;
     if(item.comboOffer){setCart(current=>{const next={...current};item.comboItems.forEach(entry=>{next[entry.id]={...entry,quantity:(next[entry.id]?.quantity||0)+quantity}});return next});setSelectedItem(null);setDrawerOpen(true);return}
@@ -294,11 +305,19 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
         items: orderDraft.itemDetails.map((item) => ({ menuItemId: item.id, quantity: item.quantity })),
       });
       actions.placeOrder({ ...orderDraft, id: created.id, orderNumber: created.order_number });
+      const placedOrder={id:created.id,orderNumber:created.order_number,tableId:tableNumber,status:String(created.status||'pending').toUpperCase(),subtotal:Number(created.subtotal),discount:Number(created.discount_total),total:Number(created.grand_total),placed:'Just now',itemDetails:(created.items||orderDraft.itemDetails).map(item=>({id:item.menuItemId||item.id,name:item.name,price:Number(item.price),quantity:Number(item.quantity)}))};
+      orderStatusesRef.current.set(placedOrder.id,placedOrder.status);historyReadyRef.current=true;setOrderHistory(current=>[placedOrder,...current.filter(item=>item.id!==placedOrder.id)]);
       setCart({});
       setDrawerOpen(false);
       setHistoryOpen(true);
-    } catch {
-      setOrderError('Could not place the order. Please check the table QR and try again.');
+    } catch (requestError) {
+      setOrderError(requestError?.payload?.error==='table_not_found'
+        ? `Table ${tableNumber} is not registered for this outlet. Scan a valid table QR or ask the restaurant team for help.`
+        : requestError?.payload?.error==='customer_session_required'
+          ? 'Your ordering session could not be created. Refresh the QR page and try again.'
+          : requestError?.payload?.error==='menu_item_unavailable'
+            ? 'One of these dishes is no longer available. Return to the menu and update your cart.'
+            : 'Could not place the order. Please try again.');
     } finally { setOrderSubmitting(false); }
   };
   if (publicLoading) return <div className="customer-live-loader" role="status" aria-label="Loading restaurant experience"><div className="live-loader-phone"><header><i/><span/><b/></header><section className="live-loader-hero"><i/><i/><i/></section><section className="live-loader-copy"><i/><i/><i/></section><section className="live-loader-menu"><i/><i/></section><nav><i/><i/><i/><i/><i/></nav></div><span className="sr-only">Loading the restaurant's selected template</span></div>;
@@ -410,12 +429,13 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
         </main>
         {(template === "editorial" || template === "garden") && <StandardTemplateFooter template={template} restaurantName={restaurantContent.name} outlet={context.outlet} content={restaurantContent} onMenu={scrollToMenu} />}
         <CustomerBottomNav
-          cartCount={cartCount}
+          activeOrderCount={activeOrderCount}
           onMenu={scrollToMenu}
           onOrder={() => setHistoryOpen(true)}
           onBill={() => setBillOpen(true)}
           onHelp={() => setHelpOpen(true)}
         />
+        {statusNotice&&<button className={`customer-status-toast status-${statusNotice.status.toLowerCase()}`} role="status" aria-live="polite" onClick={()=>{const order=orderHistory.find(item=>item.id===statusNotice.id);if(order){setSelectedOrder(order);setOrderOpen(true)}setStatusNotice(null)}}><span><ShoppingBag size={17}/></span><div><small>ORDER #{statusNotice.orderNumber} · {statusNotice.status}</small><b>{statusNotice.message}</b><em>Tap to view order</em></div><X size={15}/></button>}
         <button className="customer-cart-fab" onClick={()=>setDrawerOpen(true)} aria-label={`Open cart with ${cartCount} items`}><ShoppingBag size={19}/><span>Cart</span>{cartCount>0&&<b>{cartCount}</b>}</button>
       </div>
       {selectedItem && (

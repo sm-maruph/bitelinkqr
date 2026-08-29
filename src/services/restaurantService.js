@@ -1,8 +1,12 @@
 import { apiRequest } from './apiClient'
 
+const customerSessionKey='bitelink-customer-session'
+const customerSession=()=>{let token=sessionStorage.getItem(customerSessionKey);if(!token){token=crypto.randomUUID();sessionStorage.setItem(customerSessionKey,token)}return token}
+const customerHeaders=()=>({'x-customer-session':customerSession()})
+
 export const restaurantService = {
   getPublicSite: (restaurantSlug, outletSlug) => apiRequest(`/api/public/restaurants/${encodeURIComponent(restaurantSlug)}/outlets/${encodeURIComponent(outletSlug)}`),
-  getOrders: (restaurantSlug, outletSlug, tableNumber) => apiRequest(`/api/public/restaurants/${encodeURIComponent(restaurantSlug)}/outlets/${encodeURIComponent(outletSlug)}/tables/${encodeURIComponent(tableNumber)}/orders`),
-  getLatestOrder: (restaurantSlug, outletSlug, tableNumber) => apiRequest(`/api/public/restaurants/${encodeURIComponent(restaurantSlug)}/outlets/${encodeURIComponent(outletSlug)}/tables/${encodeURIComponent(tableNumber)}/orders/latest`),
-  placeOrder: (restaurantSlug, outletSlug, tableNumber, payload) => apiRequest(`/api/public/restaurants/${encodeURIComponent(restaurantSlug)}/outlets/${encodeURIComponent(outletSlug)}/tables/${encodeURIComponent(tableNumber)}/orders`, { method: 'POST', body: JSON.stringify(payload) }),
+  getOrders: (restaurantSlug, outletSlug, tableNumber) => apiRequest(`/api/public/restaurants/${encodeURIComponent(restaurantSlug)}/outlets/${encodeURIComponent(outletSlug)}/tables/${encodeURIComponent(tableNumber)}/orders`,{headers:customerHeaders()}),
+  getLatestOrder: (restaurantSlug, outletSlug, tableNumber) => apiRequest(`/api/public/restaurants/${encodeURIComponent(restaurantSlug)}/outlets/${encodeURIComponent(outletSlug)}/tables/${encodeURIComponent(tableNumber)}/orders/latest`,{headers:customerHeaders()}),
+  placeOrder: (restaurantSlug, outletSlug, tableNumber, payload) => apiRequest(`/api/public/restaurants/${encodeURIComponent(restaurantSlug)}/outlets/${encodeURIComponent(outletSlug)}/tables/${encodeURIComponent(tableNumber)}/orders`, { method: 'POST', headers:customerHeaders(), body: JSON.stringify(payload) }),
 }
