@@ -116,7 +116,7 @@ export function AdminSidebar({
     role === "kitchen"
       ? ["Overview", "Live orders"]
       : role === "order"
-        ? ["Overview", "Live orders", "Tables"]
+        ? ["Overview", "Live orders", "Tables", "Payments"]
         : role === "outlet"
           ? [
               "Overview",

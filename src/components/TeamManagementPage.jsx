@@ -96,7 +96,7 @@ export default function TeamManagementPage({ context }) {
     if (session && context.tenantId) load();
   }, [session, context.tenantId]);
   const chosen = roles.find((x) => x.id === assignId),
-    system = false,
+    system = Boolean(roleId && roles.find((x) => x.id === roleId)?.code === "owner"),
     toggle = (c) =>
       setRole((r) => ({
         ...r,
@@ -147,9 +147,13 @@ export default function TeamManagementPage({ context }) {
       setMessage(`${r.name} saved.`);
     } catch (e) {
       setMessage(
-        e.payload?.error === "system_role_read_only"
-          ? "System roles are read-only."
-          : "Could not save role.",
+        e.payload?.error === "owner_role_read_only"
+          ? "The Owner role is read-only."
+          : e.payload?.error === "conflict"
+            ? "Another role already uses this name or code."
+            : e.payload?.error === "permission_denied"
+              ? "Your account is not allowed to manage roles."
+              : `Could not save role${e.payload?.error ? `: ${e.payload.error}` : "."}`,
       );
     } finally {
       setBusy(false);
@@ -364,7 +368,14 @@ export default function TeamManagementPage({ context }) {
                   </label>
                   <label>
                     <span>Code</span>
-                    <input disabled={system} required value={role.code} />
+                    <input
+                      disabled={system}
+                      required
+                      value={role.code}
+                      onChange={(e) =>
+                        setRole({ ...role, code: slug(e.target.value) })
+                      }
+                    />
                   </label>
                   <label>
                     <span>Scope</span>

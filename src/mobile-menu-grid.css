@@ -1,16 +1,23 @@
-/* Loaded after App.css so every template uses the same reliable mobile grid. */
-.customer-page .customer-bottom-nav { display: none !important; }
+/* Keep the customer shortcuts available on phones and desktop customer views. */
+.customer-page .customer-bottom-nav {
+  position: fixed !important;
+  z-index: 40;
+  right: auto !important;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  left: 50% !important;
+  width: min(500px, calc(100% - 24px)) !important;
+  display: flex !important;
+  margin: 0 !important;
+  transform: translateX(-50%);
+}
+
+.customer-page .customer-canvas { padding-bottom: 88px; }
 
 @media screen and (max-width: 900px) {
   .customer-page .customer-bottom-nav {
-    position: fixed !important;
-    z-index: 40;
-    right: 12px;
-    bottom: max(12px, env(safe-area-inset-bottom));
-    left: 12px;
-    width: auto !important;
-    display: flex !important;
-    margin: 0 !important;
+    right: auto !important;
+    left: 50% !important;
+    width: calc(100% - 24px) !important;
   }
 
   .customer-page .customer-canvas { padding-bottom: 88px; }

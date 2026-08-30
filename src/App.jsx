@@ -76,7 +76,15 @@ export default function App() {
   const rolePath={owner:'admin',manager:'manager',outlet:'outlet-manager',order:'order-staff',kitchen:'kitchen'}
   const setRole = (roleId) => { if(roleId==='super'&&!session?.user?.isPlatformAdmin)return;setActivePage('Overview'); setContext((current) => ({ ...current, roleId })) }
   const handleLogout = async () => { await logout(); navigate('/login', { replace: true }) }
-  const Page = activePage === 'Help' ? HelpCenterPage : role === 'kitchen' ? KitchenDashboard : role === 'order' ? OrderStaffDashboard : role === 'outlet' && activePage === 'Overview' ? OutletDashboard : pages[activePage] || Overview
+  const Page = activePage === 'Help'
+    ? HelpCenterPage
+    : role === 'kitchen'
+      ? KitchenDashboard
+      : role === 'order' && activePage === 'Overview'
+        ? OrderStaffDashboard
+        : role === 'outlet' && activePage === 'Overview'
+          ? OutletDashboard
+          : pages[activePage] || Overview
   useEffect(() => {
     document.body.classList.toggle('has-context-bar', showContextBar)
     return () => document.body.classList.remove('has-context-bar')
