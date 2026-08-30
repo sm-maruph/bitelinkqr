@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Building2, CheckCircle2, Clock3, ImageUp, Plus, X } from 'lucide-react'
+import { Building2, CheckCircle2, Clock3, ImageUp, Plus, Save, Trash2, X } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 import { managementService } from '../services/managementService'
 import { Button, Header } from './PortalChrome'
@@ -19,12 +19,14 @@ export default function OrganizationSettingsPage({ context }) {
   const [busy, setBusy] = useState(false)
   const [notice, setNotice] = useState('')
   const [logo, setLogo] = useState(null)
+  const [marqueeItems,setMarqueeItems]=useState([context.restaurants.find(restaurant=>restaurant.id===context.restaurantUuid)?.name||'RESTAURANT','NEXT-GEN DINING','LIVE KITCHEN','FLAVOUR PROTOCOL'])
   const [now, setNow] = useState(Date.now())
   const [form, setForm] = useState({ restaurantId: context.restaurantUuid, name: '', slug: '', addressLine: '', city: 'Dhaka' })
   const isOutletManager = context.roleId === 'outlet'
   const load = () => managementService.usage(session, context.tenantId).then(setUsage).catch(() => setNotice('Could not load subscription details.'))
 
   useEffect(() => { if (session && context.tenantId) load() }, [session, context.tenantId])
+  useEffect(()=>{if(session&&context.tenantId&&context.restaurantUuid&&!isOutletManager)managementService.getDesignSettings(session,context.tenantId,context.restaurantUuid).then(result=>{if(Array.isArray(result.design_settings?.marqueeItems)&&result.design_settings.marqueeItems.length>1)setMarqueeItems(result.design_settings.marqueeItems)}).catch(()=>{})},[session,context.tenantId,context.restaurantUuid,isOutletManager])
   useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 1000); return () => window.clearInterval(timer) }, [])
 
   const submit = async event => {
@@ -40,6 +42,7 @@ export default function OrganizationSettingsPage({ context }) {
     catch { setNotice('Could not upload the logo. Use PNG, JPG, WebP, or AVIF.') }
     finally { setBusy(false) }
   }
+  const saveMarquee=async()=>{const items=marqueeItems.map(item=>item.trim()).filter(Boolean);if(items.length<2){setNotice('Add at least two scrolling messages.');return}setBusy(true);setNotice('');try{await managementService.updateDesignSettings(session,context.tenantId,context.restaurantUuid,{marqueeItems:items});setMarqueeItems(items);setNotice('Customer scrolling messages published.')}catch{setNotice('Could not save the scrolling messages.')}finally{setBusy(false)}}
 
   const limit = usage?.limit_value === null ? 'Unlimited' : usage?.limit_value ?? '—'
   const endsAt = usage?.status === 'trialing' ? usage?.trial_ends_at : usage?.current_period_end
@@ -55,6 +58,7 @@ export default function OrganizationSettingsPage({ context }) {
       <article><CheckCircle2 /><span><small>Outlet allowance</small><b>{usage?.total || 0} / {limit}</b><em>{usage?.pending || 0} awaiting approval</em></span></article>
     </section>
     <section className="panel settings-logo"><div><span className="panel-kicker">Restaurant identity</span><h2>Restaurant logo</h2><p>Shown on the customer experience and restaurant workspace.</p></div><label className="logo-upload">{logo ? <img src={logo} alt="New restaurant logo" /> : <ImageUp size={23} />}<span>{busy ? 'Uploading…' : 'Upload logo'}</span><input type="file" accept="image/png,image/jpeg,image/webp,image/avif" disabled={busy} onChange={saveLogo} /></label></section>
+    {!isOutletManager&&<section className="panel settings-marquee"><div className="settings-marquee-heading"><div><span className="panel-kicker">Customer template</span><h2>Scrolling announcement strip</h2><p>These messages loop continuously on futuristic customer templates.</p></div><Button className="primary" disabled={busy} onClick={saveMarquee}><Save size={14}/>{busy?'Saving…':'Save & publish'}</Button></div><div className="settings-marquee-fields">{marqueeItems.map((item,index)=><label key={index}><span>Message {index+1}</span><input maxLength={40} value={item} placeholder="e.g. Fresh from the kitchen" onChange={event=>setMarqueeItems(current=>current.map((value,itemIndex)=>itemIndex===index?event.target.value:value))}/><button type="button" aria-label={`Remove message ${index+1}`} disabled={marqueeItems.length<=2} onClick={()=>setMarqueeItems(current=>current.filter((_,itemIndex)=>itemIndex!==index))}><Trash2 size={14}/></button></label>)}</div>{marqueeItems.length<8&&<button className="settings-marquee-add" type="button" onClick={()=>setMarqueeItems(current=>[...current,''])}><Plus size={14}/> Add message</button>}</section>}
     <div className="panel settings-outlets"><div className="panel-heading"><div><span className="panel-kicker">Subscription controlled</span><h2>{isOutletManager ? 'Your assigned outlet' : 'Your outlets'}</h2></div></div>{context.restaurants.flatMap(restaurant => restaurant.outlets.filter(outlet => !isOutletManager || outlet.id === context.outletId).map(outlet => <div className="settings-outlet" key={outlet.id}><span className="restaurant-avatar">{outlet.name[0]}</span><div><b>{outlet.name}</b><small>{restaurant.name}</small></div><span className={`status ${outlet.status === 'active' ? 'green' : 'amber'}`}>{outlet.status === 'setup' ? 'Pending approval' : outlet.status}</span></div>))}</div>
     {open && <div className="staff-modal-backdrop"><section className="staff-modal"><header><div><span className="page-eyebrow">Subscription outlet request</span><h2>Request a new outlet</h2></div><button onClick={() => setOpen(false)}><X /></button></header><form onSubmit={submit}><div className="staff-fields"><label><span>Restaurant</span><select value={form.restaurantId} onChange={event => setForm({ ...form, restaurantId: event.target.value })}>{context.restaurants.map(restaurant => <option value={restaurant.id} key={restaurant.id}>{restaurant.name}</option>)}</select></label>{field('Outlet name', 'name')}{field('Outlet slug', 'slug')}{field('City', 'city')}{field('Address', 'addressLine', { className: 'wide' })}</div><footer><button type="button" onClick={() => setOpen(false)}>Cancel</button><Button className="primary" disabled={busy}><Plus size={15} />{busy ? 'Submitting…' : 'Submit for approval'}</Button></footer></form></section></div>}
   </>

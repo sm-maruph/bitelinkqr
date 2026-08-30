@@ -51,6 +51,72 @@
  clip-path:none!important;
  box-shadow:-18px 0 45px #263a3024!important;
 }
+
+/* Final mobile dock geometry. The shared desktop dock is centered with
+   translateX(-50%); mobile edge anchoring must explicitly remove that
+   transform or half of the five actions ends up outside the viewport. */
+@media(max-width:760px){
+ .customer-page .customer-bottom-nav{
+  right:0!important;
+  bottom:0!important;
+  left:0!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  transform:none!important;
+  overflow:visible!important;
+ }
+ .customer-page .customer-bottom-nav>button{
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  margin:0!important;
+  padding-inline:2px!important;
+  box-sizing:border-box!important;
+ }
+}
+
+/* Seamless announcement ticker: content moves through the viewport instead of
+   being squeezed into one fixed row. The second group makes the loop gapless. */
+.customer-page .future-marquee{
+ display:block;
+ width:100%;
+ max-width:100%;
+ padding:0;
+ overflow:hidden;
+ white-space:nowrap;
+ box-sizing:border-box;
+}
+.customer-page .future-marquee-track{
+ width:max-content;
+ display:flex;
+ align-items:center;
+ will-change:transform;
+ animation:future-marquee-scroll 24s linear infinite;
+}
+.customer-page .future-marquee-group{
+ display:flex;
+ align-items:center;
+ flex:0 0 auto;
+ gap:22px;
+ min-height:45px;
+ padding-right:22px;
+}
+.customer-page .future-marquee-group span{
+ flex:0 0 auto;
+ color:#7f8999;
+ font-size:8px!important;
+ font-weight:800;
+ letter-spacing:1.5px;
+ text-transform:uppercase;
+}
+.customer-page .future-marquee-group span:first-child{color:var(--future-primary)}
+.customer-page .future-marquee-group i{flex:0 0 auto;width:4px;height:4px;border-radius:50%;background:var(--future-secondary);box-shadow:0 0 8px var(--future-secondary)}
+@keyframes future-marquee-scroll{to{transform:translateX(-50%)}}
+@media(max-width:760px){.customer-page .future-marquee-track{animation-duration:18s}.customer-page .future-marquee-group{gap:18px;padding-right:18px}}
+@media(prefers-reduced-motion:reduce){.customer-page .future-marquee{overflow-x:auto}.customer-page .future-marquee-track{animation:none}}
 .customer-page:is(.customer-template-future-paper,.customer-template-future-chrome,.customer-template-future-crystal,.customer-template-future-zen) :is(.drawer-heading,.cart-row,.cart-summary .total,.bill-totals,.bill-line){border-color:color-mix(in srgb,var(--future-primary) 18%,#cbd3ce)!important}
 .customer-page:is(.customer-template-future-paper,.customer-template-future-chrome,.customer-template-future-crystal,.customer-template-future-zen) :is(.drawer-heading h2,.food-detail-body h2,.customer-panel h2,.cart-row>div:first-child b,.cart-summary .total,.bill-totals strong){color:#1c302a!important}
 .customer-page:is(.customer-template-future-paper,.customer-template-future-chrome,.customer-template-future-crystal,.customer-template-future-zen) :is(.empty-cart,.empty-order,.cart-row span,.cart-summary>div,.food-detail-body p){color:#65756f!important}
@@ -367,4 +433,104 @@ body.embedded-customer-preview :is(.future-site,.bistro-site,.express-site,.worl
  .customer-page .future-menu h2{margin-top:6px;font-size:24px;line-height:1}
  .customer-page .future-menu header p{margin:2px 0 0;font-size:9px!important;line-height:1.45}
  .customer-page .future-menu .customer-category-stack{margin-top:12px}
+}
+
+/* Keep every futuristic menu inside the real phone viewport. Layout 19 uses a
+   desktop carousel and several layouts assign fixed card tracks; reset both at
+   the final cascade layer so they cannot widen the customer document. */
+@media(max-width:760px){
+ html:has(.customer-page.customer-template-future),
+ body:has(.customer-page.customer-template-future),
+ .customer-page.customer-template-future,
+ .customer-page.customer-template-future .customer-canvas,
+ .customer-page.customer-template-future .future-site{
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  overflow-x:clip;
+ }
+ .customer-page.customer-template-future .future-menu{
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  padding-inline:16px!important;
+  overflow:hidden;
+  box-sizing:border-box;
+ }
+ .customer-page.customer-template-future .future-menu header,
+ .customer-page.customer-template-future .future-menu header>div,
+ .customer-page.customer-template-future .customer-category-stack{
+  width:100%;
+  min-width:0;
+  max-width:100%;
+ }
+ .customer-page.customer-template-future .future-menu h2{
+  max-width:100%;
+  font-size:clamp(21px,6.5vw,25px)!important;
+  overflow-wrap:anywhere;
+ }
+ .customer-page.customer-template-future .customer-cats{
+  width:100%!important;
+  max-width:100%!important;
+  margin-right:0!important;
+  padding-right:0!important;
+  box-sizing:border-box;
+ }
+ .customer-page.customer-template-future .future-food-grid,
+ .customer-page.customer-template-future .future-layout-19 .future-food-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-auto-flow:row!important;
+  gap:10px!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  margin-inline:0!important;
+  overflow:visible!important;
+  transform:none!important;
+  box-sizing:border-box;
+ }
+ .customer-page.customer-template-future .future-card-wrap,
+ .customer-page.customer-template-future .future-layout-19 .future-card-wrap{
+  grid-column:auto!important;
+  flex:initial!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  margin:0!important;
+  transform:none!important;
+  box-sizing:border-box;
+ }
+ .customer-page.customer-template-future .future-card-wrap .customer-dish,
+ .customer-page.customer-template-future .future-card-wrap .food-card-image,
+ .customer-page.customer-template-future .future-card-wrap .food-card-copy{
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box;
+ }
+}
+
+@media(max-width:760px){
+ .customer-page .customer-bottom-nav{
+  right:0!important;
+  bottom:0!important;
+  left:0!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  margin:0!important;
+  transform:none!important;
+  overflow:visible!important;
+ }
+ .customer-page .customer-bottom-nav>button{
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  margin:0!important;
+  padding-inline:2px!important;
+  box-sizing:border-box!important;
+ }
 }

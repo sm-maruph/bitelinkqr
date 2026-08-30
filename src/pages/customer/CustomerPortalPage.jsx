@@ -149,6 +149,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
     chefName: liveContent.restaurant.chef_name || fallbackContent.chefName,
     offerTitle: liveContent.offers[0]?.name || fallbackContent.offerTitle,
     offerDescription: liveContent.offers[0]?.description || fallbackContent.offerDescription,
+    designSettings: liveContent.restaurant.design_settings || {},
   } : fallbackContent;
   const categories = ["All dishes", "Popular now", "Offers", "Combo offers", ...new Set(state.menu.map((item) => item.category).filter(Boolean))];
   const comboItems=(liveContent?.comboOffers||[]).map(offer=>({id:`combo-${offer.id}`,comboOffer:true,name:offer.name,description:offer.description,price:Number(offer.comboPrice),regularPrice:Number(offer.regularPrice),savings:Number(offer.savings),image:offer.items[0]?.image_url,tag:'Combo offer',availability:'AVAILABLE',comboItems:offer.items.map(raw=>state.menu.find(item=>item.id===raw.id)).filter(Boolean)}));

@@ -5,6 +5,8 @@ export const managementService={
   requestOutlet:(session,tenantId,payload)=>apiRequest('/api/v1/outlets',{method:'POST',headers:headers(session,tenantId),body:JSON.stringify(payload)}),
   uploadRestaurantLogo:(session,tenantId,restaurantId,outletId,file)=>{const body=new FormData();body.append('file',file);return apiRequest(`/api/v1/restaurants/${restaurantId}/assets?outletId=${encodeURIComponent(outletId||'')}`,{method:'POST',headers:headers(session,tenantId),body})},
   updateRestaurantLogo:(session,tenantId,restaurantId,payload)=>apiRequest(`/api/v1/restaurants/${restaurantId}/logo`,{method:'PATCH',headers:headers(session,tenantId),body:JSON.stringify(payload)}),
+  getDesignSettings:(session,tenantId,restaurantId)=>apiRequest(`/api/v1/restaurants/${restaurantId}/design-settings`,{headers:headers(session,tenantId)}),
+  updateDesignSettings:(session,tenantId,restaurantId,payload)=>apiRequest(`/api/v1/restaurants/${restaurantId}/design-settings`,{method:'PATCH',headers:headers(session,tenantId),body:JSON.stringify(payload)}),
   categories:(session,tenantId,restaurantId)=>apiRequest(`/api/v1/menu-categories?restaurantId=${restaurantId}`,{headers:headers(session,tenantId)}),
   createCategory:(session,tenantId,payload)=>apiRequest('/api/v1/menu-categories',{method:'POST',headers:headers(session,tenantId),body:JSON.stringify(payload)}),
   createItem:(session,tenantId,payload)=>apiRequest('/api/v1/menu-items',{method:'POST',headers:headers(session,tenantId),body:JSON.stringify(payload)}),
