@@ -3,6 +3,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ShoppingBag,
+  ReceiptText,
   X,
   Palette,
   SlidersHorizontal,
@@ -87,11 +88,15 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
   const [statusNotice, setStatusNotice] = useState(null);
   const orderStatusesRef = useRef(new Map());
   const historyReadyRef = useRef(false);
+  const paymentStatusRef = useRef('');
   const [historyOpen, setHistoryOpen] = useState(false);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [historyView, setHistoryView] = useState('grid');
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [billOpen, setBillOpen] = useState(false);
+  const [livePayment, setLivePayment] = useState(null);
+  const [paymentSubmitting, setPaymentSubmitting] = useState(false);
+  const [paymentError, setPaymentError] = useState('');
   const [helpOpen, setHelpOpen] = useState(false);
   const [template, setTemplate] = useState(requestedTemplate && templates[requestedTemplate] ? requestedTemplate : "editorial");
   const [theme, setTheme] = useState("coral");
@@ -168,7 +173,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
         const result = await restaurantService.getOrders(context.restaurantId, outletSlug, tableNumber);
         if (active) {
           const normalized = result.items.map(item => ({ id:item.id, orderNumber:item.order_number, tableId:tableNumber, status:item.status==='completed'?'SERVED':String(item.status).toUpperCase(), subtotal:Number(item.subtotal), discount:Number(item.discount_total), total:Number(item.grand_total), placed:new Date(item.placed_at).toLocaleString(), itemDetails:item.items.map(line=>({id:line.id,name:line.name,price:Number(line.price),quantity:Number(line.quantity)})) }));
-          if(historyReadyRef.current){const changed=normalized.filter(item=>orderStatusesRef.current.has(item.id)&&orderStatusesRef.current.get(item.id)!==item.status);if(changed.length){const item=changed[0];setStatusNotice({id:item.id,orderNumber:item.orderNumber,status:item.status,message:{CONFIRMED:'Your order has been confirmed.',PREPARING:'The kitchen has started preparing your order.',READY:'Your order is ready to serve.',SERVING:'Your order is on the way to your table.',SERVED:'Your order has been served.',REJECTED:'The restaurant could not accept this order.',CANCELLED:'This order has been cancelled.'}[item.status]||`Order status changed to ${item.status.toLowerCase()}.`})}}else historyReadyRef.current=true;
+          if(historyReadyRef.current){const changed=normalized.filter(item=>orderStatusesRef.current.has(item.id)&&orderStatusesRef.current.get(item.id)!==item.status);if(changed.length){const item=changed[0];setStatusNotice({id:item.id,orderNumber:item.orderNumber,status:item.status,message:{CONFIRMED:'Your order has been confirmed.',PREPARING:'The kitchen has started preparing your order.',READY:'Your order is ready to serve.',SERVING:'Your order is on the way to your table.',SERVED:'Your order has been served. Your bill is ready.',REJECTED:'The restaurant could not accept this order.',CANCELLED:'This order has been cancelled.'}[item.status]||`Order status changed to ${item.status.toLowerCase()}.`});if(item.status==='SERVED')setBillOpen(true)}}else historyReadyRef.current=true;
           orderStatusesRef.current=new Map(normalized.map(item=>[item.id,item.status]));
           setOrderHistory(normalized);
           setSelectedOrder(current => current ? normalized.find(item=>item.id===current.id) || current : current);
@@ -264,6 +269,20 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
     0,
   );
   const activeOrderCount=orderHistory.filter(item=>!['SERVED','COMPLETED','REJECTED','CANCELLED'].includes(item.status)).length;
+  const billOrder=orderHistory.find(item=>['SERVED','COMPLETED'].includes(item.status))||((order&&['SERVED','COMPLETED'].includes(order.status))?order:null);
+  useEffect(()=>{
+    if(!isLiveCustomerRoute||!billOrder?.id)return undefined;
+    let active=true,refreshing=false;
+    const outletSlug=context.outlet.toLowerCase().trim().replaceAll(/\s+/g,'-');
+    const refresh=async()=>{if(refreshing)return;refreshing=true;try{const result=await restaurantService.getOrderPayment(context.restaurantId,outletSlug,tableNumber,billOrder.id);if(active){const nextStatus=String(result.payment?.status||'').toLowerCase();if(nextStatus==='verified'&&paymentStatusRef.current!=='verified')setBillOpen(true);paymentStatusRef.current=nextStatus;setLivePayment(result.payment)}}catch{/* Keep the last payment state during a transient outage. */}finally{refreshing=false}};
+    refresh();const timer=window.setInterval(refresh,2500);return()=>{active=false;window.clearInterval(timer)};
+  },[isLiveCustomerRoute,billOrder?.id,context.restaurantId,context.outlet,tableNumber]);
+  const submitPayment=async(payload)=>{
+    if(paymentSubmitting||!billOrder)return;setPaymentSubmitting(true);setPaymentError('');
+    try{if(isLiveCustomerRoute){const outletSlug=context.outlet.toLowerCase().trim().replaceAll(/\s+/g,'-');const created=await restaurantService.submitOrderPayment(context.restaurantId,outletSlug,tableNumber,billOrder.id,payload);setLivePayment(created)}else{actions.submitPayment({orderId:billOrder.id,amount:billOrder.total, ...payload,status:'SUBMITTED'});setLivePayment({order_id:billOrder.id,...payload,status:'submitted'})}}
+    catch(error){setPaymentError(error?.payload?.error==='order_not_served'?'The restaurant must mark this order served before payment.':'We could not submit your payment. Please try again.')}
+    finally{setPaymentSubmitting(false)}
+  };
   const addToCart = (item, quantity = 1) => {
     if (item.availability === "SOLD_OUT") return;
     if(item.comboOffer){setCart(current=>{const next={...current};item.comboItems.forEach(entry=>{next[entry.id]={...entry,quantity:(next[entry.id]?.quantity||0)+quantity}});return next});setSelectedItem(null);setDrawerOpen(true);return}
@@ -441,6 +460,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
           onHelp={() => setHelpOpen(true)}
         />
         {statusNotice&&<button className={`customer-status-toast status-${statusNotice.status.toLowerCase()}`} role="status" aria-live="polite" onClick={()=>{const order=orderHistory.find(item=>item.id===statusNotice.id);if(order){setSelectedOrder(order);setOrderOpen(true)}setStatusNotice(null)}}><span><ShoppingBag size={17}/></span><div><small>ORDER #{statusNotice.orderNumber} · {statusNotice.status}</small><b>{statusNotice.message}</b><em>Tap to view order</em></div><X size={15}/></button>}
+        {billOrder&&String(livePayment?.status||'').toLowerCase()!=='verified'&&<button className="customer-bill-fab" onClick={()=>setBillOpen(true)} aria-label="Your bill is ready"><ReceiptText size={19}/><span>Bill</span><i/><i/><i/></button>}
         <button className="customer-cart-fab" onClick={()=>setDrawerOpen(true)} aria-label={`Open cart with ${cartCount} items`}><ShoppingBag size={19}/><span>Cart</span>{cartCount>0&&<b>{cartCount}</b>}</button>
       </div>
       {selectedItem && (
@@ -488,10 +508,13 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
               <X size={17} />
             </button>
             <BillAndPayment
-              order={order}
+              order={billOrder}
               tableNumber={tableNumber}
-              payment={[...state.payments].reverse().find((payment) => payment.orderId === order?.id)}
-              onPay={actions.submitPayment}
+              restaurantName={restaurantContent.name}
+              payment={livePayment||[...state.payments].reverse().find((payment) => payment.orderId === billOrder?.id)}
+              onPay={submitPayment}
+              submitting={paymentSubmitting}
+              error={paymentError}
             />
           </div>
         </div>
