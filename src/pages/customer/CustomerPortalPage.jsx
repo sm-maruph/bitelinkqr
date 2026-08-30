@@ -512,6 +512,8 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
               order={billOrder}
               tableNumber={tableNumber}
               restaurantName={restaurantContent.name}
+              restaurantAddress={restaurantContent.address}
+              logoUrl={embedded ? "/default-restaurant-logo.svg" : liveContent?.restaurant?.logo_url}
               payment={livePayment||[...state.payments].reverse().find((payment) => payment.orderId === billOrder?.id)}
               onPay={submitPayment}
               submitting={paymentSubmitting}
