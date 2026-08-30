@@ -290,3 +290,81 @@ body.embedded-customer-preview::-webkit-scrollbar-thumb:hover{background:#84918d
  .customer-page :is(.customer-grid,.bistro-live-menu-grid,.express-food-grid,.worldplate-food-grid,.sage-food-grid,.future-food-grid,.ember-grid){width:100%;max-width:100%;margin-left:0!important;margin-right:0!important;box-sizing:border-box}
  .customer-page :is(.customer-grid,.bistro-live-menu-grid,.express-food-grid,.worldplate-food-grid,.sage-food-grid,.future-food-grid,.ember-grid)>*{min-width:0;max-width:100%;margin-inline:0!important;transform:none!important;box-sizing:border-box}
 }
+
+/* The landing-page handset can be narrower than the app's 320px shell.
+   Let customer documents use their real iframe width instead of painting a
+   320px layout that is subsequently clipped by the phone frame. */
+html:has(body.embedded-customer-preview),
+body.embedded-customer-preview{min-width:0!important}
+
+body.embedded-customer-preview :is(.customer-page,.customer-canvas){
+ min-width:0!important;
+ inline-size:100%;
+ max-inline-size:100%;
+}
+
+body.embedded-customer-preview :is(.future-site,.bistro-site,.express-site,.worldplate-site,.sage-site,.ember-site),
+body.embedded-customer-preview :is(.future-site,.bistro-site,.express-site,.worldplate-site,.sage-site,.ember-site)>*{
+ min-width:0;
+ max-width:100%;
+ box-sizing:border-box;
+}
+
+@media(max-width:360px){
+ .customer-page :is(.bistro-nav,.express-nav,.worldplate-nav,.sage-nav,.future-nav,.ember-nav){
+  gap:8px;
+  padding-inline:12px!important;
+ }
+ .customer-page :is(.bistro-nav,.express-nav,.worldplate-nav,.sage-nav,.future-nav,.ember-nav)>a{
+  min-width:0;
+  overflow:hidden;
+ }
+ .customer-page :is(.bistro-nav,.express-nav,.worldplate-nav,.sage-nav,.future-nav,.ember-nav)>a :is(b,strong,span){
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+ }
+ .customer-page .future-nav-actions{flex:0 0 auto;gap:6px}
+ .customer-page .future-nav-actions>button{margin-left:0!important;padding-inline:10px!important}
+ .customer-page .template-offer{grid-template-columns:42px minmax(0,1fr);gap:12px;padding:20px 14px}
+ .customer-page .template-offer-icon{width:42px;height:42px}
+ .customer-page .template-offer>div{min-width:0}
+ .customer-page .template-offer h2,
+ .customer-page :is(.future-menu,.bistro-live-menu,.express-menu,.worldplate-menu,.sage-menu,.ember-menu) h2{
+  max-width:100%;
+  overflow-wrap:anywhere;
+ }
+ .customer-page .template-offer>span{white-space:normal}
+ .customer-page .customer-bottom-nav button{min-width:0!important;padding-inline:3px!important}
+}
+
+/* Compact the high-value ordering content in phone-sized customer views. */
+@media(max-width:600px){
+ .customer-page .template-offer{
+  grid-template-columns:34px minmax(0,1fr);
+  gap:5px 10px;
+  padding:12px 13px;
+ }
+ .customer-page .template-offer-icon{width:34px;height:34px}
+ .customer-page .template-offer-icon svg{width:17px;height:17px}
+ .customer-page .template-offer small{font-size:7px!important;letter-spacing:.1em}
+ .customer-page .template-offer h2{margin:2px 0;font-size:17px;line-height:1.05}
+ .customer-page .template-offer p{font-size:9px!important;line-height:1.35}
+ .customer-page .template-offer>span{grid-column:2;font-size:8px!important}
+ .customer-page .template-offer>span svg{width:11px;height:11px}
+ .customer-page .template-offer>button{
+  grid-column:1/-1;
+  min-height:29px;
+  padding:6px 10px;
+  font-size:9px!important;
+ }
+ .customer-page :is(.future-menu,.bistro-reference-menus,.express-menu,.worldplate-menu,.sage-menu,.ember-menu){
+  padding-top:32px!important;
+  padding-bottom:38px!important;
+ }
+ .customer-page .future-menu header{gap:8px}
+ .customer-page .future-menu header>div>span{font-size:7px!important}
+ .customer-page .future-menu h2{margin-top:6px;font-size:24px;line-height:1}
+ .customer-page .future-menu header p{margin:2px 0 0;font-size:9px!important;line-height:1.45}
+ .customer-page .future-menu .customer-category-stack{margin-top:12px}
+}

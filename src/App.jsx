@@ -34,6 +34,7 @@ import './dark-landing-fix.css'
 import './dark-template-gallery.css'
 import './live-template-thumbnails.css'
 import './template-redesign.css'
+import './admin-mobile.css'
 import { useAuth } from './contexts/AuthContext'
 import { workspaceService } from './services/workspaceService'
 

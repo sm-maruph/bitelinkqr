@@ -157,7 +157,9 @@ export function AdminSidebar({
           ),
       )
     : baseAllowed;
+  const mobileLinks = navGroups.flatMap((group) => group.links).filter(([name]) => allowed.includes(name));
   return (
+    <>
     <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
       <div className="side-top">
         <a className="brand" href="#overview">
@@ -248,6 +250,13 @@ export function AdminSidebar({
         <ArrowRight size={15} />
       </button>
     </aside>
+    <nav className="mobile-primary-nav" aria-label="Mobile workspace navigation">
+      {mobileLinks.map(([name, Icon]) => <button className={activePage === name ? "active" : ""} onClick={() => setActivePage(name)} key={name}><Icon size={18}/><span>{name}</span></button>)}
+      {allowed.includes("Team") && <button className={`mobile-utility-start ${activePage === "Settings" ? "active" : ""}`} onClick={() => setActivePage("Settings")}><Settings size={18}/><span>Settings</span></button>}
+      <button className={`${!allowed.includes("Team") ? "mobile-utility-start " : ""}${activePage === "Help" ? "active" : ""}`} onClick={() => setActivePage("Help")}><HelpCircle size={18}/><span>Help</span></button>
+      <button className="logout-button" onClick={onLogout}><LogOut size={18}/><span>Log out</span></button>
+    </nav>
+    </>
   );
 }
 

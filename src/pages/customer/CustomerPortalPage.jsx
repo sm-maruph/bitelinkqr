@@ -134,6 +134,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
   const fallbackContent = getRestaurantContent(context.restaurantId, context.outlet);
   const restaurantContent = liveContent ? {
     ...fallbackContent,
+    hasActiveOffers: liveContent.offers.length > 0,
     name: liveContent.restaurant.name,
     tagline: liveContent.restaurant.tagline || fallbackContent.tagline,
     description: liveContent.restaurant.description || fallbackContent.description,
@@ -181,7 +182,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
     return () => { active = false; window.clearInterval(timer); window.removeEventListener('focus', refreshOrders); };
   }, [isLiveCustomerRoute, context.restaurantId, context.outlet, tableNumber]);
   const filteredItems = category === "All dishes" ? state.menu
-    : category === "Popular now" ? state.menu.filter(item=>item.popularNow)
+    : category === "Popular now" ? (state.menu.some(item=>item.popularNow) ? state.menu.filter(item=>item.popularNow) : [{id:'popular-empty',emptyOffer:true,emptyKind:'popular',emptyLabel:'Popular now',emptyTitle:'No popular dishes yet.',emptyDescription:'Popular dishes will appear here as guests start ordering. Explore the full menu in the meantime.',onViewMenu:()=>{setCategoryState('All dishes');setCurrentPage(1)}}])
     : category === "Offers" ? (state.menu.some(item=>item.onOffer) ? state.menu.filter(item=>item.onOffer) : [{id:'offers-empty',name:state.menu[0]?.name||'Menu',image:state.menu[0]?.image,emptyOffer:true,onViewMenu:()=>{setCategoryState('All dishes');setCurrentPage(1)}}])
     : category === "Combo offers" ? (comboItems.length?comboItems:[{id:'combos-empty',emptyOffer:true,emptyTitle:'No combo offers are available right now.',onViewMenu:()=>{setCategoryState('All dishes');setCurrentPage(1)}}])
     : state.menu.filter((item) => item.category === category);
@@ -216,6 +217,10 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
             : "menu",
       )
       ?.scrollIntoView({ behavior: "smooth" });
+  const viewOffers = () => {
+    setCategory("Offers");
+    window.requestAnimationFrame(scrollToMenu);
+  };
   const items = {
     map: (renderItem) => (
       <>
@@ -361,7 +366,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
       <div ref={canvasRef} className={`customer-canvas ${compactCanvas ? "customer-canvas-compact" : ""}`}>
         <CustomerHeader
           restaurantName={restaurantContent.name}
-          logoUrl={liveContent?.restaurant?.logo_url}
+          logoUrl={embedded ? "/default-restaurant-logo.svg" : liveContent?.restaurant?.logo_url}
           cartCount={cartCount}
           setRole={setRole}
           onCart={() => setDrawerOpen(true)}
@@ -373,7 +378,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
         <CustomerHero
           template={template}
           restaurantName={restaurantContent.name}
-          content={restaurantContent}
+          content={{...restaurantContent,onOffers:viewOffers}}
           outlet={context.outlet}
           menuItems={visibleItems}
           currentPage={currentPage}
@@ -390,7 +395,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
           onMenu={scrollToMenu}
           onCart={() => setDrawerOpen(true)}
           cartCount={cartCount}
-          logoUrl={liveContent?.restaurant?.logo_url}
+          logoUrl={embedded ? "/default-restaurant-logo.svg" : liveContent?.restaurant?.logo_url}
         />
         <main className="customer-content">
           <section className="customer-menu" id="menu">

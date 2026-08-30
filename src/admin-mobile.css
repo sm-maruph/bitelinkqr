@@ -1,0 +1,140 @@
+.mobile-primary-nav{display:none}
+/* Shared phone workspace for every restaurant role. */
+@media(max-width:700px){
+ body:has(.portal-shell){min-width:0;background:#f2f4f0}
+ .portal-shell{display:block;min-height:100dvh;padding:0 0 0 48px;overflow-x:hidden}
+ .portal-shell .sidebar{
+  display:none!important;
+ }
+ .portal-shell .mobile-primary-nav{
+  position:fixed!important;
+  z-index:90;
+  inset:0 auto 0 0!important;
+  width:48px!important;
+  height:100dvh!important;
+  display:flex;
+  align-items:stretch;
+  justify-content:flex-start;
+  flex-direction:column;
+  align-items:stretch;
+  gap:0;
+  gap:1px;
+  padding:max(3px,env(safe-area-inset-top)) 2px max(3px,env(safe-area-inset-bottom));
+  overflow:hidden;
+  border:0;
+  border-top:1px solid #d5ddd3;
+  background:rgba(251,252,248,.97);
+  box-shadow:0 -8px 24px rgba(28,52,41,.12);
+  backdrop-filter:blur(16px);
+  overflow-x:hidden;
+  overflow-y:auto;
+  scrollbar-width:none;
+  overscroll-behavior-block:contain;
+ }
+ .portal-shell .mobile-primary-nav::-webkit-scrollbar{display:none}
+ .portal-shell .mobile-primary-nav button{
+  position:relative;
+  width:44px;
+  min-width:44px;
+  height:48px;
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:2px;
+  padding:3px 2px;
+  border:0;
+  color:#718078;
+  background:transparent;
+  cursor:pointer;
+  font-size:7px;
+  font-weight:700;
+  line-height:1.1;
+ }
+ .portal-shell .mobile-primary-nav button svg{width:16px;height:16px}
+ .portal-shell .mobile-primary-nav button span{display:block;width:100%;max-width:41px;overflow:visible;white-space:normal;overflow-wrap:anywhere;line-height:1.05;text-align:center}
+ .portal-shell .mobile-primary-nav button.active{color:#244a39;background:#e8f0e4;box-shadow:inset 3px 0 #e97656}
+ .portal-shell .mobile-primary-nav .mobile-utility-start{margin-top:auto;border-top:1px solid #dce3da}
+ .portal-shell .mobile-primary-nav .logout-button{color:#a95345}
+ .portal-shell .sidebar :is(.side-top,.restaurant-switch,.portal-switch,.user-chip,.nav-group>small){display:none!important}
+ .portal-shell .sidebar .portal-nav{width:calc(100% - 88px)!important;min-width:0!important;flex:1 1 0!important;display:flex!important;align-items:stretch;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none;overscroll-behavior-inline:contain}
+ .portal-shell .portal-nav::-webkit-scrollbar{display:none}
+ .portal-shell .nav-group{display:contents}
+ .portal-shell .nav-group button,
+ .portal-shell .side-bottom>button{
+  width:58px;
+  min-width:58px;
+  min-height:58px;
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:3px;
+  padding:5px 3px!important;
+  border:0;
+  color:#718078;
+  background:transparent;
+  box-shadow:none;
+  font-size:8px;
+  line-height:1.1;
+  text-align:center;
+ }
+ .portal-shell .nav-group button span{display:block!important;max-width:54px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .portal-shell .nav-group button svg,.portal-shell .side-bottom>button svg{flex:0 0 auto;width:18px;height:18px}
+ .portal-shell .nav-group button.active{color:#244a39;background:#e8f0e4;box-shadow:inset 0 3px #e97656}
+ .portal-shell .sidebar .side-bottom{width:88px!important;min-width:88px;flex:0 0 88px!important;display:flex!important;align-items:stretch;padding:0!important;border:0;border-left:1px solid #dce3da}
+ .portal-shell .side-bottom>button{width:44px;min-width:44px}
+ .portal-shell .side-bottom>button span{display:none!important}
+ .portal-shell .side-bottom>button[title="Help center"]{display:none!important}
+ .portal-shell .side-bottom .logout-button{color:#a95345}
+ .portal-main,.portal-main:has(.manager-overview-stats){width:100%!important;max-width:none;padding:20px 14px 28px!important;overflow-x:hidden}
+ .content-header{min-width:0;align-items:flex-start;gap:12px;margin-bottom:8px}
+ .content-header>div:first-child{min-width:0}
+ .content-header h1,.portal-main:has(.manager-overview-stats) .content-header h1{max-width:none!important;font-size:clamp(28px,9vw,36px)!important;line-height:1.05;overflow-wrap:anywhere}
+ .header-actions{flex:0 0 auto;gap:7px}
+ .header-actions .icon-button{display:none}
+ .header-actions .ui-button{min-height:36px;padding:0 10px;font-size:9px;white-space:nowrap}
+ .welcome-line{align-items:flex-start;gap:8px;margin:12px 0 16px;font-size:10px}
+ .welcome-line>span:first-child{min-width:0}
+ .welcome-line .sync{flex:0 0 auto;font-size:8px}
+ .stats-grid,.manager-overview-stats,.payments-stats,.role-stats,.subscription-usage{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px}
+ .stat-card,.manager-overview-stats .stat-card{min-width:0;min-height:116px!important;padding:12px!important}
+ .stat-card>strong{font-size:19px!important;overflow-wrap:anywhere}
+ .dashboard-grid,.manager-overview-grid,.analytics-cards,.manager-chart-grid{grid-template-columns:1fr!important;gap:9px}
+ .panel{min-width:0;max-width:100%}
+ .panel-heading{align-items:flex-start;gap:10px;padding:15px 14px 11px}
+ .panel-heading h2{font-size:21px}
+ .panel-heading .text-button{flex:0 0 auto}
+ .order-row{grid-template-columns:48px minmax(0,1fr) auto;gap:8px;padding:12px}
+ .order-row>.status,.order-row>.more-button{display:none}
+ .order-detail{min-width:0}.order-detail b{overflow-wrap:anywhere;white-space:normal}
+ .filter-bar,.menu-toolbar,.floor-toolbar{align-items:stretch;flex-wrap:wrap;gap:8px;margin:16px 0 12px}
+ .search-field{width:100%;min-width:0}.filter-bar .filter-button,.menu-toolbar .filter-button{margin-left:0}
+ .category-pills,.floor-filters{width:100%;overflow-x:auto;scrollbar-width:none}
+ .category-pills::-webkit-scrollbar,.floor-filters::-webkit-scrollbar{display:none}
+ .admin-menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px}
+ .admin-dish{min-width:0}.admin-dish>img,.menu-image-empty{height:108px}.admin-dish-body{padding:10px}.admin-dish h3{font-size:15px;overflow-wrap:anywhere}
+ .floor-overview{grid-template-columns:1fr!important}.floor-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px}.floor-table{min-width:0;padding:12px}
+ .table-header{display:none}.table-row{grid-template-columns:55px minmax(0,1fr) auto;gap:8px;padding:13px}.table-row span:nth-child(2),.table-row span:nth-child(3),.table-row span:nth-child(6){display:none}
+ .payment-row{grid-template-columns:28px minmax(0,1fr) auto;padding:0 12px}.payment-row>.status{display:none}
+ .team-row{grid-template-columns:30px minmax(0,1fr) 22px;padding:0 12px}.team-row :is(.role-pill,.scope){display:none}
+ .overview-outlet-grid{grid-template-columns:1fr!important;padding:0 12px 12px}
+ .chart-frame{min-width:0;height:230px}.manager-chart{min-width:0;overflow:hidden}
+ .outlet-performance{overflow-x:auto}.outlet-performance-head,.outlet-performance-row{min-width:650px}
+ .outlet-action-grid,.role-loading-stats{grid-template-columns:1fr!important}
+ .role-task{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;padding:12px 14px}
+ .role-task .text-button{grid-column:1/-1;width:100%;min-height:36px;justify-content:center;margin:0;border-top:1px solid #e3e8e1}
+ .kitchen-board{grid-template-columns:1fr!important;gap:10px}
+ .kitchen-column{display:grid!important;grid-template-columns:1fr!important;gap:9px;padding:11px}
+ .kitchen-column .column-title{grid-column:1;margin:0 0 2px}.kitchen-ticket{margin:0;padding:13px}
+ .settings-logo{padding:16px}.settings-outlet{grid-template-columns:30px minmax(0,1fr);padding:12px 14px}.settings-outlet>*:last-child{grid-column:1/-1}
+ .actual-admin-frame{width:100%!important;min-width:0!important}
+}
+
+@media(max-width:370px){
+ .portal-main,.portal-main:has(.manager-overview-stats){padding-inline:10px!important}
+ .stats-grid,.manager-overview-stats,.payments-stats,.role-stats{grid-template-columns:1fr!important}
+ .admin-menu-grid{grid-template-columns:1fr!important}
+ .floor-grid{grid-template-columns:1fr!important}
+}
