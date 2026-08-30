@@ -11,4 +11,5 @@ export const workspaceService = {
   deleteTable: (session, tenantId, id) => apiRequest(`/api/v1/tables/${id}`, { method: 'DELETE', headers: authenticatedHeaders({ accessToken: session.accessToken, tenantId }) }),
   updateOrderStatus: (session, tenantId, orderId, status) => apiRequest(`/api/v1/orders/${encodeURIComponent(orderId)}/status`, { method: 'PATCH', headers: authenticatedHeaders({ accessToken: session.accessToken, tenantId }), body: JSON.stringify({ status }) }),
   updatePaymentStatus: (session, tenantId, paymentId, status) => apiRequest(`/api/v1/payments/${encodeURIComponent(paymentId)}/status`, { method: 'PATCH', headers: authenticatedHeaders({ accessToken: session.accessToken, tenantId }), body: JSON.stringify({ status }) }),
+  updateOrderEstimate: (session,tenantId,orderId,payload)=>apiRequest(`/api/v1/orders/${encodeURIComponent(orderId)}/estimate`,{method:'PATCH',headers:authenticatedHeaders({accessToken:session.accessToken,tenantId}),body:JSON.stringify(payload)}),
 }
