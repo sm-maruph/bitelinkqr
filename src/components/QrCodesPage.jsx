@@ -9,7 +9,7 @@ import { workspaceService } from '../services/workspaceService'
 function TableQr({ table, restaurantSlug, outletSlug, onEdit, onDelete, busy }) {
   const [image, setImage] = useState('')
   const [copied, setCopied] = useState(false)
-  const link = useMemo(() => `${window.location.origin}/${restaurantSlug}/${outletSlug}/table/${encodeURIComponent(table.table_number)}`, [restaurantSlug, outletSlug, table.table_number])
+  const link = useMemo(() => `${window.location.origin}/${restaurantSlug}/${outletSlug}/table/${encodeURIComponent(table.table_number)}?access=${encodeURIComponent(table.qr_token)}`, [restaurantSlug, outletSlug, table.table_number, table.qr_token])
 
   useEffect(() => {
     let active = true

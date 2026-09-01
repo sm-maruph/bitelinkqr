@@ -183,9 +183,10 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
       finally { refreshing = false; if(active)setHistoryLoading(false); }
     };
     refreshOrders();
-    const timer = window.setInterval(refreshOrders, 3000);
+    const unsubscribe=restaurantService.subscribe(context.restaurantId,outletSlug,tableNumber,event=>{refreshOrders();window.dispatchEvent(new CustomEvent('bitelink:guest-realtime',{detail:event}))});
+    const timer = window.setInterval(refreshOrders, 30000);
     window.addEventListener('focus', refreshOrders);
-    return () => { active = false; window.clearInterval(timer); window.removeEventListener('focus', refreshOrders); };
+    return () => { active = false; unsubscribe(); window.clearInterval(timer); window.removeEventListener('focus', refreshOrders); };
   }, [isLiveCustomerRoute, context.restaurantId, context.outlet, tableNumber]);
   const filteredItems = category === "All dishes" ? state.menu
     : category === "Popular now" ? (state.menu.some(item=>item.popularNow) ? state.menu.filter(item=>item.popularNow) : [{id:'popular-empty',emptyOffer:true,emptyKind:'popular',emptyLabel:'Popular now',emptyTitle:'No popular dishes yet.',emptyDescription:'Popular dishes will appear here as guests start ordering. Explore the full menu in the meantime.',onViewMenu:()=>{setCategoryState('All dishes');setCurrentPage(1)}}])
@@ -276,7 +277,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
     let active=true,refreshing=false;
     const outletSlug=context.outlet.toLowerCase().trim().replaceAll(/\s+/g,'-');
     const refresh=async()=>{if(refreshing)return;refreshing=true;try{const result=await restaurantService.getOrderPayment(context.restaurantId,outletSlug,tableNumber,billOrder.id);if(active){const nextStatus=String(result.payment?.status||'').toLowerCase();if(nextStatus==='verified'&&paymentStatusRef.current!=='verified')setBillOpen(true);paymentStatusRef.current=nextStatus;setLivePayment(result.payment)}}catch{/* Keep the last payment state during a transient outage. */}finally{refreshing=false}};
-    refresh();const timer=window.setInterval(refresh,2500);return()=>{active=false;window.clearInterval(timer)};
+    const realtime=()=>refresh();window.addEventListener('bitelink:guest-realtime',realtime);refresh();const timer=window.setInterval(refresh,30000);return()=>{active=false;window.clearInterval(timer);window.removeEventListener('bitelink:guest-realtime',realtime)};
   },[isLiveCustomerRoute,billOrder?.id,context.restaurantId,context.outlet,tableNumber]);
   const submitPayment=async(payload)=>{
     if(paymentSubmitting||!billOrder)return;setPaymentSubmitting(true);setPaymentError('');

@@ -32,12 +32,26 @@ export default function useWorkspaceData(context) {
       if (document.visibilityState === 'visible') load()
     }
     load()
-    const refreshTimer = context.demoPreview ? null : window.setInterval(refreshWhenVisible, 3000)
+    let socket
+    let reconnectTimer
+    const connectRealtime=()=>{
+      if(context.demoPreview||!session?.accessToken||!active)return
+      const configured=(import.meta.env.VITE_API_URL||window.location.origin).replace(/\/$/,'')
+      const url=`${configured.replace(/^http/,'ws')}/api/realtime`
+      socket=new WebSocket(url)
+      socket.addEventListener('open',()=>socket.send(JSON.stringify({accessToken:session.accessToken,tenantId:context.tenantId,restaurantId:context.restaurantUuid,outletId:context.outletId})))
+      socket.addEventListener('message',event=>{try{const message=JSON.parse(event.data);if(message.type!=='ready')refreshWhenVisible()}catch{/* Ignore malformed server events. */}})
+      socket.addEventListener('close',()=>{if(active)reconnectTimer=window.setTimeout(connectRealtime,3000)})
+    }
+    connectRealtime()
+    const refreshTimer = context.demoPreview ? null : window.setInterval(refreshWhenVisible, 30000)
     window.addEventListener('focus', refreshWhenVisible)
     document.addEventListener('visibilitychange', refreshWhenVisible)
     return () => {
       active = false
       if (refreshTimer) window.clearInterval(refreshTimer)
+      if(reconnectTimer)window.clearTimeout(reconnectTimer)
+      if(socket)socket.close()
       window.removeEventListener('focus', refreshWhenVisible)
       document.removeEventListener('visibilitychange', refreshWhenVisible)
     }
