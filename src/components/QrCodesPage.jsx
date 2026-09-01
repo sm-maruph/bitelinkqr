@@ -9,16 +9,19 @@ import { workspaceService } from '../services/workspaceService'
 function TableQr({ table, restaurantSlug, outletSlug, onEdit, onDelete, busy }) {
   const [image, setImage] = useState('')
   const [copied, setCopied] = useState(false)
-  const link = useMemo(() => `${window.location.origin}/${restaurantSlug}/${outletSlug}/table/${encodeURIComponent(table.table_number)}?access=${encodeURIComponent(table.qr_token)}`, [restaurantSlug, outletSlug, table.table_number, table.qr_token])
+  const hasSecureToken=Boolean(table.qr_token&&table.qr_token!=='undefined')
+  const link = useMemo(() => hasSecureToken?`${window.location.origin}/${restaurantSlug}/${outletSlug}/table/${encodeURIComponent(table.table_number)}?access=${encodeURIComponent(table.qr_token)}`:'', [restaurantSlug, outletSlug, table.table_number, table.qr_token,hasSecureToken])
 
   useEffect(() => {
     let active = true
+    if(!link){setImage('');return undefined}
     QRCode.toDataURL(link, { width: 320, margin: 2, color: { dark: '#17382e', light: '#ffffff' }, errorCorrectionLevel: 'H' })
       .then(value => { if (active) setImage(value) })
     return () => { active = false }
   }, [link])
 
   const copy = async () => {
+    if(!link)return
     await navigator.clipboard.writeText(link)
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1600)
@@ -32,12 +35,12 @@ function TableQr({ table, restaurantSlug, outletSlug, onEdit, onDelete, busy }) 
 
   return <article className="table-qr-card">
     <div className="table-qr-heading"><span><Table2 size={18} /></span><div><small>TABLE</small><strong>{table.table_number}</strong></div><em>{table.capacity} seats</em></div>
-    <div className="table-qr-image">{image ? <img src={image} alt={`Customer QR code for table ${table.table_number}`} /> : <div className="table-qr-skeleton" />}</div>
-    <label>Customer ordering link<input value={link} readOnly /></label>
+    <div className="table-qr-image">{image ? <img src={image} alt={`Customer QR code for table ${table.table_number}`} /> : hasSecureToken?<div className="table-qr-skeleton" />:<div className="state-message"><b>Secure QR unavailable</b><small>Deploy the updated backend, then reload.</small></div>}</div>
+    <label>Customer ordering link<input value={link} placeholder={hasSecureToken?'':'Waiting for signed token from backend'} readOnly /></label>
     <div className="table-qr-actions">
-      <button onClick={copy}>{copied ? <Check size={15} /> : <Copy size={15} />} {copied ? 'Copied' : 'Copy link'}</button>
-      <button onClick={download} disabled={!image}><Download size={15} /> Download QR</button>
-      <a href={link} target="_blank" rel="noreferrer"><ExternalLink size={15} /> Preview</a>
+      <button onClick={copy} disabled={!hasSecureToken}>{copied ? <Check size={15} /> : <Copy size={15} />} {copied ? 'Copied' : 'Copy link'}</button>
+      <button onClick={download} disabled={!image||!hasSecureToken}><Download size={15} /> Download QR</button>
+      {hasSecureToken?<a href={link} target="_blank" rel="noreferrer"><ExternalLink size={15} /> Preview</a>:<button disabled><ExternalLink size={15} /> Preview</button>}
       <button onClick={() => onEdit(table)} disabled={busy}><Pencil size={15} /> Edit</button>
       <button className="danger" onClick={() => onDelete(table)} disabled={busy}><Trash2 size={15} /> Delete</button>
     </div>

@@ -282,7 +282,7 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
   const submitPayment=async(payload)=>{
     if(paymentSubmitting||!billOrder)return;setPaymentSubmitting(true);setPaymentError('');
     try{if(isLiveCustomerRoute){const outletSlug=context.outlet.toLowerCase().trim().replaceAll(/\s+/g,'-');const created=await restaurantService.submitOrderPayment(context.restaurantId,outletSlug,tableNumber,billOrder.id,payload);setLivePayment(created)}else{actions.submitPayment({orderId:billOrder.id,amount:billOrder.total, ...payload,status:'SUBMITTED'});setLivePayment({order_id:billOrder.id,...payload,status:'submitted'})}}
-    catch(error){setPaymentError(error?.payload?.error==='order_not_served'?'The restaurant must mark this order served before payment.':'We could not submit your payment. Please try again.')}
+    catch(error){setPaymentError(error?.payload?.error==='valid_table_qr_required'?`Payment access requires the QR code displayed at Table ${tableNumber}. Please scan that QR with this device and reopen your bill.`:error?.payload?.error==='order_not_served'?'The restaurant must mark this order served before payment.':'We could not submit your payment. Please try again.')}
     finally{setPaymentSubmitting(false)}
   };
   const addToCart = (item, quantity = 1) => {
@@ -337,7 +337,9 @@ export default function CustomerPortalPage({ setRole, context, embedded = false 
       setDrawerOpen(false);
       setHistoryOpen(true);
     } catch (requestError) {
-      setOrderError(requestError?.payload?.error==='table_not_found'
+      setOrderError(requestError?.payload?.error==='valid_table_qr_required'
+        ? `Ordering is available only after scanning the QR code displayed at Table ${tableNumber}. Please scan that QR with this device, then return to your cart—your selected items will remain here.`
+        : requestError?.payload?.error==='table_not_found'
         ? `Table ${tableNumber} is not registered for this outlet. Scan a valid table QR or ask the restaurant team for help.`
         : requestError?.payload?.error==='customer_session_required'
           ? 'Your ordering session could not be created. Refresh the QR page and try again.'

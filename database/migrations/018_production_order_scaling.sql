@@ -24,6 +24,7 @@ create index if not exists orders_workspace_recent_idx on app.orders(tenant_id,r
 create index if not exists payments_workspace_recent_idx on app.payments(tenant_id,restaurant_id,outlet_id,created_at desc);
 
 alter table app.outlet_order_counters enable row level security;
+drop policy if exists outlet_order_counters_tenant on app.outlet_order_counters;
 create policy outlet_order_counters_tenant on app.outlet_order_counters for all
 using(tenant_id=app.current_tenant_id()) with check(tenant_id=app.current_tenant_id());
 grant select,insert,update on app.outlet_order_counters to bitelink_api;

@@ -33,15 +33,15 @@ export default function useWorkspaceData(context) {
     }
     load()
     let socket
-    let reconnectTimer
+    let reconnectTimer,reconnectAttempts=0
     const connectRealtime=()=>{
       if(context.demoPreview||!session?.accessToken||!active)return
       const configured=(import.meta.env.VITE_API_URL||window.location.origin).replace(/\/$/,'')
       const url=`${configured.replace(/^http/,'ws')}/api/realtime`
       socket=new WebSocket(url)
       socket.addEventListener('open',()=>socket.send(JSON.stringify({accessToken:session.accessToken,tenantId:context.tenantId,restaurantId:context.restaurantUuid,outletId:context.outletId})))
-      socket.addEventListener('message',event=>{try{const message=JSON.parse(event.data);if(message.type!=='ready')refreshWhenVisible()}catch{/* Ignore malformed server events. */}})
-      socket.addEventListener('close',()=>{if(active)reconnectTimer=window.setTimeout(connectRealtime,3000)})
+      socket.addEventListener('message',event=>{try{const message=JSON.parse(event.data);if(message.type==='ready')reconnectAttempts=0;else refreshWhenVisible()}catch{/* Ignore malformed server events. */}})
+      socket.addEventListener('close',()=>{if(active){reconnectAttempts+=1;reconnectTimer=window.setTimeout(connectRealtime,Math.min(60000,3000*(2**Math.min(reconnectAttempts-1,5))))}})
     }
     connectRealtime()
     const refreshTimer = context.demoPreview ? null : window.setInterval(refreshWhenVisible, 30000)
