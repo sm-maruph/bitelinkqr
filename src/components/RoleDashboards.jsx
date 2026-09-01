@@ -1,42 +1,765 @@
-import { useState } from 'react'
-import { AlertTriangle, ArrowLeft, ArrowRight, ChefHat, CheckCircle2, Clock3, ListChecks, PackageCheck, QrCode, ShoppingBag, Table2, Users, WalletCards, X } from 'lucide-react'
-import { Header, StatCard } from './PortalChrome'
-import useWorkspaceData from '../hooks/useWorkspaceData'
-import { useAuth } from '../contexts/AuthContext'
-import { workspaceService } from '../services/workspaceService'
-const money=v=>`BDT ${Number(v||0).toLocaleString('en-BD')}`
-const title=value=>String(value||'').replaceAll('_',' ').replace(/\b\w/g,letter=>letter.toUpperCase())
-function Loading({loading,error}){return loading?<section className="role-loading" role="status" aria-label="Loading outlet data"><span className="sr-only">Loading outlet data</span><div className="role-loading-stats"><i/><i/><i/></div><div className="role-loading-panel"><i/><i/><i/></div></section>:error?<div className="panel state-message"><b>{error}</b></div>:null}
-
-export function KitchenDashboard({context}){
- const {session}=useAuth(),{data,loading,error}=useWorkspaceData(context)
- const [statusChanges,setStatusChanges]=useState({}),[busy,setBusy]=useState(''),[notice,setNotice]=useState(''),[rollback,setRollback]=useState(null)
- const orders=(data?.orders||[]).map(order=>statusChanges[order.id]?{...order,status:statusChanges[order.id]}:order).filter(o=>['confirmed','preparing','ready','served'].includes(o.status))
- const groups=[['confirmed','New / approved','coral'],['preparing','Cooking','amber'],['ready','Ready to serve','green'],['served','Served','green']]
- const nextStep={confirmed:{status:'preparing',label:'Start preparing'},preparing:{status:'ready',label:'Mark ready'}},previousStep={preparing:{status:'confirmed',label:'Move back to approved'},ready:{status:'preparing',label:'Move back to cooking'}}
- const move=async(order,step,backward=false)=>{if(!step)return;let estimate=null;if(order.status==='confirmed'&&step.status==='preparing'){const choice=window.prompt('Set customer countdown in minutes. Presets: 10, 15, 20, 30. You can also enter +5 or +10 to extend the current estimate.','20');if(choice===null)return;const trimmed=choice.trim();if(/^\+(5|10)$/.test(trimmed))estimate={addMinutes:Number(trimmed.slice(1))};else if(['10','15','20','30'].includes(trimmed))estimate={minutes:Number(trimmed)};else{setNotice('Choose 10, 15, 20, 30, +5, or +10 minutes.');return}}setBusy(order.id);setNotice('');try{await workspaceService.updateOrderStatus(session,context.tenantId,order.id,step.status);if(estimate)await workspaceService.updateOrderEstimate(session,context.tenantId,order.id,estimate);setStatusChanges(current=>({...current,[order.id]:step.status}));setNotice(`Order #${order.order_number} moved ${backward?'back ':''}to ${step.status==='confirmed'?'New / approved':step.status==='preparing'?'Cooking':'Ready to serve'}${estimate?' with the customer countdown updated':''}.`);setRollback(null)}catch(requestError){setNotice(requestError?.payload?.error==='permission_denied'?'Your role does not have permission to change this stage.':requestError?.payload?.error==='invalid_order_status_transition'?'This order has already moved to another stage. Refresh and try again.':'Could not update this ticket. Please try again.')}finally{setBusy('')}}
- return <><Header eyebrow={`${context.outlet} kitchen / Database queue`} title="Kitchen view"/><div className="role-intro"><ChefHat size={18}/><span>Only approved preparation work from the selected outlet is shown.</span></div>{notice&&<div className="management-notice">{notice}</div>}<Loading loading={loading} error={error}/><section className="stats-grid role-stats"><StatCard label="To accept" value={String(orders.filter(o=>o.status==='confirmed').length)} trend="Live" meta="approved tickets" icon={ShoppingBag} tone="coral"/><StatCard label="Cooking now" value={String(orders.filter(o=>o.status==='preparing').length)} trend="Live" meta="database queue" icon={Clock3} tone="amber"/><StatCard label="Ready to serve" value={String(orders.filter(o=>o.status==='ready').length)} trend="Live" meta="handoff queue" icon={PackageCheck}/></section><div className="kitchen-board">{groups.map(([status,label,tone])=>{const rows=orders.filter(o=>o.status===status);return <section className="kitchen-column" key={status}><div className="column-title"><span className={`status ${tone}`}>{status.toUpperCase()}</span><b>{label}</b><strong>{rows.length}</strong></div>{!rows.length&&<p>No tickets.</p>}{rows.map(o=><article className="kitchen-ticket" key={o.id}><div><b>#{o.order_number}</b><span>Table {o.table_number}</span></div><p>{o.items}</p><span>{money(o.grand_total)}</span>{o.review_rating&&<small>Customer review: {o.review_rating}/5{o.review_comment?` - ${o.review_comment}`:''}</small>}<div className={`ticket-workflow-actions ${previousStep[o.status]&&nextStep[o.status]?'dual':''}`}>{previousStep[o.status]&&<button className="ticket-flow-button backward" disabled={busy===o.id} onClick={()=>setRollback({order:o,step:previousStep[o.status]})}><ArrowLeft size={14}/><span>{previousStep[o.status].label}</span></button>}{nextStep[o.status]&&<button className="ticket-flow-button forward" disabled={busy===o.id} onClick={()=>move(o,nextStep[o.status])}><span>{busy===o.id?'Updating…':nextStep[o.status].label}</span><ArrowRight size={14}/></button>}</div>{o.status==='ready'&&<small className="ticket-handoff"><CheckCircle2 size={13}/> Waiting for service staff</small>}</article>)}</section>})}</div>{rollback&&<div className="kitchen-prompt-backdrop" onMouseDown={event=>event.target===event.currentTarget&&setRollback(null)}><section className="kitchen-rollback-prompt" role="dialog" aria-modal="true" aria-labelledby="rollback-title"><header><span><AlertTriangle size={19}/></span><button onClick={()=>setRollback(null)} aria-label="Close"><X size={18}/></button></header><div><span className="page-eyebrow">Confirm workflow correction</span><h2 id="rollback-title">Move order #{rollback.order.order_number} backward?</h2><p>Review the ticket before changing the stage. The restaurant team and customer tracker will see this correction immediately.</p><dl><div><dt>Table</dt><dd>{rollback.order.table_number}</dd></div><div><dt>Current stage</dt><dd>{title(rollback.order.status)}</dd></div><div><dt>Move back to</dt><dd>{rollback.step.status==='confirmed'?'New / approved':'Cooking'}</dd></div><div><dt>Order total</dt><dd>{money(rollback.order.grand_total)}</dd></div></dl><section><span>Order items</span><p>{rollback.order.items||'Order item details unavailable'}</p></section></div><footer><button onClick={()=>setRollback(null)}>Keep current stage</button><button className="confirm-rollback" disabled={busy===rollback.order.id} onClick={()=>move(rollback.order,rollback.step,true)}>{busy===rollback.order.id?'Updating…':'Confirm rollback'} <ArrowRight size={14}/></button></footer></section></div>}</>
+import { useState } from "react";
+import {
+  AlertTriangle,
+  ArrowLeft,
+  ArrowRight,
+  ChefHat,
+  CheckCircle2,
+  Clock3,
+  ListChecks,
+  PackageCheck,
+  QrCode,
+  ShoppingBag,
+  Table2,
+  Users,
+  WalletCards,
+  X,
+} from "lucide-react";
+import { Header, StatCard } from "./PortalChrome";
+import useWorkspaceData from "../hooks/useWorkspaceData";
+import { useAuth } from "../contexts/AuthContext";
+import { workspaceService } from "../services/workspaceService";
+const money = (v) => `BDT ${Number(v || 0).toLocaleString("en-BD")}`;
+const title = (value) =>
+  String(value || "")
+    .replaceAll("_", " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+function Loading({ loading, error }) {
+  return loading ? (
+    <section
+      className="role-loading"
+      role="status"
+      aria-label="Loading outlet data"
+    >
+      <span className="sr-only">Loading outlet data</span>
+      <div className="role-loading-stats">
+        <i />
+        <i />
+        <i />
+      </div>
+      <div className="role-loading-panel">
+        <i />
+        <i />
+        <i />
+      </div>
+    </section>
+  ) : error ? (
+    <div className="panel state-message">
+      <b>{error}</b>
+    </div>
+  ) : null;
 }
 
-export function OrderStaffDashboard({context}){
- const {session}=useAuth(),{data,loading,error}=useWorkspaceData(context)
- const [statusChanges,setStatusChanges]=useState({}),[busy,setBusy]=useState(''),[notice,setNotice]=useState('')
- const orders=(data?.orders||[]).map(order=>statusChanges[order.id]?{...order,status:statusChanges[order.id]}:order)
- const tables=data?.tables||[],payments=data?.payments||[]
- const pending=orders.filter(order=>order.status==='pending')
- const ongoing=orders.filter(order=>['confirmed','preparing','ready','serving','served'].includes(order.status))
- const finished=orders.filter(order=>['completed','rejected','cancelled'].includes(order.status))
- const accept=order=>{const action=actionFor(order);return action?move(order,action):undefined}
- const readOnlyOrder=order=>orderCard(order)
- const permissions=new Set(context.permissions||[])
- const actionFor=order=>order.status==='pending'&&permissions.has('orders.approve')?{status:'confirmed',label:'Accept for kitchen'}:order.status==='confirmed'&&permissions.has('orders.cook')?{status:'preparing',label:'Start preparing'}:order.status==='preparing'&&permissions.has('orders.ready')?{status:'ready',label:'Mark ready'}:order.status==='ready'&&permissions.has('orders.serve')?{status:'serving',label:'Start serving'}:order.status==='serving'&&permissions.has('orders.serve')?{status:'served',label:'Mark served'}:order.status==='served'&&permissions.has('orders.complete')?{status:'completed',label:'Complete order'}:null
- const move=async(order,action)=>{setBusy(order.id);setNotice('');try{await workspaceService.updateOrderStatus(session,context.tenantId,order.id,action.status);setStatusChanges(current=>({...current,[order.id]:action.status}));setNotice(`Order #${order.order_number} marked ${title(action.status)}.`)}catch(error){setNotice(error?.payload?.error==='permission_denied'?'This workflow permission is no longer assigned to your account. Refresh and try again.':error?.payload?.error==='invalid_order_status_transition'?'This order has already moved to another stage. Refresh and try again.':'Could not update this order. Please try again.')}finally{setBusy('')}}
- const orderCard=order=>{const action=actionFor(order);return <article className="kitchen-ticket order-status-ticket" key={order.id}><div><b>#{order.order_number}</b><span>Table {order.table_number}</span></div><p>{order.items||'Order item details unavailable'}</p><span>{money(order.grand_total)}</span><small className="ticket-handoff"><Clock3 size={13}/>{title(order.status)}</small>{action&&<button className="ticket-flow-button forward" disabled={busy===order.id} onClick={()=>move(order,action)}><span>{busy===order.id?'Updating…':action.label}</span><ArrowRight size={14}/></button>}</article>}
- return <><Header eyebrow={`${context.outlet} service desk`} title="Service desk"/><div className="role-intro"><ListChecks size={18}/><span>Monitor orders, tables, and payments. New orders are the only stage you can change.</span></div>{notice&&<div className="management-notice">{notice}</div>}<Loading loading={loading} error={error}/><section className="stats-grid role-stats"><StatCard label="New orders" value={String(pending.length)} trend="Live" meta="needs acceptance" icon={ShoppingBag} tone="coral"/><StatCard label="Ongoing orders" value={String(ongoing.length)} trend="Live" meta="kitchen and service" icon={Clock3} tone="amber"/><StatCard label="Open tables" value={String(tables.filter(t=>t.status!=='available'&&t.status!=='disabled').length)} trend="Live" meta="on the floor" icon={Table2}/><StatCard label="Pending payments" value={String(payments.filter(payment=>['pending','submitted'].includes(payment.status)).length)} trend="View only" meta="payment activity" icon={WalletCards}/></section><div className="kitchen-board order-staff-board"><section className="kitchen-column"><div className="column-title"><span className="status coral">NEW</span><b>New arrivals</b><strong>{pending.length}</strong></div>{!loading&&!pending.length&&<p>No new orders.</p>}{pending.map(order=><article className="kitchen-ticket" key={order.id}><div><b>#{order.order_number}</b><span>Table {order.table_number}</span></div><p>{order.items||'New customer order'}</p><span>{money(order.grand_total)}</span><button className="ticket-flow-button forward" disabled={busy===order.id} onClick={()=>accept(order)}><span>{busy===order.id?'Sending…':'Accept for kitchen'}</span><ArrowRight size={14}/></button></article>)}</section><section className="kitchen-column"><div className="column-title"><span className="status amber">LIVE</span><b>Ongoing</b><strong>{ongoing.length}</strong></div>{!loading&&!ongoing.length&&<p>No ongoing orders.</p>}{ongoing.map(readOnlyOrder)}</section><section className="kitchen-column"><div className="column-title"><span className="status green">DONE</span><b>Completed</b><strong>{finished.length}</strong></div>{!loading&&!finished.length&&<p>No completed orders.</p>}{finished.slice(0,10).map(readOnlyOrder)}</section></div></>
+export function KitchenDashboard({ context }) {
+  const { session } = useAuth(),
+    { data, loading, error } = useWorkspaceData(context);
+  const [statusChanges, setStatusChanges] = useState({}),
+    [busy, setBusy] = useState(""),
+    [notice, setNotice] = useState(""),
+    [rollback, setRollback] = useState(null),
+    [estimatePrompt, setEstimatePrompt] = useState(null);
+  const orders = (data?.orders || [])
+    .map((order) =>
+      statusChanges[order.id]
+        ? { ...order, status: statusChanges[order.id] }
+        : order,
+    )
+    .filter((o) =>
+      ["confirmed", "preparing", "ready", "served"].includes(o.status),
+    );
+  const groups = [
+    ["confirmed", "New / approved", "coral"],
+    ["preparing", "Cooking", "amber"],
+    ["ready", "Ready to serve", "green"],
+    ["served", "Served", "green"],
+  ];
+  const nextStep = {
+      confirmed: { status: "preparing", label: "Start preparing" },
+      preparing: { status: "ready", label: "Mark ready" },
+    },
+    previousStep = {
+      preparing: { status: "confirmed", label: "Move back to approved" },
+      ready: { status: "preparing", label: "Move back to cooking" },
+    };
+  const move = async (order, step, backward = false, estimate = null) => {
+    if (!step) return;
+    setBusy(order.id);
+    setNotice("");
+    try {
+      await workspaceService.updateOrderStatus(
+        session,
+        context.tenantId,
+        order.id,
+        step.status,
+      );
+      if (estimate)
+        await workspaceService.updateOrderEstimate(
+          session,
+          context.tenantId,
+          order.id,
+          estimate,
+        );
+      setStatusChanges((current) => ({ ...current, [order.id]: step.status }));
+      setNotice(
+        `Order #${order.order_number} moved ${backward ? "back " : ""}to ${step.status === "confirmed" ? "New / approved" : step.status === "preparing" ? "Cooking" : "Ready to serve"}${estimate ? " with the customer countdown updated" : ""}.`,
+      );
+      setRollback(null);
+      setEstimatePrompt(null);
+    } catch (requestError) {
+      setNotice(
+        requestError?.payload?.error === "permission_denied"
+          ? "Your role does not have permission to change this stage."
+          : requestError?.payload?.error === "invalid_order_status_transition"
+            ? "This order has already moved to another stage. Refresh and try again."
+            : "Could not update this ticket. Please try again.",
+      );
+    } finally {
+      setBusy("");
+    }
+  };
+  const advance = (order, step) =>
+    order.status === "confirmed" && step?.status === "preparing"
+      ? setEstimatePrompt({ order, step })
+      : move(order, step);
+  return (
+    <>
+      <Header
+        eyebrow={`${context.outlet} kitchen / Database queue`}
+        title="Kitchen view"
+      />
+      <div className="role-intro">
+        <ChefHat size={18} />
+        <span>
+          Only approved preparation work from the selected outlet is shown.
+        </span>
+      </div>
+      {notice && <div className="management-notice">{notice}</div>}
+      <Loading loading={loading} error={error} />
+      <section className="stats-grid role-stats">
+        <StatCard
+          label="To accept"
+          value={String(orders.filter((o) => o.status === "confirmed").length)}
+          trend="Live"
+          meta="approved tickets"
+          icon={ShoppingBag}
+          tone="coral"
+        />
+        <StatCard
+          label="Cooking now"
+          value={String(orders.filter((o) => o.status === "preparing").length)}
+          trend="Live"
+          meta="database queue"
+          icon={Clock3}
+          tone="amber"
+        />
+        <StatCard
+          label="Ready to serve"
+          value={String(orders.filter((o) => o.status === "ready").length)}
+          trend="Live"
+          meta="handoff queue"
+          icon={PackageCheck}
+        />
+      </section>
+      <div className="kitchen-board">
+        {groups.map(([status, label, tone]) => {
+          const rows = orders.filter((o) => o.status === status);
+          return (
+            <section className="kitchen-column" key={status}>
+              <div className="column-title">
+                <span className={`status ${tone}`}>{status.toUpperCase()}</span>
+                <b>{label}</b>
+                <strong>{rows.length}</strong>
+              </div>
+              {!rows.length && <p>No tickets.</p>}
+              {rows.map((o) => (
+                <article className="kitchen-ticket" key={o.id}>
+                  <div>
+                    <b>#{o.order_number}</b>
+                    <span>Table {o.table_number}</span>
+                  </div>
+                  <p>{o.items}</p>
+                  <span>{money(o.grand_total)}</span>
+                  {o.review_rating && (
+                    <small>
+                      Customer review: {o.review_rating}/5
+                      {o.review_comment ? ` - ${o.review_comment}` : ""}
+                    </small>
+                  )}
+                  <div
+                    className={`ticket-workflow-actions ${previousStep[o.status] && nextStep[o.status] ? "dual" : ""}`}
+                  >
+                    {previousStep[o.status] && (
+                      <button
+                        className="ticket-flow-button backward"
+                        disabled={busy === o.id}
+                        onClick={() =>
+                          setRollback({
+                            order: o,
+                            step: previousStep[o.status],
+                          })
+                        }
+                      >
+                        <ArrowLeft size={14} />
+                        <span>{previousStep[o.status].label}</span>
+                      </button>
+                    )}
+                    {nextStep[o.status] && (
+                      <button
+                        className="ticket-flow-button forward"
+                        disabled={busy === o.id}
+                        onClick={() => advance(o, nextStep[o.status])}
+                      >
+                        <span>
+                          {busy === o.id
+                            ? "Updating…"
+                            : nextStep[o.status].label}
+                        </span>
+                        <ArrowRight size={14} />
+                      </button>
+                    )}
+                  </div>
+                  {o.status === "ready" && (
+                    <small className="ticket-handoff">
+                      <CheckCircle2 size={13} /> Waiting for service staff
+                    </small>
+                  )}
+                </article>
+              ))}
+            </section>
+          );
+        })}
+      </div>
+      {estimatePrompt && (
+        <div
+          className="kitchen-prompt-backdrop estimate-prompt-backdrop"
+          onMouseDown={(event) =>
+            event.target === event.currentTarget && setEstimatePrompt(null)
+          }
+        >
+          <section
+            className="kitchen-estimate-prompt"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="estimate-title"
+          >
+            <header>
+              <span><Clock3 size={20} /></span>
+              <button onClick={() => setEstimatePrompt(null)} aria-label="Close countdown prompt"><X size={18} /></button>
+            </header>
+            <div>
+              <span className="page-eyebrow">Customer preparation countdown</span>
+              <h2 id="estimate-title">How long for order #{estimatePrompt.order.order_number}?</h2>
+              <p>Select a preparation time. The customer tracker starts immediately when the order moves to Cooking.</p>
+              <div className="estimate-order-context">
+                <span><small>TABLE</small><b>{estimatePrompt.order.table_number}</b></span>
+                <span><small>ORDER TOTAL</small><b>{money(estimatePrompt.order.grand_total)}</b></span>
+              </div>
+              <section className="estimate-quick-actions" aria-label="Preparation time choices">
+                {[10,15,20,30].map(minutes=><button className={minutes===20?'recommended':''} disabled={busy===estimatePrompt.order.id} onClick={()=>move(estimatePrompt.order,estimatePrompt.step,false,{minutes})} key={minutes}><b>{minutes}</b><span>minutes</span>{minutes===20&&<small>Suggested</small>}</button>)}
+              </section>
+              <div className="estimate-extension-actions">
+                <span>Need more time?</span>
+                <button disabled={busy===estimatePrompt.order.id} onClick={()=>move(estimatePrompt.order,estimatePrompt.step,false,{addMinutes:5})}>+5 min</button>
+                <button disabled={busy===estimatePrompt.order.id} onClick={()=>move(estimatePrompt.order,estimatePrompt.step,false,{addMinutes:10})}>+10 min</button>
+              </div>
+            </div>
+            <footer>
+              <button disabled={busy===estimatePrompt.order.id} onClick={()=>setEstimatePrompt(null)}>Cancel</button>
+              <small><Clock3 size={13}/> Customer sees a live countdown</small>
+            </footer>
+          </section>
+        </div>
+      )}
+      {rollback && (
+        <div
+          className="kitchen-prompt-backdrop"
+          onMouseDown={(event) =>
+            event.target === event.currentTarget && setRollback(null)
+          }
+        >
+          <section
+            className="kitchen-rollback-prompt"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="rollback-title"
+          >
+            <header>
+              <span>
+                <AlertTriangle size={19} />
+              </span>
+              <button onClick={() => setRollback(null)} aria-label="Close">
+                <X size={18} />
+              </button>
+            </header>
+            <div>
+              <span className="page-eyebrow">Confirm workflow correction</span>
+              <h2 id="rollback-title">
+                Move order #{rollback.order.order_number} backward?
+              </h2>
+              <p>
+                Review the ticket before changing the stage. The restaurant team
+                and customer tracker will see this correction immediately.
+              </p>
+              <dl>
+                <div>
+                  <dt>Table</dt>
+                  <dd>{rollback.order.table_number}</dd>
+                </div>
+                <div>
+                  <dt>Current stage</dt>
+                  <dd>{title(rollback.order.status)}</dd>
+                </div>
+                <div>
+                  <dt>Move back to</dt>
+                  <dd>
+                    {rollback.step.status === "confirmed"
+                      ? "New / approved"
+                      : "Cooking"}
+                  </dd>
+                </div>
+                <div>
+                  <dt>Order total</dt>
+                  <dd>{money(rollback.order.grand_total)}</dd>
+                </div>
+              </dl>
+              <section>
+                <span>Order items</span>
+                <p>
+                  {rollback.order.items || "Order item details unavailable"}
+                </p>
+              </section>
+            </div>
+            <footer>
+              <button onClick={() => setRollback(null)}>
+                Keep current stage
+              </button>
+              <button
+                className="confirm-rollback"
+                disabled={busy === rollback.order.id}
+                onClick={() => move(rollback.order, rollback.step, true)}
+              >
+                {busy === rollback.order.id ? "Updating…" : "Confirm rollback"}{" "}
+                <ArrowRight size={14} />
+              </button>
+            </footer>
+          </section>
+        </div>
+      )}
+    </>
+  );
 }
 
-export function OutletDashboard({context,setActivePage}){
- const {session}=useAuth(),{data,loading,error}=useWorkspaceData(context);const [orders,setOrders]=useState(null),[payments,setPayments]=useState(null),[notice,setNotice]=useState(''),[busy,setBusy]=useState('');const m=data?.metrics;const orderRows=orders||data?.orders||[],paymentRows=payments||data?.payments||[]
- const approve=async order=>{setBusy(order.id);try{await workspaceService.updateOrderStatus(session,context.tenantId,order.id,'confirmed');setOrders(rows=>rows?rows.map(row=>row.id===order.id?{...row,status:'confirmed'}:row):data.orders.map(row=>row.id===order.id?{...row,status:'confirmed'}:row));setNotice(`Order #${order.order_number} approved and sent to the kitchen.`)}catch{setNotice('Could not approve this order.')}finally{setBusy('')}}
- const reviewPayment=async(payment,status)=>{setBusy(payment.id);try{await workspaceService.updatePaymentStatus(session,context.tenantId,payment.id,status);setPayments(rows=>(rows||data.payments).map(row=>row.id===payment.id?{...row,status}:row));setNotice(`Payment marked ${status}.`)}catch{setNotice('Could not update this payment.')}finally{setBusy('')}}
- return <><Header eyebrow={`${context.outlet} outlet / Operations`} title="Outlet overview"/><div className="role-intro"><CheckCircle2 size={18}/><span>This workspace is scoped to your outlet only.</span></div>{notice&&<div className="management-notice">{notice}</div>}<Loading loading={loading} error={error}/><section className="stats-grid role-stats"><StatCard label="Today's sales" value={money(m?.revenueToday)} trend="Live" meta="completed orders" icon={ShoppingBag}/><StatCard label="Orders today" value={String(m?.ordersToday??0)} trend="Live" meta="database queue" icon={ListChecks} tone="coral"/><StatCard label="Active tables" value={`${m?.activeTables??0} / ${m?.totalTables??0}`} trend="Live" meta="right now" icon={Table2}/></section><section className="outlet-action-grid"><button onClick={()=>setActivePage('Team')}><Users size={19}/><span><b>Add outlet member</b><small>Create temporary credentials and assign a role.</small></span><ArrowRight size={16}/></button><button onClick={()=>setActivePage('Menu & offers')}><ShoppingBag size={19}/><span><b>Manage menu</b><small>Add menu items or mark dishes sold out.</small></span><ArrowRight size={16}/></button><button onClick={()=>setActivePage('QR codes')}><QrCode size={19}/><span><b>Add table & QR</b><small>Create a table with its customer ordering QR.</small></span><ArrowRight size={16}/></button><button onClick={()=>setActivePage('Payments')}><WalletCards size={19}/><span><b>Review payments</b><small>Verify or reject submitted payments.</small></span><ArrowRight size={16}/></button></section><section className="panel role-list-panel"><div className="panel-heading"><div><span className="panel-kicker">Approval queue</span><h2>New orders</h2></div><button className="text-button" onClick={()=>setActivePage('Live orders')}>Open all <ArrowRight size={14}/></button></div>{orderRows.filter(order=>order.status==='pending').length===0?<p>No orders waiting for approval.</p>:orderRows.filter(order=>order.status==='pending').map(order=><div className="role-task" key={order.id}><span className="user-avatar">{order.table_number}</span><div><b>#{order.order_number} · Table {order.table_number}</b><small>{order.items||'New customer order'} · {money(order.grand_total)}</small></div><button className="text-button" disabled={busy===order.id} onClick={()=>approve(order)}>{busy===order.id?'Sending…':'Accept for kitchen'} <ArrowRight size={14}/></button></div>)}</section><section className="panel role-list-panel"><div className="panel-heading"><div><span className="panel-kicker">Payment queue</span><h2>Submitted payments</h2></div></div>{paymentRows.filter(payment=>['pending','submitted'].includes(payment.status)).length===0?<p>No payments waiting for review.</p>:paymentRows.filter(payment=>['pending','submitted'].includes(payment.status)).map(payment=><div className="role-task" key={payment.id}><WalletCards size={18}/><div><b>Table {payment.table_number} · {money(payment.amount)}</b><small>{title(payment.method)} payment · Ref: {payment.customer_reference||'Not provided'}</small></div><button className="text-button" disabled={busy===payment.id} onClick={()=>reviewPayment(payment,'verified')}>{busy===payment.id?'Saving…':'Verify'} <CheckCircle2 size={14}/></button></div>)}</section></>}
+export function OrderStaffDashboard({ context }) {
+  const { session } = useAuth(),
+    { data, loading, error } = useWorkspaceData(context);
+  const [statusChanges, setStatusChanges] = useState({}),
+    [busy, setBusy] = useState(""),
+    [notice, setNotice] = useState("");
+  const orders = (data?.orders || []).map((order) =>
+    statusChanges[order.id]
+      ? { ...order, status: statusChanges[order.id] }
+      : order,
+  );
+  const tables = data?.tables || [],
+    payments = data?.payments || [];
+  const pending = orders.filter((order) => order.status === "pending");
+  const ongoing = orders.filter((order) =>
+    ["confirmed", "preparing", "ready", "serving", "served"].includes(
+      order.status,
+    ),
+  );
+  const finished = orders.filter((order) =>
+    ["completed", "rejected", "cancelled"].includes(order.status),
+  );
+  const accept = (order) => {
+    const action = actionFor(order);
+    return action ? move(order, action) : undefined;
+  };
+  const readOnlyOrder = (order) => orderCard(order);
+  const permissions = new Set(context.permissions || []);
+  const actionFor = (order) =>
+    order.status === "pending" && permissions.has("orders.approve")
+      ? { status: "confirmed", label: "Accept for kitchen" }
+      : order.status === "confirmed" && permissions.has("orders.cook")
+        ? { status: "preparing", label: "Start preparing" }
+        : order.status === "preparing" && permissions.has("orders.ready")
+          ? { status: "ready", label: "Mark ready" }
+          : order.status === "ready" && permissions.has("orders.serve")
+            ? { status: "serving", label: "Start serving" }
+            : order.status === "serving" && permissions.has("orders.serve")
+              ? { status: "served", label: "Mark served" }
+              : order.status === "served" && permissions.has("orders.complete")
+                ? { status: "completed", label: "Complete order" }
+                : null;
+  const move = async (order, action) => {
+    setBusy(order.id);
+    setNotice("");
+    try {
+      await workspaceService.updateOrderStatus(
+        session,
+        context.tenantId,
+        order.id,
+        action.status,
+      );
+      setStatusChanges((current) => ({
+        ...current,
+        [order.id]: action.status,
+      }));
+      setNotice(`Order #${order.order_number} marked ${title(action.status)}.`);
+    } catch (error) {
+      setNotice(
+        error?.payload?.error === "permission_denied"
+          ? "This workflow permission is no longer assigned to your account. Refresh and try again."
+          : error?.payload?.error === "invalid_order_status_transition"
+            ? "This order has already moved to another stage. Refresh and try again."
+            : "Could not update this order. Please try again.",
+      );
+    } finally {
+      setBusy("");
+    }
+  };
+  const orderCard = (order) => {
+    const action = actionFor(order);
+    return (
+      <article className="kitchen-ticket order-status-ticket" key={order.id}>
+        <div>
+          <b>#{order.order_number}</b>
+          <span>Table {order.table_number}</span>
+        </div>
+        <p>{order.items || "Order item details unavailable"}</p>
+        <span>{money(order.grand_total)}</span>
+        <small className="ticket-handoff">
+          <Clock3 size={13} />
+          {title(order.status)}
+        </small>
+        {action && (
+          <button
+            className="ticket-flow-button forward"
+            disabled={busy === order.id}
+            onClick={() => move(order, action)}
+          >
+            <span>{busy === order.id ? "Updating…" : action.label}</span>
+            <ArrowRight size={14} />
+          </button>
+        )}
+      </article>
+    );
+  };
+  return (
+    <>
+      <Header eyebrow={`${context.outlet} service desk`} title="Service desk" />
+      <div className="role-intro">
+        <ListChecks size={18} />
+        <span>
+          Monitor orders, tables, and payments. New orders are the only stage
+          you can change.
+        </span>
+      </div>
+      {notice && <div className="management-notice">{notice}</div>}
+      <Loading loading={loading} error={error} />
+      <section className="stats-grid role-stats">
+        <StatCard
+          label="New orders"
+          value={String(pending.length)}
+          trend="Live"
+          meta="needs acceptance"
+          icon={ShoppingBag}
+          tone="coral"
+        />
+        <StatCard
+          label="Ongoing orders"
+          value={String(ongoing.length)}
+          trend="Live"
+          meta="kitchen and service"
+          icon={Clock3}
+          tone="amber"
+        />
+        <StatCard
+          label="Open tables"
+          value={String(
+            tables.filter(
+              (t) => t.status !== "available" && t.status !== "disabled",
+            ).length,
+          )}
+          trend="Live"
+          meta="on the floor"
+          icon={Table2}
+        />
+        <StatCard
+          label="Pending payments"
+          value={String(
+            payments.filter((payment) =>
+              ["pending", "submitted"].includes(payment.status),
+            ).length,
+          )}
+          trend="View only"
+          meta="payment activity"
+          icon={WalletCards}
+        />
+      </section>
+      <div className="kitchen-board order-staff-board">
+        <section className="kitchen-column">
+          <div className="column-title">
+            <span className="status coral">NEW</span>
+            <b>New arrivals</b>
+            <strong>{pending.length}</strong>
+          </div>
+          {!loading && !pending.length && <p>No new orders.</p>}
+          {pending.map((order) => (
+            <article className="kitchen-ticket" key={order.id}>
+              <div>
+                <b>#{order.order_number}</b>
+                <span>Table {order.table_number}</span>
+              </div>
+              <p>{order.items || "New customer order"}</p>
+              <span>{money(order.grand_total)}</span>
+              <button
+                className="ticket-flow-button forward"
+                disabled={busy === order.id}
+                onClick={() => accept(order)}
+              >
+                <span>
+                  {busy === order.id ? "Sending…" : "Accept for kitchen"}
+                </span>
+                <ArrowRight size={14} />
+              </button>
+            </article>
+          ))}
+        </section>
+        <section className="kitchen-column">
+          <div className="column-title">
+            <span className="status amber">LIVE</span>
+            <b>Ongoing</b>
+            <strong>{ongoing.length}</strong>
+          </div>
+          {!loading && !ongoing.length && <p>No ongoing orders.</p>}
+          {ongoing.map(readOnlyOrder)}
+        </section>
+        <section className="kitchen-column">
+          <div className="column-title">
+            <span className="status green">DONE</span>
+            <b>Completed</b>
+            <strong>{finished.length}</strong>
+          </div>
+          {!loading && !finished.length && <p>No completed orders.</p>}
+          {finished.slice(0, 10).map(readOnlyOrder)}
+        </section>
+      </div>
+    </>
+  );
+}
+
+export function OutletDashboard({ context, setActivePage }) {
+  const { session } = useAuth(),
+    { data, loading, error } = useWorkspaceData(context);
+  const [orders, setOrders] = useState(null),
+    [payments, setPayments] = useState(null),
+    [notice, setNotice] = useState(""),
+    [busy, setBusy] = useState("");
+  const m = data?.metrics;
+  const orderRows = orders || data?.orders || [],
+    paymentRows = payments || data?.payments || [];
+  const approve = async (order) => {
+    setBusy(order.id);
+    try {
+      await workspaceService.updateOrderStatus(
+        session,
+        context.tenantId,
+        order.id,
+        "confirmed",
+      );
+      setOrders((rows) =>
+        rows
+          ? rows.map((row) =>
+              row.id === order.id ? { ...row, status: "confirmed" } : row,
+            )
+          : data.orders.map((row) =>
+              row.id === order.id ? { ...row, status: "confirmed" } : row,
+            ),
+      );
+      setNotice(
+        `Order #${order.order_number} approved and sent to the kitchen.`,
+      );
+    } catch {
+      setNotice("Could not approve this order.");
+    } finally {
+      setBusy("");
+    }
+  };
+  const reviewPayment = async (payment, status) => {
+    setBusy(payment.id);
+    try {
+      await workspaceService.updatePaymentStatus(
+        session,
+        context.tenantId,
+        payment.id,
+        status,
+      );
+      setPayments((rows) =>
+        (rows || data.payments).map((row) =>
+          row.id === payment.id ? { ...row, status } : row,
+        ),
+      );
+      setNotice(`Payment marked ${status}.`);
+    } catch {
+      setNotice("Could not update this payment.");
+    } finally {
+      setBusy("");
+    }
+  };
+  return (
+    <>
+      <Header
+        eyebrow={`${context.outlet} outlet / Operations`}
+        title="Outlet overview"
+      />
+      <div className="role-intro">
+        <CheckCircle2 size={18} />
+        <span>This workspace is scoped to your outlet only.</span>
+      </div>
+      {notice && <div className="management-notice">{notice}</div>}
+      <Loading loading={loading} error={error} />
+      <section className="stats-grid role-stats">
+        <StatCard
+          label="Today's sales"
+          value={money(m?.revenueToday)}
+          trend="Live"
+          meta="completed orders"
+          icon={ShoppingBag}
+        />
+        <StatCard
+          label="Orders today"
+          value={String(m?.ordersToday ?? 0)}
+          trend="Live"
+          meta="database queue"
+          icon={ListChecks}
+          tone="coral"
+        />
+        <StatCard
+          label="Active tables"
+          value={`${m?.activeTables ?? 0} / ${m?.totalTables ?? 0}`}
+          trend="Live"
+          meta="right now"
+          icon={Table2}
+        />
+      </section>
+      <section className="outlet-action-grid">
+        <button onClick={() => setActivePage("Team")}>
+          <Users size={19} />
+          <span>
+            <b>Add outlet member</b>
+            <small>Create temporary credentials and assign a role.</small>
+          </span>
+          <ArrowRight size={16} />
+        </button>
+        <button onClick={() => setActivePage("Menu & offers")}>
+          <ShoppingBag size={19} />
+          <span>
+            <b>Manage menu</b>
+            <small>Add menu items or mark dishes sold out.</small>
+          </span>
+          <ArrowRight size={16} />
+        </button>
+        <button onClick={() => setActivePage("QR codes")}>
+          <QrCode size={19} />
+          <span>
+            <b>Add table & QR</b>
+            <small>Create a table with its customer ordering QR.</small>
+          </span>
+          <ArrowRight size={16} />
+        </button>
+        <button onClick={() => setActivePage("Payments")}>
+          <WalletCards size={19} />
+          <span>
+            <b>Review payments</b>
+            <small>Verify or reject submitted payments.</small>
+          </span>
+          <ArrowRight size={16} />
+        </button>
+      </section>
+      <section className="panel role-list-panel">
+        <div className="panel-heading">
+          <div>
+            <span className="panel-kicker">Approval queue</span>
+            <h2>New orders</h2>
+          </div>
+          <button
+            className="text-button"
+            onClick={() => setActivePage("Live orders")}
+          >
+            Open all <ArrowRight size={14} />
+          </button>
+        </div>
+        {orderRows.filter((order) => order.status === "pending").length ===
+        0 ? (
+          <p>No orders waiting for approval.</p>
+        ) : (
+          orderRows
+            .filter((order) => order.status === "pending")
+            .map((order) => (
+              <div className="role-task" key={order.id}>
+                <span className="user-avatar">{order.table_number}</span>
+                <div>
+                  <b>
+                    #{order.order_number} · Table {order.table_number}
+                  </b>
+                  <small>
+                    {order.items || "New customer order"} ·{" "}
+                    {money(order.grand_total)}
+                  </small>
+                </div>
+                <button
+                  className="text-button"
+                  disabled={busy === order.id}
+                  onClick={() => approve(order)}
+                >
+                  {busy === order.id ? "Sending…" : "Accept for kitchen"}{" "}
+                  <ArrowRight size={14} />
+                </button>
+              </div>
+            ))
+        )}
+      </section>
+      <section className="panel role-list-panel">
+        <div className="panel-heading">
+          <div>
+            <span className="panel-kicker">Payment queue</span>
+            <h2>Submitted payments</h2>
+          </div>
+        </div>
+        {paymentRows.filter((payment) =>
+          ["pending", "submitted"].includes(payment.status),
+        ).length === 0 ? (
+          <p>No payments waiting for review.</p>
+        ) : (
+          paymentRows
+            .filter((payment) =>
+              ["pending", "submitted"].includes(payment.status),
+            )
+            .map((payment) => (
+              <div className="role-task" key={payment.id}>
+                <WalletCards size={18} />
+                <div>
+                  <b>
+                    Table {payment.table_number} · {money(payment.amount)}
+                  </b>
+                  <small>
+                    {title(payment.method)} payment · Ref:{" "}
+                    {payment.customer_reference || "Not provided"}
+                  </small>
+                </div>
+                <button
+                  className="text-button"
+                  disabled={busy === payment.id}
+                  onClick={() => reviewPayment(payment, "verified")}
+                >
+                  {busy === payment.id ? "Saving…" : "Verify"}{" "}
+                  <CheckCircle2 size={14} />
+                </button>
+              </div>
+            ))
+        )}
+      </section>
+    </>
+  );
+}
